@@ -5,7 +5,7 @@ local folders, documents, previews, tasks, and agent context.
 
 ## Status
 
-- Stage: framing / foundation docs
+- Stage: runnable web shell scaffold
 - Current phase: see `docs/PLAN.md`
 - Product spec: see `docs/SPEC.md`
 - Architecture: see `docs/ARCHITECTURE.md`
@@ -46,19 +46,23 @@ search, terminal, file editing, or moving files.
 
 ## Setup
 
-The Vite app has not been scaffolded yet. The next implementation step is to
-create the React/TypeScript/Tailwind skeleton inside this repo.
-
-Intended commands after scaffold:
+Install dependencies and run the local Phase 0 web shell:
 
 ```bash
-npm install
+npm ci
 npm run dev
+```
+
+Feedback-loop commands:
+
+```bash
 npm run typecheck
 npm run lint
 npm test
 npm run build
 ```
+
+The app runs locally at `http://localhost:5173` by default.
 
 ## Design Direction
 

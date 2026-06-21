@@ -18,6 +18,7 @@ This repo should store project truth in files, not in chat memory.
 6. Runtime proof beats agent claims. Passing tests, clicked flows, database records, and provider dashboards are evidence. `$aga-verify-agent` checks the task contract against agent claims and evidence after build; it does not replace `$aga-test` or `$aga-review`. Verification is proportional: routine browser proof is a targeted check, not full gstack `/qa`.
 7. Non-trivial diffs get review before merge after the evidence gate is resolved.
 8. High-risk decisions get `doubt-driven-development` before code.
+9. Version-sensitive external behavior gets `source-driven-development`: before changing framework, library, provider, browser API, or tooling behavior, detect the installed version, check current official docs, follow the documented pattern, and cite the source in the work summary or PR.
 
 ## 1. Meta-Skill Routing
 
@@ -53,7 +54,7 @@ Common routing:
 | Implement one task                                  | `$aga-build`                                          | `incremental-implementation` + `test-driven-development` |
 | UI, forms, states, navigation                       | `$aga-build` + `frontend-ui-engineering`              | production UI, a11y, states                              |
 | Endpoint, server action, webhook, shared interface  | `$aga-build` + `api-and-interface-design`             | contract, validation, error semantics                    |
-| Provider/library behavior                           | `source-driven-development`                           | verify current official docs                             |
+| Version-sensitive framework/library/provider/browser/tooling behavior | `source-driven-development` | verify installed version + current official docs         |
 | Auth, payments, tenant data, migrations, AI actions | `security-and-hardening` + `doubt-driven-development` | high-risk override                                       |
 | Bug                                                 | `debugging-and-error-recovery`                        | reproduce -> localize -> regression test -> fix          |
 | Completed agent work, commit, PR, or final answer   | `$aga-verify-agent`                                   | task contract vs claims/diff/proof + Aga Action          |
@@ -289,6 +290,9 @@ Use this for new user-visible behavior, backend flow, or non-trivial change.
 
 3. BUILD
    Use $aga-build for one task.
+   If the task touches framework, library, provider, browser API, or tooling
+   behavior where correctness may depend on installed version or current docs,
+   use source-driven-development before coding.
    Run the smallest relevant test loop while editing.
    Typecheck + relevant tests before commit.
    Full suite + build before PR/merge.
@@ -500,7 +504,7 @@ One main agent by default. Session per feature or per task. Use `docs/PLAN.md` a
 - "Checkout redirected successfully" -> payment state lives in webhook/provider/database proof.
 - "The model said it is fixed" -> agent claims are not evidence.
 - "I will clean this up while I am here" -> cleanup needs its own task.
-- "Provider docs probably did not change" -> check current official docs.
+- "Current docs probably did not change" -> source-check version-sensitive framework, library, provider, browser API, and tooling behavior.
 - "This test is annoying" -> tests protect behavior until proven obsolete.
 
 ## 14. When To Extend This Workflow

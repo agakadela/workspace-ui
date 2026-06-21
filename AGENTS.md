@@ -17,20 +17,34 @@
 
 ## Commands
 
-The app is not scaffolded yet. Intended commands after Vite setup:
+The app is scaffolded. Use:
 
-- install: `npm install`
+- install: `npm ci`
 - dev: `npm run dev`
 - typecheck: `npm run typecheck`
 - lint: `npm run lint`
 - test: `npm test`
 - build: `npm run build`
 
+## Source-Checked Tooling
+
+- Use `source-driven-development` before changing framework, library,
+  provider, browser API, or tooling behavior where the correct pattern may
+  depend on the installed version or current official docs.
+- This especially applies to scaffolding, dependency upgrades, config files,
+  provider integrations, security-sensitive features, browser/platform APIs,
+  and shared patterns that future agents or humans are likely to copy.
+- Do not rely on memory for version-sensitive setup or APIs. Detect the
+  installed version, check the relevant official docs, implement the documented
+  pattern, and cite the source in the work summary or PR.
+
 ## Skill Routing
 
 - New phase or significant scope change -> `$aga-spec`.
 - Task planning -> `$aga-plan`.
 - UI, states, navigation, responsive polish -> `frontend-ui-engineering`.
+- Version-sensitive framework, library, provider, browser API, or tooling
+  changes -> `source-driven-development` first.
 - Implementation slice -> `$aga-build`.
 - Bug -> `debugging-and-error-recovery`.
 - Verification -> `$aga-test` and targeted browser/runtime proof.

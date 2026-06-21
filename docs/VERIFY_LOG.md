@@ -12,7 +12,63 @@ Rules:
 
 ## Entries
 
-No runtime entries yet. The app has not been scaffolded.
+### 2026-06-20 — `standard` — `Task 1 runnable web shell and feedback loops` — `N/A recorded before commit`
+
+- Environment: `local`
+- Checked:
+  - Vite + React + TypeScript + Tailwind scaffold renders Home first.
+  - Feedback-loop scripts exist and run real commands.
+  - CI workflow runs typecheck, lint, tests, and build.
+  - Source structure includes `src/features`, `src/shared/ui`,
+    `src/shared/data`, and `src/shared/platform`.
+- Commands run:
+  - `npm test` failed first because `src/app/App.tsx` did not exist.
+  - `npm test`
+  - `npm run typecheck`
+  - `npm run lint`
+  - `npm run build`
+- Runtime proof:
+  - Browser flow: gstack `/browse` opened `http://127.0.0.1:5173/` with HTTP
+    200, page text included `Workspace Home`, and console output had no errors.
+  - Database proof: `N/A` because Phase 0 has no database.
+  - Provider/dashboard proof: `N/A` because Phase 0 has no external provider.
+- Cannot verify:
+  - GitHub Actions result before the draft PR runs CI.
+  - Final visual quality or complete Phase 0 product usefulness.
+- Docs updated:
+  - `docs/PLAN.md`
+  - `README.md`
+  - `docs/VERIFY_LOG.md`
+- Verdict: `SHIP`
+
+### 2026-06-20 — `standard` — `Tailwind v4 Vite setup correction` — `N/A recorded before commit`
+
+- Environment: `local`
+- Checked:
+  - Tailwind setup was corrected against current official Tailwind docs.
+  - Vite uses `@tailwindcss/vite`.
+  - CSS imports Tailwind with `@import "tailwindcss";`.
+  - Custom tokens live in CSS `@theme`.
+  - Agent-facing docs now require checking current Tailwind docs before future
+    Tailwind setup/config/theme changes.
+- Commands run:
+  - `npm run typecheck`
+  - `npm run lint`
+  - `npm test`
+  - `npm run build`
+- Runtime proof:
+  - Browser flow: gstack `/browse` opened `http://127.0.0.1:5173/` with HTTP
+    200, page text included `Workspace Home`, console output had no errors, and
+    `bg-paper-50` resolved to `rgb(251, 250, 247)`.
+  - Database proof: `N/A` because Phase 0 has no database.
+  - Provider/dashboard proof: `N/A` because Phase 0 has no external provider.
+- Cannot verify:
+  - GitHub Actions result before the updated draft PR runs CI.
+- Docs updated:
+  - `AGENTS.md`
+  - `docs/ARCHITECTURE.md`
+  - `docs/VERIFY_LOG.md`
+- Verdict: `SHIP`
 
 ## Entry Template
 
