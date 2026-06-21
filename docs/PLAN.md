@@ -13,7 +13,7 @@ Context Panel on public-safe mock data.
 ### Acceptance Criteria
 
 - [x] `workspace-ui` has accepted foundation docs.
-- [ ] Vite + React + TypeScript + Tailwind skeleton runs locally.
+- [x] Vite + React + TypeScript + Tailwind skeleton runs locally.
 - [ ] Home renders as the first screen and answers where to continue, what
       changed, what is next, and what context can be prepared.
 - [ ] Visual Explorer renders artifact cards with role/status/privacy and a
@@ -62,6 +62,9 @@ Context Panel on public-safe mock data.
 - Foundation docs and ADR are accepted: `docs/SPEC.md`,
   `docs/ARCHITECTURE.md`, `CONTEXT.md`, and
   `docs/decisions/ADR-0001-project-foundation.md`.
+- Task 1 scaffold is complete: the Vite + React + TypeScript + Tailwind shell
+  renders Home first, feedback-loop commands pass locally, and CI runs the same
+  real commands.
 - Dashboard UI kit PNGs exist as references only, not product assets.
 
 ## Dependency Graph
@@ -89,17 +92,17 @@ Notes:
 
 ### Task 1 - Runnable Web Shell And Feedback Loops
 
-- Status: not started.
+- Status: complete.
 - User-visible result: local app boots to a minimal Home-first workspace shell.
 - Description: Scaffold the agreed Vite + React + TypeScript + Tailwind app in
   the repo root, with a small Home-first shell, feature/shared folders, and real
   feedback-loop commands before feature UI begins.
 - Acceptance criteria:
-  - [ ] `npm run dev` starts Vite and renders the Home-first shell.
-  - [ ] `npm run typecheck`, `npm run lint`, `npm test`, and `npm run build`
+  - [x] `npm run dev` starts Vite and renders the Home-first shell.
+  - [x] `npm run typecheck`, `npm run lint`, `npm test`, and `npm run build`
         exist and pass on the scaffold.
-  - [ ] CI runs typecheck, lint, tests, and build without silent-pass stubs.
-  - [ ] Source structure follows `src/features`, `src/shared/ui`,
+  - [x] CI runs typecheck, lint, tests, and build without silent-pass stubs.
+  - [x] Source structure follows `src/features`, `src/shared/ui`,
         `src/shared/data`, and `src/shared/platform`.
 - Verification:
   - Automated: `npm run typecheck`, `npm run lint`, `npm test`,
