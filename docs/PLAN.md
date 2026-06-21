@@ -14,14 +14,14 @@ Context Panel on public-safe mock data.
 
 - [x] `workspace-ui` has accepted foundation docs.
 - [x] Vite + React + TypeScript + Tailwind skeleton runs locally.
-- [ ] Home renders as the first screen and answers where to continue, what
+- [x] Home renders as the first screen and answers where to continue, what
       changed, what is next, and what context can be prepared.
 - [ ] Visual Explorer renders artifact cards with role/status/privacy and a
       readable Preview Pane.
 - [ ] Project Desk renders one project as a work surface, not a folder listing.
 - [ ] Agent Context Panel shows selected, excluded, private/review-first files,
       and a suggested prompt.
-- [ ] Recent Activity is limited to three or four static cards.
+- [x] Recent Activity is limited to three or four static cards.
 - [ ] UI is visually coherent, calm, premium, work-focused, and close to the
       dashboard UI kit references without copying them.
 - [ ] At least two agent-work rounds are documented.
@@ -65,6 +65,9 @@ Context Panel on public-safe mock data.
 - Task 1 scaffold is complete: the Vite + React + TypeScript + Tailwind shell
   renders Home first, feedback-loop commands pass locally, and CI runs the same
   real commands.
+- Task 2 Home Orientation Slice is complete: Home now uses public-safe mock data
+  to show where to continue, what changed, what is next, pinned docs, and a mock
+  agent context draft.
 - Dashboard UI kit PNGs exist as references only, not product assets.
 
 ## Dependency Graph
@@ -141,7 +144,7 @@ Notes:
 
 ### Task 2 - Home Orientation Slice
 
-- Status: not started.
+- Status: complete.
 - User-visible result: Home answers where to continue, what changed, what is
   next, which docs matter, and what context can be prepared.
 - Description: Build the first real Phase 0 surface using public-safe mock data:
@@ -149,15 +152,15 @@ Notes:
   context draft summary, using `docs/UI_SYSTEM.md` as the visual and interaction
   reference.
 - Acceptance criteria:
-  - [ ] Home is the first screen and does not read like a file browser.
-  - [ ] Home follows `docs/UI_SYSTEM.md` for density, panel rhythm, dark
+  - [x] Home is the first screen and does not read like a file browser.
+  - [x] Home follows `docs/UI_SYSTEM.md` for density, panel rhythm, dark
         graphite/work-surface direction, restrained accents, and component
         states.
-  - [ ] Recent Activity contains exactly three or four static cards.
-  - [ ] Home shows continue item, next tasks, pinned docs, and context draft
+  - [x] Recent Activity contains exactly three static cards.
+  - [x] Home shows continue item, next tasks, pinned docs, and context draft
         from fictional public-safe mock data.
-  - [ ] Status/privacy/agent-safety information is visible and not color-only.
-  - [ ] Agent work round 1 is documented in the chosen lightweight format.
+  - [x] Status/privacy/agent-safety information is visible and not color-only.
+  - [x] Agent work round 1 is documented in `docs/AGENT_WORK_ROUNDS.md`.
 - Verification:
   - Automated: `npm run typecheck`, `npm run lint`, `npm test`,
     `npm run build`.
