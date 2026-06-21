@@ -85,8 +85,8 @@ Notes:
 - After Task 1, each implementation task should cut through mock data,
   feature ownership under `src/features`, shared primitives only where useful,
   app navigation, tests, and targeted browser proof.
-- Reusable UI conventions should be documented only after the trigger exists
-  (second view or reusable pattern).
+- `docs/UI_SYSTEM.md` now exists as the durable UI reference at Aga's request;
+  update it when later views introduce or change reusable patterns.
 
 ## Active Tasks
 
@@ -198,8 +198,8 @@ Notes:
   - [ ] Preview Pane shows readable markdown, HTML mockup, image/card, and code
         summary examples.
   - [ ] Empty and unsupported-preview states are visible and calm.
-  - [ ] If this introduces the second reusable view/pattern, `docs/UI_SYSTEM.md`
-        is created or updated with only the conventions that now exist.
+  - [ ] `docs/UI_SYSTEM.md` is updated if Explorer introduces or changes
+        reusable UI conventions.
 - Verification:
   - Automated: `npm run typecheck`, `npm run lint`, `npm test`,
     `npm run build`.
@@ -214,7 +214,7 @@ Notes:
   - `src/shared/data/`
   - `src/shared/ui/`
   - `src/app/App.tsx`
-  - `docs/UI_SYSTEM.md` only if the trigger exists.
+  - `docs/UI_SYSTEM.md` if UI conventions change.
 - Do not touch:
   - Real filesystem scanning.
   - Real local HTML preview or sandbox policy implementation.
@@ -261,7 +261,7 @@ Notes:
   - `src/shared/ui/`
   - `src/app/App.tsx`
   - `docs/AGENT_WORK_ROUNDS.md`
-  - `docs/UI_SYSTEM.md` if UI conventions changed after the trigger.
+  - `docs/UI_SYSTEM.md` if UI conventions changed.
 - Do not touch:
   - Real open-in-VS-Code, Finder, or terminal behavior.
   - File editing, moving, deleting, or pinning persistence.
@@ -307,7 +307,7 @@ Notes:
   - `src/features/project-desk/`
   - `src/shared/data/`
   - `src/shared/ui/`
-  - `docs/UI_SYSTEM.md` if UI conventions changed after the trigger.
+  - `docs/UI_SYSTEM.md` if UI conventions changed.
 - Do not touch:
   - Real Codex, Claude, terminal, or provider execution.
   - Real file reads or automatic context selection from disk.
@@ -349,7 +349,7 @@ Notes:
   - `docs/VERIFY_LOG.md`
   - `docs/PLAN.md`
   - `docs/AGENT_WORK_ROUNDS.md`
-  - `docs/UI_SYSTEM.md` if UI conventions changed after the trigger.
+  - `docs/UI_SYSTEM.md` if UI conventions changed.
 - Do not touch:
   - New product features beyond Phase 0 acceptance criteria.
   - `src-tauri/` or real desktop setup.
@@ -377,7 +377,7 @@ Notes:
 - [ ] Home and Explorer + Preview are both reachable.
 - [ ] Mock data remains fictional and public-safe.
 - [ ] Preview types are represented without real filesystem access.
-- [ ] `docs/UI_SYSTEM.md` exists only if the trigger has actually occurred.
+- [ ] `docs/UI_SYSTEM.md` remains current with Home and Explorer patterns.
 
 ### Checkpoint - After Task 5
 

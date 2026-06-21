@@ -152,13 +152,14 @@ Pull requests as review artifacts:
 
 ## 3. Risk-Triggered Docs
 
-Create these only when the trigger happens:
+Create these only when the trigger happens, except for `docs/UI_SYSTEM.md`,
+which this repo created early by explicit Aga request:
 
 | File                        | Trigger                                                |
 | --------------------------- | ------------------------------------------------------ |
 | `docs/AUTH_ACCESS_MODEL.md` | first protected route or first user                    |
 | `docs/API_CONTRACTS.md`     | first shared endpoint/server action/webhook/public API |
-| `docs/UI_SYSTEM.md`         | second view or reusable UI pattern                     |
+| `docs/UI_SYSTEM.md`         | UI conventions; this repo created it early by Aga request |
 | `docs/AI_BOUNDARIES.md`     | first AI call                                          |
 | `docs/INTEGRATIONS.md`      | first external provider with callback/webhook          |
 | `docs/SYSTEM_MAP.md`        | entering an existing/rescue/client repo                |

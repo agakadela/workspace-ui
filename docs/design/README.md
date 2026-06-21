@@ -25,3 +25,6 @@ and dashboard craft, while being adapted to this product's workspace-orientation
 problem.
 
 See `docs/design/references/dashboard-ui-kit/` for the PNG reference set.
+
+See `docs/UI_SYSTEM.md` for the canonical agent-facing UI rules derived from
+these references.
