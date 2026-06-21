@@ -3,7 +3,7 @@
 ## Process
 
 - Read `docs/AGENT_WORKFLOW.md`, `docs/SPEC.md`, and `docs/PLAN.md` before
-  non-trivial work.
+  non-trivial work. Read `docs/UI_SYSTEM.md` before UI work.
 - Work on one vertical slice at a time.
 - Before non-trivial work, surface assumptions explicitly.
 - Keep Phase 0 web-only unless Aga explicitly changes the scope.
@@ -11,7 +11,8 @@
   execution, login, cloud sync, search, terminal, file editing, or PDF viewing
   during Phase 0.
 - When project truth changes, update the matching document in `docs/`.
-- Do not create risk-triggered docs before their trigger exists.
+- Do not create risk-triggered docs before their trigger exists, except
+  `docs/UI_SYSTEM.md`, which Aga requested early as the UI reference for agents.
 - Do not invent. If unknown, write `UNKNOWN`. If not applicable, write `N/A`
   and why.
 
@@ -68,6 +69,8 @@ QA/testing/bug-report coverage or a larger release/regression pass.
 ## Design Guardrails
 
 - Human-readable first, developer-readable second.
+- Follow `docs/UI_SYSTEM.md` for visual direction, components, states, and
+  reference-image boundaries.
 - Home is the primary first screen, not a file browser.
 - Dashboard UI kit PNGs are close visual inspiration, not assets to copy 1:1.
 - Use real buttons, focus states, readable contrast, and statuses that do not
@@ -79,7 +82,8 @@ QA/testing/bug-report coverage or a larger release/regression pass.
 
 - Adding dependencies beyond the agreed foundation.
 - Introducing shadcn/Radix components.
-- Creating risk-triggered docs.
+- Creating risk-triggered docs other than the already-approved
+  `docs/UI_SYSTEM.md`.
 - Expanding Phase 0 scope.
 - Copying or using dashboard UI kit assets in the product UI rather than as
   references.

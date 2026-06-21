@@ -175,7 +175,7 @@ It will include:
 | Architecture | `docs/ARCHITECTURE.md` |
 | Foundation decisions | `docs/decisions/ADR-0001-project-foundation.md` |
 | Design references | `docs/design/references/dashboard-ui-kit/` |
-| UI conventions | `docs/UI_SYSTEM.md` once triggered |
+| UI conventions | `docs/UI_SYSTEM.md` |
 | AI boundaries | `docs/AI_BOUNDARIES.md` once triggered by a real AI call |
 | Integrations | `docs/INTEGRATIONS.md` once triggered |
 | Operations | `docs/OPERATIONS.md` once launch prep begins |
@@ -184,7 +184,8 @@ It will include:
 
 - Accepted: project foundation, stack, module convention, and Tauri-compatible
   repo shape in `docs/decisions/ADR-0001-project-foundation.md`.
-- Future: UI system conventions after the second view/reusable pattern.
+- Accepted: UI system conventions in `docs/UI_SYSTEM.md`, created early at
+  Aga's request so agents have a durable UI reference before later views exist.
 - Future: HTML preview sandbox policy before Phase 1 real local HTML preview.
 - Future: Tauri filesystem permissions and ignore rules before real workspace
   scanning.

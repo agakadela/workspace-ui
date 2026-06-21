@@ -30,7 +30,7 @@ Phase 0 proves useful.
 | Data isolation | N/A for Phase 0 | No persisted user data. | Real local/private data scanning starts. |
 | Payments/entitlements | N/A | Out of scope. | Commercial packaging is considered. |
 | API style | N/A for Phase 0 | No backend/API. | Shared endpoint/action appears. |
-| UI foundation | Own dashboard-kit-inspired components; Radix/shadcn selectively | Preserve visual direction while allowing accessible primitives. | Second view/reusable pattern triggers `UI_SYSTEM.md`. |
+| UI foundation | Own dashboard-kit-inspired components; Radix/shadcn selectively | Preserve visual direction while allowing accessible primitives. | Revisit when reusable patterns harden after multiple views. |
 | Module convention | `src/features` + `src/shared` | Product-area ownership; portable to Tauri. | Product domains become more backend-like. |
 | AI boundary | N/A for Phase 0 | Agent Context Panel is mock-only. | First real AI/provider call. |
 | Future desktop | Tauri first, Electron fallback | Local-first desktop direction with smaller/security-focused runtime. | Phase 0 close decision. |
@@ -159,12 +159,13 @@ Phase 0 proves useful.
 
 - Keep platform behavior behind `src/shared/platform`.
 - Do not create `src-tauri/` in Phase 0.
-- Create `UI_SYSTEM.md` once the second view/reusable UI patterns exist.
+- Maintain `docs/UI_SYSTEM.md`, created early at Aga's request so agents have a
+  durable UI reference before later views exist.
 - Add CI only after package scripts exist and are real.
 
 ## Follow-Up Docs Triggered
 
-- [ ] `docs/UI_SYSTEM.md` after second view/reusable UI pattern.
+- [x] `docs/UI_SYSTEM.md` created early as the agent-facing UI reference.
 - [ ] `docs/AI_BOUNDARIES.md` after first real AI call.
 - [ ] `docs/INTEGRATIONS.md` after first provider webhook/callback.
 - [ ] `docs/AUTH_ACCESS_MODEL.md` after first protected route/user.
@@ -174,6 +175,6 @@ Phase 0 proves useful.
 
 - Phase 0 close decision.
 - First real local filesystem access.
-- First reusable UI pattern beyond one view.
+- First reusable UI pattern beyond one view, to refine `docs/UI_SYSTEM.md`.
 - First real AI/provider integration.
 - Decision to publish/share prototype outside local use.
