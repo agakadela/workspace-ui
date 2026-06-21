@@ -41,6 +41,35 @@ Rules:
   - `docs/VERIFY_LOG.md`
 - Verdict: `SHIP`
 
+### 2026-06-20 — `standard` — `Tailwind v4 Vite setup correction` — `N/A recorded before commit`
+
+- Environment: `local`
+- Checked:
+  - Tailwind setup was corrected against current official Tailwind docs.
+  - Vite uses `@tailwindcss/vite`.
+  - CSS imports Tailwind with `@import "tailwindcss";`.
+  - Custom tokens live in CSS `@theme`.
+  - Agent-facing docs now require checking current Tailwind docs before future
+    Tailwind setup/config/theme changes.
+- Commands run:
+  - `npm run typecheck`
+  - `npm run lint`
+  - `npm test`
+  - `npm run build`
+- Runtime proof:
+  - Browser flow: gstack `/browse` opened `http://127.0.0.1:5173/` with HTTP
+    200, page text included `Workspace Home`, console output had no errors, and
+    `bg-paper-50` resolved to `rgb(251, 250, 247)`.
+  - Database proof: `N/A` because Phase 0 has no database.
+  - Provider/dashboard proof: `N/A` because Phase 0 has no external provider.
+- Cannot verify:
+  - GitHub Actions result before the updated draft PR runs CI.
+- Docs updated:
+  - `AGENTS.md`
+  - `docs/ARCHITECTURE.md`
+  - `docs/VERIFY_LOG.md`
+- Verdict: `SHIP`
+
 ## Entry Template
 
 ### YYYY-MM-DD — `standard | high-risk | phase close | ship` — `[feature/task/phase]` — `[commit SHA or N/A]`

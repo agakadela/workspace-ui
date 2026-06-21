@@ -15,7 +15,7 @@ boundaries.
 |---|---|---|---|
 | App framework | Vite + React | ADR-0001 | Web-only Phase 0, Tauri-compatible later. |
 | Language | TypeScript | ADR-0001 | Strict app code expected after scaffold. |
-| Styling | Tailwind CSS | ADR-0001 | Own dashboard-kit-inspired UI system, not default SaaS look. |
+| Styling | Tailwind CSS v4 | ADR-0001 + current Tailwind docs | Own dashboard-kit-inspired UI system, not default SaaS look. Use the Vite plugin and CSS-first theme tokens. |
 | Icons | lucide-react | ADR-0001 | Use real icons for actions where available. |
 | UI primitives | Own components; Radix/shadcn selectively | ADR-0001 | Ask first before adding. |
 | Package manager | npm | ADR-0001 | Chosen for stability and agent/tool compatibility. |
@@ -69,6 +69,28 @@ Global technical folders policy:
 - `src/shared/platform/` is allowed for adapters that hide mock vs future Tauri
   behavior.
 - Broad global dumping grounds for application logic are not allowed.
+
+## Styling Tooling
+
+Tailwind setup/config/theme work must be checked against the current official
+Tailwind docs before editing. Tailwind changed materially between v3 and v4, so
+agents should not rely on memory or older scaffold patterns.
+
+Current project setup:
+
+- `tailwindcss` and `@tailwindcss/vite` are installed together.
+- `vite.config.ts` registers `@tailwindcss/vite`.
+- `src/index.css` imports Tailwind with `@import "tailwindcss";`.
+- Custom design tokens live in CSS using `@theme`.
+- No `tailwind.config.*` or `postcss.config.*` file is used unless future
+  official docs and installed package versions require one.
+
+Source checked on 2026-06-20:
+
+- `https://tailwindcss.com/docs/installation/using-vite`
+- `https://tailwindcss.com/docs/theme`
+- `https://tailwindcss.com/docs/functions-and-directives`
+- `https://tailwindcss.com/docs/upgrade-guide`
 
 ## Data Flow
 

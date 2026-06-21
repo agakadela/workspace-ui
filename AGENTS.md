@@ -17,20 +17,35 @@
 
 ## Commands
 
-The app is not scaffolded yet. Intended commands after Vite setup:
+The app is scaffolded. Use:
 
-- install: `npm install`
+- install: `npm ci`
 - dev: `npm run dev`
 - typecheck: `npm run typecheck`
 - lint: `npm run lint`
 - test: `npm test`
 - build: `npm run build`
 
+## Source-Checked Tooling
+
+- For Tailwind work, check the current official Tailwind docs before changing
+  setup, config, imports, plugins, theme tokens, or upgrade paths. Tailwind has
+  changed materially across major versions, and stale v3 patterns are easy to
+  apply by mistake.
+- Current Tailwind setup in this repo follows the v4 Vite plugin path:
+  `@tailwindcss/vite` in `vite.config.ts`, `@import "tailwindcss";` in
+  `src/index.css`, and custom tokens in CSS `@theme`. Do not add
+  `tailwind.config.*`, `postcss.config.*`, `@tailwind base`, `@tailwind
+  components`, or `@tailwind utilities` unless the current official docs and
+  the installed package version require it.
+
 ## Skill Routing
 
 - New phase or significant scope change -> `$aga-spec`.
 - Task planning -> `$aga-plan`.
 - UI, states, navigation, responsive polish -> `frontend-ui-engineering`.
+- Tailwind setup/config/theme changes -> `source-driven-development` first,
+  using current official Tailwind docs.
 - Implementation slice -> `$aga-build`.
 - Bug -> `debugging-and-error-recovery`.
 - Verification -> `$aga-test` and targeted browser/runtime proof.
