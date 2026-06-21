@@ -72,6 +72,7 @@ Context Panel on public-safe mock data.
 ```txt
 Runnable Vite/React/Tailwind shell + feedback loops
   -> public-safe mock workspace data through the shared/platform boundary
+  -> docs/UI_SYSTEM.md visual reference
     -> Home orientation slice
       -> Visual Explorer + Preview slice
       -> Project Desk slice
@@ -145,9 +146,13 @@ Notes:
   next, which docs matter, and what context can be prepared.
 - Description: Build the first real Phase 0 surface using public-safe mock data:
   continue card, bounded Recent Activity, next tasks, pinned docs, and an agent
-  context draft summary.
+  context draft summary, using `docs/UI_SYSTEM.md` as the visual and interaction
+  reference.
 - Acceptance criteria:
   - [ ] Home is the first screen and does not read like a file browser.
+  - [ ] Home follows `docs/UI_SYSTEM.md` for density, panel rhythm, dark
+        graphite/work-surface direction, restrained accents, and component
+        states.
   - [ ] Recent Activity contains exactly three or four static cards.
   - [ ] Home shows continue item, next tasks, pinned docs, and context draft
         from fictional public-safe mock data.
@@ -157,7 +162,8 @@ Notes:
   - Automated: `npm run typecheck`, `npm run lint`, `npm test`,
     `npm run build`.
   - Runtime/manual: targeted gstack `/browse` check at desktop and narrower
-    laptop widths that Home remains readable and action hierarchy is clear.
+    laptop widths that Home remains readable, follows `docs/UI_SYSTEM.md`, and
+    action hierarchy is clear.
   - Data/provider proof: N/A.
 - Dependencies:
   - Task 1.
@@ -168,6 +174,7 @@ Notes:
   - `src/shared/ui/`
   - `src/app/App.tsx`
   - `docs/AGENT_WORK_ROUNDS.md`
+  - `docs/UI_SYSTEM.md` if the first real Home pass changes UI conventions.
 - Do not touch:
   - Real private workspace names or client data.
   - More than four Recent Activity cards.
