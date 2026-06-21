@@ -28,24 +28,23 @@ The app is scaffolded. Use:
 
 ## Source-Checked Tooling
 
-- For Tailwind work, check the current official Tailwind docs before changing
-  setup, config, imports, plugins, theme tokens, or upgrade paths. Tailwind has
-  changed materially across major versions, and stale v3 patterns are easy to
-  apply by mistake.
-- Current Tailwind setup in this repo follows the v4 Vite plugin path:
-  `@tailwindcss/vite` in `vite.config.ts`, `@import "tailwindcss";` in
-  `src/index.css`, and custom tokens in CSS `@theme`. Do not add
-  `tailwind.config.*`, `postcss.config.*`, `@tailwind base`, `@tailwind
-  components`, or `@tailwind utilities` unless the current official docs and
-  the installed package version require it.
+- Use `source-driven-development` before changing framework, library,
+  provider, browser API, or tooling behavior where the correct pattern may
+  depend on the installed version or current official docs.
+- This especially applies to scaffolding, dependency upgrades, config files,
+  provider integrations, security-sensitive features, browser/platform APIs,
+  and shared patterns that future agents or humans are likely to copy.
+- Do not rely on memory for version-sensitive setup or APIs. Detect the
+  installed version, check the relevant official docs, implement the documented
+  pattern, and cite the source in the work summary or PR.
 
 ## Skill Routing
 
 - New phase or significant scope change -> `$aga-spec`.
 - Task planning -> `$aga-plan`.
 - UI, states, navigation, responsive polish -> `frontend-ui-engineering`.
-- Tailwind setup/config/theme changes -> `source-driven-development` first,
-  using current official Tailwind docs.
+- Version-sensitive framework, library, provider, browser API, or tooling
+  changes -> `source-driven-development` first.
 - Implementation slice -> `$aga-build`.
 - Bug -> `debugging-and-error-recovery`.
 - Verification -> `$aga-test` and targeted browser/runtime proof.
