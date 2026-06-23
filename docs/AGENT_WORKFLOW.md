@@ -10,12 +10,12 @@ This repo should store project truth in files, not in chat memory.
 
 ## 0. Always-On Rules
 
-1. Feedback loops before features: typecheck, lint, tests, CI, and build must exist before real feature work.
+1. Feedback loops before features: typecheck, lint, tests, CI, and build must exist before real feature work. Add baseline error monitoring early. Use observability while building triggered production paths, not as a post-launch cleanup.
 2. Specs are created through conversation. The agent interviews Aga, resolves blocking unknowns, and writes the spec.
 3. Work in small vertical slices. One task at a time. `docs/PLAN.md` is the durable memory.
 4. Git is a save-point system. Standard tasks end in commits. Larger or riskier changes go through short-lived branches and PRs. High-risk work pauses before commit.
 5. `AGENTS.md` stays small and alive. Long-form workflow lives here.
-6. Runtime proof beats agent claims. Passing tests, clicked flows, database records, and provider dashboards are evidence. `$aga-verify-agent` checks the task contract against agent claims and evidence after build; it does not replace `$aga-test` or `$aga-review`. Verification is proportional: routine browser proof is a targeted check, not full gstack `/qa`.
+6. Runtime proof beats agent claims. Passing tests, clicked flows, database records, provider dashboards, and triggered telemetry are evidence. `$aga-verify-agent` checks the task contract against agent claims and evidence after build; it does not replace `$aga-test` or `$aga-review`. Verification is proportional: routine browser proof is a targeted check, not full gstack `/qa`, and browser tooling defaults to an isolated or dedicated testing profile.
 7. Non-trivial diffs get review before merge after the evidence gate is resolved.
 8. High-risk decisions get `doubt-driven-development` before code.
 9. Version-sensitive external behavior gets `source-driven-development`: before changing framework, library, provider, browser API, or tooling behavior, detect the installed version, check current official docs, follow the documented pattern, and cite the source in the work summary or PR.
@@ -23,6 +23,11 @@ This repo should store project truth in files, not in chat memory.
 ## 1. Meta-Skill Routing
 
 Use `using-agent-skills` at the start of a session or whenever the right workflow is unclear.
+
+Addy Osmani `agent-skills` are the primary workflow system. Auxiliary installed
+packs are constrained by this workflow: Matt Pocock is used only through
+`grill-with-docs` for repeated terminology/plan confusion, and gstack is only a
+focused browser/visual verification helper.
 
 Rules:
 
@@ -55,6 +60,7 @@ Common routing:
 | UI, forms, states, navigation                       | `$aga-build` + `frontend-ui-engineering`              | production UI, a11y, states                              |
 | Endpoint, server action, webhook, shared interface  | `$aga-build` + `api-and-interface-design`             | contract, validation, error semantics                    |
 | Version-sensitive framework/library/provider/browser/tooling behavior | `source-driven-development` | verify installed version + current official docs         |
+| Production endpoint/integration/job/retry/I/O or hard-to-diagnose path | `observability-and-instrumentation` | on-call questions, structured telemetry, proof           |
 | Auth, payments, tenant data, migrations, AI actions | `security-and-hardening` + `doubt-driven-development` | high-risk override                                       |
 | Bug                                                 | `debugging-and-error-recovery`                        | reproduce -> localize -> regression test -> fix          |
 | Completed agent work, commit, PR, or final answer   | `$aga-verify-agent`                                   | task contract vs claims/diff/proof + Aga Action          |
@@ -71,6 +77,13 @@ Verification routing:
   or a bug report, or for larger release, client handoff, or regression passes.
 - If the agent thinks gstack `/qa` is needed but Aga did not ask for it, ask
   first and explain why a targeted check is not enough.
+- Browser tooling defaults to an isolated or dedicated Chrome profile. Attaching
+  to Aga's everyday logged-in browser is a security exception requiring explicit
+  need.
+- gstack `/browse` is allowed for focused visual inspection when visual proof is
+  needed; keep it scoped to the specific check.
+- Do not route normal work through Matt `ask-matt`, `implement`, `to-prd`,
+  `to-issues`, `tdd`, `codebase-design`, or `diagnosing-bugs`.
 
 ## 2. Files In Every Repo
 
@@ -232,6 +245,9 @@ Before real features:
 - local/preview/prod environments are separated
 - `.env.example` exists; real secrets never enter repo or chat
 - error monitoring exists if production-like deploy exists
+- observability trigger rule exists for production-facing endpoints,
+  integrations, jobs, queues/retries, external I/O, high-risk flows, and
+  behavior hard to diagnose from current data
 - seed data includes at least two test accounts
 - baseline UI approach is chosen
 - `AGENTS.md` and this workflow exist in repo
@@ -294,6 +310,10 @@ Use this for new user-visible behavior, backend flow, or non-trivial change.
    If the task touches framework, library, provider, browser API, or tooling
    behavior where correctness may depend on installed version or current docs,
    use source-driven-development before coding.
+   If the task touches a production endpoint, integration, job, queue/retry,
+   external I/O, high-risk flow, or behavior hard to diagnose from current data,
+   use observability-and-instrumentation while building: write 2-4 on-call
+   questions first, then add only telemetry that answers them.
    Run the smallest relevant test loop while editing.
    Typecheck + relevant tests before commit.
    Full suite + build before PR/merge.
@@ -316,6 +336,12 @@ Use this for new user-visible behavior, backend flow, or non-trivial change.
 5. REVIEW
    Use $aga-review before merge when the task is aligned and evidence is adequate.
    Check API contracts, access model, UI system, and docs consistency.
+   Keep Aga-facing groups as BLOCKER / FIX NOW / FOLLOW-UP. Internally map
+   Addy severities as: Critical -> BLOCKER; required no-prefix findings -> FIX
+   NOW; Optional/Consider/FYI/Nit -> FOLLOW-UP or omit if noisy. Include Addy's
+   structural checks for bolted-on conditionals, repeated condition chains,
+   complexity relocation, feature logic leaking into shared modules, weak type
+   boundaries, and unhealthy large-file growth.
 
 6. TEST / RUNTIME VERIFY
    Use $aga-test.
@@ -323,7 +349,10 @@ Use this for new user-visible behavior, backend flow, or non-trivial change.
    Treat browser proof as a targeted flow/state check, not full gstack `/qa`.
    Do not invoke or suggest gstack `/qa` unless Aga explicitly asked for QA/testing/bug reporting,
    or this is a larger release/client handoff/regression pass.
+   Use an isolated or dedicated browser profile by default.
    Check database/provider proof where relevant.
+   If observability was triggered, verify a test event/error/request through
+   logs, metrics, traces, or alert path when environment access allows it.
    Add one line to VERIFY_LOG.
 
 7. DOCS
@@ -428,6 +457,8 @@ Additional requirements:
 - Auth/data isolation requires manual two-user test.
 - Payments require provider dashboard proof and database proof.
 - AI endpoints require cost cap, retry cap, logging, and failure path proof.
+- High-risk production paths automatically trigger observability: the PR names
+  on-call questions and proves or names cannot-verify for telemetry.
 - Cannot-verify items must be named in `docs/VERIFY_LOG.md`.
 
 ## 11. Required Command Outputs
@@ -449,6 +480,8 @@ $aga-build
   -> changed files summarized
   -> commit for standard task; branch + PR for larger/riskier work
   -> PR description includes scope, tests, runtime proof, docs, cannot-verify
+  -> on-call questions and telemetry proof/not-needed note when observability
+     is triggered
   -> pause before commit for high-risk
 
 $aga-verify-agent
@@ -468,6 +501,8 @@ $aga-test
 
 $aga-review
   -> findings grouped BLOCKER / FIX NOW / FOLLOW-UP
+  -> Critical maps to BLOCKER; required no-prefix findings map to FIX NOW;
+     Optional/Consider/FYI/Nit map to FOLLOW-UP or are omitted if noisy
   -> file:line references when possible
   -> no unrelated refactor
 
@@ -476,7 +511,7 @@ $aga-simplify
   -> or explicit note that no worthwhile simplification exists
 
 $aga-ship
-  -> env/webhook/monitoring/rollback checklist
+  -> env/webhook/monitoring/observability/rollback checklist
   -> GO/NO-GO decision
   -> VERIFY_LOG entry
   -> handoff notes for client work
@@ -515,7 +550,7 @@ Extend only after two real misses.
 | Signal appears twice                        | Patch                                                |
 | ------------------------------------------- | ---------------------------------------------------- |
 | Agent mixes domain terms despite CONTEXT.md | add stronger terminology checks or `grill-with-docs` |
-| Product direction feels wrong               | use office-hours style review before spec            |
-| UI looks generic or sloppy                  | use design review before build                       |
+| Product direction feels wrong               | use Addy `idea-refine` / `doubt-driven-development` before spec |
+| UI looks generic or sloppy                  | use Addy `frontend-ui-engineering` plus focused browser/visual proof |
 | Payment/auth diff feels risky               | second-model cross-review before merge               |
 | Build loop is boring and reliable           | consider broader automation or second worktree       |
