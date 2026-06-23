@@ -5,7 +5,7 @@ boundaries.
 
 ## Status
 
-- Last reviewed: 2026-06-20.
+- Last reviewed: 2026-06-23.
 - Reviewed by: Aga + agent.
 - Related ADRs: `docs/decisions/ADR-0001-project-foundation.md`.
 
@@ -145,7 +145,7 @@ No persistent schema in Phase 0.
 | Workspace area | TypeScript mock data | `shared/data` | Projects, Clients, Research, Build Logs, Templates, Assets, Archive. |
 | Artifact | TypeScript mock data | `shared/data` | File/project/card with role, status, privacy, agent-safety, preview type. |
 | Project desk | TypeScript mock data | `features/project-desk` | Focused composition for one project. |
-| Agent context draft | TypeScript mock data | `features/agent-context` | Selected/excluded/private/review-first files and suggested prompt. |
+| Agent context composer | TypeScript mock data | `features/agent-context` | Active folder, selected/excluded/private/review-first files, suggested prompt, and browser clipboard fallback state. |
 
 ## External Systems
 
@@ -180,3 +180,4 @@ No persistent schema in Phase 0.
 | Date | Change | Reason | Commit/PR |
 |---|---|---|---|
 | 2026-06-20 | Initial architecture | Project foundation | N/A |
+| 2026-06-23 | Added Agent Context composer model and feature owner | Task 5 implemented the mock context composer slice | Task 5 |

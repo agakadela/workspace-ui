@@ -19,7 +19,7 @@ Context Panel on public-safe mock data.
 - [x] Visual Explorer renders artifact cards with role/status/privacy and a
       readable Preview Pane.
 - [x] Project Desk renders one project as a work surface, not a folder listing.
-- [ ] Agent Context Panel shows selected, excluded, private/review-first files,
+- [x] Agent Context Panel shows selected, excluded, private/review-first files,
       and a suggested prompt.
 - [x] Recent Activity is limited to three or four static cards.
 - [ ] UI is visually coherent, calm, premium, work-focused, and close to the
@@ -76,6 +76,10 @@ Context Panel on public-safe mock data.
   and Explorer as a focused work surface with status, important docs, next
   tasks, recent work, context candidates, mock quick actions, and calm empty
   states.
+- Task 5 Agent Context Composer Slice is complete: Home and Project Desk share a
+  mock composer that shows active folder, selected/excluded/private/review-first
+  files, a suggested prompt, and copy success/fallback states without implying
+  live agent execution.
 - Dashboard UI kit PNGs exist as references only, not product assets.
 
 ## Dependency Graph
@@ -296,20 +300,20 @@ Notes:
 
 ### Task 5 - Agent Context Composer Slice
 
-- Status: not started.
+- Status: complete.
 - User-visible result: Agent Context Panel is an explicit context composer, not
   a chat or live agent session.
 - Description: Add the mock Agent Context Panel and integrate it with Home and
   Project Desk so selected, excluded, private, and review-first files are clear
   before a suggested prompt is copied.
 - Acceptance criteria:
-  - [ ] Panel shows active folder, selected files, excluded files,
+  - [x] Panel shows active folder, selected files, excluded files,
         private files, review-first files, and suggested prompt.
-  - [ ] Copy prompt action copies only mock generated text or shows a graceful
+  - [x] Copy prompt action copies only mock generated text or shows a graceful
         browser-permission fallback.
-  - [ ] The panel is visually a composer, not an AI chat, terminal, or Codex
+  - [x] The panel is visually a composer, not an AI chat, terminal, or Codex
         runtime.
-  - [ ] Privacy and review-first states are readable without relying only on
+  - [x] Privacy and review-first states are readable without relying only on
         color.
 - Verification:
   - Automated: `npm run typecheck`, `npm run lint`, `npm test`,
@@ -400,10 +404,10 @@ Notes:
 
 ### Checkpoint - After Task 5
 
-- [ ] Three main screens and Agent Context Panel are present.
-- [ ] Recent Activity is still limited to three or four static cards.
-- [ ] Agent Context Panel is still a composer, not a live agent integration.
-- [ ] Ready for Phase 0 decision pack.
+- [x] Three main screens and Agent Context Panel are present.
+- [x] Recent Activity is still limited to three or four static cards.
+- [x] Agent Context Panel is still a composer, not a live agent integration.
+- [x] Ready for Phase 0 decision pack.
 
 ## Deferred For This Phase
 

@@ -11,17 +11,23 @@ import {
   Sparkles,
 } from "lucide-react";
 
-import type { WorkspaceProjectDeskModel } from "../../shared/data/mockWorkspace";
+import { AgentContextComposer } from "../agent-context/AgentContextComposer";
+import type {
+  WorkspaceAgentContextModel,
+  WorkspaceProjectDeskModel,
+} from "../../shared/data/mockWorkspace";
 import { StatusChip } from "../../shared/ui/StatusChip";
 
 type ProjectDeskProps = {
   model: WorkspaceProjectDeskModel;
+  agentContext: WorkspaceAgentContextModel;
   onOpenHome: () => void;
   onOpenExplorer: () => void;
 };
 
 export function ProjectDesk({
   model,
+  agentContext,
   onOpenHome,
   onOpenExplorer,
 }: ProjectDeskProps) {
@@ -362,6 +368,10 @@ export function ProjectDesk({
                 />
               </div>
             </section>
+          </div>
+
+          <div className="mt-4">
+            <AgentContextComposer model={agentContext} layout="wide" />
           </div>
         </section>
       </div>

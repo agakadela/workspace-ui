@@ -1,3 +1,24 @@
+export type WorkspaceAgentContextFile = {
+  id: string;
+  title: string;
+  path: string;
+  reason: string;
+  statusLabel: string;
+  safetyLabel: string;
+};
+
+export type WorkspaceAgentContextModel = {
+  activeFolder: string;
+  summary: string;
+  statusLabel: string;
+  boundaryLabel: string;
+  selectedFiles: WorkspaceAgentContextFile[];
+  excludedFiles: WorkspaceAgentContextFile[];
+  privateFiles: WorkspaceAgentContextFile[];
+  reviewFirstFiles: WorkspaceAgentContextFile[];
+  suggestedPrompt: string;
+};
+
 export type WorkspaceHomeModel = {
   continueItem: {
     title: string;
@@ -29,15 +50,6 @@ export type WorkspaceHomeModel = {
     statusLabel: string;
     safetyLabel: string;
   }>;
-  contextDraft: {
-    activeFolder: string;
-    summary: string;
-    statusLabel: string;
-    selectedFiles: string[];
-    reviewFirstFiles: string[];
-    privateExcludedFiles: string[];
-    suggestedPrompt: string;
-  };
   shellStatus: Array<{
     label: string;
     value: string;
@@ -156,15 +168,118 @@ export type WorkspaceProjectDeskModel = {
   };
 };
 
+export const workspaceAgentContextModel: WorkspaceAgentContextModel = {
+  activeFolder: "demo-workspace/orchard-notes",
+  summary:
+    "A controlled handoff composer built from explicit fictional files, with every included and excluded item visible before prompt copy.",
+  statusLabel: "Mock composer",
+  boundaryLabel: "No live agent session",
+  selectedFiles: [
+    {
+      id: "selected-spec",
+      title: "Phase 0 spec",
+      path: "docs/SPEC.md",
+      reason: "Frames the product promise, user, scope, and success criteria.",
+      statusLabel: "Selected",
+      safetyLabel: "Safe for agent",
+    },
+    {
+      id: "selected-plan",
+      title: "Active implementation plan",
+      path: "docs/PLAN.md",
+      reason: "Names Task 5 acceptance criteria, verification, and boundaries.",
+      statusLabel: "Selected",
+      safetyLabel: "Safe for agent",
+    },
+    {
+      id: "selected-ui-system",
+      title: "UI system reference",
+      path: "docs/UI_SYSTEM.md",
+      reason: "Keeps the composer aligned with the established work-surface rhythm.",
+      statusLabel: "Selected",
+      safetyLabel: "Review first",
+    },
+    {
+      id: "selected-project-desk",
+      title: "Project Desk component",
+      path: "src/features/project-desk/ProjectDesk.tsx",
+      reason: "Shows the existing context candidate surface the composer extends.",
+      statusLabel: "Selected",
+      safetyLabel: "Safe for agent",
+    },
+  ],
+  excludedFiles: [
+    {
+      id: "excluded-raw-export",
+      title: "Raw workspace export",
+      path: "demo-workspace/orchard-notes/exports/raw-workspace.dump",
+      reason:
+        "Unsupported export stays visible as excluded instead of being hidden or summarized automatically.",
+      statusLabel: "Excluded",
+      safetyLabel: "Review first",
+    },
+    {
+      id: "excluded-archive",
+      title: "Archived idea stack",
+      path: "demo-workspace/orchard-notes/archive/old-ideas.md",
+      reason: "Not relevant to the next task, so it should not enter the prompt.",
+      statusLabel: "Excluded",
+      safetyLabel: "Safe mock data",
+    },
+  ],
+  privateFiles: [
+    {
+      id: "private-founder-journal",
+      title: "Founder journal",
+      path: "private-notes/founder-journal.md",
+      reason:
+        "Fictional private notes demonstrate the privacy boundary without using real data.",
+      statusLabel: "Private: excluded",
+      safetyLabel: "Private",
+    },
+    {
+      id: "private-client-brief",
+      title: "Real client brief placeholder",
+      path: "client-materials/real-client-brief.md",
+      reason:
+        "Client-like material is clearly excluded and never copied into the suggested prompt.",
+      statusLabel: "Private: excluded",
+      safetyLabel: "Private",
+    },
+  ],
+  reviewFirstFiles: [
+    {
+      id: "review-dashboard-kit-readme",
+      title: "Dashboard kit reference notes",
+      path: "docs/design/references/dashboard-ui-kit/README.md",
+      reason:
+        "Useful for visual direction, but a human should review reference boundaries before reuse.",
+      statusLabel: "Review first",
+      safetyLabel: "Review first",
+    },
+    {
+      id: "review-html-mockup",
+      title: "Desk layout mockup",
+      path: "demo-workspace/orchard-notes/mockups/desk-layout.html",
+      reason:
+        "HTML mockups remain conceptual in Phase 0 and should not imply local file execution.",
+      statusLabel: "Review first",
+      safetyLabel: "Review first",
+    },
+  ],
+  suggestedPrompt:
+    "Build the Agent Context composer using the Phase 0 docs, UI system, and Project Desk mock model. Keep it web-only and mock-only: no real filesystem reads, Git, terminal, search, provider calls, or live Codex/Claude execution.",
+};
+
 export const workspaceHomeModel: WorkspaceHomeModel = {
   continueItem: {
     title: "Review the Orchard Notes Project Desk",
     summary:
-      "Pick up from the focused project work surface: status, docs, tasks, recent work, context candidates, and mock actions are ready to inspect before the context composer slice.",
+      "Pick up from the focused project work surface: status, docs, tasks, recent work, context candidates, and the mock context composer are ready to inspect.",
     area: "Fictional workspace / Product concept",
     statusLabel: "In progress",
     safetyLabel: "Safe for agent",
-    actionLabel: "Review context draft",
+    actionLabel: "Review context composer",
   },
   recentActivity: [
     {
@@ -244,25 +359,6 @@ export const workspaceHomeModel: WorkspaceHomeModel = {
       safetyLabel: "Review before reuse",
     },
   ],
-  contextDraft: {
-    activeFolder: "demo-workspace/orchard-notes",
-    summary:
-      "A controlled draft for the next agent pass, built from explicit fictional files rather than local workspace scanning.",
-    statusLabel: "Composer preview",
-    selectedFiles: [
-      "docs/SPEC.md",
-      "docs/PLAN.md",
-      "docs/UI_SYSTEM.md",
-      "src/features/project-desk/ProjectDesk.tsx",
-    ],
-    reviewFirstFiles: ["docs/design/references/dashboard-ui-kit/README.md"],
-    privateExcludedFiles: [
-      "private-notes/founder-journal.md",
-      "client-materials/real-client-brief.md",
-    ],
-    suggestedPrompt:
-      "Use the pinned Phase 0 docs and Project Desk mock model to build the next Agent Context composer slice without adding real filesystem, Git, search, terminal, or agent execution.",
-  },
   shellStatus: [
     {
       label: "Prototype mode",
@@ -470,7 +566,7 @@ export const workspaceProjectDeskModel: WorkspaceProjectDeskModel = {
     {
       id: "project-doc-plan",
       title: "Active implementation plan",
-      role: "Task 4 acceptance criteria and out-of-scope boundaries.",
+      role: "Task 5 acceptance criteria and out-of-scope boundaries.",
       path: "docs/PLAN.md",
       statusLabel: "Current",
       safetyLabel: "Safe for agent",

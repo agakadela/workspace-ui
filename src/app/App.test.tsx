@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { vi } from "vitest";
 
 import { App } from "./App";
 
@@ -30,14 +31,53 @@ describe("App shell", () => {
       screen.getByRole("heading", { level: 2, name: /pinned docs/i }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { level: 2, name: /agent context draft/i }),
+      screen.getByRole("heading", { level: 2, name: /agent context composer/i }),
     ).toBeInTheDocument();
 
     expect(screen.getAllByTestId("recent-activity-card")).toHaveLength(3);
     expect(screen.getAllByText(/safe for agent/i).length).toBeGreaterThan(0);
-    expect(screen.getByText(/review first/i)).toBeInTheDocument();
-    expect(screen.getByText(/private: excluded/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/review first/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/private: excluded/i).length).toBeGreaterThan(0);
     expect(screen.getByText(/mock only/i)).toBeInTheDocument();
+  });
+
+  it("shows the mock Agent Context composer and fallback copy state", async () => {
+    const user = userEvent.setup();
+    const writeText = vi.fn().mockRejectedValue(new DOMException("NotAllowedError"));
+
+    Object.defineProperty(navigator, "clipboard", {
+      configurable: true,
+      value: { writeText },
+    });
+
+    render(<App />);
+
+    expect(screen.getByText("demo-workspace/orchard-notes")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 3, name: /selected files/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 3, name: /excluded files/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 3, name: /private files/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 3, name: /review-first files/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 3, name: /suggested prompt/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/build the Agent Context composer/i)).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /copy suggested prompt/i }));
+
+    expect(writeText).toHaveBeenCalledWith(
+      expect.stringContaining("Build the Agent Context composer"),
+    );
+    expect(
+      await screen.findByText(/clipboard permission is unavailable/i),
+    ).toBeInTheDocument();
   });
 
   it("opens Visual Explorer from Home and shows meaningful artifact previews", async () => {
@@ -108,6 +148,9 @@ describe("App shell", () => {
     ).toBeInTheDocument();
     expect(
       screen.getByRole("heading", { level: 2, name: /context candidates/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 2, name: /agent context composer/i }),
     ).toBeInTheDocument();
     expect(
       screen.getByRole("heading", { level: 2, name: /quick actions/i }),

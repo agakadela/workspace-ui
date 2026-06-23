@@ -4,6 +4,7 @@ import { Explorer } from "../features/explorer/Explorer";
 import { Home } from "../features/home/Home";
 import { ProjectDesk } from "../features/project-desk/ProjectDesk";
 import {
+  getWorkspaceAgentContextModel,
   getWorkspaceExplorerModel,
   getWorkspaceHomeModel,
   getWorkspaceProjectDeskModel,
@@ -16,6 +17,7 @@ export function App() {
   const homeModel = getWorkspaceHomeModel();
   const explorerModel = getWorkspaceExplorerModel();
   const projectDeskModel = getWorkspaceProjectDeskModel();
+  const agentContextModel = getWorkspaceAgentContextModel();
 
   if (activeView === "explorer") {
     return (
@@ -31,6 +33,7 @@ export function App() {
     return (
       <ProjectDesk
         model={projectDeskModel}
+        agentContext={agentContextModel}
         onOpenHome={() => setActiveView("home")}
         onOpenExplorer={() => setActiveView("explorer")}
       />
@@ -40,6 +43,7 @@ export function App() {
   return (
     <Home
       model={homeModel}
+      agentContext={agentContextModel}
       onOpenExplorer={() => setActiveView("explorer")}
       onOpenProjectDesk={() => setActiveView("projectDesk")}
     />
