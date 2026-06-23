@@ -82,4 +82,53 @@ describe("App shell", () => {
 
     expect(screen.getByText(/no artifacts in archive/i)).toBeInTheDocument();
   });
+
+  it("opens Project Desk from Home and Explorer as a mock work surface with empty states", async () => {
+    const user = userEvent.setup();
+
+    render(<App />);
+
+    await user.click(screen.getByRole("button", { name: /open project desk/i }));
+
+    expect(
+      screen.getByRole("heading", { level: 1, name: /project desk/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/fictional project workspace/i)).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 2, name: /project status/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 2, name: /important docs/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 2, name: /next tasks/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 2, name: /recent and pinned work/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 2, name: /context candidates/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 2, name: /quick actions/i }),
+    ).toBeInTheDocument();
+
+    expect(screen.getAllByText(/mock only/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/conceptual action/i).length).toBeGreaterThan(0);
+    expect(screen.getByText(/no tasks yet/i)).toBeInTheDocument();
+    expect(screen.getByText(/no pinned docs/i)).toBeInTheDocument();
+    expect(screen.getByText(/no safe context/i)).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /back to explorer/i }));
+
+    expect(
+      screen.getByRole("heading", { level: 1, name: /visual explorer/i }),
+    ).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /open project desk/i }));
+
+    expect(
+      screen.getByRole("heading", { level: 1, name: /project desk/i }),
+    ).toBeInTheDocument();
+  });
 });

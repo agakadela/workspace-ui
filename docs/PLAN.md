@@ -18,7 +18,7 @@ Context Panel on public-safe mock data.
       changed, what is next, and what context can be prepared.
 - [x] Visual Explorer renders artifact cards with role/status/privacy and a
       readable Preview Pane.
-- [ ] Project Desk renders one project as a work surface, not a folder listing.
+- [x] Project Desk renders one project as a work surface, not a folder listing.
 - [ ] Agent Context Panel shows selected, excluded, private/review-first files,
       and a suggested prompt.
 - [x] Recent Activity is limited to three or four static cards.
@@ -72,6 +72,10 @@ Context Panel on public-safe mock data.
   from Home and shows workspace areas, meaning-first artifact cards, readable
   markdown/HTML mockup/image-card/code-summary previews, plus unsupported and
   empty states.
+- Task 4 Project Desk Slice is complete: one fictional project opens from Home
+  and Explorer as a focused work surface with status, important docs, next
+  tasks, recent work, context candidates, mock quick actions, and calm empty
+  states.
 - Dashboard UI kit PNGs exist as references only, not product assets.
 
 ## Dependency Graph
@@ -246,20 +250,20 @@ Notes:
 
 ### Task 4 - Project Desk Slice
 
-- Status: not started.
+- Status: complete.
 - User-visible result: one fictional project opens as a work surface, not a
   folder listing.
 - Description: Build Project Desk for a single public-safe fictional project,
   showing project status, important docs, next tasks, recent/pinned work,
   context candidates, and calm mock quick actions.
 - Acceptance criteria:
-  - [ ] Project Desk is reachable from Home and Explorer.
-  - [ ] The project view shows status, important docs, next tasks,
+  - [x] Project Desk is reachable from Home and Explorer.
+  - [x] The project view shows status, important docs, next tasks,
         recent/pinned work, context candidates, and quick actions.
-  - [ ] Quick actions are visibly mock/conceptual and do not perform real OS,
+  - [x] Quick actions are visibly mock/conceptual and do not perform real OS,
         terminal, filesystem, Git, or agent actions.
-  - [ ] Empty states exist for no tasks, no pinned docs, and no safe context.
-  - [ ] Agent work round 2 is documented in the chosen lightweight format.
+  - [x] Empty states exist for no tasks, no pinned docs, and no safe context.
+  - [x] Agent work round 2 is documented in the chosen lightweight format.
 - Verification:
   - Automated: `npm run typecheck`, `npm run lint`, `npm test`,
     `npm run build`.

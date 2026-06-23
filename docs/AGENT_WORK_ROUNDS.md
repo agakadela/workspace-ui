@@ -22,3 +22,25 @@ Lightweight record of Phase 0 work done with an agent.
   - No copied dashboard UI kit assets.
 - Verification:
   - See `docs/VERIFY_LOG.md` for durable command and runtime proof.
+
+## Round 2 - Project Desk Slice
+
+- Date: 2026-06-23.
+- Command / skills: `$aga-build`, `incremental-implementation`,
+  `test-driven-development`, `frontend-ui-engineering`.
+- PLAN task: Task 4 - Project Desk Slice.
+- Scope:
+  - Added a public-safe fictional Project Desk model behind the shared mock
+    workspace platform boundary.
+  - Added Project Desk navigation from Home and Explorer.
+  - Built a focused project work surface with status, important docs, next
+    tasks, recent work, context candidates, and mock quick actions.
+  - Added calm empty states for no tasks, no pinned docs, and no safe context.
+- Boundaries kept:
+  - No real filesystem access.
+  - No real Git status, commits, diffs, or review workflow.
+  - No real OS, Finder, VS Code, terminal, or agent action.
+  - No file editing, moving, deleting, or pinning persistence.
+  - No private/client project data.
+- Verification:
+  - See `docs/VERIFY_LOG.md` for durable command and runtime proof.
