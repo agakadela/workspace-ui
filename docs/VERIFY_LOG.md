@@ -12,6 +12,40 @@ Rules:
 
 ## Entries
 
+### 2026-06-21 — `standard` — `Task 2 Home Orientation Slice` — `N/A recorded before commit`
+
+- Environment: `local`
+- Checked:
+  - Home renders as the first screen and no longer reads like a file browser.
+  - Home shows continue item, exactly three Recent Activity cards, next tasks,
+    pinned docs, and a mock Agent Context Draft from fictional public-safe data.
+  - Status, privacy, and agent-safety labels use icon plus text.
+  - Phase 0 boundaries remain mock-only with no filesystem, Git, terminal,
+    Codex, auth, cloud, search, Tauri, PDF, or file-editing behavior.
+- Commands run:
+  - `npm test` failed first for the missing Home orientation sections.
+  - `npm test`
+  - `npm run typecheck`
+  - `npm run lint`
+  - `npm run build`
+- Runtime proof:
+  - Browser flow: gstack `/browse` opened `http://127.0.0.1:5173/` with HTTP
+    200; page text included `Continue`, `Recent Activity`, `Next Up`,
+    `Pinned Docs`, `Agent Context Draft`, `Safe for agent`, `Review first`,
+    `Private: excluded`, and `Mock only`; console output had no errors.
+  - Visual proof: gstack `/browse` screenshots at `1440x900` and `1024x768`
+    showed readable hierarchy with no visible clipping or overlap.
+  - Database proof: `N/A` because Phase 0 has no database.
+  - Provider/dashboard proof: `N/A` because Phase 0 has no external provider.
+- Cannot verify:
+  - GitHub Actions result before the draft PR runs CI.
+  - Whether the whole concept is worth moving to Tauri.
+- Docs updated:
+  - `docs/AGENT_WORK_ROUNDS.md`
+  - `docs/PLAN.md`
+  - `docs/VERIFY_LOG.md`
+- Verdict: `SHIP`
+
 ### 2026-06-20 — `standard` — `Task 1 runnable web shell and feedback loops` — `N/A recorded before commit`
 
 - Environment: `local`
