@@ -86,15 +86,85 @@ export type WorkspaceExplorerModel = {
   };
 };
 
+export type WorkspaceProjectDeskModel = {
+  project: {
+    name: string;
+    eyebrow: string;
+    summary: string;
+    activeFolder: string;
+    statusLabel: string;
+    safetyLabel: string;
+    focusLabel: string;
+  };
+  statusItems: Array<{
+    id: string;
+    label: string;
+    value: string;
+    detail: string;
+    statusLabel: string;
+  }>;
+  importantDocs: Array<{
+    id: string;
+    title: string;
+    role: string;
+    path: string;
+    statusLabel: string;
+    safetyLabel: string;
+  }>;
+  nextTasks: Array<{
+    id: string;
+    title: string;
+    summary: string;
+    ownerLabel: string;
+    statusLabel: string;
+    safetyLabel: string;
+  }>;
+  recentWork: Array<{
+    id: string;
+    title: string;
+    summary: string;
+    meta: string;
+    statusLabel: string;
+  }>;
+  contextCandidates: Array<{
+    id: string;
+    title: string;
+    reason: string;
+    path: string;
+    statusLabel: string;
+    safetyLabel: string;
+  }>;
+  quickActions: Array<{
+    id: string;
+    label: string;
+    summary: string;
+    statusLabel: string;
+  }>;
+  emptyStates: {
+    noTasks: {
+      title: string;
+      summary: string;
+    };
+    noPinnedDocs: {
+      title: string;
+      summary: string;
+    };
+    noSafeContext: {
+      title: string;
+      summary: string;
+    };
+  };
+};
+
 export const workspaceHomeModel: WorkspaceHomeModel = {
   continueItem: {
-    title: "Review the Orchard Notes Home pass",
+    title: "Review the Orchard Notes Project Desk",
     summary:
-      "Pick up from the first real Home surface: the orientation cards are ready to check before the Explorer and Project Desk slices begin.",
+      "Pick up from the focused project work surface: status, docs, tasks, recent work, context candidates, and mock actions are ready to inspect before the context composer slice.",
     area: "Fictional workspace / Product concept",
     statusLabel: "In progress",
     safetyLabel: "Safe for agent",
-    actionLabel: "Review Home",
+    actionLabel: "Review context draft",
   },
   recentActivity: [
     {
@@ -106,44 +176,44 @@ export const workspaceHomeModel: WorkspaceHomeModel = {
       statusLabel: "Updated",
     },
     {
-      id: "activity-ui-system",
-      title: "UI system reference became the visual source of truth",
+      id: "activity-explorer-preview",
+      title: "Explorer preview model settled",
       summary:
-        "Dark graphite surfaces, warm paper panels, and restrained status chips guide this pass.",
-      meta: "Pinned for agent review",
-      statusLabel: "Pinned",
+        "Artifact cards now show meaning, preview availability, and safety before raw paths.",
+      meta: "Completed in the Explorer slice",
+      statusLabel: "Updated",
     },
     {
-      id: "activity-context-boundary",
-      title: "Agent handoff stayed mock-only and explicit",
+      id: "activity-project-desk",
+      title: "Project Desk became a focused work surface",
       summary:
-        "The draft names selected, review-first, and private-excluded files without reading disk.",
-      meta: "Prepared from fictional data",
+        "The fictional project now gathers status, docs, tasks, recent work, and mock quick actions.",
+      meta: "Prepared for the context composer",
       statusLabel: "Mock only",
     },
   ],
   nextTasks: [
     {
-      id: "task-visual-explorer",
-      title: "Sketch Visual Explorer artifact roles",
+      id: "task-agent-context-composer",
+      title: "Shape the Agent Context composer",
       summary:
-        "Define the first artifact cards around meaning, preview availability, and safety state.",
+        "Turn Project Desk context candidates into selected, excluded, private, and review-first groups.",
       statusLabel: "Next slice",
       safetyLabel: "Review first",
     },
     {
-      id: "task-preview-examples",
-      title: "Choose preview examples",
+      id: "task-copy-prompt-state",
+      title: "Design the copy prompt state",
       summary:
-        "Use public-safe markdown, HTML mockup, image/card, and code-summary examples.",
+        "Keep prompt copying visibly mock-generated with a graceful browser-permission fallback.",
       statusLabel: "Ready",
       safetyLabel: "Safe mock data",
     },
     {
-      id: "task-project-desk",
-      title: "Keep Project Desk distinct from Explorer",
+      id: "task-visual-coherence",
+      title: "Check whole Phase 0 rhythm",
       summary:
-        "Make the future project view feel like a work surface instead of another folder list.",
+        "Review Home, Explorer, Project Desk, and the future composer as one calm work surface.",
       statusLabel: "Queued",
       safetyLabel: "Concept only",
     },
@@ -183,7 +253,7 @@ export const workspaceHomeModel: WorkspaceHomeModel = {
       "docs/SPEC.md",
       "docs/PLAN.md",
       "docs/UI_SYSTEM.md",
-      "src/features/home/Home.tsx",
+      "src/features/project-desk/ProjectDesk.tsx",
     ],
     reviewFirstFiles: ["docs/design/references/dashboard-ui-kit/README.md"],
     privateExcludedFiles: [
@@ -191,7 +261,7 @@ export const workspaceHomeModel: WorkspaceHomeModel = {
       "client-materials/real-client-brief.md",
     ],
     suggestedPrompt:
-      "Use the pinned Phase 0 docs and mock Home model to build the next Visual Explorer slice without adding real filesystem, Git, search, terminal, or agent execution.",
+      "Use the pinned Phase 0 docs and Project Desk mock model to build the next Agent Context composer slice without adding real filesystem, Git, search, terminal, or agent execution.",
   },
   shellStatus: [
     {
@@ -351,5 +421,161 @@ export const workspaceExplorerModel: WorkspaceExplorerModel = {
     title: "No artifacts in Archive",
     summary:
       "This area is intentionally empty so the Explorer has a visible calm empty state without inventing extra files.",
+  },
+};
+
+export const workspaceProjectDeskModel: WorkspaceProjectDeskModel = {
+  project: {
+    name: "Project Desk",
+    eyebrow: "Fictional project workspace",
+    summary:
+      "A focused surface for the Orchard Notes concept pass: status, source docs, next work, recent decisions, context candidates, and mock actions before any raw folder browsing.",
+    activeFolder: "demo-workspace/orchard-notes",
+    statusLabel: "In progress",
+    safetyLabel: "Public-safe mock data",
+    focusLabel: "Work surface, not folder list",
+  },
+  statusItems: [
+    {
+      id: "status-phase",
+      label: "Phase",
+      value: "Phase 0 visual prototype",
+      detail: "Home and Explorer are available; Project Desk is the current slice.",
+      statusLabel: "Current",
+    },
+    {
+      id: "status-boundary",
+      label: "Boundary",
+      value: "Mock-only workspace",
+      detail: "No filesystem, Git, terminal, Tauri, or live agent execution.",
+      statusLabel: "Mock only",
+    },
+    {
+      id: "status-review",
+      label: "Review posture",
+      value: "Readable before raw paths",
+      detail: "Human labels lead; technical file paths stay secondary.",
+      statusLabel: "Review first",
+    },
+  ],
+  importantDocs: [
+    {
+      id: "project-doc-spec",
+      title: "Phase 0 spec",
+      role: "Product promise, scope, and success criteria for the prototype.",
+      path: "docs/SPEC.md",
+      statusLabel: "Source of truth",
+      safetyLabel: "Safe for agent",
+    },
+    {
+      id: "project-doc-plan",
+      title: "Active implementation plan",
+      role: "Task 4 acceptance criteria and out-of-scope boundaries.",
+      path: "docs/PLAN.md",
+      statusLabel: "Current",
+      safetyLabel: "Safe for agent",
+    },
+    {
+      id: "project-doc-ui-system",
+      title: "UI system reference",
+      role: "Project Desk visual rhythm, states, and interaction guardrails.",
+      path: "docs/UI_SYSTEM.md",
+      statusLabel: "Pinned",
+      safetyLabel: "Review first",
+    },
+  ],
+  nextTasks: [
+    {
+      id: "project-task-compose-context",
+      title: "Shape the mock context handoff",
+      summary:
+        "Decide which public-safe files should be selected, excluded, private, or review-first for the next agent pass.",
+      ownerLabel: "Agent Context slice",
+      statusLabel: "Next",
+      safetyLabel: "Review first",
+    },
+    {
+      id: "project-task-visual-check",
+      title: "Check Project Desk at laptop width",
+      summary:
+        "Verify the work surface stays dense and readable without turning into a directory listing.",
+      ownerLabel: "Visual proof",
+      statusLabel: "Ready",
+      safetyLabel: "Safe mock data",
+    },
+  ],
+  recentWork: [
+    {
+      id: "project-work-explorer",
+      title: "Explorer preview model settled",
+      summary:
+        "Artifact cards now show type, role, activity, preview availability, and safety state before raw paths.",
+      meta: "Recent work from Task 3",
+      statusLabel: "Updated",
+    },
+    {
+      id: "project-work-home",
+      title: "Home remains the primary center",
+      summary:
+        "The desk opens from Home as a focused continuation surface, not as the app's first screen.",
+      meta: "Pinned concept boundary",
+      statusLabel: "Pinned",
+    },
+  ],
+  contextCandidates: [
+    {
+      id: "context-ui-system",
+      title: "UI system reference",
+      reason: "Needed to keep Project Desk aligned with the established surface rhythm.",
+      path: "docs/UI_SYSTEM.md",
+      statusLabel: "Candidate",
+      safetyLabel: "Review first",
+    },
+    {
+      id: "context-desk-mockup",
+      title: "Desk layout mockup",
+      reason:
+        "Useful visual context, but still review-first because Phase 0 does not load real local HTML.",
+      path: "demo-workspace/orchard-notes/mockups/desk-layout.html",
+      statusLabel: "Candidate",
+      safetyLabel: "Review first",
+    },
+  ],
+  quickActions: [
+    {
+      id: "quick-review-docs",
+      label: "Review docs",
+      summary: "Gather the important docs into a mock reading set.",
+      statusLabel: "Conceptual action",
+    },
+    {
+      id: "quick-prepare-context",
+      label: "Prepare context",
+      summary: "Stage the review-first context candidates for the later composer.",
+      statusLabel: "Conceptual action",
+    },
+    {
+      id: "quick-open-explorer",
+      label: "Inspect artifacts",
+      summary: "Move back to the meaning-first Explorer without touching disk.",
+      statusLabel: "Conceptual action",
+    },
+  ],
+  emptyStates: {
+    noTasks: {
+      title: "No tasks yet",
+      summary:
+        "A quiet task lane appears when a project has no next step instead of inventing filler work.",
+    },
+    noPinnedDocs: {
+      title: "No pinned docs",
+      summary:
+        "The desk keeps the pinned area explicit when no document has been chosen yet.",
+    },
+    noSafeContext: {
+      title: "No safe context",
+      summary:
+        "Review-first or private files stay out of the safe context group until a human approves them.",
+    },
   },
 };

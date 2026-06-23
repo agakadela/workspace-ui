@@ -7,6 +7,7 @@ import {
   FolderKanban,
   Home as HomeIcon,
   ListChecks,
+  PanelRightOpen,
   Pin,
 } from "lucide-react";
 
@@ -16,9 +17,10 @@ import { StatusChip, type StatusTone } from "../../shared/ui/StatusChip";
 type HomeProps = {
   model: WorkspaceHomeModel;
   onOpenExplorer?: () => void;
+  onOpenProjectDesk?: () => void;
 };
 
-export function Home({ model, onOpenExplorer }: HomeProps) {
+export function Home({ model, onOpenExplorer, onOpenProjectDesk }: HomeProps) {
   return (
     <main className="min-h-screen bg-ink-950 text-paper-50">
       <div className="flex min-h-screen">
@@ -52,6 +54,16 @@ export function Home({ model, onOpenExplorer }: HomeProps) {
               >
                 <Compass aria-hidden="true" size={18} />
                 Explorer
+              </button>
+            ) : null}
+            {onOpenProjectDesk ? (
+              <button
+                className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm font-medium text-paper-100/75 hover:bg-paper-100/10 hover:text-paper-50"
+                type="button"
+                onClick={onOpenProjectDesk}
+              >
+                <PanelRightOpen aria-hidden="true" size={18} />
+                Project Desk
               </button>
             ) : null}
           </nav>
@@ -131,6 +143,16 @@ export function Home({ model, onOpenExplorer }: HomeProps) {
                       >
                         Open Visual Explorer
                         <Compass aria-hidden="true" size={15} />
+                      </button>
+                    ) : null}
+                    {onOpenProjectDesk ? (
+                      <button
+                        className="inline-flex min-h-9 items-center justify-center gap-2 rounded-lg border border-ink-950/10 bg-moss-100 px-3 py-1.5 text-sm font-semibold text-moss-700"
+                        type="button"
+                        onClick={onOpenProjectDesk}
+                      >
+                        Open Project Desk
+                        <PanelRightOpen aria-hidden="true" size={15} />
                       </button>
                     ) : null}
                   </div>

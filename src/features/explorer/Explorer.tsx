@@ -22,6 +22,7 @@ import { StatusChip } from "../../shared/ui/StatusChip";
 type ExplorerProps = {
   model: WorkspaceExplorerModel;
   onOpenHome: () => void;
+  onOpenProjectDesk?: () => void;
 };
 
 const previewIcons: Record<PreviewKind, typeof FileText> = {
@@ -32,7 +33,7 @@ const previewIcons: Record<PreviewKind, typeof FileText> = {
   unsupported: Archive,
 };
 
-export function Explorer({ model, onOpenHome }: ExplorerProps) {
+export function Explorer({ model, onOpenHome, onOpenProjectDesk }: ExplorerProps) {
   const [activeAreaId, setActiveAreaId] = useState("all");
   const [selectedArtifactId, setSelectedArtifactId] = useState(
     model.artifacts[0]?.id,
@@ -87,6 +88,16 @@ export function Explorer({ model, onOpenHome }: ExplorerProps) {
                 <ArrowLeft aria-hidden="true" size={17} />
                 Back to Home
               </button>
+              {onOpenProjectDesk ? (
+                <button
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-paper-100/15 bg-paper-100/10 px-4 py-2 text-sm font-semibold text-paper-50"
+                  type="button"
+                  onClick={onOpenProjectDesk}
+                >
+                  <PanelRightOpen aria-hidden="true" size={17} />
+                  Open Project Desk
+                </button>
+              ) : null}
               <StatusChip label="Mock only" tone="mock" />
               <StatusChip label="No filesystem access" tone="mock" />
             </div>

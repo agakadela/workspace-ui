@@ -12,6 +12,48 @@ Rules:
 
 ## Entries
 
+### 2026-06-23 — `standard` — `Task 4 Project Desk Slice` — `N/A recorded before commit`
+
+- Environment: `local`
+- Checked:
+  - Project Desk opens from Home and Explorer.
+  - The project view shows status, important docs, next tasks, recent/pinned
+    work, context candidates, quick actions, and the active fictional folder.
+  - Quick actions are visibly mock/conceptual and do not perform real OS,
+    filesystem, Git, terminal, or agent actions.
+  - Empty states are visible for no tasks, no pinned docs, and no safe context.
+  - Phase 0 boundaries remain mock-only with no filesystem, Git, terminal,
+    Codex, auth, cloud, search, Tauri, PDF, or file-editing behavior.
+- Commands run:
+  - `npm test -- src/app/App.test.tsx` failed first for the missing Project
+    Desk entry point and work-surface behavior.
+  - `npm test -- src/app/App.test.tsx`
+  - `npm run typecheck`
+  - `npm run lint` failed once for an unused icon import, then passed after
+    removing it.
+  - `npm run lint`
+  - `npm test`
+  - `npm run build`
+- Runtime proof:
+  - Browser flow: gstack `/browse` opened `http://127.0.0.1:5173/` with HTTP
+    200, verified Home text and no console errors, clicked `Open Project Desk`,
+    verified `Project Desk`, `Project Status`, `Important Docs`, `Next Tasks`,
+    `Recent and Pinned Work`, `Context Candidates`, `Quick Actions`, `Mock
+    only`, `Conceptual action`, `No tasks yet`, `No pinned docs`, and `No safe
+    context`, returned to Explorer, and opened Project Desk from Explorer.
+  - Visual proof: gstack `/browse` screenshots at `1440x900` and `1024x768`
+    showed readable layout with no visible clipping or overlap.
+  - Database proof: `N/A` because Phase 0 has no database.
+  - Provider/dashboard proof: `N/A` because Phase 0 has no external provider.
+- Cannot verify:
+  - GitHub Actions result before the draft PR runs CI.
+  - Real workspace usefulness against Aga's private folder.
+- Docs updated:
+  - `docs/AGENT_WORK_ROUNDS.md`
+  - `docs/PLAN.md`
+  - `docs/VERIFY_LOG.md`
+- Verdict: `SHIP`
+
 ### 2026-06-23 — `standard` — `Task 3 Visual Explorer And Preview Slice` — `N/A recorded before commit`
 
 - Environment: `local`
