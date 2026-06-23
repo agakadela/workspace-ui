@@ -11,16 +11,26 @@ import {
   Pin,
 } from "lucide-react";
 
-import type { WorkspaceHomeModel } from "../../shared/data/mockWorkspace";
-import { StatusChip, type StatusTone } from "../../shared/ui/StatusChip";
+import { AgentContextComposer } from "../agent-context/AgentContextComposer";
+import type {
+  WorkspaceAgentContextModel,
+  WorkspaceHomeModel,
+} from "../../shared/data/mockWorkspace";
+import { StatusChip } from "../../shared/ui/StatusChip";
 
 type HomeProps = {
   model: WorkspaceHomeModel;
+  agentContext: WorkspaceAgentContextModel;
   onOpenExplorer?: () => void;
   onOpenProjectDesk?: () => void;
 };
 
-export function Home({ model, onOpenExplorer, onOpenProjectDesk }: HomeProps) {
+export function Home({
+  model,
+  agentContext,
+  onOpenExplorer,
+  onOpenProjectDesk,
+}: HomeProps) {
   return (
     <main className="min-h-screen bg-ink-950 text-paper-50">
       <div className="flex min-h-screen">
@@ -126,7 +136,7 @@ export function Home({ model, onOpenExplorer, onOpenProjectDesk }: HomeProps) {
                     </div>
                     <a
                       className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-lg bg-ink-950 px-4 py-2 text-sm font-semibold text-paper-50"
-                      href="#context-draft"
+                      href="#agent-context-composer"
                     >
                       {model.continueItem.actionLabel}
                       <ArrowRight aria-hidden="true" size={17} />
@@ -335,93 +345,12 @@ export function Home({ model, onOpenExplorer, onOpenProjectDesk }: HomeProps) {
                   </div>
                 </section>
 
-                <section
-                  id="context-draft"
-                  aria-labelledby="context-draft-heading"
-                  className="rounded-2xl border border-ink-950/10 bg-ink-950 p-5 text-paper-50"
-                >
-                  <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-                    <div>
-                      <p className="text-sm font-medium text-paper-100/70">
-                        What context can be prepared
-                      </p>
-                      <h2
-                        id="context-draft-heading"
-                        className="mt-1 text-xl font-semibold text-paper-50"
-                      >
-                        Agent Context Draft
-                      </h2>
-                    </div>
-                    <StatusChip label={model.contextDraft.statusLabel} />
-                  </div>
-                  <p className="mt-4 text-sm leading-6 text-paper-100/75">
-                    {model.contextDraft.summary}
-                  </p>
-                  <p className="mt-4 break-words rounded-xl border border-paper-100/10 bg-paper-100/10 px-3 py-2 font-mono text-xs text-paper-100">
-                    {model.contextDraft.activeFolder}
-                  </p>
-
-                  <div className="mt-5 grid gap-3 lg:grid-cols-3">
-                    <ContextFileGroup
-                      title="Selected"
-                      files={model.contextDraft.selectedFiles}
-                      tone="safe"
-                    />
-                    <ContextFileGroup
-                      title="Review before agent"
-                      files={model.contextDraft.reviewFirstFiles}
-                      tone="review"
-                    />
-                    <ContextFileGroup
-                      title="Private: excluded"
-                      files={model.contextDraft.privateExcludedFiles}
-                      tone="private"
-                    />
-                  </div>
-
-                  <div className="mt-5 rounded-xl border border-paper-100/10 bg-paper-100/10 p-4">
-                    <h3 className="text-sm font-semibold text-paper-50">
-                      Suggested prompt
-                    </h3>
-                    <p className="mt-2 text-sm leading-6 text-paper-100/75">
-                      {model.contextDraft.suggestedPrompt}
-                    </p>
-                  </div>
-                </section>
+                <AgentContextComposer model={agentContext} />
               </div>
             </div>
           </div>
         </section>
       </div>
     </main>
-  );
-}
-
-function ContextFileGroup({
-  title,
-  files,
-  tone,
-}: {
-  title: string;
-  files: string[];
-  tone: StatusTone;
-}) {
-  return (
-    <section className="rounded-xl border border-paper-100/10 bg-paper-100/10 p-3">
-      <div className="flex items-center justify-between gap-2">
-        <h3 className="text-sm font-semibold text-paper-50">{title}</h3>
-        <StatusChip label={`${files.length}`} tone={tone} />
-      </div>
-      <ul className="mt-3 space-y-2">
-        {files.map((file) => (
-          <li
-            key={file}
-            className="break-words font-mono text-xs leading-5 text-paper-100/70"
-          >
-            {file}
-          </li>
-        ))}
-      </ul>
-    </section>
   );
 }
