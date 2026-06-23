@@ -16,7 +16,7 @@ Context Panel on public-safe mock data.
 - [x] Vite + React + TypeScript + Tailwind skeleton runs locally.
 - [x] Home renders as the first screen and answers where to continue, what
       changed, what is next, and what context can be prepared.
-- [ ] Visual Explorer renders artifact cards with role/status/privacy and a
+- [x] Visual Explorer renders artifact cards with role/status/privacy and a
       readable Preview Pane.
 - [ ] Project Desk renders one project as a work surface, not a folder listing.
 - [ ] Agent Context Panel shows selected, excluded, private/review-first files,
@@ -68,6 +68,10 @@ Context Panel on public-safe mock data.
 - Task 2 Home Orientation Slice is complete: Home now uses public-safe mock data
   to show where to continue, what changed, what is next, pinned docs, and a mock
   agent context draft.
+- Task 3 Visual Explorer And Preview Slice is complete: Explorer is reachable
+  from Home and shows workspace areas, meaning-first artifact cards, readable
+  markdown/HTML mockup/image-card/code-summary previews, plus unsupported and
+  empty states.
 - Dashboard UI kit PNGs exist as references only, not product assets.
 
 ## Dependency Graph
@@ -194,22 +198,23 @@ Notes:
 
 ### Task 3 - Visual Explorer And Preview Slice
 
-- Status: not started.
+- Status: complete.
 - User-visible result: Visual Explorer lets the user browse artifacts by meaning
   and inspect readable previews.
 - Description: Add the Explorer surface with workspace areas, artifact cards,
   and a Preview Pane for markdown, HTML mockup, image/card, and code-summary
   examples.
 - Acceptance criteria:
-  - [ ] Explorer is reachable from Home without making Explorer the primary
+  - [x] Explorer is reachable from Home without making Explorer the primary
         first screen.
-  - [ ] Artifact cards show type, role, status, activity, privacy/agent-safety,
+  - [x] Artifact cards show type, role, status, activity, privacy/agent-safety,
         and preview availability.
-  - [ ] Preview Pane shows readable markdown, HTML mockup, image/card, and code
+  - [x] Preview Pane shows readable markdown, HTML mockup, image/card, and code
         summary examples.
-  - [ ] Empty and unsupported-preview states are visible and calm.
-  - [ ] `docs/UI_SYSTEM.md` is updated if Explorer introduces or changes
-        reusable UI conventions.
+  - [x] Empty and unsupported-preview states are visible and calm.
+  - [x] `docs/UI_SYSTEM.md` is updated if Explorer introduces or changes
+        reusable UI conventions. N/A: existing Explorer, Artifact Card, Preview
+        Pane, Status Chip, and area navigation guidance still applies.
 - Verification:
   - Automated: `npm run typecheck`, `npm run lint`, `npm test`,
     `npm run build`.
@@ -384,10 +389,10 @@ Notes:
 
 ### Checkpoint - After Task 3
 
-- [ ] Home and Explorer + Preview are both reachable.
-- [ ] Mock data remains fictional and public-safe.
-- [ ] Preview types are represented without real filesystem access.
-- [ ] `docs/UI_SYSTEM.md` remains current with Home and Explorer patterns.
+- [x] Home and Explorer + Preview are both reachable.
+- [x] Mock data remains fictional and public-safe.
+- [x] Preview types are represented without real filesystem access.
+- [x] `docs/UI_SYSTEM.md` remains current with Home and Explorer patterns.
 
 ### Checkpoint - After Task 5
 
