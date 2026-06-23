@@ -1,89 +1,24 @@
 import {
   ArrowRight,
-  CircleDot,
   CircleCheck,
   Clock3,
+  Compass,
   FileText,
   FolderKanban,
   Home as HomeIcon,
   ListChecks,
-  LockKeyhole,
   Pin,
-  ShieldCheck,
-  Sparkles,
-  TriangleAlert,
 } from "lucide-react";
 
 import type { WorkspaceHomeModel } from "../../shared/data/mockWorkspace";
+import { StatusChip, type StatusTone } from "../../shared/ui/StatusChip";
 
 type HomeProps = {
   model: WorkspaceHomeModel;
+  onOpenExplorer?: () => void;
 };
 
-type StatusTone = "safe" | "review" | "private" | "info" | "mock";
-
-const statusToneClasses: Record<StatusTone, string> = {
-  safe: "border-moss-700/25 bg-moss-100 text-moss-700",
-  review: "border-clay-600/25 bg-clay-100 text-clay-600",
-  private: "border-clay-600/30 bg-clay-100 text-clay-600",
-  info: "border-steel-700/25 bg-steel-100 text-steel-700",
-  mock: "border-paper-100/20 bg-paper-100/10 text-paper-100",
-};
-
-const statusIcons = {
-  safe: ShieldCheck,
-  review: TriangleAlert,
-  private: LockKeyhole,
-  info: CircleDot,
-  mock: Sparkles,
-};
-
-function getStatusTone(label: string): StatusTone {
-  const normalizedLabel = label.toLowerCase();
-
-  if (normalizedLabel.includes("private")) {
-    return "private";
-  }
-
-  if (normalizedLabel.includes("review")) {
-    return "review";
-  }
-
-  if (
-    normalizedLabel.includes("safe") ||
-    normalizedLabel.includes("ready") ||
-    normalizedLabel.includes("current")
-  ) {
-    return "safe";
-  }
-
-  if (normalizedLabel.includes("mock")) {
-    return "mock";
-  }
-
-  return "info";
-}
-
-function StatusChip({
-  label,
-  tone = getStatusTone(label),
-}: {
-  label: string;
-  tone?: StatusTone;
-}) {
-  const StatusIcon = statusIcons[tone];
-
-  return (
-    <span
-      className={`inline-flex min-h-7 items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold ${statusToneClasses[tone]}`}
-    >
-      <StatusIcon aria-hidden="true" size={13} />
-      {label}
-    </span>
-  );
-}
-
-export function Home({ model }: HomeProps) {
+export function Home({ model, onOpenExplorer }: HomeProps) {
   return (
     <main className="min-h-screen bg-ink-950 text-paper-50">
       <div className="flex min-h-screen">
@@ -109,6 +44,16 @@ export function Home({ model }: HomeProps) {
               <HomeIcon aria-hidden="true" size={18} />
               Home
             </a>
+            {onOpenExplorer ? (
+              <button
+                className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm font-medium text-paper-100/75 hover:bg-paper-100/10 hover:text-paper-50"
+                type="button"
+                onClick={onOpenExplorer}
+              >
+                <Compass aria-hidden="true" size={18} />
+                Explorer
+              </button>
+            ) : null}
           </nav>
         </aside>
 
@@ -178,6 +123,16 @@ export function Home({ model }: HomeProps) {
                   <div className="mt-5 flex flex-wrap gap-2">
                     <StatusChip label={model.continueItem.statusLabel} />
                     <StatusChip label={model.continueItem.safetyLabel} />
+                    {onOpenExplorer ? (
+                      <button
+                        className="inline-flex min-h-9 items-center justify-center gap-2 rounded-lg border border-ink-950/10 bg-steel-100 px-3 py-1.5 text-sm font-semibold text-steel-700"
+                        type="button"
+                        onClick={onOpenExplorer}
+                      >
+                        Open Visual Explorer
+                        <Compass aria-hidden="true" size={15} />
+                      </button>
+                    ) : null}
                   </div>
                 </section>
 

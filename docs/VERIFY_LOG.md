@@ -12,6 +12,45 @@ Rules:
 
 ## Entries
 
+### 2026-06-23 — `standard` — `Task 3 Visual Explorer And Preview Slice` — `N/A recorded before commit`
+
+- Environment: `local`
+- Checked:
+  - Home remains the first screen and exposes an `Open Visual Explorer` action.
+  - Explorer shows workspace areas, meaning-first artifact cards, type, role,
+    status, activity, agent-safety, paths as secondary detail, and preview
+    availability.
+  - Preview Pane shows readable markdown, HTML mockup, image/card, and
+    code-summary examples from fictional public-safe mock data.
+  - Unsupported preview and empty Archive states are visible and calm.
+  - Phase 0 boundaries remain mock-only with no filesystem, Git, terminal,
+    Codex, auth, cloud, search, Tauri, PDF, or file-editing behavior.
+- Commands run:
+  - `npm test -- src/app/App.test.tsx` failed first for the missing Explorer
+    entry point and preview behavior.
+  - `npm test -- src/app/App.test.tsx`
+  - `npm run typecheck`
+  - `npm run lint`
+  - `npm test`
+  - `npm run build`
+- Runtime proof:
+  - Browser flow: gstack `/browse` opened `http://127.0.0.1:5173/` with HTTP
+    200, verified Home text and no console errors, clicked `Open Visual
+    Explorer`, and verified text for `Visual Explorer`, `Markdown preview`,
+    `HTML mockup preview`, `Image card preview`, `Code summary preview`,
+    `Unsupported preview`, and `No artifacts in Archive`.
+  - Visual proof: gstack `/browse` screenshots at `1440x900` and `1024x768`
+    showed readable layout with no visible clipping or overlap.
+  - Database proof: `N/A` because Phase 0 has no database.
+  - Provider/dashboard proof: `N/A` because Phase 0 has no external provider.
+- Cannot verify:
+  - GitHub Actions result before the draft PR runs CI.
+  - Real local-file preview security; it is Phase 1+.
+- Docs updated:
+  - `docs/PLAN.md`
+  - `docs/VERIFY_LOG.md`
+- Verdict: `SHIP`
+
 ### 2026-06-21 — `standard` — `Task 2 Home Orientation Slice` — `N/A recorded before commit`
 
 - Environment: `local`

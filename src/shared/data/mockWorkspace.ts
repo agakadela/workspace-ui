@@ -44,6 +44,48 @@ export type WorkspaceHomeModel = {
   }>;
 };
 
+export type PreviewKind =
+  | "markdown"
+  | "html"
+  | "image-card"
+  | "code-summary"
+  | "unsupported";
+
+export type WorkspaceArtifact = {
+  id: string;
+  areaId: string;
+  title: string;
+  typeLabel: string;
+  role: string;
+  statusLabel: string;
+  activityLabel: string;
+  safetyLabel: string;
+  path: string;
+  previewAvailability: string;
+  preview: {
+    kind: PreviewKind;
+    eyebrow: string;
+    title: string;
+    summary: string;
+    details: string[];
+  };
+};
+
+export type WorkspaceExplorerModel = {
+  workspaceName: string;
+  summary: string;
+  areas: Array<{
+    id: string;
+    label: string;
+    summary: string;
+  }>;
+  artifacts: WorkspaceArtifact[];
+  emptyState: {
+    title: string;
+    summary: string;
+  };
+};
+
 export const workspaceHomeModel: WorkspaceHomeModel = {
   continueItem: {
     title: "Review the Orchard Notes Home pass",
@@ -165,4 +207,149 @@ export const workspaceHomeModel: WorkspaceHomeModel = {
       value: "No filesystem, Git, terminal, Codex, auth, cloud, search, or Tauri.",
     },
   ],
+};
+
+export const workspaceExplorerModel: WorkspaceExplorerModel = {
+  workspaceName: "Orchard Notes demo workspace",
+  summary:
+    "Browse fictional artifacts by role, safety, activity, and preview value before opening a raw path.",
+  areas: [
+    {
+      id: "strategy",
+      label: "Strategy",
+      summary: "Source-of-truth docs and decision notes for the concept pass.",
+    },
+    {
+      id: "interface",
+      label: "Interface",
+      summary: "Mockups, cards, and code summaries for the web prototype.",
+    },
+    {
+      id: "archive",
+      label: "Archive",
+      summary: "A quiet empty state for old material that is not active.",
+    },
+  ],
+  artifacts: [
+    {
+      id: "strategy-note",
+      areaId: "strategy",
+      title: "Strategy Note",
+      typeLabel: "Markdown",
+      role: "Source of truth",
+      statusLabel: "Current",
+      activityLabel: "Updated today",
+      safetyLabel: "Safe for agent",
+      path: "demo-workspace/orchard-notes/docs/strategy-note.md",
+      previewAvailability: "Markdown",
+      preview: {
+        kind: "markdown",
+        eyebrow: "Markdown preview",
+        title: "Workspace layer wedge",
+        summary:
+          "A concise product note that frames Home as the center and Explorer as a meaning-first inspection surface.",
+        details: [
+          "Primary user: a builder returning to a busy local work folder.",
+          "Promise: explain what matters before showing raw paths.",
+          "Boundary: all examples are fictional public-safe mock data.",
+        ],
+      },
+    },
+    {
+      id: "html-mockup",
+      areaId: "interface",
+      title: "Desk Layout Mockup",
+      typeLabel: "HTML mockup",
+      role: "Visual reference",
+      statusLabel: "In progress",
+      activityLabel: "Reviewed yesterday",
+      safetyLabel: "Review first",
+      path: "demo-workspace/orchard-notes/mockups/desk-layout.html",
+      previewAvailability: "HTML mockup",
+      preview: {
+        kind: "html",
+        eyebrow: "HTML mockup preview",
+        title: "Static desk frame",
+        summary:
+          "A non-executing mockup preview that shows the intended panel rhythm without loading local HTML.",
+        details: [
+          "Left rail: workspace areas.",
+          "Center: selected work surface.",
+          "Right: preview and context notes.",
+        ],
+      },
+    },
+    {
+      id: "image-card",
+      areaId: "interface",
+      title: "Concept Card Set",
+      typeLabel: "Image card",
+      role: "Visual asset",
+      statusLabel: "Pinned",
+      activityLabel: "Added this week",
+      safetyLabel: "Safe mock data",
+      path: "demo-workspace/orchard-notes/assets/concept-cards.png",
+      previewAvailability: "Image/card",
+      preview: {
+        kind: "image-card",
+        eyebrow: "Image card preview",
+        title: "Three-card concept strip",
+        summary:
+          "A readable card-style stand-in for image assets, showing the actual concept labels rather than a decorative thumbnail.",
+        details: ["Home", "Explorer", "Project Desk"],
+      },
+    },
+    {
+      id: "code-summary",
+      areaId: "interface",
+      title: "Home Component Summary",
+      typeLabel: "Code summary",
+      role: "Implementation note",
+      statusLabel: "Ready",
+      activityLabel: "Checked today",
+      safetyLabel: "Safe for agent",
+      path: "src/features/home/Home.tsx",
+      previewAvailability: "Code summary",
+      preview: {
+        kind: "code-summary",
+        eyebrow: "Code summary preview",
+        title: "Home feature responsibilities",
+        summary:
+          "A human-readable code preview that names component boundaries without pretending to execute or edit files.",
+        details: [
+          "Renders the Home-first orientation surface.",
+          "Uses shared mock workspace data through the platform adapter.",
+          "Shows status and privacy with text plus icons.",
+        ],
+      },
+    },
+    {
+      id: "raw-export",
+      areaId: "strategy",
+      title: "Raw Export",
+      typeLabel: "Unsupported file",
+      role: "Reference only",
+      statusLabel: "Parked",
+      activityLabel: "Imported last week",
+      safetyLabel: "Review first",
+      path: "demo-workspace/orchard-notes/exports/raw-workspace.dump",
+      previewAvailability: "Unsupported",
+      preview: {
+        kind: "unsupported",
+        eyebrow: "Unsupported preview",
+        title: "Preview unavailable in Phase 0",
+        summary:
+          "This artifact is tracked for meaning, but Phase 0 does not preview this file type.",
+        details: [
+          "Keep the role and safety state visible.",
+          "Do not add real file readers or binary preview behavior.",
+        ],
+      },
+    },
+  ],
+  emptyState: {
+    title: "No artifacts in Archive",
+    summary:
+      "This area is intentionally empty so the Explorer has a visible calm empty state without inventing extra files.",
+  },
 };
