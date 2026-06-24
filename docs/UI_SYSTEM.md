@@ -89,6 +89,135 @@ layouts.
 - visual payloads that are only decorative thumbnails rather than useful
   previews or object signals.
 
+## Reference-Matched Layout Foundation
+
+This foundation is a required gate before deeper Home, Explorer, Project Desk,
+and Agent Context redesign work. It is stronger than "inspired by the
+references": implementation should closely match the layout grammar, density,
+hierarchy, and control rhythm of the selected references while using
+workspace-ui content and public-safe mock data.
+
+### Foundation Reference Model
+
+Use a hybrid model:
+
+| Role | Reference | Drives |
+|---|---|---|
+| Primary product frame | `Company Profile.png` | global top navigation, object header, tab rhythm, dense dark panel hierarchy, action clusters |
+| Work canvas | `Workflow.png` | dominant dark canvas, tool-control placement, object/work surface feeling, contextual action field |
+| Composer and tray | `Company Profile - ai chat.png`, `Company Profile - ai chat (1).png` | docked/floating composer density, prompt tray, permission/context grouping |
+| Supporting detail | `Company Profile - Materials.png`, `settings- General.png`, `Employees- profile details.png` | payload-forward cards, settings/detail rows, readable preview/detail panes |
+
+`Company Profile.png` is the primary anchor. Other references extend it for
+specific product areas; they should not dilute the app into a collage of
+unrelated dashboard patterns.
+
+### Similarity Target
+
+Match strongly:
+
+- macro composition: top nav, dominant rounded workspace surface, object
+  header, tab/control row, dense supporting panels,
+- relative proportions: canvas should dominate the first viewport, supporting
+  panels should feel attached to the current object, not like equal cards,
+- density: compact labels, short values, tight rows, grouped controls,
+- visual hierarchy: one primary object or work surface per screen,
+- radius and depth: large rounded major surfaces, smaller dense panels, subtle
+  borders, restrained shadows,
+- control rhythm: short nav pills, segmented tabs, count chips, icon controls,
+  and action clusters near the surface they affect.
+
+Do not match:
+
+- logos, people, avatars, brand names, insurance/company domain content,
+  screenshots, charts, or exact asset content,
+- exact copy or data,
+- reference features that are out of Phase 0 scope, such as real search,
+  sharing, uploads, reports, account settings, AI execution, or workflow
+  automation.
+
+An implementation is not acceptable if it keeps the current scaffold feeling and
+only borrows colors, rounded corners, or isolated components from the
+references.
+
+### Non-Negotiable Layout Grammar
+
+- Shell: global frame uses top navigation/product chrome as the default. A left
+  rail may appear only as a local tool/category rail inside a focused surface.
+- Canvas: every main screen has a dominant dark rounded workspace canvas in the
+  first viewport. The canvas carries the product identity.
+- Object header: each main surface starts from a selected workspace, project, or
+  artifact object with title, status, metadata, and a compact action cluster.
+- Tabs and controls: use reference-like tab strips or segmented controls inside
+  the current object. Do not use large unrelated nav cards.
+- Panel hierarchy: one primary surface, then a small number of supporting
+  panels with clear jobs. Avoid uniform card grids.
+- Preview and composer: preview panes and composer trays should be attached to
+  the current object or canvas, not placed as long explanatory documents.
+- Copy density: visible text should behave like product UI. Keep raw technical
+  explanation secondary and compact.
+- Public-safe mock data: all proof content stays fictional and must not imply
+  real filesystem, Git, Codex, Tauri, auth, cloud, search, terminal, PDF, or
+  file editing behavior.
+
+### Component Library Stance
+
+Do not build a broad component library before the foundation is proven. The
+library should grow from repeated product areas after the layout grammar is
+accepted.
+
+Allowed early primitives, only when used by the foundation proof or immediately
+reused by planned screens:
+
+- `AppShell`
+- `WorkspaceCanvas`
+- `ObjectHeader`
+- `SurfaceTabs`
+- `InsightPanel`
+- `ObjectCard`
+- `PreviewPane`
+- `ComposerTray`
+- `StatusChip`
+
+Feature-specific UI should remain inside `src/features/<feature>/` until a
+pattern is reused or clearly needed across the active Phase 0 redesign tasks.
+
+### Foundation Runtime Proof
+
+Before Home, Explorer, Project Desk, or Agent Context are deeply rebuilt, Task
+8B must produce a small runtime proof that demonstrates the foundation. This
+proof can be a neutral shell/canvas state or a minimal existing app surface, but
+it must show:
+
+- top navigation/product chrome,
+- dominant dark workspace canvas,
+- selected-object header,
+- tab or segmented control rhythm,
+- compact action cluster,
+- dense supporting panel group,
+- preview or composer placeholder attached to the canvas,
+- accessible focus states and readable contrast.
+
+The proof is acceptable only if Aga can visually compare it with the hybrid
+reference model and decide whether it is close enough before further screen
+redesign work continues.
+
+### Similarity Review Checklist
+
+Use this checklist before accepting the foundation proof:
+
+- Does the first viewport immediately feel close to `Company Profile.png` and
+  `Workflow.png`, not merely like a recolored app shell?
+- Is the dark canvas the dominant surface, not a background decoration?
+- Is there one clear selected object or work surface?
+- Are panels dense and purposeful instead of an even grid?
+- Are tabs, chips, icon controls, and action clusters placed like product
+  controls, not explanatory cards?
+- Is the composer/preview language ready to support the AI-chat references
+  without implying live AI execution?
+- Are raw paths and technical details secondary to human-readable labels?
+- Are Phase 0 exclusions still intact?
+
 ## Product Feel
 
 The UI should feel like a calm local work cockpit for a builder's folder:

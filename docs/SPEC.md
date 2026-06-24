@@ -99,6 +99,12 @@ Create a stronger dashboard-kit-inspired product surface for the existing Phase
   references.
 - Use the dashboard UI kit PNGs as strong visual inspiration, not assets to copy
   1:1.
+- Add a reference-matched layout foundation before deeper screen redesign work:
+  `Company Profile.png` is the primary shell/object reference, `Workflow.png`
+  is the work-canvas reference, and `Company Profile - ai chat*.png` is the
+  composer/tray reference.
+- Require a small runtime proof of the layout foundation before rebuilding the
+  full screen set.
 - Do not add Tauri, real filesystem access, Git integration, search, terminal,
   file editing, auth, cloud sync, AI calls, or provider behavior.
 
@@ -196,6 +202,7 @@ Create a stronger dashboard-kit-inspired product surface for the existing Phase
 | Agent workflow is documented | Docs review | At least two rounds recorded before Phase 0 decision | Aga + agent |
 | Phase 0 decision can be made | Phase close review | Move to Tauri, improve concept, or stop | Aga |
 | Redesign direction is documented | Docs review | Reference audit and task pack exist before implementation PRs | Aga + agent |
+| Reference-matched layout foundation is accepted | Docs + runtime proof | `docs/UI_SYSTEM.md` defines the hybrid reference grammar and the app shows a small proof before full screen redesign | Aga |
 | Current UI is treated as a functional sketch | Plan review | Redesign tasks may replace shell/layouts while preserving Phase 0 flows | Aga + agent |
 | Dashboard-kit inspiration is stronger | Visual review | Top nav, dark workspace canvas, dense panels, object-focused surfaces, and refined control rhythm are visible | Aga |
 | Generic AI-dashboard feel is removed | Visual review | Screens no longer read as explanatory card grids or template scaffold UI | Aga |
@@ -232,9 +239,11 @@ Create a stronger dashboard-kit-inspired product surface for the existing Phase
 - Accepted: UI system conventions in `docs/UI_SYSTEM.md`, created early at
   Aga's request so agents have a durable UI reference before later views exist.
 - Existing module convention remains `src/features`; the redesign does not
-  change the architecture convention.
-- Future: reference-backed visual shell and layout primitive decision, only if
-  the redesign establishes reusable app-shell/workspace-canvas primitives that
+  change the architecture convention, and the shared component library should
+  grow organically from repeated Phase 0 screen patterns after the foundation
+  proof, not from a broad up-front abstraction pass.
+- Future: reference-matched layout foundation and component grammar, if the
+  accepted proof establishes reusable app-shell/workspace-canvas primitives that
   should be treated as architecture rather than ordinary UI implementation.
 - Future: HTML preview sandbox policy before Phase 1 real local HTML preview.
 - Future: Tauri filesystem permissions and ignore rules before real workspace
@@ -246,8 +255,10 @@ Create a stronger dashboard-kit-inspired product surface for the existing Phase
 ### Blocking
 
 - N/A for the Phase 0 visual redesign task pack. Aga confirmed the scope stays
-  Phase 0 web-only/mock-only, the current UI structure is disposable, and the
-  redesign should be deeper than polish.
+  Phase 0 web-only/mock-only, the current UI structure is disposable, the
+  redesign should be deeper than polish, and the reference-matched layout
+  foundation should be documented and proven in runtime before full screen
+  redesign.
 
 ### Non-blocking
 
@@ -257,6 +268,7 @@ Create a stronger dashboard-kit-inspired product surface for the existing Phase
 - Whether to introduce Radix/shadcn for specific accessible primitives.
 - Where to host/share the prototype, if anywhere, during Phase 0.
 - Exact format for documenting the two agent-work rounds.
+- Exact shared primitive API names after the reference-matched foundation proof.
 
 ## Review Notes
 
