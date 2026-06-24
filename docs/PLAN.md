@@ -25,7 +25,7 @@ longer feel like a generic AI-generated card dashboard.
       and a suggested prompt.
 - [x] Recent Activity is limited to three or four static cards.
 - [x] Phase 0 decision is made: improve concept before moving to Tauri.
-- [ ] Reference audit identifies the specific dashboard UI kit patterns to
+- [x] Reference audit identifies the specific dashboard UI kit patterns to
       borrow for shell, navigation, object surfaces, tabs, panels, Composer, and
       Preview.
 - [ ] The app shell moves toward top navigation, product chrome, and a dominant
@@ -105,6 +105,10 @@ longer feel like a generic AI-generated card dashboard.
   browser proof covered Home, Explorer + Preview, Project Desk, and Agent
   Context at desktop and narrower laptop widths; the phase decision is to
   improve the concept before moving to Tauri.
+- Task 7 Reference Audit And Redesign Brief is complete: `docs/UI_SYSTEM.md`
+  now maps the dashboard UI kit references to concrete redesign targets for
+  shell, navigation, object surfaces, tabs, panels, Preview, Composer, and each
+  core screen.
 - Dashboard UI kit PNGs exist as references only, not product assets.
 
 ## Phase 0 Decision
@@ -148,7 +152,7 @@ Notes:
 
 ### Task 7 - Reference Audit And Redesign Brief
 
-- Status: planned.
+- Status: complete.
 - User-visible result: future implementation PRs have a precise visual target
   instead of the vague instruction to be "more like the references."
 - Description: Review the dashboard UI kit PNGs and document which patterns the
@@ -156,13 +160,13 @@ Notes:
   dense panels, preview/composer surfaces, object cards, and visual hierarchy.
   Name what must not be copied.
 - Acceptance criteria:
-  - [ ] `docs/UI_SYSTEM.md` records the reference patterns selected for this
+  - [x] `docs/UI_SYSTEM.md` records the reference patterns selected for this
         product.
-  - [ ] Each core screen has a reference-backed target: Home, Explorer +
+  - [x] Each core screen has a reference-backed target: Home, Explorer +
         Preview, Project Desk, and Agent Context Composer.
-  - [ ] The brief explicitly rejects the current left-rail plus white page-card
+  - [x] The brief explicitly rejects the current left-rail plus white page-card
         composition as the default shell.
-  - [ ] The brief names anti-patterns to avoid: generic card grid, explanatory
+  - [x] The brief names anti-patterns to avoid: generic card grid, explanatory
         doc panels, decorative AI UI, and raw file-browser hierarchy.
 - Verification:
   - Automated: N/A, docs-only.

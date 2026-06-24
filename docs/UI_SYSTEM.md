@@ -35,6 +35,60 @@ For the Phase 0 visual redesign, start from these reference roles:
 | `Company Profile - Materials.png` | object cards with real visual payload, metric strips, tab-selected state |
 | `settings- General.png` | settings-like two-column work surface, form density, side category rhythm |
 
+## Reference Audit And Redesign Brief
+
+Task 7 selects the dashboard UI kit patterns that future redesign tasks should
+borrow. The goal is a precise visual target, not a license to copy screens,
+brands, insurance domain content, logos, people, product names, charts, or exact
+layouts.
+
+### Borrow These Patterns
+
+| Product need | Reference-backed target |
+|---|---|
+| Workspace shell | Borrow the dark top navigation and sparse product chrome from `Company Profile.png` and `Workflow.png`: product mark, primary navigation, quiet utility cluster, and a large rounded workspace canvas below. The current left-rail plus white page-card composition is rejected as the default shell for the redesign. |
+| Top navigation | Use short active nav pills, compact icon controls, and an optional mock-safe status/action cluster inspired by `Company Profile.png`. Keep Home primary, and do not turn the shell into a file-browser tree. |
+| Object header | Use a strong selected-object header like `Company Profile.png`: back/breadcrumb affordance, object icon/title, status chip, primary action cluster, and clear secondary metadata. Translate this to workspace/project/artifact objects rather than company records. |
+| Tabs and controls | Borrow the wide segmented tab rhythm from `Company Profile.png` and `Company Profile - Materials.png`: short labels, count chips, pale active state, and controls grouped near the surface they affect. |
+| Dense panels | Borrow the dark, low-border panel density from `Company Profile.png`, `Company Profile - Materials.png`, and `settings- General.png`: one job per panel, compact labels, readable values, and restrained shadows. Do not create an even grid of equal-priority cards. |
+| Object cards | Borrow the payload-forward cards from `Company Profile - Materials.png` and `Employees- profile details.png`: preview first, human label next, raw technical detail secondary, and small utility affordances. |
+| Preview surface | Borrow the readable document/detail panels from `Company Profile - ai chat (1).png` and the document cards in `Employees- profile details.png`: preview content should be legible and object-specific, not only thumbnail decoration. |
+| Composer surface | Borrow the docked/floating composer, prompt tray, and share/permission panel density from `Company Profile - ai chat.png` and `Company Profile - ai chat (1).png`. Translate sharing/access into mock context boundaries: selected, excluded, private, and review-first. |
+| Work canvas | Borrow the full-canvas interaction field from `Workflow.png`: a dark dotted or subtly gridded field, tool controls attached to the canvas, selected object nodes, contextual menus, and a clear bottom/right action area when useful. |
+| Settings/detail rhythm | Borrow the two-column settings/detail surface from `settings- General.png`: local category rail only inside a focused tool, dense rows, form-like control grouping, and a single persistent save/action position. |
+
+### Screen Targets
+
+| Screen | Reference-backed target |
+|---|---|
+| Home | Home should become a workspace cockpit inside the dark top-nav shell. Borrow the object header, metric/detail panel rhythm, and action cluster from `Company Profile.png`, then adapt them to "continue work," recent changes, next actions, pinned material, and context readiness. Home should have one dominant workspace object, not a generic dashboard grid. |
+| Explorer + Preview | Explorer should feel like an inspection surface. Borrow the left/object list plus selected-detail rhythm from `Employees- profile details.png`, the payload-first cards from `Company Profile - Materials.png`, and the canvas/tool-control density from `Workflow.png`. Preview must be a readable object pane beside or below selection, with raw paths secondary. |
+| Project Desk | Project Desk should feel like a focused work surface for one fictional project. Borrow the selected-object header and tab strip from `Company Profile.png`, supporting panels from `settings- General.png`, and document/material cards from `Company Profile - Materials.png`. Quick actions stay mock/conceptual and grouped as controls, not explanatory panels. |
+| Agent Context Composer | Composer should feel like a controlled handoff tray. Borrow the floating/docked composer and share panel hierarchy from `Company Profile - ai chat.png` and `Company Profile - ai chat (1).png`, but replace live AI/share semantics with explicit selected, excluded, private, review-first, and suggested-prompt groups. It must not look like a chat session or terminal. |
+
+### Do Not Copy
+
+- Do not copy reference logos, people, avatars, company names, insurance
+  concepts, chart data, product labels, documents, or exact screen layouts.
+- Do not use the PNGs as product assets.
+- Do not introduce real search, sharing, uploads, invoices, reports, workflow
+  execution, AI execution, or account settings because those references show
+  similar controls.
+- Do not copy the reference floating AI prompt in a way that implies live
+  Codex/Claude access, automatic private-data selection, or provider execution.
+
+### Anti-Patterns To Avoid
+
+- generic card grid where every panel has the same visual weight,
+- explanatory documentation panels that describe the app instead of acting like
+  product UI,
+- decorative AI UI: purple gradients, sparkles as the main visual idea,
+  chat-first composition, or fake magic controls,
+- raw file-browser hierarchy as the first layer,
+- left-rail plus white page-card shell as the default app frame,
+- visual payloads that are only decorative thumbnails rather than useful
+  previews or object signals.
+
 ## Product Feel
 
 The UI should feel like a calm local work cockpit for a builder's folder:
