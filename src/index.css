@@ -56,12 +56,3 @@ a:focus-visible {
   outline: 3px solid var(--color-steel-700);
   outline-offset: 3px;
 }
-
-.proof-workflow-grid {
-  background-image: radial-gradient(
-    circle at 1px 1px,
-    color-mix(in srgb, var(--color-paper-100) 14%, transparent) 1px,
-    transparent 0
-  );
-  background-size: 28px 28px;
-}

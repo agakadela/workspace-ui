@@ -320,84 +320,34 @@ Rules:
   - `docs/VERIFY_LOG.md`
 - Verdict: `SHIP`
 
-### 2026-06-24 — `standard` — `Task 8B reference-matched layout foundation proof` — `N/A before commit`
+### 2026-06-24 — `standard` — `Task 8B proof revert and replanning` — `N/A before commit`
 
 - Environment: `local`
 - Checked:
-  - `Foundation Proof` opens from the global top navigation while Home remains
-    the first screen.
-  - Runtime proof shows top nav, dark rounded canvas, selected-object header,
-    compact action cluster, tab/control rhythm, dense supporting panels, and
-    composer tray placeholder.
-  - Proof remains mock-only and does not use dashboard UI kit PNGs as product
-    assets.
+  - Reverted the rejected Task 8B runtime proof commits.
+  - Removed the standalone `Foundation` / `Foundation Proof` route, nav item,
+    feature file, proof-specific test, CSS proof grid, and docs review file.
+  - Reframed Task 8B as a whole-Phase-0 UI reset across Home, Visual Explorer +
+    Preview, Project Desk, and Agent Context Composer.
+  - Phase 0 exclusions remain unchanged: no Tauri, real filesystem, Git,
+    Codex/Claude execution, terminal, auth, cloud, search, PDF, or file
+    editing.
 - Commands run:
-  - `npm test -- App.test.tsx` failed first because the proof nav/surface did
-    not exist yet.
-  - `npm test -- App.test.tsx`
   - `npm run typecheck`
   - `npm run lint`
   - `npm test`
   - `npm run build`
 - Runtime proof:
-  - Browser flow: gstack `/browse` opened `http://127.0.0.1:5173/`, selected
-    `Foundation Proof`, confirmed proof text for `Company Profile.png`,
-    `Workflow.png`, and `Company Profile - ai chat.png`, and captured desktop
-    and narrower-laptop screenshots at `/tmp/workspace-ui-task8b-desktop.png`
-    and `/tmp/workspace-ui-task8b-laptop.png`.
-  - Console proof: no app errors; only Vite/React development informational
-    messages.
+  - Browser flow: `N/A` for this revert/replan step.
   - Database proof: `N/A` because Phase 0 has no database.
   - Provider/dashboard proof: `N/A` because Phase 0 has no external provider.
 - Cannot verify:
-  - Aga visual acceptance; Aga later reviewed the proof and rejected the visual
-    gate because the app rendered reference/checklist copy instead of a
-    product-facing workspace surface.
-  - GitHub Actions result before the draft PR runs CI.
+  - The new whole-Phase-0 visual direction until Task 8B is implemented and Aga
+    reviews the real screens.
 - Docs updated:
-  - `docs/UI_SYSTEM.md`
   - `docs/PLAN.md`
-  - `docs/VERIFY_LOG.md`
-- Verdict: `FIX FIRST`
-
-### 2026-06-24 — `standard` — `Task 8B visual blocker repair` — `N/A before commit`
-
-- Environment: `local`
-- Checked:
-  - `Foundation` now opens a product-facing `Orchard Notes` workspace surface
-    instead of rendering reference/checklist copy.
-  - The proof shows selected object metadata, short tabs, compact actions,
-    workflow-style canvas, readable preview, and an attached context handoff
-    tray.
-  - Top navigation uses the shorter `Foundation` label and remains uncut at
-    `1024x768`.
-  - Phase 0 exclusions remain visible: mock-only, no filesystem, no Git, no
-    Codex/Tauri/runtime behavior, no private data.
-- Commands run:
-  - `npm test -- App.test.tsx`
-  - `npm run typecheck`
-  - `npm run lint`
-  - `npm test`
-  - `npm run build`
-- Runtime proof:
-  - Browser flow: gstack `/browse` opened `http://127.0.0.1:5173/`, selected
-    `Foundation`, captured `/tmp/workspace-ui-task8b-fix-desktop.png` and
-    `/tmp/workspace-ui-task8b-fix-1024.png`.
-  - 1024px DOM proof: viewport `1024x768`; canvas rect top `191`; context tray
-    rect top `557`; nav labels `Home`, `Visual Explorer`, `Project Desk`, and
-    `Foundation` all fit inside the viewport.
-  - Console proof: no app errors; only Vite/React development informational
-    messages.
-  - Database proof: `N/A` because Phase 0 has no database.
-  - Provider/dashboard proof: `N/A` because Phase 0 has no external provider.
-- Cannot verify:
-  - Aga visual acceptance until Aga reviews the repaired runtime proof.
-  - GitHub Actions result before the draft PR runs CI.
-- Docs updated:
   - `docs/UI_SYSTEM.md`
-  - `docs/PLAN.md`
   - `docs/VERIFY_LOG.md`
-  - `docs/review/task-8b-foundation-proof.md`
 - Verdict: `FIX FIRST`
 
 ## Entry Template

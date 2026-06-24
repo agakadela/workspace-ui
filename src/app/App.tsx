@@ -1,13 +1,7 @@
 import { useState } from "react";
-import {
-  Compass,
-  Home as HomeIcon,
-  LayoutDashboard,
-  PanelRightOpen,
-} from "lucide-react";
+import { Compass, Home as HomeIcon, PanelRightOpen } from "lucide-react";
 
 import { Explorer } from "../features/explorer/Explorer";
-import { FoundationProof } from "../features/foundation-proof/FoundationProof";
 import { Home } from "../features/home/Home";
 import { ProjectDesk } from "../features/project-desk/ProjectDesk";
 import {
@@ -18,7 +12,7 @@ import {
 } from "../shared/platform/workspace";
 import { AppShell } from "../shared/ui/AppShell";
 
-type ActiveView = "home" | "explorer" | "projectDesk" | "foundationProof";
+type ActiveView = "home" | "explorer" | "projectDesk";
 
 export function App() {
   const [activeView, setActiveView] = useState<ActiveView>("home");
@@ -49,13 +43,6 @@ export function App() {
       isActive: activeView === "projectDesk",
       onSelect: () => setActiveView("projectDesk"),
     },
-    {
-      id: "foundationProof",
-      label: "Foundation",
-      icon: LayoutDashboard,
-      isActive: activeView === "foundationProof",
-      onSelect: () => setActiveView("foundationProof"),
-    },
   ];
 
   if (activeView === "explorer") {
@@ -79,14 +66,6 @@ export function App() {
           onOpenHome={() => setActiveView("home")}
           onOpenExplorer={() => setActiveView("explorer")}
         />
-      </AppShell>
-    );
-  }
-
-  if (activeView === "foundationProof") {
-    return (
-      <AppShell navItems={navItems}>
-        <FoundationProof />
       </AppShell>
     );
   }

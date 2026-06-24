@@ -89,13 +89,17 @@ layouts.
 - visual payloads that are only decorative thumbnails rather than useful
   previews or object signals.
 
-## Reference-Matched Layout Foundation
+## Whole Phase 0 Visual Reset Foundation
 
-This foundation is a required gate before deeper Home, Explorer, Project Desk,
-and Agent Context redesign work. It is stronger than "inspired by the
-references": implementation should closely match the layout grammar, density,
-hierarchy, and control rhythm of the selected references while using
-workspace-ui content and public-safe mock data.
+This foundation now applies to the actual Phase 0 product flow, not to a
+detached proof screen. Aga rejected the standalone Task 8B proof direction
+because it produced another surface to judge instead of addressing the source
+problem: Home, Explorer, Project Desk, and Agent Context still need one
+coherent visual system.
+
+The implementation should closely match the layout grammar, density, hierarchy,
+and control rhythm of the selected references while using workspace-ui content
+and public-safe mock data in the real screens.
 
 ### Foundation Reference Model
 
@@ -156,18 +160,18 @@ references.
   the current object or canvas, not placed as long explanatory documents.
 - Copy density: visible text should behave like product UI. Keep raw technical
   explanation secondary and compact.
-- Public-safe mock data: all proof content stays fictional and must not imply
+- Public-safe mock data: all product content stays fictional and must not imply
   real filesystem, Git, Codex, Tauri, auth, cloud, search, terminal, PDF, or
   file editing behavior.
 
 ### Component Library Stance
 
-Do not build a broad component library before the foundation is proven. The
-library should grow from repeated product areas after the layout grammar is
-accepted.
+Do not build a broad component library before repeated product screens prove
+the pattern. The library should grow from Home, Explorer, Project Desk, and
+Agent Context needs during the whole Phase 0 reset.
 
-Allowed early primitives, only when used by the foundation proof or immediately
-reused by planned screens:
+Allowed early primitives, only when used by the actual Phase 0 screens or
+immediately reused by planned screens:
 
 - `AppShell`
 - `WorkspaceCanvas`
@@ -182,51 +186,40 @@ reused by planned screens:
 Feature-specific UI should remain inside `src/features/<feature>/` until a
 pattern is reused or clearly needed across the active Phase 0 redesign tasks.
 
-### Foundation Runtime Proof
+### Whole Phase 0 Runtime Gate
 
-Before Home, Explorer, Project Desk, or Agent Context are deeply rebuilt, Task
-8B must produce a small runtime proof that demonstrates the foundation. This
-proof can be a neutral shell/canvas state or a minimal existing app surface, but
-it must show:
+Task 8B no longer creates a separate `Foundation` / `Foundation Proof` product
+surface. The runtime gate is the real Phase 0 flow:
+
+- Home as the first-screen workspace cockpit,
+- Visual Explorer + Preview as the artifact inspection surface,
+- Project Desk as the focused project work surface,
+- Agent Context Composer as the controlled handoff tray/tool.
+
+The redesigned flow must show:
 
 - top navigation/product chrome,
-- dominant dark workspace canvas,
-- selected-object header,
-- tab or segmented control rhythm,
-- compact action cluster,
-- dense supporting panel group,
-- preview or composer placeholder attached to the canvas,
+- one selected workspace/project/artifact object per screen,
+- dominant dark workspace surfaces in the first viewport,
+- tab or segmented control rhythm where it belongs to the current object,
+- compact action clusters near the surface they affect,
+- dense supporting panels with distinct jobs,
+- readable previews and composer trays attached to the current object or
+  canvas,
 - accessible focus states and readable contrast.
 
-The proof is acceptable only if Aga can visually compare it with the hybrid
-reference model and decide whether it is close enough before further screen
-redesign work continues.
-
-Current Task 8B runtime proof:
-
-- App surface: `Foundation` in the global top navigation.
-- Feature owner: `src/features/foundation-proof/FoundationProof.tsx`.
-- Shell mount: `src/app/App.tsx`, still inside `AppShell` and the global dark
-  workspace canvas.
-- Shared primitives: no new broad primitive was added; the proof reuses
-  `AppShell`, `StatusChip`, `SurfaceTabStrip`, and `WorkspaceTray`.
-- Proof content: a fictional `Orchard Notes` workspace object with compact
-  metadata, tab/control row, dominant workflow-style canvas, readable preview,
-  dense object/status panels, and an attached context handoff tray visible in
-  the same surface.
-- Review notes: reference-role and visual-gate checklist lives in
-  `docs/review/task-8b-foundation-proof.md`, not in product UI copy.
-- Review status: `FIX FIRST / pending Aga visual acceptance`; the proof is not
-  a full Home, Explorer, Project Desk, or Agent Context redesign.
+Rejected approach: rendering a meta-checklist, reference names, or a standalone
+proof surface in product UI. Reference comparison belongs in docs/review or PR
+notes, not in the app.
 
 ### Similarity Review Checklist
 
-Use this checklist before accepting the foundation proof:
+Use this checklist before accepting the whole Phase 0 visual reset:
 
 - Does the first viewport immediately feel close to `Company Profile.png` and
-  `Workflow.png`, not merely like a recolored app shell?
+  `Workflow.png`, not merely like a recolored app shell or card dashboard?
 - Is the dark canvas the dominant surface, not a background decoration?
-- Is there one clear selected object or work surface?
+- Is there one clear selected object or work surface on each screen?
 - Are panels dense and purposeful instead of an even grid?
 - Are tabs, chips, icon controls, and action clusters placed like product
   controls, not explanatory cards?

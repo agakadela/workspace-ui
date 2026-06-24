@@ -37,37 +37,6 @@ describe("App shell", () => {
     expect(screen.getByText(/phase 0 web prototype/i)).toBeInTheDocument();
   });
 
-  it("opens the foundation surface as a product workspace proof", async () => {
-    const user = userEvent.setup();
-
-    render(<App />);
-
-    await user.click(screen.getByRole("button", { name: /foundation/i }));
-
-    expect(
-      screen.getByRole("heading", {
-        level: 1,
-        name: /orchard notes/i,
-      }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("list", { name: /orchard notes sections/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("region", { name: /orchard work canvas/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("region", { name: /context handoff/i }),
-    ).toBeInTheDocument();
-    expect(screen.getByText("demo-workspace/orchard-notes")).toBeInTheDocument();
-    expect(screen.getByText(/preview: strategy note/i)).toBeInTheDocument();
-    expect(screen.getByText(/suggested prompt/i)).toBeInTheDocument();
-    expect(screen.queryByText(/company profile\.png/i)).not.toBeInTheDocument();
-    expect(screen.queryByText(/reference foundation proof/i)).not.toBeInTheDocument();
-    expect(screen.getAllByText(/mock only/i).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/no filesystem/i).length).toBeGreaterThan(0);
-  });
-
   it("orients the builder with recent activity, next work, pinned docs, and agent context", () => {
     render(<App />);
 
