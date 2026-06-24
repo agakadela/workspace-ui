@@ -109,10 +109,12 @@ longer feel like a generic AI-generated card dashboard.
   now maps the dashboard UI kit references to concrete redesign targets for
   shell, navigation, object surfaces, tabs, panels, Preview, Composer, and each
   core screen.
-- Task 8 Redesign Shell, Tokens, And Layout Primitives is complete: the app now
-  uses shared top navigation/product chrome, a dominant dark workspace canvas,
-  named Tailwind shell/radius/depth tokens, and reusable shell/tray/tab
-  primitives for the remaining redesign tasks.
+- Task 8 Redesign Shell, Tokens, And Layout Primitives is complete after the
+  dark-canvas blocker fix: the app now uses shared top navigation/product
+  chrome, a dominant dark workspace canvas that carries the screen containers
+  instead of sitting behind large bright page cards, named Tailwind
+  shell/radius/depth tokens, and reusable shell/tray/tab primitives for the
+  remaining redesign tasks.
 - Dashboard UI kit PNGs exist as references only, not product assets.
 
 ## Phase 0 Decision
@@ -219,7 +221,9 @@ Notes:
   - Automated: `npm run typecheck`, `npm run lint`, `npm test`,
     `npm run build`.
   - Runtime/manual: targeted gstack `/browse` check that the shell renders at
-    desktop and narrower laptop widths without overlap.
+    desktop and narrower laptop widths without overlap, and that Home,
+    Explorer, and Project Desk use the dark canvas as the actual working
+    surface.
   - Visual proof: screenshot against selected dashboard kit shell references.
 - Dependencies:
   - Task 7.

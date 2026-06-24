@@ -39,7 +39,7 @@ export function AppShell({ navItems, children }: AppShellProps) {
                 </p>
               </div>
             </div>
-            <IconControl label="Phase 0 mock boundaries" icon={ShieldCheck} />
+            <BoundaryStatus label="Phase 0 mock boundaries" icon={ShieldCheck} />
           </div>
 
           <nav
@@ -85,7 +85,7 @@ function ShellNavButton({ item }: { item: AppShellNavItem }) {
   );
 }
 
-function IconControl({
+function BoundaryStatus({
   label,
   icon: Icon,
 }: {
@@ -93,14 +93,13 @@ function IconControl({
   icon: LucideIcon;
 }) {
   return (
-    <button
-      type="button"
-      aria-label={label}
+    <span
       title={label}
-      className="inline-flex size-10 shrink-0 items-center justify-center rounded-control border border-paper-100/10 bg-paper-100/5 text-paper-100 transition hover:bg-paper-100/10 hover:text-paper-50"
+      className="inline-flex min-h-10 shrink-0 items-center gap-2 rounded-control border border-paper-100/10 bg-paper-100/5 px-3 text-xs font-semibold text-paper-100"
     >
       <Icon aria-hidden="true" size={18} />
-    </button>
+      <span className="hidden sm:inline">Bounded mock</span>
+    </span>
   );
 }
 

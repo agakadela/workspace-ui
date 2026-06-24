@@ -12,6 +12,47 @@ Rules:
 
 ## Entries
 
+### 2026-06-24 — `standard` — `Task 8 dark canvas blocker fix` — `N/A recorded before commit`
+
+- Environment: `local`
+- Checked:
+  - Home, Visual Explorer, and Project Desk no longer place the primary screen
+    content inside a large bright page-card wrapper.
+  - The dark workspace canvas is the dominant work surface; paper surfaces are
+    used as selected/detail cards, preview content, and readable prompt/doc
+    interiors.
+  - Home reads as a workspace cockpit with one dominant continue object and a
+    compact guardrails/meta cluster, not an explanatory card dashboard.
+  - Explorer Preview Pane renders only the selected artifact; markdown, HTML
+    mockup, image/card, code-summary, unsupported, and empty states were checked
+    by selecting artifacts/areas.
+  - The shell boundary icon is non-interactive status, not a dead-end button.
+  - Phase 0 boundaries remain mock-only with no filesystem, Git, terminal,
+    Codex/Claude, auth, cloud, search, PDF, file editing, or Tauri behavior.
+- Commands run:
+  - `npm test`
+  - `npm run typecheck`
+  - `npm run lint`
+  - `npm run build`
+- Runtime proof:
+  - Browser flow: gstack `/browse` opened `http://127.0.0.1:5173/` with HTTP
+    200; clicked Visual Explorer; selected Desk Layout Mockup, Concept Card Set,
+    Home Component Summary, Raw Export, and Archive; verified the Preview Pane
+    swapped to the selected object or empty state.
+  - Visual proof: gstack `/browse` screenshots checked Home, Explorer, and
+    Project Desk at `1440x1000` and `1024x900`; no incoherent overlap was found.
+  - Console proof: gstack `/browse console` showed normal Vite/React dev
+    messages only, with no app errors observed.
+  - Database proof: `N/A` because Phase 0 has no database.
+  - Provider/dashboard proof: `N/A` because Phase 0 has no external provider.
+- Cannot verify:
+  - GitHub Actions result before CI runs on the branch/PR.
+  - Real workspace usefulness against Aga's private folder.
+- Docs updated:
+  - `docs/PLAN.md`
+  - `docs/VERIFY_LOG.md`
+- Verdict: `SHIP`
+
 ### 2026-06-23 — `phase close` — `Phase 0 Decision Pack` — `N/A recorded before commit`
 
 - Environment: `local`
