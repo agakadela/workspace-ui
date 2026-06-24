@@ -31,6 +31,12 @@ longer feel like a generic AI-generated card dashboard.
 - [x] The app shell moves toward top navigation, product chrome, and a dominant
       dark workspace canvas instead of the current left rail plus white page
       card composition.
+- [ ] Reference-matched layout foundation is documented and accepted as a hard
+      gate before deeper screen redesign continues.
+- [ ] A small runtime proof demonstrates the hybrid foundation: `Company
+      Profile.png` as primary shell/object reference, `Workflow.png` as work
+      canvas reference, and `Company Profile - ai chat*.png` as composer/tray
+      reference.
 - [ ] Home is redesigned as a first-screen workspace cockpit, not an
       explanatory stack of equal-weight cards.
 - [ ] Visual Explorer + Preview is redesigned as a dense inspection surface
@@ -69,6 +75,12 @@ longer feel like a generic AI-generated card dashboard.
 - The redesign should follow the references more strongly: top nav, dark
   workspace canvas, dense panels, object-focused surfaces, refined tabs, and
   tighter control rhythm.
+- The redesign must pass a reference-matched layout foundation gate before
+  screen-level Task 9-11 work continues. The foundation should strongly mirror
+  the selected references' composition and hierarchy, not only borrow colors or
+  rounded surfaces.
+- The shared component library should grow from repeated screen needs after the
+  foundation proof, not from a broad up-front abstraction pass.
 - Future Tauri compatibility is protected through `src/shared/platform/`.
 - Desktop/laptop are priority; mobile is not a Phase 0 priority.
 
@@ -139,10 +151,11 @@ Runnable Vite/React/Tailwind shell + feedback loops
     -> functional Home / Explorer / Project Desk / Agent Context sketch
       -> reference audit and redesign brief
         -> redesigned shell, tokens, and layout primitives
-          -> redesigned Home
-            -> redesigned Explorer + Preview
-              -> redesigned Project Desk + Agent Context Composer
-                -> visual verification pack
+          -> reference-matched layout foundation docs and runtime proof
+            -> redesigned Home
+              -> redesigned Explorer + Preview
+                -> redesigned Project Desk + Agent Context Composer
+                  -> visual verification pack
 ```
 
 Notes:
@@ -195,7 +208,7 @@ Notes:
   - `frontend-ui-engineering`
 - Estimated scope: Small.
 - Cannot verify yet:
-  - Whether the selected patterns work in the product until Task 8+.
+  - Whether the selected patterns work in the full product until Task 8B+.
 
 ### Task 8 - Redesign Shell, Tokens, And Layout Primitives
 
@@ -250,6 +263,80 @@ Notes:
 - Cannot verify yet:
   - Whether each screen fully reaches the new visual bar until Tasks 9-11.
 
+### Task 8B - Reference-Matched Layout Foundation Proof
+
+- Status: planned.
+- User-visible result: Aga can judge a small live foundation proof before the
+  redesign is applied across Home, Explorer, Project Desk, and Agent Context.
+- Five-line feature spec:
+  - Problem: the current shell primitives exist, but the plan still allows
+    loose, generic dashboard interpretation during screen redesign.
+  - Flow: document the hybrid reference grammar, implement a minimal live
+    shell/canvas proof, and compare it visually before deeper screen work.
+  - Visible result: a top-nav, dark-canvas, object-header, dense-panel proof
+    that feels materially close to the selected dashboard UI kit references.
+  - Out of scope: full Home/Explorer/Project Desk rebuild, broad component
+    library, copied reference assets, or new Phase 0 product behavior.
+  - Success: Aga accepts the proof as the foundation for subsequent screen and
+    component work.
+- Description: Establish a hard design-system foundation before Task 9. Use
+  `Company Profile.png` as the primary shell/object reference, `Workflow.png`
+  for the dominant work canvas, and `Company Profile - ai chat.png` /
+  `Company Profile - ai chat (1).png` for composer/tray language. Produce a
+  small runtime proof that demonstrates the foundation without rebuilding every
+  screen.
+- Acceptance criteria:
+  - [ ] `docs/UI_SYSTEM.md` contains the reference-matched layout foundation,
+        including selected references, similarity targets, layout grammar,
+        component-library stance, runtime proof contract, and review checklist.
+  - [ ] The proof uses top navigation/product chrome as the default global
+        frame.
+  - [ ] The proof makes a dark rounded workspace canvas the dominant first
+        viewport surface.
+  - [ ] The proof shows a selected-object header, compact action cluster,
+        reference-like tab/control rhythm, dense supporting panels, and a
+        preview or composer placeholder attached to the canvas.
+  - [ ] The proof is visually closer to the hybrid reference model than to a
+        generic dashboard shell.
+  - [ ] Shared primitives are introduced only where they serve the proof or are
+        immediately reusable by planned Phase 0 redesign tasks.
+  - [ ] Phase 0 mock-only exclusions remain intact.
+- Verification:
+  - Automated: `npm run typecheck`, `npm run lint`, `npm test`,
+    `npm run build`.
+  - Runtime/manual: targeted gstack `/browse` check at desktop and narrower
+    laptop widths.
+  - Visual proof: compare screenshots against `Company Profile.png`,
+    `Workflow.png`, and `Company Profile - ai chat*.png`.
+- Dependencies:
+  - Task 7.
+  - Task 8.
+- Likely touched files:
+  - `docs/UI_SYSTEM.md`
+  - `docs/PLAN.md`
+  - `docs/SPEC.md`
+  - `src/app/App.tsx`
+  - `src/index.css`
+  - `src/shared/ui/`
+  - One minimal feature surface if needed for the proof.
+- Do not touch:
+  - Full Home, Explorer, Project Desk, or Agent Context rebuild beyond what is
+    needed to mount the proof.
+  - Broad component library work before reuse exists.
+  - Dashboard UI kit PNGs as product assets.
+  - New UI dependencies without asking first.
+  - `src-tauri/`
+  - Real filesystem, Git, terminal, Codex, auth, cloud, search, PDF, or file
+    editing behavior.
+- Risk level: standard.
+- Skill routing:
+  - `$aga-build`
+  - `frontend-ui-engineering`
+- Estimated scope: Medium.
+- Cannot verify yet:
+  - Whether the foundation is accepted as visually close enough until Aga
+    reviews the runtime proof.
+
 ### Task 9 - Redesign Home As Workspace Cockpit
 
 - Status: planned.
@@ -277,6 +364,7 @@ Notes:
     reference patterns from Task 7.
 - Dependencies:
   - Task 8.
+  - Task 8B.
 - Likely touched files:
   - `src/features/home/`
   - `src/shared/data/`
@@ -322,6 +410,7 @@ Notes:
     reference patterns from Task 7.
 - Dependencies:
   - Task 8.
+  - Task 8B.
   - Task 9 for Home-to-Explorer navigation context.
 - Likely touched files:
   - `src/features/explorer/`
@@ -372,6 +461,7 @@ Notes:
     reference patterns from Task 7.
 - Dependencies:
   - Task 8.
+  - Task 8B.
   - Task 9.
   - Task 10 for shared artifact/preview language.
 - Likely touched files:
@@ -734,6 +824,17 @@ Notes:
 - [x] Shared primitives are justified by repeated use.
 - [x] No Phase 0 exclusions were introduced.
 - [x] Typecheck, lint, tests, and build pass.
+
+### Checkpoint - After Task 8B
+
+- [ ] Hybrid reference model is documented in `docs/UI_SYSTEM.md`.
+- [ ] Runtime proof shows top nav, dark canvas, object header, tabs/controls,
+      dense panels, and preview/composer attachment.
+- [ ] Aga has accepted the proof as close enough to guide screen redesign.
+- [ ] Component extraction remains limited to the foundation proof and
+      immediately reused Phase 0 patterns.
+- [ ] No Phase 0 exclusions were introduced.
+- [ ] Typecheck, lint, tests, and build pass.
 
 ### Checkpoint - After Task 10
 
