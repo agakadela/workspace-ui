@@ -33,10 +33,8 @@ longer feel like a generic AI-generated card dashboard.
       card composition.
 - [ ] Reference-matched layout foundation is documented and accepted as a hard
       gate before deeper screen redesign continues.
-- [x] A small runtime proof demonstrates the hybrid foundation: `Company
-      Profile.png` as primary shell/object reference, `Workflow.png` as work
-      canvas reference, and `Company Profile - ai chat*.png` as composer/tray
-      reference.
+- [ ] A repaired runtime proof demonstrates the hybrid foundation as a
+      product-facing workspace surface and is accepted at the visual gate.
 - [ ] Home is redesigned as a first-screen workspace cockpit, not an
       explanatory stack of equal-weight cards.
 - [ ] Visual Explorer + Preview is redesigned as a dense inspection surface
@@ -127,12 +125,12 @@ longer feel like a generic AI-generated card dashboard.
   instead of sitting behind large bright page cards, named Tailwind
   shell/radius/depth tokens, and reusable shell/tray/tab primitives for the
   remaining redesign tasks.
-- Task 8B Reference-Matched Layout Foundation Proof is implementation-complete:
-  `docs/UI_SYSTEM.md` records the runtime proof contract, the app exposes a
-  `Foundation Proof` top-nav surface with selected-object header, dark canvas,
-  tabs, dense panels, and composer tray placeholder, and no Phase 0 exclusions
-  or new shared UI dependencies were introduced. Aga visual acceptance remains
-  the open checkpoint before deeper screen redesign continues.
+- Task 8B Reference-Matched Layout Foundation Proof is in fix-first
+  remediation: Aga rejected the first runtime proof because it rendered an
+  agent-facing checklist instead of a product workspace surface. The repaired
+  proof uses a fictional `Orchard Notes` workspace object with metadata, tabs,
+  workflow canvas, preview, and attached context tray; Aga visual acceptance
+  remains the open checkpoint before deeper screen redesign continues.
 - Dashboard UI kit PNGs exist as references only, not product assets.
 
 ## Phase 0 Decision
@@ -271,7 +269,7 @@ Notes:
 
 ### Task 8B - Reference-Matched Layout Foundation Proof
 
-- Status: complete, pending Aga acceptance checkpoint.
+- Status: fix-first, pending Aga visual acceptance checkpoint.
 - User-visible result: Aga can judge a small live foundation proof before the
   redesign is applied across Home, Explorer, Project Desk, and Agent Context.
 - Five-line feature spec:
@@ -302,8 +300,8 @@ Notes:
   - [x] The proof shows a selected-object header, compact action cluster,
         reference-like tab/control rhythm, dense supporting panels, and a
         preview or composer placeholder attached to the canvas.
-  - [x] The proof is visually closer to the hybrid reference model than to a
-        generic dashboard shell.
+  - [ ] The proof is visually closer to the hybrid reference model than to a
+        generic dashboard shell, pending Aga visual acceptance.
   - [x] Shared primitives are introduced only where they serve the proof or are
         immediately reusable by planned Phase 0 redesign tasks.
   - [x] Phase 0 mock-only exclusions remain intact.

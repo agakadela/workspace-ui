@@ -350,13 +350,55 @@ Rules:
   - Database proof: `N/A` because Phase 0 has no database.
   - Provider/dashboard proof: `N/A` because Phase 0 has no external provider.
 - Cannot verify:
-  - Aga visual acceptance until Aga reviews the runtime proof.
+  - Aga visual acceptance; Aga later reviewed the proof and rejected the visual
+    gate because the app rendered reference/checklist copy instead of a
+    product-facing workspace surface.
   - GitHub Actions result before the draft PR runs CI.
 - Docs updated:
   - `docs/UI_SYSTEM.md`
   - `docs/PLAN.md`
   - `docs/VERIFY_LOG.md`
-- Verdict: `SHIP`
+- Verdict: `FIX FIRST`
+
+### 2026-06-24 — `standard` — `Task 8B visual blocker repair` — `N/A before commit`
+
+- Environment: `local`
+- Checked:
+  - `Foundation` now opens a product-facing `Orchard Notes` workspace surface
+    instead of rendering reference/checklist copy.
+  - The proof shows selected object metadata, short tabs, compact actions,
+    workflow-style canvas, readable preview, and an attached context handoff
+    tray.
+  - Top navigation uses the shorter `Foundation` label and remains uncut at
+    `1024x768`.
+  - Phase 0 exclusions remain visible: mock-only, no filesystem, no Git, no
+    Codex/Tauri/runtime behavior, no private data.
+- Commands run:
+  - `npm test -- App.test.tsx`
+  - `npm run typecheck`
+  - `npm run lint`
+  - `npm test`
+  - `npm run build`
+- Runtime proof:
+  - Browser flow: gstack `/browse` opened `http://127.0.0.1:5173/`, selected
+    `Foundation`, captured `/tmp/workspace-ui-task8b-fix-desktop.png` and
+    `/tmp/workspace-ui-task8b-fix-1024.png`.
+  - 1024px DOM proof: viewport `1024x768`; canvas rect top `191`; context tray
+    rect top `557`; nav labels `Home`, `Visual Explorer`, `Project Desk`, and
+    `Foundation` all fit inside the viewport.
+  - Console proof: no app errors; only Vite/React development informational
+    messages.
+  - Database proof: `N/A` because Phase 0 has no database.
+  - Provider/dashboard proof: `N/A` because Phase 0 has no external provider.
+- Cannot verify:
+  - Aga visual acceptance until Aga reviews the repaired runtime proof.
+  - GitHub Actions result before the draft PR runs CI.
+- Docs updated:
+  - `docs/UI_SYSTEM.md`
+  - `docs/PLAN.md`
+  - `docs/VERIFY_LOG.md`
+  - `docs/review/task-8b-foundation-proof.md`
+- Verdict: `FIX FIRST`
 
 ## Entry Template
 

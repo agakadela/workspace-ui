@@ -24,7 +24,7 @@ export function AppShell({ navItems, children }: AppShellProps) {
         aria-label="Workspace product chrome"
         className="sticky top-0 z-30 border-b border-paper-100/10 bg-canvas-950/95 backdrop-blur"
       >
-        <div className="mx-auto flex max-w-[1540px] flex-col gap-3 px-4 py-3 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+        <div className="mx-auto flex max-w-[1540px] flex-col gap-3 px-4 py-3 sm:px-6 lg:px-8 xl:flex-row xl:items-center xl:justify-between">
           <div className="flex items-center justify-between gap-4">
             <div className="flex min-w-0 items-center gap-3">
               <span className="flex size-10 shrink-0 items-center justify-center rounded-panel bg-paper-50 text-ink-950 shadow-float">
@@ -44,14 +44,14 @@ export function AppShell({ navItems, children }: AppShellProps) {
 
           <nav
             aria-label="Primary workspace views"
-            className="flex min-w-0 gap-2 overflow-x-auto rounded-panel border border-paper-100/10 bg-paper-100/5 p-1"
+            className="flex w-full min-w-0 gap-2 overflow-x-auto rounded-panel border border-paper-100/10 bg-paper-100/5 p-1 xl:w-auto"
           >
             {navItems.map((item) => (
               <ShellNavButton key={item.id} item={item} />
             ))}
           </nav>
 
-          <div className="flex flex-wrap items-center gap-2 lg:justify-end">
+          <div className="flex flex-wrap items-center gap-2 xl:justify-end">
             <StatusChip label="Mock only" tone="mock" />
             <StatusChip label="No filesystem" tone="mock" />
           </div>
@@ -73,7 +73,7 @@ function ShellNavButton({ item }: { item: AppShellNavItem }) {
       type="button"
       aria-current={item.isActive ? "page" : undefined}
       onClick={item.onSelect}
-      className={`inline-flex min-h-10 shrink-0 items-center justify-center gap-2 rounded-control px-3 py-2 text-sm font-semibold transition ${
+      className={`inline-flex min-h-10 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-control px-3 py-2 text-sm font-semibold transition ${
         item.isActive
           ? "bg-paper-50 text-ink-950 shadow-float"
           : "text-paper-100/72 hover:bg-paper-100/10 hover:text-paper-50"

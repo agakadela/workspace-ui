@@ -204,17 +204,20 @@ redesign work continues.
 
 Current Task 8B runtime proof:
 
-- App surface: `Foundation Proof` in the global top navigation.
+- App surface: `Foundation` in the global top navigation.
 - Feature owner: `src/features/foundation-proof/FoundationProof.tsx`.
 - Shell mount: `src/app/App.tsx`, still inside `AppShell` and the global dark
   workspace canvas.
 - Shared primitives: no new broad primitive was added; the proof reuses
   `AppShell`, `StatusChip`, `SurfaceTabStrip`, and `WorkspaceTray`.
-- Proof content: selected-object header, compact action cluster,
-  reference-like tab/control row, dominant dark canvas with subtle workflow-grid
-  texture, dense supporting panels, and a docked composer placeholder.
-- Review status: ready for Aga visual acceptance; the proof is not a full Home,
-  Explorer, Project Desk, or Agent Context redesign.
+- Proof content: a fictional `Orchard Notes` workspace object with compact
+  metadata, tab/control row, dominant workflow-style canvas, readable preview,
+  dense object/status panels, and an attached context handoff tray visible in
+  the same surface.
+- Review notes: reference-role and visual-gate checklist lives in
+  `docs/review/task-8b-foundation-proof.md`, not in product UI copy.
+- Review status: `FIX FIRST / pending Aga visual acceptance`; the proof is not
+  a full Home, Explorer, Project Desk, or Agent Context redesign.
 
 ### Similarity Review Checklist
 

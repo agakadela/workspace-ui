@@ -1,10 +1,11 @@
+import type { LucideIcon } from "lucide-react";
 import {
   ArrowUpRight,
-  Boxes,
-  CircleDashed,
+  BookOpenCheck,
   ClipboardCheck,
   FileText,
-  Layers3,
+  FolderKanban,
+  LayoutGrid,
   LockKeyhole,
   PanelRightOpen,
   ShieldCheck,
@@ -17,335 +18,339 @@ import {
   WorkspaceTray,
 } from "../../shared/ui/WorkspacePrimitives";
 
-const referenceRoles = [
+const objectMetadata = [
+  { label: "Active folder", value: "demo-workspace/orchard-notes" },
+  { label: "Last stop", value: "Layout note, 11:20" },
+  { label: "Context", value: "4 selected, 2 review-first" },
+];
+
+const workItems = [
   {
-    reference: "Company Profile.png",
-    role: "Primary shell/object anchor",
-    proof: "Top nav, selected-object header, tabs, compact action cluster.",
+    title: "Strategy Note",
+    role: "Source of truth",
+    detail: "Defines the calmer notebook workspace and the next review decision.",
+    status: "Current",
+    icon: BookOpenCheck,
   },
   {
-    reference: "Workflow.png",
-    role: "Dominant work canvas",
-    proof: "Dark rounded field with controls and object work zones attached.",
+    title: "Desk Layout Mockup",
+    role: "Visual artifact",
+    detail: "Shows the intended object header, canvas, and composer attachment.",
+    status: "Review first",
+    icon: LayoutGrid,
   },
   {
-    reference: "Company Profile - ai chat.png",
-    role: "Composer/tray language",
-    proof: "Docked handoff tray with permissions and prompt boundary.",
+    title: "Context Packet",
+    role: "Agent handoff",
+    detail: "Includes safe docs only; private notes stay outside the packet.",
+    status: "Safe for agent",
+    icon: ShieldCheck,
   },
 ];
 
-const foundationPanels = [
+const canvasSignals = [
   {
-    title: "Selected-object header",
-    detail: "One workspace object anchors the first viewport.",
-    value: "Object first",
-    icon: Boxes,
+    label: "Continue",
+    value: "Prepare review packet",
+    detail: "Strategy note, layout mockup, and context tray stay paired.",
   },
   {
-    title: "Reference-like tabs",
-    detail: "Short controls sit inside the current object.",
-    value: "4 controls",
-    icon: SlidersHorizontal,
+    label: "Preview",
+    value: "Strategy Note",
+    detail: "Readable summary attached to the selected workspace object.",
   },
   {
-    title: "Dense supporting panels",
-    detail: "Purposeful panels attach to the canvas instead of forming a grid.",
-    value: "3 checks",
-    icon: Layers3,
+    label: "Boundary",
+    value: "Mock only",
+    detail: "No real filesystem, Git, Codex, Tauri, or private data.",
   },
 ];
 
-const canvasNodes = [
+const contextRows = [
   {
-    label: "Workspace object",
-    meta: "Orchard Notes cockpit",
-    tone: "bg-paper-50 text-ink-950",
+    title: "Selected context",
+    detail: "SPEC, PLAN, UI system, and mock workspace model.",
+    chip: "Safe",
+    icon: ShieldCheck,
   },
   {
-    label: "Preview rail",
-    meta: "Readable artifact pane",
-    tone: "bg-steel-100 text-steel-700",
+    title: "Review-first material",
+    detail: "Desk layout sketch needs human review before it joins the packet.",
+    chip: "Review first",
+    icon: ClipboardCheck,
   },
   {
-    label: "Context handoff",
-    meta: "Composer tray boundary",
-    tone: "bg-moss-100 text-moss-700",
+    title: "Private material",
+    detail: "Client notes and real folder names remain excluded.",
+    chip: "Private",
+    icon: LockKeyhole,
   },
 ];
 
 export function FoundationProof() {
   return (
-    <section className="flex flex-col gap-4">
-      <header className="rounded-shell border border-paper-100/10 bg-canvas-800 p-5 shadow-panel lg:p-7">
-        <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
-          <div>
-            <p className="text-sm font-semibold uppercase text-steel-100">
-              Hybrid reference model
-            </p>
-            <h1 className="mt-2 text-3xl font-semibold tracking-normal text-paper-50 md:text-5xl">
-              Reference Foundation Proof
-            </h1>
-            <p className="mt-3 max-w-3xl text-sm leading-6 text-paper-100/75">
-              A small live surface for judging the shared layout grammar before
-              the full Home, Explorer, Project Desk, and Composer redesign.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <StatusChip label="Mock only" tone="mock" />
-            <StatusChip label="No filesystem" tone="mock" />
-            <StatusChip label="No copied assets" tone="mock" />
-          </div>
-        </div>
-        <SurfaceTabStrip
-          label="Foundation proof sections"
-          className="mt-5"
-          items={[
-            { label: "Layout", count: "8B", isActive: true },
-            { label: "Canvas", count: "Workflow" },
-            { label: "Composer", count: "Tray" },
-            { label: "Review", count: "Gate" },
-          ]}
-        />
-      </header>
-
-      <section className="rounded-shell border border-paper-100/10 bg-canvas-950/55 p-3 text-paper-50 shadow-panel sm:p-4 lg:p-5">
-        <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_360px]">
-          <section
-            aria-labelledby="foundation-object-heading"
-            className="rounded-shell border border-paper-100/10 bg-canvas-800 p-4 shadow-float sm:p-5"
-          >
-            <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-              <div className="flex min-w-0 gap-4">
-                <span className="flex size-12 shrink-0 items-center justify-center rounded-panel bg-paper-50 text-ink-950 shadow-float">
-                  <ClipboardCheck aria-hidden="true" size={22} />
-                </span>
-                <div className="min-w-0">
-                  <p className="text-sm font-medium text-paper-100/65">
-                    Selected workspace object
-                  </p>
-                  <h2
-                    id="foundation-object-heading"
-                    className="mt-1 text-2xl font-semibold tracking-normal text-paper-50"
-                  >
-                    Selected-object header
-                  </h2>
-                  <p className="mt-3 max-w-2xl text-sm leading-6 text-paper-100/75">
-                    Orchard Notes is standing in for the future active workspace
-                    object. Raw paths and implementation details stay secondary.
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-wrap gap-2 lg:justify-end">
-                <button
-                  type="button"
-                  className="inline-flex min-h-10 items-center justify-center gap-2 rounded-control bg-paper-50 px-3 py-2 text-sm font-semibold text-ink-950"
-                >
-                  Compare proof
-                  <ArrowUpRight aria-hidden="true" size={16} />
-                </button>
-                <button
-                  type="button"
-                  className="inline-flex min-h-10 items-center justify-center gap-2 rounded-control border border-paper-100/15 bg-paper-100/10 px-3 py-2 text-sm font-semibold text-paper-50"
-                >
-                  Inspect tray
-                  <PanelRightOpen aria-hidden="true" size={16} />
-                </button>
+    <section className="rounded-shell border border-paper-100/10 bg-canvas-950/55 p-3 text-paper-50 shadow-panel sm:p-4 lg:p-5">
+      <section
+        aria-labelledby="orchard-heading"
+        className="rounded-shell border border-paper-100/10 bg-canvas-800 p-4 shadow-float lg:p-5"
+      >
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+          <div className="flex min-w-0 gap-3">
+            <span className="flex size-11 shrink-0 items-center justify-center rounded-panel bg-paper-50 text-ink-950 shadow-float">
+              <FolderKanban aria-hidden="true" size={21} />
+            </span>
+            <div className="min-w-0">
+              <p className="text-sm font-medium text-paper-100/65">
+                Workspace / Fictional project
+              </p>
+              <h1
+                id="orchard-heading"
+                className="mt-1 text-3xl font-semibold tracking-normal text-paper-50 lg:text-4xl"
+              >
+                Orchard Notes
+              </h1>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <StatusChip label="Mock workspace" tone="mock" />
+                <StatusChip label="Ready for visual review" tone="safe" />
+                <StatusChip label="No filesystem" tone="mock" />
               </div>
             </div>
+          </div>
 
-            <SurfaceTabStrip
-              label="Reference-like tabs"
-              className="mt-5"
-              items={[
-                { label: "Foundation", count: "Active", isActive: true },
-                { label: "Object", count: "Header" },
-                { label: "Panels", count: 3 },
-                { label: "Tray", count: "Docked" },
-              ]}
-            />
-
-            <div className="mt-4 grid gap-4 2xl:grid-cols-[minmax(0,1fr)_300px]">
-              <section
-                aria-label="Workflow-style canvas field"
-                className="proof-workflow-grid min-h-[430px] rounded-panel border border-paper-100/10 bg-ink-950 p-4"
+          <dl className="grid gap-2 text-xs leading-5 text-paper-100/70 sm:grid-cols-3 lg:w-[27rem]">
+            {objectMetadata.map((item) => (
+              <div
+                key={item.label}
+                className="rounded-control border border-paper-100/10 bg-paper-100/5 px-3 py-2"
               >
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div className="flex flex-wrap gap-2">
-                    <StatusChip label="Canvas dominant" tone="mock" />
-                    <StatusChip label="Public-safe mock" tone="mock" />
-                  </div>
-                  <div className="flex gap-2 rounded-control border border-paper-100/10 bg-paper-100/10 p-1">
-                    <button
-                      type="button"
-                      className="inline-flex min-h-9 items-center justify-center gap-2 rounded-control bg-paper-50 px-3 text-sm font-semibold text-ink-950"
-                    >
-                      <CircleDashed aria-hidden="true" size={15} />
-                      Focus
-                    </button>
-                    <button
-                      type="button"
-                      className="inline-flex min-h-9 items-center justify-center gap-2 rounded-control px-3 text-sm font-semibold text-paper-100/75"
-                    >
-                      <Layers3 aria-hidden="true" size={15} />
-                      Layers
-                    </button>
-                  </div>
-                </div>
+                <dt className="font-semibold text-paper-50">{item.label}</dt>
+                <dd>{item.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
 
-                <div className="mt-8 grid gap-4 lg:grid-cols-3">
-                  {canvasNodes.map((node) => (
-                    <article
-                      key={node.label}
-                      className={`rounded-panel p-4 shadow-float ${node.tone}`}
+        <div className="mt-4 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <SurfaceTabStrip
+            label="Orchard Notes sections"
+            items={[
+              { label: "Overview", count: "Active", isActive: true },
+              { label: "Artifacts", count: 6 },
+              { label: "Canvas", count: 3 },
+              { label: "Context", count: 4 },
+            ]}
+          />
+
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              className="inline-flex min-h-10 items-center justify-center gap-2 rounded-control bg-paper-50 px-3 py-2 text-sm font-semibold text-ink-950"
+            >
+              Review surface
+              <ArrowUpRight aria-hidden="true" size={16} />
+            </button>
+            <button
+              type="button"
+              className="inline-flex min-h-10 items-center justify-center gap-2 rounded-control border border-paper-100/15 bg-paper-100/10 px-3 py-2 text-sm font-semibold text-paper-50"
+            >
+              Open tray
+              <PanelRightOpen aria-hidden="true" size={16} />
+            </button>
+          </div>
+        </div>
+
+        <section
+          aria-labelledby="orchard-canvas-heading"
+          className="proof-workflow-grid mt-4 rounded-shell border border-paper-100/10 bg-ink-950 p-3 lg:p-4"
+        >
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2
+                id="orchard-canvas-heading"
+                className="text-lg font-semibold text-paper-50"
+              >
+                Orchard work canvas
+              </h2>
+              <p className="mt-1 text-sm text-paper-100/65">
+                One selected object, readable preview, and context tray in the
+                same first-viewport surface.
+              </p>
+            </div>
+
+            <div className="flex gap-2 rounded-control border border-paper-100/10 bg-paper-100/10 p-1">
+              <button
+                type="button"
+                className="inline-flex min-h-9 items-center justify-center gap-2 rounded-control bg-paper-50 px-3 text-sm font-semibold text-ink-950"
+              >
+                <SlidersHorizontal aria-hidden="true" size={15} />
+                Focus
+              </button>
+              <button
+                type="button"
+                className="inline-flex min-h-9 items-center justify-center gap-2 rounded-control px-3 text-sm font-semibold text-paper-100/75"
+              >
+                <LayoutGrid aria-hidden="true" size={15} />
+                Map
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-4 grid gap-3 lg:grid-cols-[minmax(0,1fr)_18rem] xl:grid-cols-[minmax(0,1fr)_20rem]">
+            <div className="min-w-0 space-y-3">
+              <div className="grid gap-3 sm:grid-cols-3">
+                {canvasSignals.map((signal) => (
+                  <article
+                    key={signal.label}
+                    className="rounded-panel border border-paper-100/10 bg-paper-100/10 p-3"
+                  >
+                    <p className="text-xs font-semibold uppercase text-steel-100">
+                      {signal.label}
+                    </p>
+                    <p className="mt-2 text-sm font-semibold text-paper-50">
+                      {signal.value}
+                    </p>
+                    <p className="mt-1 text-sm leading-5 text-paper-100/65">
+                      {signal.detail}
+                    </p>
+                  </article>
+                ))}
+              </div>
+
+              <div className="grid gap-3 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+                {workItems.map((item) => (
+                  <WorkItemCard key={item.title} item={item} />
+                ))}
+              </div>
+
+              <section
+                aria-labelledby="preview-heading"
+                className="rounded-panel border border-paper-100/10 bg-paper-50 p-4 text-ink-950 shadow-float"
+              >
+                <div className="flex items-start gap-3">
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-steel-100 text-steel-700">
+                    <FileText aria-hidden="true" size={17} />
+                  </span>
+                  <div className="min-w-0">
+                    <h3
+                      id="preview-heading"
+                      className="text-base font-semibold text-ink-950"
                     >
-                      <p className="text-sm font-semibold">{node.label}</p>
-                      <p className="mt-2 text-sm leading-5 opacity-75">
-                        {node.meta}
-                      </p>
-                    </article>
-                  ))}
-                </div>
-
-                <div className="mt-8 rounded-panel border border-paper-100/10 bg-paper-100/10 p-4">
-                  <div className="grid gap-3 md:grid-cols-3">
-                    {foundationPanels.map((panel) => {
-                      const PanelIcon = panel.icon;
-
-                      return (
-                        <article
-                          key={panel.title}
-                          className="rounded-xl border border-paper-100/10 bg-canvas-800 p-4"
-                        >
-                          <div className="flex items-start justify-between gap-3">
-                            <div>
-                              <p className="text-sm font-semibold text-paper-50">
-                                {panel.title}
-                              </p>
-                              <p className="mt-2 text-sm leading-5 text-paper-100/65">
-                                {panel.detail}
-                              </p>
-                            </div>
-                            <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-paper-50 text-ink-950">
-                              <PanelIcon aria-hidden="true" size={17} />
-                            </span>
-                          </div>
-                          <p className="mt-4 text-xs font-semibold uppercase text-steel-100">
-                            {panel.value}
-                          </p>
-                        </article>
-                      );
-                    })}
+                      Preview: Strategy Note
+                    </h3>
+                    <p className="mt-2 text-sm leading-6 text-ink-600">
+                      The local workspace should answer where to continue, what
+                      changed, and which context is safe before an editor opens.
+                    </p>
                   </div>
                 </div>
               </section>
-
-              <aside className="rounded-panel border border-paper-100/10 bg-paper-100/5 p-4">
-                <h2 className="text-base font-semibold text-paper-50">
-                  Dense supporting panels
-                </h2>
-                <div className="mt-4 space-y-3">
-                  {referenceRoles.map((item) => (
-                    <article
-                      key={item.reference}
-                      className="rounded-xl border border-paper-100/10 bg-paper-50 p-4 text-ink-950"
-                    >
-                      <p className="text-sm font-semibold">{item.reference}</p>
-                      <p className="mt-1 text-xs font-semibold uppercase text-ink-600">
-                        {item.role}
-                      </p>
-                      <p className="mt-3 text-sm leading-5 text-ink-600">
-                        {item.proof}
-                      </p>
-                    </article>
-                  ))}
-                </div>
-              </aside>
             </div>
-          </section>
 
-          <div className="flex flex-col gap-4">
             <WorkspaceTray
-              labelledBy="foundation-composer-heading"
-              className="xl:sticky xl:top-24"
+              labelledBy="context-tray-heading"
+              className="self-start bg-canvas-950/95 p-4"
             >
               <div className="flex items-start gap-3">
                 <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-paper-50 text-ink-950">
-                  <FileText aria-hidden="true" size={18} />
+                  <ClipboardCheck aria-hidden="true" size={18} />
                 </span>
                 <div>
                   <p className="text-sm font-medium text-paper-100/70">
-                    Attached to the canvas
+                    Attached context tray
                   </p>
                   <h2
-                    id="foundation-composer-heading"
+                    id="context-tray-heading"
                     className="mt-1 text-xl font-semibold text-paper-50"
                   >
-                    Composer tray placeholder
+                    Context handoff
                   </h2>
                 </div>
               </div>
-              <p className="mt-4 text-sm leading-6 text-paper-100/75">
-                This placeholder borrows the density of Company Profile - ai
-                chat (1).png without implying live AI execution.
-              </p>
 
-              <div className="mt-5 space-y-3">
-                <BoundaryRow
-                  icon={ShieldCheck}
-                  title="Selected context"
-                  detail="Spec, plan, and UI system are allowed in the mock packet."
-                  chip="Safe"
-                />
-                <BoundaryRow
-                  icon={LockKeyhole}
-                  title="Private material"
-                  detail="Client/private files remain excluded from the proof."
-                  chip="Blocked"
-                />
+              <div className="mt-4 space-y-2">
+                {contextRows.map((row) => (
+                  <ContextRow key={row.title} row={row} />
+                ))}
               </div>
 
-              <div className="mt-5 rounded-xl border border-paper-100/10 bg-paper-100/10 p-4">
+              <div className="mt-4 rounded-xl border border-paper-100/10 bg-paper-100/10 p-3">
                 <p className="text-sm font-semibold text-paper-50">
-                  Runtime proof contract
+                  Suggested prompt
                 </p>
                 <p className="mt-2 text-sm leading-6 text-paper-100/70">
-                  Top nav, dark canvas, object header, tabs, dense panels, and a
-                  docked composer are visible in one first-viewport surface.
+                  Prepare a concise pass on the Orchard Notes desk layout using
+                  only selected mock files.
                 </p>
               </div>
             </WorkspaceTray>
           </div>
-        </div>
+        </section>
       </section>
     </section>
   );
 }
 
-function BoundaryRow({
-  icon: Icon,
-  title,
-  detail,
-  chip,
+function WorkItemCard({
+  item,
 }: {
-  icon: typeof ShieldCheck;
-  title: string;
-  detail: string;
-  chip: string;
+  item: {
+    title: string;
+    role: string;
+    detail: string;
+    status: string;
+    icon: LucideIcon;
+  };
 }) {
+  const ItemIcon = item.icon;
+
   return (
-    <article className="rounded-xl border border-paper-100/10 bg-paper-100/10 p-4">
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex items-start gap-3">
-          <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-paper-50 text-ink-950">
-            <Icon aria-hidden="true" size={17} />
-          </span>
-          <div>
-            <h3 className="text-sm font-semibold text-paper-50">{title}</h3>
-            <p className="mt-1 text-sm leading-5 text-paper-100/65">{detail}</p>
-          </div>
+    <article className="rounded-panel border border-paper-100/10 bg-canvas-800 p-3 shadow-float">
+      <div className="flex items-start gap-3">
+        <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-paper-50 text-ink-950">
+          <ItemIcon aria-hidden="true" size={17} />
+        </span>
+        <div className="min-w-0">
+          <p className="text-sm font-semibold text-paper-50">{item.title}</p>
+          <p className="mt-1 text-xs font-semibold uppercase text-paper-100/55">
+            {item.role}
+          </p>
         </div>
-        <StatusChip label={chip} tone="mock" />
+      </div>
+      <p className="mt-3 text-sm leading-5 text-paper-100/65">{item.detail}</p>
+      <div className="mt-3">
+        <StatusChip label={item.status} />
+      </div>
+    </article>
+  );
+}
+
+function ContextRow({
+  row,
+}: {
+  row: {
+    title: string;
+    detail: string;
+    chip: string;
+    icon: LucideIcon;
+  };
+}) {
+  const RowIcon = row.icon;
+
+  return (
+    <article className="rounded-xl border border-paper-100/10 bg-paper-100/10 p-3">
+      <div className="flex items-start gap-3">
+        <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-paper-50 text-ink-950">
+          <RowIcon aria-hidden="true" size={16} />
+        </span>
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-2">
+            <h3 className="text-sm font-semibold text-paper-50">{row.title}</h3>
+            <StatusChip label={row.chip} />
+          </div>
+          <p className="mt-1 text-sm leading-5 text-paper-100/65">
+            {row.detail}
+          </p>
+        </div>
       </div>
     </article>
   );

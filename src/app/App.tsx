@@ -51,7 +51,7 @@ export function App() {
     },
     {
       id: "foundationProof",
-      label: "Foundation Proof",
+      label: "Foundation",
       icon: LayoutDashboard,
       isActive: activeView === "foundationProof",
       onSelect: () => setActiveView("foundationProof"),
