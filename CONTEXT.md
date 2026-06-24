@@ -17,6 +17,8 @@ separate concepts.
 | `Agent Context Panel` | Context composer for selected/excluded/private files and suggested prompt. | Agent chat, Codex runtime. | Context panel | Overview v3 | 2026-06-20 |
 | `public-safe mock data` | Fictional data safe for GitHub/social/demo use. | Real private workspace data. | demo data | Overview v3 | 2026-06-20 |
 | `Dashboard UI kit references` | PNG design references used for visual inspiration. | Product assets to copy. | UI kit PNGs | Spec conversation | 2026-06-20 |
+| `Phase 0 Visual Redesign Pack` | Planned redesign work that replaces the current generic/card-heavy UI language while preserving Phase 0 flows and mock-only boundaries. | Minor polish pass, Phase 1/Tauri work. | visual redesign pack | Spec conversation | 2026-06-24 |
+| `Workspace Canvas` | Dominant dark product surface for the active workspace object, preview, composer, or project desk. | White page card, raw file browser, decorative background. | dark canvas, workspace surface | Spec conversation | 2026-06-24 |
 
 ## Important Distinctions
 
@@ -27,6 +29,8 @@ separate concepts.
 | Agent Context Panel | Codex integration | The panel composes mock context in Phase 0; it does not run Codex. | Prevents fake integration. |
 | Recent Activity | Git timeline | Phase 0 has a small static signal; real Git awareness is later. | Prevents scope creep. |
 | UI kit inspiration | UI kit copying | References guide quality and feel; final UI must be adapted to this product. | Avoids licensing/design-copy risk. |
+| Visual redesign | Visual polish | Redesign may replace shell, hierarchy, and layout primitives; polish only adjusts the existing UI. | Prevents treating the current generic UI as basically accepted. |
+| Workspace Canvas | Left rail shell | Canvas is the primary product surface; a rail may exist only as local navigation when justified. | Keeps the redesign close to the references instead of the current scaffold. |
 
 ## Naming Conventions
 
@@ -53,3 +57,4 @@ separate concepts.
 | Date | Change | Reason | Commit/PR |
 |---|---|---|---|
 | 2026-06-20 | Initial terms | Project framing/spec | N/A |
+| 2026-06-24 | Added visual redesign and workspace canvas terms | Phase 0 redesign task pack | Current PR |

@@ -7,6 +7,7 @@ changing Home, Explorer, Project Desk, Agent Context, or shared UI primitives.
 
 - Status: active Phase 0 reference.
 - Created: 2026-06-21.
+- Last updated: 2026-06-24.
 - Owner: Aga.
 - Reason for early creation: Aga explicitly requested a full UI reference before
   the second view so agents do not guess from isolated screenshots or one-off
@@ -24,6 +25,16 @@ tab/control styling, typography feel, quiet status treatment, and polished
 dashboard craft. Do not copy logos, brand names, insurance/company domain
 content, illustrations, exact layouts, exact visual assets, or screens 1:1.
 
+For the Phase 0 visual redesign, start from these reference roles:
+
+| Reference | Useful for |
+|---|---|
+| `Company Profile.png` | top navigation, company/object header, tab rhythm, dark dashboard surface, detail panels |
+| `Workflow.png` | full-canvas work surface, tool controls, object nodes, dense interaction field |
+| `Company Profile - ai chat.png` | overlay/composer density, shared prompt surface, permission/share panels |
+| `Company Profile - Materials.png` | object cards with real visual payload, metric strips, tab-selected state |
+| `settings- General.png` | settings-like two-column work surface, form density, side category rhythm |
+
 ## Product Feel
 
 The UI should feel like a calm local work cockpit for a builder's folder:
@@ -39,6 +50,42 @@ Primary feeling:
 - workspace-oriented, not file-browser-oriented,
 - agent-aware, not AI-marketing-oriented.
 
+## Phase 0 Redesign Direction
+
+The current implementation is a functional sketch, not the accepted visual
+direction. It proves the product surfaces, but it reads too much like a generic
+AI-generated card dashboard: large explanatory sections, repeated card shapes,
+left rail scaffolding, and long documentation-like panels.
+
+The redesign should change the visual system, not merely polish spacing.
+
+Preserve:
+
+- Home, Visual Explorer, Preview Pane, Project Desk, and Agent Context Composer
+  as product concepts,
+- mock-only and public-safe boundaries,
+- Home as the first screen,
+- readable statuses, privacy, and agent-safety signals,
+- feature ownership under `src/features`.
+
+Change freely:
+
+- app shell and navigation composition,
+- panel hierarchy,
+- copy density,
+- card shapes and repeated section rhythm,
+- placement of Composer and Preview,
+- exact layout of Home, Explorer, and Project Desk.
+
+Target:
+
+- top navigation/product chrome instead of a global left rail,
+- a dominant dark workspace canvas instead of a large white page card,
+- contextual object surfaces with tabs, tool controls, and dense panels,
+- fewer equal-weight cards,
+- richer object-specific preview/composer areas,
+- less explanatory prose on screen.
+
 ## Visual Direction
 
 Default toward a dark graphite workspace shell inspired by the references, with
@@ -46,6 +93,10 @@ warm paper surfaces used for selected states, readable preview areas, and
 high-contrast controls. The current app tokens already include ink/paper/steel/
 moss/clay; preserve that product personality while borrowing the references'
 dark dashboard structure.
+
+During the redesign, do not preserve the existing left rail plus white page-card
+composition unless a later design pass explicitly proves it is stronger than
+the reference-backed top-nav/canvas direction.
 
 Use:
 
@@ -133,6 +184,8 @@ does not optimize for a phone-first workflow.
 Reference-backed layout patterns:
 
 - app shell with persistent navigation/chrome,
+- top navigation as the default global frame,
+- dominant dark workspace canvas for the main product surface,
 - wide primary work surface with rounded major container,
 - tab strip or segmented navigation inside a surface,
 - dense grid of panels where each panel has a clear job,
@@ -155,6 +208,8 @@ Nesting:
 - Avoid decorative card-inside-card stacks.
 - If a nested surface exists, it must have a functional reason: preview,
   composer, selected object, modal, grouped settings, or repeated artifact.
+- Repeated panels should not all carry equal visual weight; every screen needs
+  one obvious primary object or work surface.
 
 ## Radius And Depth
 
@@ -183,7 +238,8 @@ the product into a file browser.
 Allowed patterns:
 
 - desktop top navigation inspired by the references,
-- left rail when a screen benefits from persistent workspace sections,
+- left rail only when a screen benefits from local sections; do not use it as
+  the default global shell for the redesign,
 - tab strip for modes inside one object or workspace surface,
 - breadcrumb/back affordance when drilling into a project or artifact.
 
@@ -222,6 +278,27 @@ Use for:
 - Project Desk,
 - Agent Context composer area.
 
+### Workspace Canvas
+
+The dominant dark surface that holds the current object, preview, composer, or
+workflow. This is the main redesign primitive and should feel closer to the
+reference kit's product surfaces than to a generic web page.
+
+Use for:
+
+- Home first-screen cockpit,
+- Explorer inspection field,
+- Project Desk work surface,
+- Agent Context composer tray or overlay.
+
+Rules:
+
+- The canvas should establish the product identity in the first viewport.
+- Supporting panels sit inside or adjacent to the canvas; they should not turn
+  the page into a uniform grid of cards.
+- The canvas may include tabs, tool buttons, status chips, preview trays, and
+  object cards when they support the current work object.
+
 ### Insight Panel
 
 A compact panel that answers one question. Use for continue state, project
@@ -258,6 +335,22 @@ Rules:
 - Unsupported and empty states must be calm and explicit.
 - Real local HTML/file preview is out of scope in Phase 0.
 - Do not add PDF viewing.
+
+### Agent Context Composer
+
+Use for selected/excluded/private/review-first context and suggested prompt.
+The Composer should feel like a controlled handoff tool, not a chat, terminal,
+or long documentation panel.
+
+Rules:
+
+- Selected, excluded, private, and review-first boundaries must be visible at a
+  glance.
+- The suggested prompt is secondary to the context boundary.
+- Do not imply live Codex/Claude execution, AI calls, real file reads, or
+  automatic context selection.
+- Prefer compact grouped controls, trays, split panes, or overlays inspired by
+  the references over a long single-column stack.
 
 ### Tab Strip / Segmented Control
 
