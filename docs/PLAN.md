@@ -23,9 +23,10 @@ Context Panel on public-safe mock data.
       and a suggested prompt.
 - [x] Recent Activity is limited to three or four static cards.
 - [ ] UI is visually coherent, calm, premium, work-focused, and close to the
-      dashboard UI kit references without copying them.
-- [ ] At least two agent-work rounds are documented.
-- [ ] Phase 0 decision is made: move to Tauri, improve concept, or stop.
+      dashboard UI kit references without copying them. Gap named: Home needs a
+      desktop visual-balance pass before any Tauri move.
+- [x] At least two agent-work rounds are documented.
+- [x] Phase 0 decision is made: improve concept before moving to Tauri.
 
 ### Not Building In This Phase
 
@@ -80,7 +81,24 @@ Context Panel on public-safe mock data.
   mock composer that shows active folder, selected/excluded/private/review-first
   files, a suggested prompt, and copy success/fallback states without implying
   live agent execution.
+- Task 6 Phase 0 Decision Pack is complete: automated checks and targeted
+  browser proof covered Home, Explorer + Preview, Project Desk, and Agent
+  Context at desktop and narrower laptop widths; the phase decision is to
+  improve the concept before moving to Tauri.
 - Dashboard UI kit PNGs exist as references only, not product assets.
+
+## Phase 0 Decision
+
+- Decision: improve concept before moving to Tauri.
+- Reason: the web prototype proves the core surfaces, mock-only boundaries,
+  public-safe data model, and agent context composer concept, but the final
+  browser pass found a visual-balance gap on Home at desktop width: the left
+  column stretches into a large empty paper area beside the long Agent Context
+  Composer. Tightening that polish before desktop packaging is the safer next
+  move.
+- Evidence: see the `2026-06-23` phase-close entry in `docs/VERIFY_LOG.md`.
+- Next planning action: define the smallest Phase 0 improvement slice before
+  any Tauri setup.
 
 ## Dependency Graph
 
@@ -347,19 +365,19 @@ Notes:
 
 ### Task 6 - Phase 0 Decision Pack
 
-- Status: not started.
+- Status: complete.
 - User-visible result: Aga has enough evidence to choose move to Tauri, improve
   concept, or stop.
 - Description: Close the phase with traceable evidence: all Phase 0 criteria,
   documented agent-work rounds, targeted browser proof, cannot-verify items, and
   a compact decision record.
 - Acceptance criteria:
-  - [ ] Home, Explorer + Preview, Project Desk, and Agent Context Panel meet the
+  - [x] Home, Explorer + Preview, Project Desk, and Agent Context Panel meet the
         phase acceptance criteria or gaps are explicitly named.
-  - [ ] At least two agent-work rounds are documented.
-  - [ ] Targeted browser checks cover desktop and narrower laptop widths.
-  - [ ] `docs/VERIFY_LOG.md` has a compact phase-close entry.
-  - [ ] Phase 0 decision is recorded: move to Tauri, improve concept, or stop.
+  - [x] At least two agent-work rounds are documented.
+  - [x] Targeted browser checks cover desktop and narrower laptop widths.
+  - [x] `docs/VERIFY_LOG.md` has a compact phase-close entry.
+  - [x] Phase 0 decision is recorded: improve concept before moving to Tauri.
 - Verification:
   - Automated: `npm run typecheck`, `npm run lint`, `npm test`,
     `npm run build`.
@@ -427,10 +445,11 @@ Notes:
 
 ## Phase Closing Gate
 
-- [ ] Acceptance criteria met and verified in runtime.
-- [ ] Simplification pass completed on touched areas, or explicitly not useful.
-- [ ] Agent output verified against task contract and evidence.
-- [ ] Review completed on the feature/phase diff.
-- [ ] Relevant docs updated.
-- [ ] `docs/VERIFY_LOG.md` entry added with checks, runtime proof,
+- [x] Acceptance criteria met or gaps named and verified in runtime.
+- [x] Simplification pass completed on touched areas, or explicitly not useful.
+      N/A: Task 6 changed docs only.
+- [x] Agent output verified against task contract and evidence.
+- [x] Review completed on the feature/phase diff.
+- [x] Relevant docs updated.
+- [x] `docs/VERIFY_LOG.md` entry added with checks, runtime proof,
       cannot-verify, and verdict.

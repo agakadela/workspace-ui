@@ -12,6 +12,58 @@ Rules:
 
 ## Entries
 
+### 2026-06-23 — `phase close` — `Phase 0 Decision Pack` — `N/A recorded before commit`
+
+- Environment: `local`
+- Checked:
+  - Home remains the first screen and answers continue state, recent activity,
+    next work, pinned docs, and mock agent context.
+  - Visual Explorer shows meaning-first artifact cards plus readable markdown,
+    HTML mockup, image/card, and code-summary previews.
+  - Explorer unsupported-preview and empty Archive states are visible and calm.
+  - Project Desk shows status, important docs, next tasks, recent/pinned work,
+    context candidates, mock quick actions, and empty states.
+  - Agent Context Composer shows active folder, selected/excluded/private/
+    review-first groups, suggested prompt, and browser-permission copy fallback.
+  - Phase 0 boundaries remain web-only and mock-only with no real filesystem,
+    Git, terminal, Codex/Claude, auth, cloud, search, PDF, file editing, Tauri,
+    AI calls, database, provider, or telemetry behavior.
+  - Agent work rounds are already documented in `docs/AGENT_WORK_ROUNDS.md`
+    for Round 1 and Round 2.
+- Commands run:
+  - `npm run typecheck`
+  - `npm run lint`
+  - `npm test`
+  - `npm run build`
+- Runtime proof:
+  - Browser flow: gstack `/browse` opened `http://127.0.0.1:5173/` with HTTP
+    200; verified Home text and no console errors; opened Explorer from Home;
+    verified required preview types, unsupported preview, and empty Archive;
+    opened Project Desk from Explorer; verified the work-surface sections and
+    Agent Context Composer; clicked `Copy prompt` and saw the clipboard
+    permission fallback.
+  - Responsive proof: gstack `/browse` screenshots checked Home, Explorer, and
+    Project Desk at `1440x900` and `1024x768`.
+  - Visual proof: Explorer and Project Desk were readable with no obvious
+    clipping or overlap at both widths. Home was readable at both widths, but
+    the desktop screenshot showed a visual-balance gap where the left column
+    stretches into a large empty paper area beside the long Agent Context
+    Composer.
+  - Console proof: gstack `/browse console --errors` reported no errors on
+    Home, Explorer, and Project Desk.
+  - Database proof: `N/A` because Phase 0 has no database.
+  - Provider/dashboard proof: `N/A` because Phase 0 has no external provider.
+- Cannot verify:
+  - GitHub Actions result before the draft PR runs CI.
+  - Real Phase 1 feasibility with local folders, because Phase 0 has no Tauri
+    or filesystem integration.
+  - Real workspace usefulness against Aga's private folder.
+- Docs updated:
+  - `docs/PLAN.md`
+  - `docs/VERIFY_LOG.md`
+- Phase decision: improve concept before moving to Tauri.
+- Verdict: `IMPROVE CONCEPT BEFORE TAURI`
+
 ### 2026-06-23 — `standard` — `Task 5 Agent Context Composer Slice` — `N/A recorded before commit`
 
 - Environment: `local`
