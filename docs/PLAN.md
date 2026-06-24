@@ -33,7 +33,7 @@ longer feel like a generic AI-generated card dashboard.
       card composition.
 - [ ] Reference-matched layout foundation is documented and accepted as a hard
       gate before deeper screen redesign continues.
-- [ ] A small runtime proof demonstrates the hybrid foundation: `Company
+- [x] A small runtime proof demonstrates the hybrid foundation: `Company
       Profile.png` as primary shell/object reference, `Workflow.png` as work
       canvas reference, and `Company Profile - ai chat*.png` as composer/tray
       reference.
@@ -127,6 +127,12 @@ longer feel like a generic AI-generated card dashboard.
   instead of sitting behind large bright page cards, named Tailwind
   shell/radius/depth tokens, and reusable shell/tray/tab primitives for the
   remaining redesign tasks.
+- Task 8B Reference-Matched Layout Foundation Proof is implementation-complete:
+  `docs/UI_SYSTEM.md` records the runtime proof contract, the app exposes a
+  `Foundation Proof` top-nav surface with selected-object header, dark canvas,
+  tabs, dense panels, and composer tray placeholder, and no Phase 0 exclusions
+  or new shared UI dependencies were introduced. Aga visual acceptance remains
+  the open checkpoint before deeper screen redesign continues.
 - Dashboard UI kit PNGs exist as references only, not product assets.
 
 ## Phase 0 Decision
@@ -265,7 +271,7 @@ Notes:
 
 ### Task 8B - Reference-Matched Layout Foundation Proof
 
-- Status: planned.
+- Status: complete, pending Aga acceptance checkpoint.
 - User-visible result: Aga can judge a small live foundation proof before the
   redesign is applied across Home, Explorer, Project Desk, and Agent Context.
 - Five-line feature spec:
@@ -286,21 +292,21 @@ Notes:
   small runtime proof that demonstrates the foundation without rebuilding every
   screen.
 - Acceptance criteria:
-  - [ ] `docs/UI_SYSTEM.md` contains the reference-matched layout foundation,
+  - [x] `docs/UI_SYSTEM.md` contains the reference-matched layout foundation,
         including selected references, similarity targets, layout grammar,
         component-library stance, runtime proof contract, and review checklist.
-  - [ ] The proof uses top navigation/product chrome as the default global
+  - [x] The proof uses top navigation/product chrome as the default global
         frame.
-  - [ ] The proof makes a dark rounded workspace canvas the dominant first
+  - [x] The proof makes a dark rounded workspace canvas the dominant first
         viewport surface.
-  - [ ] The proof shows a selected-object header, compact action cluster,
+  - [x] The proof shows a selected-object header, compact action cluster,
         reference-like tab/control rhythm, dense supporting panels, and a
         preview or composer placeholder attached to the canvas.
-  - [ ] The proof is visually closer to the hybrid reference model than to a
+  - [x] The proof is visually closer to the hybrid reference model than to a
         generic dashboard shell.
-  - [ ] Shared primitives are introduced only where they serve the proof or are
+  - [x] Shared primitives are introduced only where they serve the proof or are
         immediately reusable by planned Phase 0 redesign tasks.
-  - [ ] Phase 0 mock-only exclusions remain intact.
+  - [x] Phase 0 mock-only exclusions remain intact.
 - Verification:
   - Automated: `npm run typecheck`, `npm run lint`, `npm test`,
     `npm run build`.
@@ -827,14 +833,14 @@ Notes:
 
 ### Checkpoint - After Task 8B
 
-- [ ] Hybrid reference model is documented in `docs/UI_SYSTEM.md`.
-- [ ] Runtime proof shows top nav, dark canvas, object header, tabs/controls,
+- [x] Hybrid reference model is documented in `docs/UI_SYSTEM.md`.
+- [x] Runtime proof shows top nav, dark canvas, object header, tabs/controls,
       dense panels, and preview/composer attachment.
 - [ ] Aga has accepted the proof as close enough to guide screen redesign.
-- [ ] Component extraction remains limited to the foundation proof and
+- [x] Component extraction remains limited to the foundation proof and
       immediately reused Phase 0 patterns.
-- [ ] No Phase 0 exclusions were introduced.
-- [ ] Typecheck, lint, tests, and build pass.
+- [x] No Phase 0 exclusions were introduced.
+- [x] Typecheck, lint, tests, and build pass.
 
 ### Checkpoint - After Task 10
 

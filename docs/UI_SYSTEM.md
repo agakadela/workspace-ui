@@ -202,6 +202,20 @@ The proof is acceptable only if Aga can visually compare it with the hybrid
 reference model and decide whether it is close enough before further screen
 redesign work continues.
 
+Current Task 8B runtime proof:
+
+- App surface: `Foundation Proof` in the global top navigation.
+- Feature owner: `src/features/foundation-proof/FoundationProof.tsx`.
+- Shell mount: `src/app/App.tsx`, still inside `AppShell` and the global dark
+  workspace canvas.
+- Shared primitives: no new broad primitive was added; the proof reuses
+  `AppShell`, `StatusChip`, `SurfaceTabStrip`, and `WorkspaceTray`.
+- Proof content: selected-object header, compact action cluster,
+  reference-like tab/control row, dominant dark canvas with subtle workflow-grid
+  texture, dense supporting panels, and a docked composer placeholder.
+- Review status: ready for Aga visual acceptance; the proof is not a full Home,
+  Explorer, Project Desk, or Agent Context redesign.
+
 ### Similarity Review Checklist
 
 Use this checklist before accepting the foundation proof:

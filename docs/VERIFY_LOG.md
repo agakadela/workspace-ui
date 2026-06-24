@@ -320,6 +320,44 @@ Rules:
   - `docs/VERIFY_LOG.md`
 - Verdict: `SHIP`
 
+### 2026-06-24 — `standard` — `Task 8B reference-matched layout foundation proof` — `N/A before commit`
+
+- Environment: `local`
+- Checked:
+  - `Foundation Proof` opens from the global top navigation while Home remains
+    the first screen.
+  - Runtime proof shows top nav, dark rounded canvas, selected-object header,
+    compact action cluster, tab/control rhythm, dense supporting panels, and
+    composer tray placeholder.
+  - Proof remains mock-only and does not use dashboard UI kit PNGs as product
+    assets.
+- Commands run:
+  - `npm test -- App.test.tsx` failed first because the proof nav/surface did
+    not exist yet.
+  - `npm test -- App.test.tsx`
+  - `npm run typecheck`
+  - `npm run lint`
+  - `npm test`
+  - `npm run build`
+- Runtime proof:
+  - Browser flow: gstack `/browse` opened `http://127.0.0.1:5173/`, selected
+    `Foundation Proof`, confirmed proof text for `Company Profile.png`,
+    `Workflow.png`, and `Company Profile - ai chat.png`, and captured desktop
+    and narrower-laptop screenshots at `/tmp/workspace-ui-task8b-desktop.png`
+    and `/tmp/workspace-ui-task8b-laptop.png`.
+  - Console proof: no app errors; only Vite/React development informational
+    messages.
+  - Database proof: `N/A` because Phase 0 has no database.
+  - Provider/dashboard proof: `N/A` because Phase 0 has no external provider.
+- Cannot verify:
+  - Aga visual acceptance until Aga reviews the runtime proof.
+  - GitHub Actions result before the draft PR runs CI.
+- Docs updated:
+  - `docs/UI_SYSTEM.md`
+  - `docs/PLAN.md`
+  - `docs/VERIFY_LOG.md`
+- Verdict: `SHIP`
+
 ## Entry Template
 
 ### YYYY-MM-DD — `standard | high-risk | phase close | ship` — `[feature/task/phase]` — `[commit SHA or N/A]`

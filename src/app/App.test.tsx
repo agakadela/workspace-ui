@@ -37,6 +37,33 @@ describe("App shell", () => {
     expect(screen.getByText(/phase 0 web prototype/i)).toBeInTheDocument();
   });
 
+  it("opens the reference-matched foundation proof from the shell", async () => {
+    const user = userEvent.setup();
+
+    render(<App />);
+
+    await user.click(screen.getByRole("button", { name: /foundation proof/i }));
+
+    expect(
+      screen.getByRole("heading", {
+        level: 1,
+        name: /reference foundation proof/i,
+      }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/hybrid reference model/i)).toBeInTheDocument();
+    expect(screen.getByText(/company profile\.png/i)).toBeInTheDocument();
+    expect(screen.getByText(/workflow\.png/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/company profile - ai chat/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/selected-object header/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/reference-like tabs/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/dense supporting panels/i).length).toBeGreaterThan(0);
+    expect(
+      screen.getByRole("region", { name: /composer tray placeholder/i }),
+    ).toBeInTheDocument();
+    expect(screen.getAllByText(/mock only/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/no filesystem/i).length).toBeGreaterThan(0);
+  });
+
   it("orients the builder with recent activity, next work, pinned docs, and agent context", () => {
     render(<App />);
 
