@@ -18,6 +18,10 @@ import type {
   WorkspaceExplorerModel,
 } from "../../shared/data/mockWorkspace";
 import { StatusChip } from "../../shared/ui/StatusChip";
+import {
+  SurfaceTabStrip,
+  WorkspaceTray,
+} from "../../shared/ui/WorkspacePrimitives";
 
 type ExplorerProps = {
   model: WorkspaceExplorerModel;
@@ -53,6 +57,10 @@ export function Explorer({ model, onOpenHome, onOpenProjectDesk }: ExplorerProps
   const supportedArtifacts = model.artifacts.filter(
     (artifact) => artifact.preview.kind !== "unsupported",
   );
+  const activeAreaLabel =
+    activeAreaId === "all"
+      ? "All artifacts"
+      : model.areas.find((area) => area.id === activeAreaId)?.label ?? "Area";
 
   function selectArea(areaId: string) {
     setActiveAreaId(areaId);
@@ -64,22 +72,21 @@ export function Explorer({ model, onOpenHome, onOpenProjectDesk }: ExplorerProps
   }
 
   return (
-    <main className="min-h-screen bg-ink-950 text-paper-50">
-      <div className="mx-auto flex min-h-screen max-w-[1500px] flex-col gap-4 px-4 py-4 sm:px-6 lg:px-8">
-        <header className="rounded-3xl border border-paper-100/10 bg-ink-800 p-5 shadow-panel lg:p-7">
-          <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-            <div>
-              <p className="text-sm font-semibold uppercase text-steel-100">
-                Meaning-first browser
-              </p>
-              <h1 className="mt-2 text-3xl font-semibold tracking-normal text-paper-50 md:text-5xl">
-                Visual Explorer
-              </h1>
-              <p className="mt-3 max-w-3xl text-sm leading-6 text-paper-100/75">
-                {model.summary}
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-2">
+    <section className="flex flex-col gap-4">
+      <header className="rounded-shell border border-paper-100/10 bg-canvas-800 p-5 shadow-panel lg:p-7">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase text-steel-100">
+              Meaning-first browser
+            </p>
+            <h1 className="mt-2 text-3xl font-semibold tracking-normal text-paper-50 md:text-5xl">
+              Visual Explorer
+            </h1>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-paper-100/75">
+              {model.summary}
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
               <button
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-paper-100/15 bg-paper-100/10 px-4 py-2 text-sm font-semibold text-paper-50"
                 type="button"
@@ -100,11 +107,24 @@ export function Explorer({ model, onOpenHome, onOpenProjectDesk }: ExplorerProps
               ) : null}
               <StatusChip label="Mock only" tone="mock" />
               <StatusChip label="No filesystem access" tone="mock" />
-            </div>
           </div>
-        </header>
+        </div>
+        <SurfaceTabStrip
+          label="Explorer inspection sections"
+          className="mt-5"
+          items={[
+            {
+              label: activeAreaLabel,
+              count: visibleArtifacts.length,
+              isActive: true,
+            },
+            { label: "Previews", count: supportedArtifacts.length },
+            { label: "Areas", count: model.areas.length },
+          ]}
+        />
+      </header>
 
-        <section className="rounded-3xl border border-paper-100/10 bg-paper-50 p-4 text-ink-950 shadow-panel sm:p-5 lg:p-6">
+      <section className="rounded-shell border border-paper-100/10 bg-paper-50 p-4 text-ink-950 shadow-panel sm:p-5 lg:p-6">
           <div className="grid gap-4 xl:grid-cols-[280px_minmax(0,1fr)_420px]">
             <aside
               className="rounded-2xl border border-ink-950/10 bg-ink-800 p-4 text-paper-50"
@@ -196,8 +216,7 @@ export function Explorer({ model, onOpenHome, onOpenProjectDesk }: ExplorerProps
             />
           </div>
         </section>
-      </div>
-    </main>
+    </section>
   );
 }
 
@@ -329,10 +348,7 @@ function PreviewPane({
   supportedArtifacts: WorkspaceArtifact[];
 }) {
   return (
-    <aside
-      className="rounded-2xl border border-ink-950/10 bg-ink-950 p-4 text-paper-50"
-      aria-labelledby="preview-pane-heading"
-    >
+    <WorkspaceTray labelledBy="preview-pane-heading" className="p-4">
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-sm font-medium text-paper-100/65">
@@ -367,7 +383,7 @@ function PreviewPane({
           ))}
         </div>
       )}
-    </aside>
+    </WorkspaceTray>
   );
 }
 

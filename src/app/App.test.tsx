@@ -5,6 +5,24 @@ import { vi } from "vitest";
 import { App } from "./App";
 
 describe("App shell", () => {
+  it("renders the redesigned top navigation shell and dark workspace canvas", () => {
+    render(<App />);
+
+    expect(screen.getByLabelText(/workspace product chrome/i)).toBeInTheDocument();
+    expect(
+      screen.getByRole("navigation", { name: /primary workspace views/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /^home$/i })).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
+    expect(
+      screen.getByRole("region", { name: /dark workspace canvas/i }),
+    ).toBeInTheDocument();
+    expect(screen.getAllByText(/mock only/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/no filesystem/i).length).toBeGreaterThan(0);
+  });
+
   it("renders Home as the first screen of the workspace shell", () => {
     render(<App />);
 
@@ -38,7 +56,7 @@ describe("App shell", () => {
     expect(screen.getAllByText(/safe for agent/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/review first/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/private: excluded/i).length).toBeGreaterThan(0);
-    expect(screen.getByText(/mock only/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/mock only/i).length).toBeGreaterThan(0);
   });
 
   it("shows the mock Agent Context composer and fallback copy state", async () => {

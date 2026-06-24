@@ -28,7 +28,7 @@ longer feel like a generic AI-generated card dashboard.
 - [x] Reference audit identifies the specific dashboard UI kit patterns to
       borrow for shell, navigation, object surfaces, tabs, panels, Composer, and
       Preview.
-- [ ] The app shell moves toward top navigation, product chrome, and a dominant
+- [x] The app shell moves toward top navigation, product chrome, and a dominant
       dark workspace canvas instead of the current left rail plus white page
       card composition.
 - [ ] Home is redesigned as a first-screen workspace cockpit, not an
@@ -109,6 +109,10 @@ longer feel like a generic AI-generated card dashboard.
   now maps the dashboard UI kit references to concrete redesign targets for
   shell, navigation, object surfaces, tabs, panels, Preview, Composer, and each
   core screen.
+- Task 8 Redesign Shell, Tokens, And Layout Primitives is complete: the app now
+  uses shared top navigation/product chrome, a dominant dark workspace canvas,
+  named Tailwind shell/radius/depth tokens, and reusable shell/tray/tab
+  primitives for the remaining redesign tasks.
 - Dashboard UI kit PNGs exist as references only, not product assets.
 
 ## Phase 0 Decision
@@ -193,7 +197,7 @@ Notes:
 
 ### Task 8 - Redesign Shell, Tokens, And Layout Primitives
 
-- Status: planned.
+- Status: complete.
 - User-visible result: the app has a stronger product shell and reusable visual
   primitives that can carry the redesigned screens.
 - Description: Replace the default scaffold feel with a reference-backed shell:
@@ -202,15 +206,15 @@ Notes:
   primitives for object surfaces, tab strips, preview/composer trays, and status
   controls.
 - Acceptance criteria:
-  - [ ] The primary shell uses top navigation/product chrome rather than the
+  - [x] The primary shell uses top navigation/product chrome rather than the
         current left rail as the default app frame.
-  - [ ] A dark workspace canvas becomes the dominant screen surface.
-  - [ ] Shared primitives exist only where they reduce duplication across the
+  - [x] A dark workspace canvas becomes the dominant screen surface.
+  - [x] Shared primitives exist only where they reduce duplication across the
         redesign.
-  - [ ] Tailwind theme tokens stay named in `src/index.css`; raw hex values are
+  - [x] Tailwind theme tokens stay named in `src/index.css`; raw hex values are
         not scattered through feature components.
-  - [ ] Focus states, buttons, tabs, chips, and icon controls remain accessible.
-  - [ ] `docs/UI_SYSTEM.md` reflects the new shell/primitives.
+  - [x] Focus states, buttons, tabs, chips, and icon controls remain accessible.
+  - [x] `docs/UI_SYSTEM.md` reflects the new shell/primitives.
 - Verification:
   - Automated: `npm run typecheck`, `npm run lint`, `npm test`,
     `npm run build`.
@@ -722,10 +726,10 @@ Notes:
 
 ### Checkpoint - After Task 8
 
-- [ ] New top-nav/dark-canvas shell is visible in browser.
-- [ ] Shared primitives are justified by repeated use.
-- [ ] No Phase 0 exclusions were introduced.
-- [ ] Typecheck, lint, tests, and build pass.
+- [x] New top-nav/dark-canvas shell is visible in browser.
+- [x] Shared primitives are justified by repeated use.
+- [x] No Phase 0 exclusions were introduced.
+- [x] Typecheck, lint, tests, and build pass.
 
 ### Checkpoint - After Task 10
 

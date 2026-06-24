@@ -17,6 +17,7 @@ import type {
   WorkspaceProjectDeskModel,
 } from "../../shared/data/mockWorkspace";
 import { StatusChip } from "../../shared/ui/StatusChip";
+import { SurfaceTabStrip } from "../../shared/ui/WorkspacePrimitives";
 
 type ProjectDeskProps = {
   model: WorkspaceProjectDeskModel;
@@ -32,25 +33,24 @@ export function ProjectDesk({
   onOpenExplorer,
 }: ProjectDeskProps) {
   return (
-    <main className="min-h-screen bg-ink-950 text-paper-50">
-      <div className="mx-auto flex min-h-screen max-w-[1500px] flex-col gap-4 px-4 py-4 sm:px-6 lg:px-8">
-        <header className="rounded-3xl border border-paper-100/10 bg-ink-800 p-5 shadow-panel lg:p-7">
-          <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-            <div>
-              <p className="text-sm font-semibold uppercase text-steel-100">
-                {model.project.eyebrow}
-              </p>
-              <h1 className="mt-2 text-3xl font-semibold tracking-normal text-paper-50 md:text-5xl">
-                {model.project.name}
-              </h1>
-              <p className="mt-3 max-w-3xl text-sm leading-6 text-paper-100/75">
-                {model.project.summary}
-              </p>
-              <p className="mt-4 break-words rounded-xl border border-paper-100/10 bg-paper-100/10 px-3 py-2 font-mono text-xs text-paper-100">
-                {model.project.activeFolder}
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-2">
+    <section className="flex flex-col gap-4">
+      <header className="rounded-shell border border-paper-100/10 bg-canvas-800 p-5 shadow-panel lg:p-7">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase text-steel-100">
+              {model.project.eyebrow}
+            </p>
+            <h1 className="mt-2 text-3xl font-semibold tracking-normal text-paper-50 md:text-5xl">
+              {model.project.name}
+            </h1>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-paper-100/75">
+              {model.project.summary}
+            </p>
+            <p className="mt-4 break-words rounded-xl border border-paper-100/10 bg-paper-100/10 px-3 py-2 font-mono text-xs text-paper-100">
+              {model.project.activeFolder}
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
               <button
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-paper-100/15 bg-paper-100/10 px-4 py-2 text-sm font-semibold text-paper-50"
                 type="button"
@@ -69,11 +69,20 @@ export function ProjectDesk({
               </button>
               <StatusChip label={model.project.statusLabel} />
               <StatusChip label={model.project.safetyLabel} />
-            </div>
           </div>
-        </header>
+        </div>
+        <SurfaceTabStrip
+          label="Project desk surface sections"
+          className="mt-5"
+          items={[
+            { label: "Desk", count: model.nextTasks.length, isActive: true },
+            { label: "Docs", count: model.importantDocs.length },
+            { label: "Context", count: model.contextCandidates.length },
+          ]}
+        />
+      </header>
 
-        <section className="rounded-3xl border border-paper-100/10 bg-paper-50 p-4 text-ink-950 shadow-panel sm:p-5 lg:p-6">
+      <section className="rounded-shell border border-paper-100/10 bg-paper-50 p-4 text-ink-950 shadow-panel sm:p-5 lg:p-6">
           <div className="grid gap-4 xl:grid-cols-[0.9fr_1.1fr]">
             <section
               aria-labelledby="project-status-heading"
@@ -374,8 +383,7 @@ export function ProjectDesk({
             <AgentContextComposer model={agentContext} layout="wide" />
           </div>
         </section>
-      </div>
-    </main>
+    </section>
   );
 }
 

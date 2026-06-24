@@ -181,11 +181,16 @@ Current tokens:
 
 | Token | Use |
 |---|---|
+| `canvas-950` | outer app background and sticky top chrome |
+| `canvas-900` | dominant dark workspace canvas |
+| `canvas-800` | raised dark object headers and product surfaces |
 | `ink-950` | primary dark shell, deepest text on light surfaces |
+| `ink-900` | deeper neutral text/surface support |
 | `ink-800` | raised dark panels, secondary chrome |
 | `ink-600` | muted text, secondary metadata |
 | `paper-50` | high-contrast text/control fill on dark surfaces |
 | `paper-100` | selected tabs, pale panels, preview interiors |
+| `paper-200` | quiet paper border/support tone |
 | `steel-700` | focus, info, preview/link accent |
 | `steel-100` | quiet blue action surfaces |
 | `moss-700` | safe/complete/context-approved status |
@@ -283,6 +288,8 @@ Depth:
 - Prefer border plus subtle tonal contrast.
 - Use shadow only for raised panels, overlays, and composer trays.
 - Do not stack multiple heavy shadows.
+- Task 8 added named Tailwind tokens: `rounded-control`, `rounded-panel`,
+  `rounded-shell`, `shadow-float`, and `shadow-shell`.
 
 ## Navigation
 
@@ -313,6 +320,14 @@ Rules:
 Use a dark, quiet shell with clear active location. Keep global controls sparse.
 Do not add account/auth concepts beyond public-safe mock UI.
 
+Current Task 8 implementation:
+
+- `src/shared/ui/AppShell.tsx` owns global top navigation, product chrome,
+  mock-only status controls, and the labeled dark workspace canvas.
+- Feature views no longer own the global left rail or full-page frame.
+- Top navigation is a compact button group with `aria-current="page"` on the
+  active view.
+
 Expected elements:
 
 - product/workspace mark or text,
@@ -337,6 +352,12 @@ Use for:
 The dominant dark surface that holds the current object, preview, composer, or
 workflow. This is the main redesign primitive and should feel closer to the
 reference kit's product surfaces than to a generic web page.
+
+Current Task 8 implementation:
+
+- `AppShell` renders a `Dark workspace canvas` landmark around each screen.
+- Screen-level object headers use `canvas-800`; light paper panels now sit
+  inside the canvas instead of defining the whole page.
 
 Use for:
 
@@ -383,6 +404,11 @@ Required content:
 
 Use for markdown, HTML mockup, image/card, and code-summary previews.
 
+Current Task 8 implementation:
+
+- Preview and Composer surfaces share `WorkspaceTray` from
+  `src/shared/ui/WorkspacePrimitives.tsx`.
+
 Rules:
 
 - Preview content must be readable, not a decorative thumbnail only.
@@ -410,6 +436,13 @@ Rules:
 
 Inspired by the reference tab rows. Use for switching related views inside the
 same object or surface.
+
+Current Task 8 implementation:
+
+- `SurfaceTabStrip` provides a compact metadata strip for screen sections and
+  counts.
+- Until a strip actually switches content, inactive items render as labeled
+  metadata rather than pretending to be clickable tabs.
 
 Rules:
 
@@ -599,6 +632,8 @@ Rules:
 - Feature-specific UI starts under `src/features/<feature>/`.
 - Reusable primitives go in `src/shared/ui/` only after reuse is real or clearly
   imminent across planned Phase 0 screens.
+- Current shared primitives are `AppShell`, `StatusChip`, `WorkspaceTray`, and
+  `SurfaceTabStrip`.
 - Mock data stays in `src/shared/data/` or behind `src/shared/platform/`.
 - Do not add Radix/shadcn or other UI dependencies without asking Aga first.
 - Do not change Tailwind/tooling behavior without `source-driven-development`.
