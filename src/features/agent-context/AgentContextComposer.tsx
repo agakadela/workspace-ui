@@ -14,6 +14,7 @@ import type {
   WorkspaceAgentContextModel,
 } from "../../shared/data/mockWorkspace";
 import { StatusChip, type StatusTone } from "../../shared/ui/StatusChip";
+import { WorkspaceTray } from "../../shared/ui/WorkspacePrimitives";
 
 type AgentContextComposerProps = {
   model: WorkspaceAgentContextModel;
@@ -81,10 +82,9 @@ export function AgentContextComposer({
   ];
 
   return (
-    <section
+    <WorkspaceTray
       id="agent-context-composer"
-      aria-labelledby="agent-context-composer-heading"
-      className="rounded-2xl border border-ink-950/10 bg-ink-950 p-5 text-paper-50"
+      labelledBy="agent-context-composer-heading"
     >
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div>
@@ -170,7 +170,7 @@ export function AgentContextComposer({
             : null}
         </p>
       </div>
-    </section>
+    </WorkspaceTray>
   );
 }
 

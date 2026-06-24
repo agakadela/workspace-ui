@@ -4,8 +4,6 @@ import {
   Clock3,
   Compass,
   FileText,
-  FolderKanban,
-  Home as HomeIcon,
   ListChecks,
   PanelRightOpen,
   Pin,
@@ -17,6 +15,7 @@ import type {
   WorkspaceHomeModel,
 } from "../../shared/data/mockWorkspace";
 import { StatusChip } from "../../shared/ui/StatusChip";
+import { SurfaceTabStrip } from "../../shared/ui/WorkspacePrimitives";
 
 type HomeProps = {
   model: WorkspaceHomeModel;
@@ -32,110 +31,75 @@ export function Home({
   onOpenProjectDesk,
 }: HomeProps) {
   return (
-    <main className="min-h-screen bg-ink-950 text-paper-50">
-      <div className="flex min-h-screen">
-        <aside
-          aria-label="Workspace sections"
-          className="hidden w-64 shrink-0 border-r border-paper-100/10 bg-ink-950 px-5 py-6 text-paper-50 lg:block"
-        >
-          <div className="flex items-center gap-3">
-            <span className="flex size-10 items-center justify-center rounded-xl bg-paper-50 text-ink-950">
-              <FolderKanban aria-hidden="true" size={20} />
-            </span>
-            <div>
-              <p className="text-sm font-semibold leading-tight">workspace-ui</p>
-              <p className="text-xs text-paper-100/70">Mock workspace</p>
-            </div>
+    <section id="home" className="flex flex-col gap-5">
+      <header className="rounded-shell border border-paper-100/10 bg-canvas-800 px-5 py-5 shadow-panel lg:px-7">
+        <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase text-steel-100">
+              Phase 0 web prototype
+            </p>
+            <h1 className="mt-2 text-3xl font-semibold tracking-normal text-paper-50 md:text-5xl">
+              Workspace Home
+            </h1>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-paper-100/75">
+              {model.continueItem.area}
+            </p>
           </div>
-
-          <nav className="mt-10 space-y-2" aria-label="Primary">
-            <a
-              className="flex items-center gap-3 rounded-lg bg-paper-50 px-3 py-2 text-sm font-medium text-ink-950"
-              href="#home"
-            >
-              <HomeIcon aria-hidden="true" size={18} />
-              Home
-            </a>
-            {onOpenExplorer ? (
-              <button
-                className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm font-medium text-paper-100/75 hover:bg-paper-100/10 hover:text-paper-50"
-                type="button"
-                onClick={onOpenExplorer}
-              >
-                <Compass aria-hidden="true" size={18} />
-                Explorer
-              </button>
-            ) : null}
-            {onOpenProjectDesk ? (
-              <button
-                className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm font-medium text-paper-100/75 hover:bg-paper-100/10 hover:text-paper-50"
-                type="button"
-                onClick={onOpenProjectDesk}
-              >
-                <PanelRightOpen aria-hidden="true" size={18} />
-                Project Desk
-              </button>
-            ) : null}
-          </nav>
-        </aside>
-
-        <section id="home" className="flex-1 px-4 py-4 sm:px-6 lg:px-8">
-          <div className="mx-auto flex max-w-7xl flex-col gap-5">
-            <header className="flex flex-col gap-4 rounded-3xl border border-paper-100/10 bg-ink-800 px-5 py-5 shadow-panel md:flex-row md:items-center md:justify-between lg:px-7">
-              <div>
-                <p className="text-sm font-semibold uppercase text-steel-100">
-                  Phase 0 web prototype
-                </p>
-                <h1 className="mt-2 text-3xl font-semibold tracking-normal text-paper-50 md:text-5xl">
-                  Workspace Home
-                </h1>
-                <p className="mt-3 max-w-2xl text-sm leading-6 text-paper-100/75">
-                  A human-readable first screen for a fictional local workspace:
-                  where to resume, what changed, what matters next, and what
-                  context is safe to prepare.
-                </p>
-              </div>
-              <div className="max-w-sm rounded-2xl border border-paper-100/15 bg-paper-100/10 px-4 py-3 text-sm text-paper-100">
-                <div className="flex flex-wrap gap-2">
-                  <StatusChip label="Web prototype" tone="mock" />
-                  <StatusChip label="Fictional data" tone="mock" />
+          <div className="max-w-sm rounded-panel border border-paper-100/10 bg-paper-100/5 px-4 py-3 text-sm text-paper-100">
+            <div className="flex flex-wrap gap-2">
+              <StatusChip label="Web prototype" tone="mock" />
+              <StatusChip label="Fictional data" tone="mock" />
+            </div>
+            <dl className="mt-3 grid gap-2 text-xs leading-5 text-paper-100/70">
+              {model.shellStatus.map((item) => (
+                <div key={item.label} className="grid gap-1 sm:grid-cols-[88px_1fr]">
+                  <dt className="font-semibold text-paper-50">{item.label}</dt>
+                  <dd>{item.value}</dd>
                 </div>
-                <p className="mt-3 text-paper-100/75">
-                  No filesystem, Git, terminal, Codex, auth, cloud, search, or
-                  Tauri behavior is active.
-                </p>
-              </div>
-            </header>
+              ))}
+            </dl>
+          </div>
+        </div>
+        <SurfaceTabStrip
+          label="Home surface sections"
+          className="mt-5"
+          items={[
+            { label: "Cockpit", count: "Home", isActive: true },
+            { label: "Context", count: agentContext.selectedFiles.length },
+            { label: "Pinned", count: model.pinnedDocs.length },
+          ]}
+        />
+      </header>
 
-            <div className="rounded-3xl border border-paper-100/10 bg-paper-50 p-4 text-ink-950 shadow-panel sm:p-5 lg:p-6">
-              <div className="grid gap-4 xl:grid-cols-[1.25fr_0.75fr]">
+      <div className="rounded-shell border border-paper-100/10 bg-canvas-950/55 p-4 text-paper-50 shadow-panel sm:p-5 lg:p-6">
+        <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_260px]">
                 <section
                   aria-labelledby="continue-heading"
-                  className="rounded-2xl border border-ink-950/10 bg-white p-5"
+                  className="rounded-panel border border-paper-100/10 bg-canvas-800 p-5"
                 >
                   <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
                     <div>
-                      <p className="text-sm font-medium text-ink-600">
-                        Continue with the active workspace
+                      <p className="text-sm font-medium text-paper-100/65">
+                        Active workspace object
                       </p>
                       <h2
                         id="continue-heading"
-                        className="mt-2 text-2xl font-semibold tracking-normal text-ink-950"
+                        className="mt-2 text-2xl font-semibold tracking-normal text-paper-50"
                       >
                         Continue
                       </h2>
-                      <h3 className="mt-4 max-w-2xl text-xl font-semibold text-ink-950">
+                      <h3 className="mt-4 max-w-2xl text-xl font-semibold text-paper-50">
                         {model.continueItem.title}
                       </h3>
-                      <p className="mt-3 max-w-2xl text-base leading-7 text-ink-600">
+                      <p className="mt-3 max-w-2xl rounded-panel border border-paper-100/10 bg-paper-50 p-4 text-sm leading-6 text-ink-600">
                         {model.continueItem.summary}
                       </p>
-                      <p className="mt-4 text-sm font-medium text-ink-600">
+                      <p className="mt-4 text-sm font-medium text-paper-100/65">
                         {model.continueItem.area}
                       </p>
                     </div>
                     <a
-                      className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-lg bg-ink-950 px-4 py-2 text-sm font-semibold text-paper-50"
+                      className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-control bg-paper-50 px-4 py-2 text-sm font-semibold text-ink-950"
                       href="#agent-context-composer"
                     >
                       {model.continueItem.actionLabel}
@@ -147,7 +111,7 @@ export function Home({
                     <StatusChip label={model.continueItem.safetyLabel} />
                     {onOpenExplorer ? (
                       <button
-                        className="inline-flex min-h-9 items-center justify-center gap-2 rounded-lg border border-ink-950/10 bg-steel-100 px-3 py-1.5 text-sm font-semibold text-steel-700"
+                        className="inline-flex min-h-9 items-center justify-center gap-2 rounded-control border border-steel-700/25 bg-steel-100 px-3 py-1.5 text-sm font-semibold text-steel-700"
                         type="button"
                         onClick={onOpenExplorer}
                       >
@@ -157,7 +121,7 @@ export function Home({
                     ) : null}
                     {onOpenProjectDesk ? (
                       <button
-                        className="inline-flex min-h-9 items-center justify-center gap-2 rounded-lg border border-ink-950/10 bg-moss-100 px-3 py-1.5 text-sm font-semibold text-moss-700"
+                        className="inline-flex min-h-9 items-center justify-center gap-2 rounded-control border border-moss-700/25 bg-moss-100 px-3 py-1.5 text-sm font-semibold text-moss-700"
                         type="button"
                         onClick={onOpenProjectDesk}
                       >
@@ -170,24 +134,24 @@ export function Home({
 
                 <section
                   aria-labelledby="status-heading"
-                  className="rounded-2xl border border-ink-950/10 bg-paper-100 p-5"
+                  className="self-start rounded-panel border border-paper-100/10 bg-paper-100/5 p-4"
                 >
                   <h2
                     id="status-heading"
-                    className="text-base font-semibold text-ink-950"
+                    className="text-sm font-semibold text-paper-50"
                   >
                     Workspace Guardrails
                   </h2>
-                  <ul className="mt-4 space-y-3 text-sm text-ink-600">
+                  <ul className="mt-3 space-y-2 text-xs leading-5 text-paper-100/70">
                     {model.shellStatus.map((item) => (
                       <li key={item.label} className="flex gap-3">
                         <CircleCheck
-                          className="mt-0.5 shrink-0 text-moss-700"
+                          className="mt-0.5 shrink-0 text-moss-100"
                           aria-hidden="true"
-                          size={18}
+                          size={14}
                         />
                         <span>
-                          <span className="font-medium text-ink-950">
+                          <span className="font-medium text-paper-50">
                             {item.label}:
                           </span>{" "}
                           {item.value}
@@ -201,7 +165,7 @@ export function Home({
               <div className="mt-4 grid gap-4 xl:grid-cols-[0.95fr_1.05fr]">
                 <section
                   aria-labelledby="recent-activity-heading"
-                  className="rounded-2xl border border-ink-950/10 bg-ink-800 p-5 text-paper-50"
+                  className="rounded-panel border border-paper-100/10 bg-ink-800 p-5 text-paper-50"
                 >
                   <div className="flex items-center justify-between gap-4">
                     <div>
@@ -247,19 +211,19 @@ export function Home({
 
                 <section
                   aria-labelledby="next-up-heading"
-                  className="rounded-2xl border border-ink-950/10 bg-white p-5"
+                  className="rounded-panel border border-paper-100/10 bg-canvas-800 p-5"
                 >
                   <div className="flex items-center gap-3">
                     <span className="flex size-10 items-center justify-center rounded-xl bg-steel-100 text-steel-700">
                       <ListChecks aria-hidden="true" size={20} />
                     </span>
                     <div>
-                      <p className="text-sm font-medium text-ink-600">
+                      <p className="text-sm font-medium text-paper-100/65">
                         What matters now
                       </p>
                       <h2
                         id="next-up-heading"
-                        className="text-xl font-semibold text-ink-950"
+                        className="text-xl font-semibold text-paper-50"
                       >
                         Next Up
                       </h2>
@@ -269,7 +233,7 @@ export function Home({
                     {model.nextTasks.map((task) => (
                       <li
                         key={task.id}
-                        className="rounded-xl border border-ink-950/10 bg-paper-50 p-4"
+                        className="rounded-xl border border-paper-100/10 bg-paper-50 p-4 text-ink-950"
                       >
                         <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
                           <div>
@@ -294,19 +258,19 @@ export function Home({
               <div className="mt-4 grid gap-4 xl:grid-cols-[0.9fr_1.1fr]">
                 <section
                   aria-labelledby="pinned-docs-heading"
-                  className="rounded-2xl border border-ink-950/10 bg-white p-5"
+                  className="rounded-panel border border-paper-100/10 bg-canvas-800 p-5"
                 >
                   <div className="flex items-center gap-3">
                     <span className="flex size-10 items-center justify-center rounded-xl bg-moss-100 text-moss-700">
                       <Pin aria-hidden="true" size={20} />
                     </span>
                     <div>
-                      <p className="text-sm font-medium text-ink-600">
+                      <p className="text-sm font-medium text-paper-100/65">
                         Which docs matter
                       </p>
                       <h2
                         id="pinned-docs-heading"
-                        className="text-xl font-semibold text-ink-950"
+                        className="text-xl font-semibold text-paper-50"
                       >
                         Pinned Docs
                       </h2>
@@ -316,7 +280,7 @@ export function Home({
                     {model.pinnedDocs.map((doc) => (
                       <article
                         key={doc.id}
-                        className="rounded-xl border border-ink-950/10 bg-paper-50 p-4"
+                        className="rounded-xl border border-paper-100/10 bg-paper-50 p-4 text-ink-950"
                       >
                         <div className="flex items-start gap-3">
                           <FileText
@@ -347,10 +311,7 @@ export function Home({
 
                 <AgentContextComposer model={agentContext} />
               </div>
-            </div>
-          </div>
-        </section>
       </div>
-    </main>
+    </section>
   );
 }

@@ -18,6 +18,10 @@ import type {
   WorkspaceExplorerModel,
 } from "../../shared/data/mockWorkspace";
 import { StatusChip } from "../../shared/ui/StatusChip";
+import {
+  SurfaceTabStrip,
+  WorkspaceTray,
+} from "../../shared/ui/WorkspacePrimitives";
 
 type ExplorerProps = {
   model: WorkspaceExplorerModel;
@@ -53,6 +57,10 @@ export function Explorer({ model, onOpenHome, onOpenProjectDesk }: ExplorerProps
   const supportedArtifacts = model.artifacts.filter(
     (artifact) => artifact.preview.kind !== "unsupported",
   );
+  const activeAreaLabel =
+    activeAreaId === "all"
+      ? "All artifacts"
+      : model.areas.find((area) => area.id === activeAreaId)?.label ?? "Area";
 
   function selectArea(areaId: string) {
     setActiveAreaId(areaId);
@@ -64,22 +72,21 @@ export function Explorer({ model, onOpenHome, onOpenProjectDesk }: ExplorerProps
   }
 
   return (
-    <main className="min-h-screen bg-ink-950 text-paper-50">
-      <div className="mx-auto flex min-h-screen max-w-[1500px] flex-col gap-4 px-4 py-4 sm:px-6 lg:px-8">
-        <header className="rounded-3xl border border-paper-100/10 bg-ink-800 p-5 shadow-panel lg:p-7">
-          <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-            <div>
-              <p className="text-sm font-semibold uppercase text-steel-100">
-                Meaning-first browser
-              </p>
-              <h1 className="mt-2 text-3xl font-semibold tracking-normal text-paper-50 md:text-5xl">
-                Visual Explorer
-              </h1>
-              <p className="mt-3 max-w-3xl text-sm leading-6 text-paper-100/75">
-                {model.summary}
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-2">
+    <section className="flex flex-col gap-4">
+      <header className="rounded-shell border border-paper-100/10 bg-canvas-800 p-5 shadow-panel lg:p-7">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase text-steel-100">
+              Meaning-first browser
+            </p>
+            <h1 className="mt-2 text-3xl font-semibold tracking-normal text-paper-50 md:text-5xl">
+              Visual Explorer
+            </h1>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-paper-100/75">
+              {model.summary}
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
               <button
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-paper-100/15 bg-paper-100/10 px-4 py-2 text-sm font-semibold text-paper-50"
                 type="button"
@@ -100,14 +107,27 @@ export function Explorer({ model, onOpenHome, onOpenProjectDesk }: ExplorerProps
               ) : null}
               <StatusChip label="Mock only" tone="mock" />
               <StatusChip label="No filesystem access" tone="mock" />
-            </div>
           </div>
-        </header>
+        </div>
+        <SurfaceTabStrip
+          label="Explorer inspection sections"
+          className="mt-5"
+          items={[
+            {
+              label: activeAreaLabel,
+              count: visibleArtifacts.length,
+              isActive: true,
+            },
+            { label: "Previews", count: supportedArtifacts.length },
+            { label: "Areas", count: model.areas.length },
+          ]}
+        />
+      </header>
 
-        <section className="rounded-3xl border border-paper-100/10 bg-paper-50 p-4 text-ink-950 shadow-panel sm:p-5 lg:p-6">
+      <section className="rounded-shell border border-paper-100/10 bg-canvas-950/55 p-4 text-paper-50 shadow-panel sm:p-5 lg:p-6">
           <div className="grid gap-4 xl:grid-cols-[280px_minmax(0,1fr)_420px]">
             <aside
-              className="rounded-2xl border border-ink-950/10 bg-ink-800 p-4 text-paper-50"
+              className="rounded-panel border border-paper-100/10 bg-ink-800 p-4 text-paper-50"
               aria-label="Workspace areas"
             >
               <div className="flex items-center gap-3">
@@ -150,17 +170,17 @@ export function Explorer({ model, onOpenHome, onOpenProjectDesk }: ExplorerProps
             </aside>
 
             <section
-              className="rounded-2xl border border-ink-950/10 bg-white p-4"
+              className="rounded-panel border border-paper-100/10 bg-canvas-800 p-4"
               aria-labelledby="artifact-list-heading"
             >
               <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
                 <div>
-                  <p className="text-sm font-medium text-ink-600">
+                  <p className="text-sm font-medium text-paper-100/65">
                     Artifact cards
                   </p>
                   <h2
                     id="artifact-list-heading"
-                    className="mt-1 text-xl font-semibold text-ink-950"
+                    className="mt-1 text-xl font-semibold text-paper-50"
                   >
                     Browse By Meaning
                   </h2>
@@ -192,12 +212,10 @@ export function Explorer({ model, onOpenHome, onOpenProjectDesk }: ExplorerProps
 
             <PreviewPane
               selectedArtifact={selectedArtifact}
-              supportedArtifacts={supportedArtifacts}
             />
           </div>
         </section>
-      </div>
-    </main>
+    </section>
   );
 }
 
@@ -256,32 +274,43 @@ function ArtifactCard({
   onSelect: () => void;
 }) {
   const PreviewIcon = previewIcons[artifact.preview.kind];
+  const mutedText = isSelected ? "text-ink-600" : "text-paper-100/65";
+  const headingText = isSelected ? "text-ink-950" : "text-paper-50";
+  const iconSurface = isSelected
+    ? "bg-paper-50 text-steel-700"
+    : "bg-paper-100/10 text-steel-100";
 
   return (
     <article
       data-testid="artifact-card"
-      className={`rounded-xl border p-4 ${
+      className={`rounded-xl border p-4 transition ${
         isSelected
-          ? "border-steel-700/35 bg-steel-100"
-          : "border-ink-950/10 bg-paper-50"
+          ? "border-steel-700/35 bg-paper-50 text-ink-950"
+          : "border-paper-100/10 bg-paper-100/5 text-paper-50"
       }`}
     >
       <div className="flex items-start gap-3">
-        <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white text-steel-700">
+        <span
+          className={`flex size-10 shrink-0 items-center justify-center rounded-lg ${iconSurface}`}
+        >
           <PreviewIcon aria-hidden="true" size={20} />
         </span>
         <div className="min-w-0 flex-1">
           <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
             <div>
-              <p className="text-xs font-semibold uppercase text-ink-600">
+              <p className={`text-xs font-semibold uppercase ${mutedText}`}>
                 {artifact.typeLabel}
               </p>
-              <h3 className="mt-1 text-lg font-semibold text-ink-950">
+              <h3 className={`mt-1 text-lg font-semibold ${headingText}`}>
                 {artifact.title}
               </h3>
             </div>
             <button
-              className="inline-flex min-h-9 items-center justify-center gap-2 rounded-lg border border-ink-950/10 bg-white px-3 py-1.5 text-sm font-semibold text-ink-950"
+              className={`inline-flex min-h-9 items-center justify-center gap-2 rounded-control border px-3 py-1.5 text-sm font-semibold ${
+                isSelected
+                  ? "border-ink-950/10 bg-ink-950 text-paper-50"
+                  : "border-paper-100/10 bg-paper-100/10 text-paper-50"
+              }`}
               type="button"
               aria-label={`View ${artifact.title}`}
               aria-pressed={isSelected}
@@ -292,22 +321,26 @@ function ArtifactCard({
             </button>
           </div>
 
-          <dl className="mt-4 grid gap-2 text-sm text-ink-600">
+          <dl className={`mt-4 grid gap-2 text-sm ${mutedText}`}>
             <div>
-              <dt className="inline font-semibold text-ink-950">Role:</dt>{" "}
+              <dt className={`inline font-semibold ${headingText}`}>Role:</dt>{" "}
               <dd className="inline">{artifact.role}</dd>
             </div>
             <div>
-              <dt className="inline font-semibold text-ink-950">Activity:</dt>{" "}
+              <dt className={`inline font-semibold ${headingText}`}>
+                Activity:
+              </dt>{" "}
               <dd className="inline">{artifact.activityLabel}</dd>
             </div>
             <div>
-              <dt className="inline font-semibold text-ink-950">Preview:</dt>{" "}
+              <dt className={`inline font-semibold ${headingText}`}>
+                Preview:
+              </dt>{" "}
               <dd className="inline">{artifact.previewAvailability}</dd>
             </div>
           </dl>
 
-          <p className="mt-3 break-words font-mono text-xs text-ink-600">
+          <p className={`mt-3 break-words font-mono text-xs ${mutedText}`}>
             {artifact.path}
           </p>
 
@@ -323,51 +356,46 @@ function ArtifactCard({
 
 function PreviewPane({
   selectedArtifact,
-  supportedArtifacts,
 }: {
   selectedArtifact?: WorkspaceArtifact;
-  supportedArtifacts: WorkspaceArtifact[];
 }) {
   return (
-    <aside
-      className="rounded-2xl border border-ink-950/10 bg-ink-950 p-4 text-paper-50"
-      aria-labelledby="preview-pane-heading"
-    >
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <p className="text-sm font-medium text-paper-100/65">
-            Preview Pane
-          </p>
-          <h2
-            id="preview-pane-heading"
-            className="mt-1 text-xl font-semibold text-paper-50"
-          >
-            Readable Previews
-          </h2>
+    <WorkspaceTray labelledBy="preview-pane-heading" className="p-4">
+      <div data-testid="preview-pane">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <p className="text-sm font-medium text-paper-100/65">
+              Selected object
+            </p>
+            <h2
+              id="preview-pane-heading"
+              className="mt-1 text-xl font-semibold text-paper-50"
+            >
+              Preview Pane
+            </h2>
+          </div>
+          <Layers3 aria-hidden="true" className="text-steel-100" size={24} />
         </div>
-        <Layers3 aria-hidden="true" className="text-steel-100" size={24} />
-      </div>
 
-      {!selectedArtifact ? (
-        <div className="mt-5 rounded-xl border border-dashed border-paper-100/20 bg-paper-100/10 p-5 text-paper-100/75">
-          <h3 className="text-base font-semibold text-paper-50">
-            Select an artifact
-          </h3>
-          <p className="mt-2 text-sm leading-6">
-            Empty areas keep the preview quiet until a meaningful artifact is
-            selected.
-          </p>
-        </div>
-      ) : selectedArtifact.preview.kind === "unsupported" ? (
-        <UnsupportedPreview artifact={selectedArtifact} />
-      ) : (
-        <div className="mt-5 space-y-3">
-          {supportedArtifacts.map((artifact) => (
-            <PreviewExample key={artifact.id} artifact={artifact} />
-          ))}
-        </div>
-      )}
-    </aside>
+        {!selectedArtifact ? (
+          <div className="mt-5 rounded-xl border border-dashed border-paper-100/20 bg-paper-100/10 p-5 text-paper-100/75">
+            <h3 className="text-base font-semibold text-paper-50">
+              Select an artifact
+            </h3>
+            <p className="mt-2 text-sm leading-6">
+              Empty areas keep the preview quiet until a meaningful artifact is
+              selected.
+            </p>
+          </div>
+        ) : selectedArtifact.preview.kind === "unsupported" ? (
+          <UnsupportedPreview artifact={selectedArtifact} />
+        ) : (
+          <div className="mt-5">
+            <PreviewExample artifact={selectedArtifact} />
+          </div>
+        )}
+      </div>
+    </WorkspaceTray>
   );
 }
 

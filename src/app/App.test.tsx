@@ -1,17 +1,39 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 
 import { App } from "./App";
 
 describe("App shell", () => {
+  it("renders the redesigned top navigation shell and dark workspace canvas", () => {
+    render(<App />);
+
+    expect(screen.getByLabelText(/workspace product chrome/i)).toBeInTheDocument();
+    expect(
+      screen.getByRole("navigation", { name: /primary workspace views/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /^home$/i })).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
+    expect(
+      screen.getByRole("region", { name: /dark workspace canvas/i }),
+    ).toBeInTheDocument();
+    expect(screen.getAllByText(/mock only/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/no filesystem/i).length).toBeGreaterThan(0);
+    expect(screen.getByText(/bounded mock/i)).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: /phase 0 mock boundaries/i }),
+    ).not.toBeInTheDocument();
+  });
+
   it("renders Home as the first screen of the workspace shell", () => {
     render(<App />);
 
     expect(
       screen.getByRole("heading", { level: 1, name: /workspace home/i }),
     ).toBeInTheDocument();
-    expect(screen.getByText(/continue with the active workspace/i)).toBeInTheDocument();
+    expect(screen.getByText(/active workspace object/i)).toBeInTheDocument();
     expect(screen.getByText(/phase 0 web prototype/i)).toBeInTheDocument();
   });
 
@@ -38,7 +60,7 @@ describe("App shell", () => {
     expect(screen.getAllByText(/safe for agent/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/review first/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/private: excluded/i).length).toBeGreaterThan(0);
-    expect(screen.getByText(/mock only/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/mock only/i).length).toBeGreaterThan(0);
   });
 
   it("shows the mock Agent Context composer and fallback copy state", async () => {
@@ -106,16 +128,39 @@ describe("App shell", () => {
     expect(screen.getAllByText(/^markdown$/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/safe for agent/i).length).toBeGreaterThan(0);
 
-    expect(screen.getByText(/markdown preview/i)).toBeInTheDocument();
-    expect(screen.getByText(/html mockup preview/i)).toBeInTheDocument();
-    expect(screen.getByText(/image card preview/i)).toBeInTheDocument();
-    expect(screen.getByText(/code summary preview/i)).toBeInTheDocument();
+    let previewPane = screen.getByTestId("preview-pane");
+    expect(within(previewPane).getByText(/markdown preview/i)).toBeInTheDocument();
+    expect(within(previewPane).getByText(/workspace layer wedge/i)).toBeInTheDocument();
+    expect(
+      within(previewPane).queryByText(/html mockup preview/i),
+    ).not.toBeInTheDocument();
+
+    await user.click(
+      screen.getByRole("button", { name: /view desk layout mockup/i }),
+    );
+    previewPane = screen.getByTestId("preview-pane");
+    expect(within(previewPane).getByText(/html mockup preview/i)).toBeInTheDocument();
+    expect(within(previewPane).getByText(/static desk frame/i)).toBeInTheDocument();
+    expect(
+      within(previewPane).queryByText(/markdown preview/i),
+    ).not.toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /view concept card set/i }));
+    previewPane = screen.getByTestId("preview-pane");
+    expect(within(previewPane).getByText(/image card preview/i)).toBeInTheDocument();
+
+    await user.click(
+      screen.getByRole("button", { name: /view home component summary/i }),
+    );
+    previewPane = screen.getByTestId("preview-pane");
+    expect(within(previewPane).getByText(/code summary preview/i)).toBeInTheDocument();
 
     await user.click(screen.getByRole("button", { name: /view raw export/i }));
 
-    expect(screen.getByText(/unsupported preview/i)).toBeInTheDocument();
+    previewPane = screen.getByTestId("preview-pane");
+    expect(within(previewPane).getByText(/unsupported preview/i)).toBeInTheDocument();
     expect(
-      screen.getByText(/this artifact is tracked for meaning, but phase 0 does not preview this file type/i),
+      within(previewPane).getByText(/this artifact is tracked for meaning, but phase 0 does not preview this file type/i),
     ).toBeInTheDocument();
 
     await user.click(screen.getByRole("button", { name: /archive/i }));

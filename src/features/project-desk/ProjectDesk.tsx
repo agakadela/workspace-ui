@@ -17,6 +17,7 @@ import type {
   WorkspaceProjectDeskModel,
 } from "../../shared/data/mockWorkspace";
 import { StatusChip } from "../../shared/ui/StatusChip";
+import { SurfaceTabStrip } from "../../shared/ui/WorkspacePrimitives";
 
 type ProjectDeskProps = {
   model: WorkspaceProjectDeskModel;
@@ -32,25 +33,24 @@ export function ProjectDesk({
   onOpenExplorer,
 }: ProjectDeskProps) {
   return (
-    <main className="min-h-screen bg-ink-950 text-paper-50">
-      <div className="mx-auto flex min-h-screen max-w-[1500px] flex-col gap-4 px-4 py-4 sm:px-6 lg:px-8">
-        <header className="rounded-3xl border border-paper-100/10 bg-ink-800 p-5 shadow-panel lg:p-7">
-          <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-            <div>
-              <p className="text-sm font-semibold uppercase text-steel-100">
-                {model.project.eyebrow}
-              </p>
-              <h1 className="mt-2 text-3xl font-semibold tracking-normal text-paper-50 md:text-5xl">
-                {model.project.name}
-              </h1>
-              <p className="mt-3 max-w-3xl text-sm leading-6 text-paper-100/75">
-                {model.project.summary}
-              </p>
-              <p className="mt-4 break-words rounded-xl border border-paper-100/10 bg-paper-100/10 px-3 py-2 font-mono text-xs text-paper-100">
-                {model.project.activeFolder}
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-2">
+    <section className="flex flex-col gap-4">
+      <header className="rounded-shell border border-paper-100/10 bg-canvas-800 p-5 shadow-panel lg:p-7">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase text-steel-100">
+              {model.project.eyebrow}
+            </p>
+            <h1 className="mt-2 text-3xl font-semibold tracking-normal text-paper-50 md:text-5xl">
+              {model.project.name}
+            </h1>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-paper-100/75">
+              {model.project.summary}
+            </p>
+            <p className="mt-4 break-words rounded-xl border border-paper-100/10 bg-paper-100/10 px-3 py-2 font-mono text-xs text-paper-100">
+              {model.project.activeFolder}
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
               <button
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-paper-100/15 bg-paper-100/10 px-4 py-2 text-sm font-semibold text-paper-50"
                 type="button"
@@ -69,15 +69,24 @@ export function ProjectDesk({
               </button>
               <StatusChip label={model.project.statusLabel} />
               <StatusChip label={model.project.safetyLabel} />
-            </div>
           </div>
-        </header>
+        </div>
+        <SurfaceTabStrip
+          label="Project desk surface sections"
+          className="mt-5"
+          items={[
+            { label: "Desk", count: model.nextTasks.length, isActive: true },
+            { label: "Docs", count: model.importantDocs.length },
+            { label: "Context", count: model.contextCandidates.length },
+          ]}
+        />
+      </header>
 
-        <section className="rounded-3xl border border-paper-100/10 bg-paper-50 p-4 text-ink-950 shadow-panel sm:p-5 lg:p-6">
+      <section className="rounded-shell border border-paper-100/10 bg-canvas-950/55 p-4 text-paper-50 shadow-panel sm:p-5 lg:p-6">
           <div className="grid gap-4 xl:grid-cols-[0.9fr_1.1fr]">
             <section
               aria-labelledby="project-status-heading"
-              className="rounded-2xl border border-ink-950/10 bg-ink-800 p-5 text-paper-50"
+              className="rounded-panel border border-paper-100/10 bg-ink-800 p-5 text-paper-50"
             >
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
@@ -121,19 +130,19 @@ export function ProjectDesk({
 
             <section
               aria-labelledby="important-docs-heading"
-              className="rounded-2xl border border-ink-950/10 bg-white p-5"
+              className="rounded-panel border border-paper-100/10 bg-canvas-800 p-5"
             >
               <div className="flex items-center gap-3">
                 <span className="flex size-10 items-center justify-center rounded-xl bg-steel-100 text-steel-700">
                   <FileText aria-hidden="true" size={20} />
                 </span>
                 <div>
-                  <p className="text-sm font-medium text-ink-600">
+                  <p className="text-sm font-medium text-paper-100/65">
                     Source material
                   </p>
                   <h2
                     id="important-docs-heading"
-                    className="text-xl font-semibold text-ink-950"
+                    className="text-xl font-semibold text-paper-50"
                   >
                     Important Docs
                   </h2>
@@ -144,7 +153,7 @@ export function ProjectDesk({
                 {model.importantDocs.map((doc) => (
                   <article
                     key={doc.id}
-                    className="rounded-xl border border-ink-950/10 bg-paper-50 p-4"
+                    className="rounded-xl border border-paper-100/10 bg-paper-50 p-4 text-ink-950"
                   >
                     <h3 className="font-semibold text-ink-950">{doc.title}</h3>
                     <p className="mt-2 text-sm leading-6 text-ink-600">
@@ -166,19 +175,19 @@ export function ProjectDesk({
           <div className="mt-4 grid gap-4 xl:grid-cols-[1fr_0.85fr]">
             <section
               aria-labelledby="next-tasks-heading"
-              className="rounded-2xl border border-ink-950/10 bg-white p-5"
+              className="rounded-panel border border-paper-100/10 bg-canvas-800 p-5"
             >
               <div className="flex items-center gap-3">
                 <span className="flex size-10 items-center justify-center rounded-xl bg-moss-100 text-moss-700">
                   <ListChecks aria-hidden="true" size={20} />
                 </span>
                 <div>
-                  <p className="text-sm font-medium text-ink-600">
+                  <p className="text-sm font-medium text-paper-100/65">
                     What needs attention
                   </p>
                   <h2
                     id="next-tasks-heading"
-                    className="text-xl font-semibold text-ink-950"
+                    className="text-xl font-semibold text-paper-50"
                   >
                     Next Tasks
                   </h2>
@@ -189,7 +198,7 @@ export function ProjectDesk({
                 {model.nextTasks.map((task) => (
                   <article
                     key={task.id}
-                    className="rounded-xl border border-ink-950/10 bg-paper-50 p-4"
+                    className="rounded-xl border border-paper-100/10 bg-paper-50 p-4 text-ink-950"
                   >
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                       <div>
@@ -220,7 +229,7 @@ export function ProjectDesk({
 
             <section
               aria-labelledby="quick-actions-heading"
-              className="rounded-2xl border border-ink-950/10 bg-ink-950 p-5 text-paper-50"
+              className="rounded-panel border border-paper-100/10 bg-ink-950 p-5 text-paper-50"
             >
               <div className="flex items-center gap-3">
                 <span className="flex size-10 items-center justify-center rounded-xl bg-paper-50 text-ink-950">
@@ -270,19 +279,19 @@ export function ProjectDesk({
           <div className="mt-4 grid gap-4 xl:grid-cols-[0.9fr_1.1fr]">
             <section
               aria-labelledby="recent-work-heading"
-              className="rounded-2xl border border-ink-950/10 bg-white p-5"
+              className="rounded-panel border border-paper-100/10 bg-canvas-800 p-5"
             >
               <div className="flex items-center gap-3">
                 <span className="flex size-10 items-center justify-center rounded-xl bg-steel-100 text-steel-700">
                   <Clock3 aria-hidden="true" size={20} />
                 </span>
                 <div>
-                  <p className="text-sm font-medium text-ink-600">
+                  <p className="text-sm font-medium text-paper-100/65">
                     What changed around this project
                   </p>
                   <h2
                     id="recent-work-heading"
-                    className="text-xl font-semibold text-ink-950"
+                    className="text-xl font-semibold text-paper-50"
                   >
                     Recent and Pinned Work
                   </h2>
@@ -293,7 +302,7 @@ export function ProjectDesk({
                 {model.recentWork.map((work) => (
                   <article
                     key={work.id}
-                    className="rounded-xl border border-ink-950/10 bg-paper-50 p-4"
+                    className="rounded-xl border border-paper-100/10 bg-paper-50 p-4 text-ink-950"
                   >
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                       <div>
@@ -321,19 +330,19 @@ export function ProjectDesk({
 
             <section
               aria-labelledby="context-candidates-heading"
-              className="rounded-2xl border border-ink-950/10 bg-paper-100 p-5"
+              className="rounded-panel border border-paper-100/10 bg-canvas-800 p-5"
             >
               <div className="flex items-center gap-3">
                 <span className="flex size-10 items-center justify-center rounded-xl bg-moss-100 text-moss-700">
                   <ShieldCheck aria-hidden="true" size={20} />
                 </span>
                 <div>
-                  <p className="text-sm font-medium text-ink-600">
+                  <p className="text-sm font-medium text-paper-100/65">
                     Candidate files before handoff
                   </p>
                   <h2
                     id="context-candidates-heading"
-                    className="text-xl font-semibold text-ink-950"
+                    className="text-xl font-semibold text-paper-50"
                   >
                     Context Candidates
                   </h2>
@@ -344,7 +353,7 @@ export function ProjectDesk({
                 {model.contextCandidates.map((candidate) => (
                   <article
                     key={candidate.id}
-                    className="rounded-xl border border-ink-950/10 bg-white p-4"
+                    className="rounded-xl border border-paper-100/10 bg-paper-50 p-4 text-ink-950"
                   >
                     <h3 className="font-semibold text-ink-950">
                       {candidate.title}
@@ -374,8 +383,7 @@ export function ProjectDesk({
             <AgentContextComposer model={agentContext} layout="wide" />
           </div>
         </section>
-      </div>
-    </main>
+    </section>
   );
 }
 
@@ -394,7 +402,7 @@ function EmptyState({
   return (
     <article className="rounded-xl border border-dashed border-ink-950/15 bg-paper-100 p-4">
       <div className="flex items-start gap-3">
-        <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white text-steel-700">
+        <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-paper-50 text-steel-700">
           <EmptyIcon aria-hidden="true" size={18} />
         </span>
         <div>
