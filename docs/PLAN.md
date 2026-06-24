@@ -2,13 +2,15 @@
 
 Execution source of truth: current phase and active tasks only.
 
-## Current Phase: Phase 0 Foundation And Visual Prototype
+## Current Phase: Phase 0 Visual Redesign Before Tauri
 
 ### Goal / Visible Result
 
-Create a Tauri-compatible web prototype that proves the Visual Workspace Layer
-concept with Home, Visual Explorer + Preview, Project Desk, and a mock Agent
-Context Panel on public-safe mock data.
+Replace the current functional Phase 0 sketch with a deeper
+dashboard-kit-inspired visual direction before any Tauri work. The redesigned
+web prototype should still prove Home, Visual Explorer + Preview, Project Desk,
+and a mock Agent Context Composer on public-safe mock data, but it should no
+longer feel like a generic AI-generated card dashboard.
 
 ### Acceptance Criteria
 
@@ -22,11 +24,24 @@ Context Panel on public-safe mock data.
 - [x] Agent Context Panel shows selected, excluded, private/review-first files,
       and a suggested prompt.
 - [x] Recent Activity is limited to three or four static cards.
-- [ ] UI is visually coherent, calm, premium, work-focused, and close to the
-      dashboard UI kit references without copying them. Gap named: Home needs a
-      desktop visual-balance pass before any Tauri move.
-- [x] At least two agent-work rounds are documented.
 - [x] Phase 0 decision is made: improve concept before moving to Tauri.
+- [ ] Reference audit identifies the specific dashboard UI kit patterns to
+      borrow for shell, navigation, object surfaces, tabs, panels, Composer, and
+      Preview.
+- [ ] The app shell moves toward top navigation, product chrome, and a dominant
+      dark workspace canvas instead of the current left rail plus white page
+      card composition.
+- [ ] Home is redesigned as a first-screen workspace cockpit, not an
+      explanatory stack of equal-weight cards.
+- [ ] Visual Explorer + Preview is redesigned as a dense inspection surface
+      with stronger preview/object hierarchy.
+- [ ] Project Desk and Agent Context Composer are redesigned as working tools,
+      not long documentation panels.
+- [ ] Redesign uses dashboard UI kit references strongly without copying
+      reference assets, brand content, or exact screens 1:1.
+- [ ] Targeted visual verification proves the redesigned screens at desktop and
+      narrower laptop widths.
+- [x] At least two agent-work rounds are documented.
 
 ### Not Building In This Phase
 
@@ -49,6 +64,11 @@ Context Panel on public-safe mock data.
 - Home is the primary mental center, not Explorer.
 - Agent Context Panel is a composer, not a chat.
 - Dashboard UI kit PNGs are design references only.
+- The current UI composition is disposable; preserve product flows and
+  boundaries, not the existing card layout.
+- The redesign should follow the references more strongly: top nav, dark
+  workspace canvas, dense panels, object-focused surfaces, refined tabs, and
+  tighter control rhythm.
 - Future Tauri compatibility is protected through `src/shared/platform/`.
 - Desktop/laptop are priority; mobile is not a Phase 0 priority.
 
@@ -91,14 +111,14 @@ Context Panel on public-safe mock data.
 
 - Decision: improve concept before moving to Tauri.
 - Reason: the web prototype proves the core surfaces, mock-only boundaries,
-  public-safe data model, and agent context composer concept, but the final
-  browser pass found a visual-balance gap on Home at desktop width: the left
-  column stretches into a large empty paper area beside the long Agent Context
-  Composer. Tightening that polish before desktop packaging is the safer next
-  move.
+  public-safe data model, and agent context composer concept, but the visual
+  language is not accepted. The current UI reads too much like explanatory
+  cards in an agent-generated scaffold instead of a premium, dense,
+  dashboard-kit-inspired workspace product. This is a redesign problem, not a
+  single Home polish issue.
 - Evidence: see the `2026-06-23` phase-close entry in `docs/VERIFY_LOG.md`.
-- Next planning action: define the smallest Phase 0 improvement slice before
-  any Tauri setup.
+- Next planning action: write and execute the Phase 0 visual redesign task pack
+  before any Tauri setup.
 
 ## Dependency Graph
 
@@ -106,23 +126,305 @@ Context Panel on public-safe mock data.
 Runnable Vite/React/Tailwind shell + feedback loops
   -> public-safe mock workspace data through the shared/platform boundary
   -> docs/UI_SYSTEM.md visual reference
-    -> Home orientation slice
-      -> Visual Explorer + Preview slice
-      -> Project Desk slice
-        -> Agent Context composer integration
-          -> Phase 0 decision pack
+    -> functional Home / Explorer / Project Desk / Agent Context sketch
+      -> reference audit and redesign brief
+        -> redesigned shell, tokens, and layout primitives
+          -> redesigned Home
+            -> redesigned Explorer + Preview
+              -> redesigned Project Desk + Agent Context Composer
+                -> visual verification pack
 ```
 
 Notes:
 
 - Task 1 is the required foundation slice because no app exists yet.
-- After Task 1, each implementation task should cut through mock data,
-  feature ownership under `src/features`, shared primitives only where useful,
-  app navigation, tests, and targeted browser proof.
+- Redesign tasks preserve feature ownership under `src/features`, shared
+  primitives only where useful, app navigation, tests, and targeted browser
+  proof.
 - `docs/UI_SYSTEM.md` now exists as the durable UI reference at Aga's request;
   update it when later views introduce or change reusable patterns.
 
-## Active Tasks
+## Active Tasks - Visual Redesign Pack
+
+### Task 7 - Reference Audit And Redesign Brief
+
+- Status: planned.
+- User-visible result: future implementation PRs have a precise visual target
+  instead of the vague instruction to be "more like the references."
+- Description: Review the dashboard UI kit PNGs and document which patterns the
+  redesign will borrow for workspace shell, top navigation, tab/control rhythm,
+  dense panels, preview/composer surfaces, object cards, and visual hierarchy.
+  Name what must not be copied.
+- Acceptance criteria:
+  - [ ] `docs/UI_SYSTEM.md` records the reference patterns selected for this
+        product.
+  - [ ] Each core screen has a reference-backed target: Home, Explorer +
+        Preview, Project Desk, and Agent Context Composer.
+  - [ ] The brief explicitly rejects the current left-rail plus white page-card
+        composition as the default shell.
+  - [ ] The brief names anti-patterns to avoid: generic card grid, explanatory
+        doc panels, decorative AI UI, and raw file-browser hierarchy.
+- Verification:
+  - Automated: N/A, docs-only.
+  - Runtime/manual: N/A.
+  - Visual proof: compare notes against
+    `docs/design/references/dashboard-ui-kit/` before implementation starts.
+- Dependencies:
+  - Completed Phase 0 functional sketch.
+- Likely touched files:
+  - `docs/UI_SYSTEM.md`
+  - `docs/PLAN.md`
+  - `docs/SPEC.md` if scope wording changes.
+- Do not touch:
+  - Product implementation.
+  - UI kit PNGs as product assets.
+  - Phase 0 exclusions.
+- Risk level: standard.
+- Skill routing:
+  - `$aga-spec`
+  - `frontend-ui-engineering`
+- Estimated scope: Small.
+- Cannot verify yet:
+  - Whether the selected patterns work in the product until Task 8+.
+
+### Task 8 - Redesign Shell, Tokens, And Layout Primitives
+
+- Status: planned.
+- User-visible result: the app has a stronger product shell and reusable visual
+  primitives that can carry the redesigned screens.
+- Description: Replace the default scaffold feel with a reference-backed shell:
+  top navigation, dark workspace canvas, product chrome, contextual action
+  cluster, tighter radius/depth rules, denser panel rhythm, and reusable layout
+  primitives for object surfaces, tab strips, preview/composer trays, and status
+  controls.
+- Acceptance criteria:
+  - [ ] The primary shell uses top navigation/product chrome rather than the
+        current left rail as the default app frame.
+  - [ ] A dark workspace canvas becomes the dominant screen surface.
+  - [ ] Shared primitives exist only where they reduce duplication across the
+        redesign.
+  - [ ] Tailwind theme tokens stay named in `src/index.css`; raw hex values are
+        not scattered through feature components.
+  - [ ] Focus states, buttons, tabs, chips, and icon controls remain accessible.
+  - [ ] `docs/UI_SYSTEM.md` reflects the new shell/primitives.
+- Verification:
+  - Automated: `npm run typecheck`, `npm run lint`, `npm test`,
+    `npm run build`.
+  - Runtime/manual: targeted gstack `/browse` check that the shell renders at
+    desktop and narrower laptop widths without overlap.
+  - Visual proof: screenshot against selected dashboard kit shell references.
+- Dependencies:
+  - Task 7.
+- Likely touched files:
+  - `src/app/App.tsx`
+  - `src/app/routes.ts`
+  - `src/index.css`
+  - `src/shared/ui/`
+  - `src/features/home/`
+  - `src/features/explorer/`
+  - `src/features/project-desk/`
+  - `src/features/agent-context/`
+  - `docs/UI_SYSTEM.md`
+- Do not touch:
+  - `src-tauri/`
+  - Real filesystem, Git, terminal, Codex, auth, cloud, search, PDF, or file
+    editing behavior.
+  - New UI dependencies without asking first.
+- Risk level: standard.
+- Skill routing:
+  - `$aga-build`
+  - `frontend-ui-engineering`
+- Estimated scope: Medium.
+- Cannot verify yet:
+  - Whether each screen fully reaches the new visual bar until Tasks 9-11.
+
+### Task 9 - Redesign Home As Workspace Cockpit
+
+- Status: planned.
+- User-visible result: Home feels like the primary cockpit for returning to a
+  local workspace, not a landing page or a card-based status report.
+- Description: Rebuild Home around a strong first-screen workspace object:
+  continue state, active project/doc, recent activity, next actions, pinned
+  material, and context readiness. Reduce explanatory copy and make the layout
+  dense, scannable, and reference-backed.
+- Acceptance criteria:
+  - [ ] Home remains the first screen.
+  - [ ] The first viewport clearly answers where to continue, what changed, and
+        what is next.
+  - [ ] Recent Activity stays bounded to three or four static cards.
+  - [ ] The layout uses the new shell/canvas primitives rather than the current
+        white page-card stack.
+  - [ ] Status/privacy/agent-safety remains readable and not color-only.
+  - [ ] Copy is trimmed so the screen reads like a product surface, not a spec.
+- Verification:
+  - Automated: `npm run typecheck`, `npm run lint`, `npm test`,
+    `npm run build`.
+  - Runtime/manual: targeted gstack `/browse` check at desktop and narrower
+    laptop widths.
+  - Visual proof: screenshot compared with the selected Home/company-profile
+    reference patterns from Task 7.
+- Dependencies:
+  - Task 8.
+- Likely touched files:
+  - `src/features/home/`
+  - `src/shared/data/`
+  - `src/shared/ui/`
+  - `src/app/App.tsx`
+  - `docs/UI_SYSTEM.md` if Home introduces reusable patterns.
+- Do not touch:
+  - More than four Recent Activity cards.
+  - Real private workspace names or client data.
+  - Real filesystem/Git-derived activity.
+  - Full search, semantic search, terminal, file editing, or AI execution.
+- Risk level: standard.
+- Skill routing:
+  - `$aga-build`
+  - `frontend-ui-engineering`
+- Estimated scope: Medium.
+- Cannot verify yet:
+  - Real private workspace usefulness; Phase 0 remains mock-only.
+
+### Task 10 - Redesign Visual Explorer And Preview
+
+- Status: planned.
+- User-visible result: Explorer feels like a dense artifact inspection surface
+  with a meaningful preview hierarchy, not a list of similarly weighted cards.
+- Description: Rework Explorer around workspace areas, selected artifact state,
+  preview depth, and object-specific visual signals. Preserve markdown, HTML
+  mockup, image/card, code-summary, unsupported, and empty preview examples.
+- Acceptance criteria:
+  - [ ] Explorer remains reachable from Home without becoming the primary first
+        screen.
+  - [ ] Areas, artifacts, and Preview Pane use a stronger hierarchy than the
+        current three-column card list.
+  - [ ] Preview content is readable and object-specific, not decorative.
+  - [ ] Artifact metadata is dense and scannable; raw paths stay secondary.
+  - [ ] Unsupported and empty states remain visible and calm.
+  - [ ] No real local HTML execution or filesystem scanning is introduced.
+- Verification:
+  - Automated: `npm run typecheck`, `npm run lint`, `npm test`,
+    `npm run build`.
+  - Runtime/manual: targeted gstack `/browse` check that all required preview
+    kinds remain visible and readable.
+  - Visual proof: screenshot compared with the selected workflow/materials
+    reference patterns from Task 7.
+- Dependencies:
+  - Task 8.
+  - Task 9 for Home-to-Explorer navigation context.
+- Likely touched files:
+  - `src/features/explorer/`
+  - `src/shared/data/`
+  - `src/shared/ui/`
+  - `src/app/App.tsx`
+  - `docs/UI_SYSTEM.md` if Explorer introduces reusable patterns.
+- Do not touch:
+  - Real filesystem scanning.
+  - Real local HTML preview or sandbox policy implementation.
+  - PDF viewer.
+  - Raw folder tree as the primary model.
+  - Full Git/change timeline or review workflow.
+- Risk level: standard.
+- Skill routing:
+  - `$aga-build`
+  - `frontend-ui-engineering`
+- Estimated scope: Medium.
+- Cannot verify yet:
+  - Real local-file preview security; it is Phase 1+.
+
+### Task 11 - Redesign Project Desk And Agent Context Composer
+
+- Status: planned.
+- User-visible result: Project Desk and Agent Context Composer feel like working
+  surfaces with controls and state, not long documentation panels.
+- Description: Rebuild the project-focused screen and composer around selected
+  project context, tasks, source material, context candidates, mock actions, and
+  prompt composition. The Composer should feel like a controlled tool/tray for
+  handoff, not a chat, terminal, or text dump.
+- Acceptance criteria:
+  - [ ] Project Desk still shows project status, source docs, next tasks,
+        recent/pinned work, context candidates, and mock quick actions.
+  - [ ] Agent Context Composer still shows active folder, selected, excluded,
+        private, review-first files, and suggested prompt.
+  - [ ] Composer visual hierarchy makes selected/excluded/private/review-first
+        boundaries understandable at a glance.
+  - [ ] Copy prompt success/fallback remains accessible.
+  - [ ] Quick actions remain visibly mock/conceptual.
+  - [ ] The screen does not imply live Codex/Claude, terminal, filesystem, Git,
+        or AI-provider behavior.
+- Verification:
+  - Automated: `npm run typecheck`, `npm run lint`, `npm test`,
+    `npm run build`.
+  - Runtime/manual: targeted gstack `/browse` check that Project Desk and
+    Composer are understandable and bounded.
+  - Visual proof: screenshot compared with the selected AI-chat/settings/detail
+    reference patterns from Task 7.
+- Dependencies:
+  - Task 8.
+  - Task 9.
+  - Task 10 for shared artifact/preview language.
+- Likely touched files:
+  - `src/features/project-desk/`
+  - `src/features/agent-context/`
+  - `src/shared/data/`
+  - `src/shared/ui/`
+  - `src/app/App.tsx`
+  - `docs/UI_SYSTEM.md` if reusable composer patterns change.
+- Do not touch:
+  - Real Codex, Claude, terminal, provider execution, or AI calls.
+  - Real file reads or automatic context selection from disk.
+  - Auth, cloud sync, telemetry, real private/client data, or `src-tauri/`.
+- Risk level: standard.
+- Skill routing:
+  - `$aga-build`
+  - `frontend-ui-engineering`
+- Estimated scope: Medium to Large.
+- Cannot verify yet:
+  - Real agent handoff quality; Phase 0 is mock-only.
+
+### Task 12 - Redesign Verification Pack
+
+- Status: planned.
+- User-visible result: Aga has visual evidence to decide whether the redesigned
+  Phase 0 concept is good enough to consider Tauri next.
+- Description: Run the automated checks and a targeted visual browser pass over
+  redesigned Home, Explorer + Preview, Project Desk, and Agent Context
+  Composer. Record the evidence and any remaining visual/product gaps.
+- Acceptance criteria:
+  - [ ] `npm run typecheck`, `npm run lint`, `npm test`, and `npm run build`
+        pass.
+  - [ ] Targeted gstack `/browse` screenshots cover desktop and narrower laptop
+        widths.
+  - [ ] Visual comparison against the dashboard UI kit references is recorded.
+  - [ ] Phase 0 exclusions remain intact.
+  - [ ] `docs/VERIFY_LOG.md` has a compact redesign milestone entry.
+  - [ ] `docs/PLAN.md` records the next decision: move toward Tauri, continue
+        improving the concept, or stop.
+- Verification:
+  - Automated: `npm run typecheck`, `npm run lint`, `npm test`,
+    `npm run build`.
+  - Runtime/manual: targeted gstack `/browse` over all redesigned screens.
+  - Data/provider proof: N/A.
+- Dependencies:
+  - Tasks 7-11.
+- Likely touched files:
+  - `docs/VERIFY_LOG.md`
+  - `docs/PLAN.md`
+  - `docs/UI_SYSTEM.md` if verification finds convention gaps.
+- Do not touch:
+  - New product features beyond the redesign acceptance criteria.
+  - `src-tauri/` or real desktop setup.
+  - Real filesystem, Git, Codex, auth, cloud, search, terminal, PDF, or file
+    editing logic.
+- Risk level: standard.
+- Skill routing:
+  - `$aga-test`
+  - `$aga-review`
+  - `$aga-verify-agent`
+- Estimated scope: Small.
+- Cannot verify yet:
+  - Phase 1 feasibility with real local folders.
+
+## Completed Task Details From The Functional Sketch
 
 ### Task 1 - Runnable Web Shell And Feedback Loops
 
@@ -406,26 +708,37 @@ Notes:
 
 ## Checkpoints
 
-### Checkpoint - After Task 1
+### Checkpoint - After Task 7
 
-- [ ] Feedback-loop commands pass locally.
-- [ ] CI runs real commands.
-- [ ] Home-first shell is visible in browser.
+- [ ] Reference audit is documented in `docs/UI_SYSTEM.md`.
+- [ ] Home, Explorer + Preview, Project Desk, and Agent Context Composer each
+      have a reference-backed target.
+- [ ] Anti-patterns are named clearly enough for implementation agents to avoid
+      generic card-grid polish.
+
+### Checkpoint - After Task 8
+
+- [ ] New top-nav/dark-canvas shell is visible in browser.
+- [ ] Shared primitives are justified by repeated use.
 - [ ] No Phase 0 exclusions were introduced.
+- [ ] Typecheck, lint, tests, and build pass.
 
-### Checkpoint - After Task 3
+### Checkpoint - After Task 10
 
-- [x] Home and Explorer + Preview are both reachable.
-- [x] Mock data remains fictional and public-safe.
-- [x] Preview types are represented without real filesystem access.
-- [x] `docs/UI_SYSTEM.md` remains current with Home and Explorer patterns.
+- [ ] Home and Explorer + Preview both use the redesigned shell language.
+- [ ] Recent Activity is still limited to three or four static cards.
+- [ ] Required preview kinds remain visible and readable.
+- [ ] Visual direction is materially closer to the selected dashboard kit
+      references.
 
-### Checkpoint - After Task 5
+### Checkpoint - After Task 12
 
-- [x] Three main screens and Agent Context Panel are present.
-- [x] Recent Activity is still limited to three or four static cards.
-- [x] Agent Context Panel is still a composer, not a live agent integration.
-- [x] Ready for Phase 0 decision pack.
+- [ ] Home, Explorer + Preview, Project Desk, and Agent Context Composer are
+      visually verified at desktop and narrower laptop widths.
+- [ ] Agent Context Composer is still a composer, not a live agent integration.
+- [ ] `docs/VERIFY_LOG.md` records redesign proof and remaining gaps.
+- [ ] Phase 0 decision is updated: move toward Tauri, continue improving the
+      concept, or stop.
 
 ## Deferred For This Phase
 
@@ -442,14 +755,17 @@ Notes:
 - Building an AI chat surface.
 - Building a full Git/change timeline.
 - Using real private data in demo.
+- Treating the current visual gap as only minor polish.
+- Keeping the current left-rail plus white page-card shell as the default
+  product frame.
+- Copying dashboard UI kit screens, assets, logos, or business content 1:1.
 
 ## Phase Closing Gate
 
-- [x] Acceptance criteria met or gaps named and verified in runtime.
-- [x] Simplification pass completed on touched areas, or explicitly not useful.
-      N/A: Task 6 changed docs only.
-- [x] Agent output verified against task contract and evidence.
-- [x] Review completed on the feature/phase diff.
-- [x] Relevant docs updated.
-- [x] `docs/VERIFY_LOG.md` entry added with checks, runtime proof,
+- [ ] Redesign acceptance criteria met or gaps named and verified in runtime.
+- [ ] Simplification pass completed on touched areas, or explicitly not useful.
+- [ ] Agent output verified against task contract and evidence.
+- [ ] Review completed on the redesign diff.
+- [ ] Relevant docs updated.
+- [ ] `docs/VERIFY_LOG.md` entry added with checks, runtime proof,
       cannot-verify, and verdict.

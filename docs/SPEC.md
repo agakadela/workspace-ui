@@ -6,9 +6,9 @@ Product source of truth: problem, user, scope, flows, and success criteria.
 
 - Product name: `workspace-ui` is the working repo name; final product name is
   undecided.
-- Spec status: accepted for Phase 0 foundation.
+- Spec status: accepted for Phase 0 foundation and visual redesign task pack.
 - Owner: Aga.
-- Last updated: 2026-06-20.
+- Last updated: 2026-06-24.
 - Current implementation phase: see `docs/PLAN.md`.
 
 ## Problem
@@ -60,6 +60,47 @@ It will include:
 - readable previews for markdown, HTML mockups, images/cards, and code summary.
 - quick actions as visible mock/conceptual actions.
 - at least two documented rounds of work with an agent.
+
+## Phase 0 Visual Redesign Addendum
+
+The current Phase 0 implementation proves the product surfaces and mock-only
+boundaries, but it is not visually accepted as the direction for the product.
+The UI currently reads too much like a generic AI-generated dashboard: a set of
+descriptive cards inside a scaffold, rather than a premium, dense,
+reference-backed workspace tool.
+
+Before moving to Tauri or Phase 1, Phase 0 needs a deeper visual redesign.
+This redesign may change the composition, shell, layout primitives, information
+density, copy density, and panel hierarchy of the current screens. It must
+preserve the product flows and Phase 0 boundaries.
+
+### Redesign Objective
+
+Create a stronger dashboard-kit-inspired product surface for the existing Phase
+0 concept:
+
+- top navigation and product chrome inspired by the references,
+- a large dark workspace canvas as the dominant shell,
+- contextual panels and object-focused work surfaces,
+- less explanatory copy and fewer equal-weight cards,
+- stronger hierarchy between workspace object, supporting metadata, previews,
+  and actions,
+- Home, Visual Explorer, Project Desk, and Agent Context Composer still present
+  and understandable.
+
+### Redesign Constraints
+
+- Keep Phase 0 web-only and mock-only.
+- Keep public-safe fictional data only.
+- Keep Home as the primary first screen.
+- Keep Visual Explorer, Preview Pane, Project Desk, and Agent Context Composer
+  as product concepts.
+- Treat the current UI structure as disposable when it conflicts with the
+  references.
+- Use the dashboard UI kit PNGs as strong visual inspiration, not assets to copy
+  1:1.
+- Do not add Tauri, real filesystem access, Git integration, search, terminal,
+  file editing, auth, cloud sync, AI calls, or provider behavior.
 
 ## Explicitly Out of Scope
 
@@ -154,6 +195,10 @@ It will include:
 | Accessibility baseline is present | Manual/browser review | Buttons, focus states, contrast, non-color-only status | Agent |
 | Agent workflow is documented | Docs review | At least two rounds recorded before Phase 0 decision | Aga + agent |
 | Phase 0 decision can be made | Phase close review | Move to Tauri, improve concept, or stop | Aga |
+| Redesign direction is documented | Docs review | Reference audit and task pack exist before implementation PRs | Aga + agent |
+| Current UI is treated as a functional sketch | Plan review | Redesign tasks may replace shell/layouts while preserving Phase 0 flows | Aga + agent |
+| Dashboard-kit inspiration is stronger | Visual review | Top nav, dark workspace canvas, dense panels, object-focused surfaces, and refined control rhythm are visible | Aga |
+| Generic AI-dashboard feel is removed | Visual review | Screens no longer read as explanatory card grids or template scaffold UI | Aga |
 
 ## Product Constraints
 
@@ -186,6 +231,11 @@ It will include:
   repo shape in `docs/decisions/ADR-0001-project-foundation.md`.
 - Accepted: UI system conventions in `docs/UI_SYSTEM.md`, created early at
   Aga's request so agents have a durable UI reference before later views exist.
+- Existing module convention remains `src/features`; the redesign does not
+  change the architecture convention.
+- Future: reference-backed visual shell and layout primitive decision, only if
+  the redesign establishes reusable app-shell/workspace-canvas primitives that
+  should be treated as architecture rather than ordinary UI implementation.
 - Future: HTML preview sandbox policy before Phase 1 real local HTML preview.
 - Future: Tauri filesystem permissions and ignore rules before real workspace
   scanning.
@@ -195,12 +245,15 @@ It will include:
 
 ### Blocking
 
-- N/A for Phase 0 foundation and first scaffold.
+- N/A for the Phase 0 visual redesign task pack. Aga confirmed the scope stays
+  Phase 0 web-only/mock-only, the current UI structure is disposable, and the
+  redesign should be deeper than polish.
 
 ### Non-blocking
 
 - Final product name after `workspace-ui`.
-- Exact first screen composition after first visual pass.
+- Exact redesigned first screen composition after the reference audit and first
+  visual pass.
 - Whether to introduce Radix/shadcn for specific accessible primitives.
 - Where to host/share the prototype, if anywhere, during Phase 0.
 - Exact format for documenting the two agent-work rounds.
