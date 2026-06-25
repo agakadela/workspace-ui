@@ -12,6 +12,53 @@ Rules:
 
 ## Entries
 
+### 2026-06-25 — `standard` — `Task 8B Design System Foundation And Home Cockpit` — `N/A recorded before commit`
+
+- Environment: `local`
+- Checked:
+  - Legacy `src/features/` and `src/shared/` implementation folders were
+    physically removed.
+  - Home renders as the first-screen Workspace cockpit using the new app-local
+    foundation under `src/app`.
+  - The UI follows the selected dashboard-kit grammar: top product chrome,
+    selected object header, segmented tab belt, dominant rounded dark canvas,
+    dense panels, dotted work field, compact action clusters, and docked mock
+    composer tray.
+  - Recent Activity remains exactly three cards.
+  - Status, privacy, review-first, private/excluded, and mock-only boundaries
+    use visible text plus icons, not color alone.
+  - Future Explorer, Project Desk, and Context surfaces remain reachable without
+    being treated as visually complete Tasks 9-11.
+  - Phase 0 exclusions remain intact: no real filesystem, Git, terminal, Codex,
+    auth, cloud, search, Tauri, PDF, file editing, or provider behavior.
+- Commands run:
+  - `npm run typecheck`
+  - `npm run lint`
+  - `npm test`
+  - `npm run build`
+- Runtime proof:
+  - gstack `/browse` opened `http://127.0.0.1:5175/` with HTTP 200.
+  - Screenshots checked Home at `1440x1000` and `1024x900`; no incoherent
+    overlap was observed.
+  - Browser smoke check opened Explorer, Project Desk, and Context from the top
+    navigation and confirmed their reachable bounded surfaces.
+  - `gstack /browse console --errors` reported no console errors after a fresh
+    reload and navigation smoke check.
+  - Database proof: `N/A` because Phase 0 has no database.
+  - Provider/dashboard proof: `N/A` because Phase 0 has no external provider.
+- Cannot verify:
+  - Aga's design acceptance of the 8B foundation.
+  - Full Phase 0 visual acceptance until Tasks 9-12 rebuild and verify the
+    remaining required surfaces.
+  - GitHub Actions result before CI runs on a branch/PR.
+- Docs updated:
+  - `docs/ARCHITECTURE.md`
+  - `docs/PLAN.md`
+  - `docs/UI_SYSTEM.md`
+  - `docs/VERIFY_LOG.md`
+  - `CONTEXT.md`
+- Verdict: `READY FOR AGA DESIGN REVIEW`
+
 ### 2026-06-24 — `standard` — `Task 8 dark canvas blocker fix` — `N/A recorded before commit`
 
 - Environment: `local`

@@ -178,6 +178,21 @@ product surfaces and mock-only boundaries, but it is not the design foundation.
 Later redesign tasks extend and correct the foundation while rebuilding their
 required surfaces; they should not invent separate visual systems.
 
+Task 8B implementation status as of 2026-06-25:
+
+- The legacy `src/features/` and `src/shared/` implementation folders were
+  physically removed instead of being restyled.
+- The first concrete foundation now lives app-local under `src/app/`:
+  `App.tsx` expresses the cockpit shell and Home surface, while
+  `cockpitData.ts` holds the public-safe mock model.
+- The Home screen is the runtime design-system specimen: top product chrome,
+  selected workspace object header, segmented tab belt, dominant dark rounded
+  canvas, dense metric/detail panels, dotted workflow field, bounded recent
+  activity, status/privacy text, and docked mock composer tray.
+- Visual Explorer, Project Desk, and Context remain reachable as bounded
+  future surfaces, but Tasks 9-11 must rebuild their full product behavior
+  against this 8B cockpit foundation.
+
 The reset applies to the whole system:
 
 - typography scale, hierarchy, density, and label/body/metadata rhythm,
@@ -223,6 +238,11 @@ design system foundation, but the library should still grow from Home,
 Explorer, Project Desk, and Agent Context needs during the sequenced Phase 0
 reset.
 
+For the current Task 8B implementation, "shared primitive" means a repeated
+cockpit pattern inside `src/app`, not a resurrected `src/shared` package. Do
+not recreate `src/shared` or `src/features` just to restore the previous module
+shape. Extract only after the new cockpit grammar repeats across Tasks 9-11.
+
 Existing shared primitives are not protected for visual continuity. `AppShell`,
 `WorkspaceTray`, `SurfaceTabStrip`, `StatusChip`, or any other current shared
 UI primitive may be rewritten, replaced, renamed, or removed during Task 8B if
@@ -243,8 +263,9 @@ immediately reused by planned screens:
 - `ComposerTray`
 - `StatusChip`
 
-Feature-specific UI should remain inside `src/features/<feature>/` until a
-pattern is reused or clearly needed across the active Phase 0 redesign tasks.
+Feature-specific UI should not be reintroduced under `src/features/<feature>/`
+during the Task 8B reset. Keep the new cockpit foundation app-local until Tasks
+9-11 prove which patterns deserve extraction.
 
 ### Whole Phase 0 Runtime Gate
 
@@ -327,7 +348,7 @@ Preserve:
 - mock-only and public-safe boundaries,
 - Home as the first screen,
 - readable statuses, privacy, and agent-safety signals,
-- feature ownership under `src/features`.
+- the Task 8B app-local cockpit foundation under `src/app`.
 
 Change freely:
 
@@ -527,11 +548,13 @@ Rules:
 Use a dark, quiet shell with clear active location. Keep global controls sparse.
 Do not add account/auth concepts beyond public-safe mock UI.
 
-Current Task 8 implementation:
+Current Task 8B implementation:
 
-- `src/shared/ui/AppShell.tsx` owns global top navigation, product chrome,
-  mock-only status controls, and the labeled dark workspace canvas.
-- Feature views no longer own the global left rail or full-page frame.
+- `src/app/App.tsx` owns global top navigation, product chrome, mock-only
+  status controls, object header, segmented tabs, the dark cockpit canvas,
+  Home panels, and the docked composer tray.
+- `src/app/cockpitData.ts` owns the public-safe mock view model for the current
+  cockpit and reachable future surfaces.
 - Top navigation is a compact button group with `aria-current="page"` on the
   active view.
 
@@ -611,10 +634,11 @@ Required content:
 
 Use for markdown, HTML mockup, image/card, and code-summary previews.
 
-Current Task 8 implementation:
+Current Task 8B implementation:
 
-- Preview and Composer surfaces share `WorkspaceTray` from
-  `src/shared/ui/WorkspacePrimitives.tsx`.
+- Preview and Composer treatments are expressed as app-local cockpit patterns
+  in `src/app/App.tsx`. Do not recreate `WorkspaceTray` or `src/shared/ui`
+  until repeated Task 9-11 needs justify extraction.
 
 Rules:
 
@@ -836,12 +860,14 @@ Rules:
 
 ## Implementation Rules
 
-- Feature-specific UI starts under `src/features/<feature>/`.
-- Reusable primitives go in `src/shared/ui/` only after reuse is real or clearly
-  imminent across planned Phase 0 screens.
-- Current shared primitives are `AppShell`, `StatusChip`, `WorkspaceTray`, and
-  `SurfaceTabStrip`.
-- Mock data stays in `src/shared/data/` or behind `src/shared/platform/`.
+- Current Task 8B UI starts under `src/app`.
+- Reusable primitives remain app-local until reuse is real across the rebuilt
+  Phase 0 screens.
+- Current cockpit patterns are `TopBar`, `ObjectHeader`, `SurfaceTabs`,
+  `WorkflowPanel`, `WorkspaceDetailsPanel`, `StatusPill`, and `ComposerTray`
+  inside `src/app/App.tsx`.
+- Mock data stays in `src/app/cockpitData.ts` until the new model repeats
+  enough to justify extraction. A real platform adapter is Phase 1+.
 - Do not add Radix/shadcn or other UI dependencies without asking Aga first.
 - Do not change Tailwind/tooling behavior without `source-driven-development`.
 - Use lucide-react for icons when possible.

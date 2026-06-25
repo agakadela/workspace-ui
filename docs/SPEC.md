@@ -259,11 +259,11 @@ Create a stronger dashboard-kit-inspired product surface for the existing Phase
   repo shape in `docs/decisions/ADR-0001-project-foundation.md`.
 - Accepted: UI system conventions in `docs/UI_SYSTEM.md`, created early at
   Aga's request so agents have a durable UI reference before later views exist.
-- Existing module convention remains `src/features`; the redesign does not
-  change the architecture convention, and the shared component library should
-  grow organically from the Task 8B design system foundation and repeated Phase
-  0 screen patterns during the sequenced rebuild, not from a broad up-front
-  abstraction pass.
+- Task 8B changed the active implementation shape: the legacy `src/features`
+  and `src/shared` folders were removed, and the first concrete design
+  foundation now lives app-local under `src/app`. Later redesign tasks should
+  extend that cockpit foundation first and extract product-area/shared folders
+  only after the new patterns repeat across actual Phase 0 screens.
 - Accepted for the redesign: Task 8B establishes the initial concrete design
   system foundation and Workspace cockpit model for the whole Phase 0 app,
   using Home as the first implemented cockpit surface. Tasks 9-11 then rebuild
