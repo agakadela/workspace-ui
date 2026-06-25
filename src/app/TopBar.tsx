@@ -14,7 +14,7 @@ export function TopBar({
   return (
     <header
       aria-label="Workspace product chrome"
-      className="mx-auto grid max-w-[1440px] gap-4 px-5 py-6 md:px-8 lg:grid-cols-[250px_minmax(470px,1fr)_260px] lg:items-center lg:px-12 xl:grid-cols-[270px_minmax(520px,1fr)_320px]"
+      className="mx-auto grid max-w-[1440px] gap-4 px-5 py-6 md:px-8 lg:grid-cols-[220px_minmax(0,1fr)_auto] lg:items-center lg:px-12 xl:grid-cols-[270px_minmax(0,1fr)_auto]"
     >
       <div className="flex min-w-0 items-center gap-3">
         <span className="brand-mark" aria-hidden="true">
@@ -46,8 +46,8 @@ export function TopBar({
         ))}
       </nav>
 
-      <div className="flex items-center justify-start gap-2 lg:justify-end">
-        <div className="hidden h-12 min-w-0 flex-1 items-center gap-3 rounded-control bg-night-930 px-4 text-sm text-ash-300 ring-1 ring-white/[0.06] 2xl:flex">
+      <div className="flex min-w-0 items-center justify-start gap-2 lg:justify-end">
+        <div className="hidden h-12 w-[250px] min-w-0 items-center gap-3 rounded-control bg-night-930 px-4 text-sm text-ash-300 ring-1 ring-white/[0.06] 2xl:flex">
           <Command aria-hidden="true" size={17} />
           <span className="truncate">Phase 0 boundary: mock data only</span>
           <span className="ml-auto rounded-md bg-black/25 px-2 py-1 text-[11px] font-semibold text-ash-400">
