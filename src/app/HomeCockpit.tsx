@@ -33,8 +33,8 @@ export function HomeCockpit({
         className="grid gap-3 xl:grid-cols-[minmax(0,1fr)_360px]"
       >
         <div className="min-w-0">
-          <MetricStrip />
-          <div className="mt-3 grid gap-3 2xl:grid-cols-[minmax(0,1fr)_410px]">
+          <WorkspaceSignalPanel />
+          <div className="mt-3 grid gap-3 xl:grid-cols-[minmax(0,1fr)_340px]">
             <WorkflowPanel onSelectView={onSelectView} />
             <RecentActivityPanel />
           </div>
@@ -47,45 +47,104 @@ export function HomeCockpit({
   );
 }
 
-function MetricStrip() {
+const signalBars = [32, 46, 58, 74, 68, 82, 61, 88, 70, 76, 55, 64];
+
+function WorkspaceSignalPanel() {
   return (
     <section
       aria-label="Workspace measures"
-      className="grid gap-3 md:grid-cols-2 2xl:grid-cols-4"
+      className="overflow-hidden rounded-panel border border-white/[0.06] bg-night-900 shadow-panel"
     >
-      {cockpit.metrics.map((metric) => (
-        <MetricCard key={metric.id} metric={metric} />
-      ))}
+      <div className="flex flex-col gap-4 border-b border-white/[0.06] p-6 lg:flex-row lg:items-start lg:justify-between">
+        <div>
+          <p className="text-sm font-medium text-ash-400">
+            Workspace performance overview
+          </p>
+          <h2 className="mt-2 text-2xl font-medium text-white">
+            Home cockpit signals
+          </h2>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {cockpit.objectStatuses.map((status) => (
+            <StatusPill key={status.label} status={status} />
+          ))}
+        </div>
+      </div>
+
+      <div className="grid lg:grid-cols-[minmax(0,1fr)_310px]">
+        <div
+          role="img"
+          aria-label="Mock workspace readiness chart"
+          className="relative min-h-[295px] overflow-hidden bg-night-910 p-6"
+        >
+          <div className="absolute inset-x-6 top-6 h-16 rounded-[1.25rem] bg-black/35 blur-2xl" />
+          <div className="relative z-10 flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+            <div>
+              <p className="text-sm text-ash-400">Current object</p>
+              <p className="mt-3 text-5xl font-medium leading-none text-white">
+                4 staged
+              </p>
+              <p className="mt-3 text-sm text-ash-400">
+                Selected files are ready for a mock handoff.
+              </p>
+            </div>
+            <div className="rounded-card border border-white/[0.06] bg-black/35 p-4">
+              <p className="text-sm font-medium text-ash-200">Boundary check</p>
+              <p className="mt-2 text-3xl font-medium text-white">Mock only</p>
+              <p className="mt-2 text-xs text-ash-500">No reads or writes.</p>
+            </div>
+          </div>
+
+          <div
+            aria-hidden="true"
+            className="relative z-10 mt-10 flex h-28 items-end gap-2 rounded-card border border-white/[0.04] bg-night-930/70 px-5 pb-5 pt-6"
+          >
+            {signalBars.map((height, index) => (
+              <span
+                key={`${height}-${index}`}
+                className={`flex-1 rounded-pill ${
+                  index > 2 && index < 9 ? "bg-sky-400" : "bg-white/[0.08]"
+                }`}
+                style={{ height: `${height}%` }}
+              />
+            ))}
+            <div className="absolute bottom-4 left-[34%] right-[22%] h-1 rounded-pill bg-ice-100" />
+          </div>
+
+          <div className="relative z-10 mt-5 grid grid-cols-4 text-xs font-medium text-ash-500">
+            <span>Spec</span>
+            <span>Plan</span>
+            <span>UI</span>
+            <span>Private</span>
+          </div>
+        </div>
+
+        <div className="grid border-t border-white/[0.06] bg-night-900 lg:border-l lg:border-t-0">
+          {cockpit.metrics.map((metric) => (
+            <MetricSummaryRow key={metric.id} metric={metric} />
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
 
-function MetricCard({ metric }: { metric: WorkspaceMetric }) {
+function MetricSummaryRow({ metric }: { metric: WorkspaceMetric }) {
   const Icon = metric.icon;
 
   return (
-    <article className="min-h-[160px] rounded-panel border border-white/[0.06] bg-night-900 p-6 shadow-panel">
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <span
-            className={`flex size-10 items-center justify-center rounded-xl ${iconToneClasses[metric.tone]}`}
-          >
-            <Icon aria-hidden="true" size={18} />
-          </span>
-          <h2 className="text-base font-medium text-white">{metric.label}</h2>
-        </div>
-        <button
-          type="button"
-          aria-label={`${metric.label} details mock action`}
-          className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-white/[0.06] text-ash-300 transition hover:bg-white/[0.1] hover:text-white"
-        >
-          <ArrowUpRight aria-hidden="true" size={16} />
-        </button>
+    <article className="grid min-h-[74px] grid-cols-[2.5rem_minmax(0,1fr)] items-center gap-4 border-b border-white/[0.06] px-5 py-4 last:border-b-0">
+      <span
+        className={`flex size-10 shrink-0 items-center justify-center rounded-xl ${iconToneClasses[metric.tone]}`}
+      >
+        <Icon aria-hidden="true" size={18} />
+      </span>
+      <div className="min-w-0">
+        <p className="text-xl font-medium leading-none text-white">{metric.value}</p>
+        <h3 className="mt-2 truncate text-sm font-medium text-ash-300">
+          {metric.label}
+        </h3>
       </div>
-      <p className="mt-8 text-4xl font-medium leading-none text-white">
-        {metric.value}
-      </p>
-      <p className="mt-5 text-sm leading-6 text-ash-400">{metric.meta}</p>
     </article>
   );
 }
