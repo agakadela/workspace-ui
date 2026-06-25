@@ -72,8 +72,17 @@ export type ContextFile = {
 export type ContextGroup = {
   id: string;
   title: string;
+  surfaceTitle: string;
   summary: string;
   files: ContextFile[];
+  status: StatusItem;
+};
+
+export type ComposerContext = {
+  eyebrow: string;
+  activeObject: string;
+  activeFolder: string;
+  summary: string;
   status: StatusItem;
 };
 
@@ -493,11 +502,11 @@ export const cockpit = {
       title: "Orchard Launch Kit",
       summary:
         "A compact desk for the current Phase 0 redesign project: source truth, near-term tasks, recent material, and safe context candidates.",
-      status: { label: "Task 10 active", tone: "blue", icon: CircleDot } satisfies StatusItem,
+      status: { label: "Task 11 active", tone: "blue", icon: CircleDot } satisfies StatusItem,
       rows: [
         { label: "Project state", value: "Visual redesign in progress" },
-        { label: "Current slice", value: "Project Desk cockpit" },
-        { label: "Primary source", value: "docs/PLAN.md#task-10" },
+        { label: "Current slice", value: "Context composer handoff" },
+        { label: "Primary source", value: "docs/PLAN.md#task-11" },
         { label: "Boundary", value: "Mock-only, no live IO" },
       ] satisfies DetailRow[],
     },
@@ -530,9 +539,9 @@ export const cockpit = {
     sourceDocs: [
       {
         id: "desk-doc-plan",
-        title: "Task 10 plan",
-        path: "docs/PLAN.md#task-10",
-        reason: "Defines the focused Project Desk acceptance criteria.",
+        title: "Task 11 plan",
+        path: "docs/PLAN.md#task-11",
+        reason: "Defines the Composer tray acceptance criteria.",
         status: { label: "Current", tone: "blue", icon: CircleDot },
       },
       {
@@ -556,16 +565,16 @@ export const cockpit = {
         title: "Redesign Project Desk",
         summary:
           "Convert the project view from a placeholder into a dense focused cockpit.",
-        meta: "Current task",
-        status: { label: "In progress", tone: "blue", icon: CircleDot },
+        meta: "Completed task",
+        status: { label: "Done", tone: "mint", icon: BadgeCheck },
       },
       {
         id: "desk-task-11",
         title: "Attach Context Composer",
         summary:
           "Rework the handoff tray around selected, review-first, private, and excluded files.",
-        meta: "Next planned",
-        status: { label: "Planned", tone: "orange", icon: ClipboardList },
+        meta: "Current task",
+        status: { label: "In progress", tone: "blue", icon: CircleDot },
       },
       {
         id: "desk-task-12",
@@ -603,8 +612,8 @@ export const cockpit = {
       {
         id: "desk-context-plan",
         title: "Task plan excerpt",
-        path: "docs/PLAN.md#task-10",
-        reason: "Selected because it names the active contract.",
+        path: "docs/PLAN.md#task-11",
+        reason: "Selected because it names the Composer contract.",
         status: { label: "Safe for agent", tone: "mint", icon: ShieldCheck },
       },
       {
@@ -679,8 +688,9 @@ export const cockpit = {
   contextGroups: [
     {
       id: "selected",
-      title: "Selected",
-      summary: "Included in the mock prompt draft.",
+      title: "Selected context",
+      surfaceTitle: "Selected handoff boundary",
+      summary: "Included in the mock prompt draft after human review.",
       status: { label: "4 files", tone: "mint", icon: ShieldCheck },
       files: [
         {
@@ -692,16 +702,31 @@ export const cockpit = {
         },
         {
           id: "selected-plan",
-          title: "Active implementation plan",
-          path: "docs/PLAN.md",
-          reason: "Defines Task 8B and the remaining redesign sequence.",
+          title: "Task 11 implementation plan",
+          path: "docs/PLAN.md#task-11",
+          reason: "Defines the Composer acceptance criteria and boundaries.",
           status: { label: "Safe for agent", tone: "mint", icon: ShieldCheck },
+        },
+        {
+          id: "selected-ui",
+          title: "Composer UI system",
+          path: "docs/UI_SYSTEM.md#agent-context-composer",
+          reason: "Keeps tray, prompt, and boundary grouping aligned.",
+          status: { label: "Safe for agent", tone: "mint", icon: ShieldCheck },
+        },
+        {
+          id: "selected-app",
+          title: "Cockpit app modules",
+          path: "src/app/",
+          reason: "Implementation context only; no filesystem scanning.",
+          status: { label: "Developer-readable", tone: "neutral", icon: FileText },
         },
       ],
     },
     {
       id: "review",
       title: "Review first",
+      surfaceTitle: "Review-first boundary",
       summary: "Useful, but not automatic context.",
       status: { label: "2 files", tone: "orange", icon: TriangleAlert },
       files: [
@@ -712,13 +737,21 @@ export const cockpit = {
           reason: "Visual direction only; no product asset copying.",
           status: { label: "Review first", tone: "orange", icon: TriangleAlert },
         },
+        {
+          id: "review-verify",
+          title: "Verification notes",
+          path: "docs/VERIFY_LOG.md",
+          reason: "Durable evidence only after meaningful verification.",
+          status: { label: "Review first", tone: "orange", icon: TriangleAlert },
+        },
       ],
     },
     {
-      id: "excluded",
-      title: "Private / excluded",
-      summary: "Visible as a boundary, never copied.",
-      status: { label: "2 blocked", tone: "danger", icon: LockKeyhole },
+      id: "private",
+      title: "Private",
+      surfaceTitle: "Private boundary",
+      summary: "Named as a warning only; never copied into the prompt.",
+      status: { label: "1 private", tone: "danger", icon: LockKeyhole },
       files: [
         {
           id: "private-notes",
@@ -729,7 +762,62 @@ export const cockpit = {
         },
       ],
     },
+    {
+      id: "excluded",
+      title: "Excluded",
+      surfaceTitle: "Excluded boundary",
+      summary: "Out-of-scope material stays visible as a deliberate omission.",
+      status: { label: "1 excluded", tone: "danger", icon: LockKeyhole },
+      files: [
+        {
+          id: "excluded-archive",
+          title: "Private archive placeholder",
+          path: "private-client-material/",
+          reason: "Fictional private folder; not selected automatically.",
+          status: { label: "Excluded", tone: "danger", icon: LockKeyhole },
+        },
+      ],
+    },
   ] satisfies ContextGroup[],
+  composerContexts: {
+    home: {
+      eyebrow: "Home handoff",
+      activeObject: "Orchard Notes Workspace",
+      activeFolder: "demo-workspace/orchard-notes",
+      summary:
+        "Prepare a bounded handoff from the Home cockpit without reading real local files.",
+      status: { label: "Attached to Home", tone: "blue", icon: LayoutDashboard },
+    },
+    explorer: {
+      eyebrow: "Explorer handoff",
+      activeObject: "Visual Explorer",
+      activeFolder: "demo-workspace/orchard-notes/source-docs",
+      summary:
+        "Carry selected artifact meaning into the mock prompt while keeping raw paths secondary.",
+      status: { label: "Artifact context", tone: "neutral", icon: Compass },
+    },
+    projectDesk: {
+      eyebrow: "Project Desk handoff",
+      activeObject: "Orchard Launch Kit",
+      activeFolder: "demo-workspace/orchard-notes/orchard-launch-kit",
+      summary:
+        "Attach the handoff tray to the focused project desk and keep private examples excluded.",
+      status: { label: "Attached to Project Desk", tone: "mint", icon: PanelRightOpen },
+    },
+    context: {
+      eyebrow: "Context handoff",
+      activeObject: "Agent Context Composer",
+      activeFolder: "demo-workspace/orchard-notes",
+      summary:
+        "Review selected, review-first, private, and excluded boundaries before copying the mock prompt.",
+      status: { label: "Controlled handoff", tone: "mint", icon: ClipboardList },
+    },
+  } satisfies Record<ViewId, ComposerContext>,
+  composerPrompt: {
+    title: "Suggested prompt",
+    text:
+      "Task 11: Rebuild the Agent Context Composer as an attached handoff tray. Keep selected context explicit, keep review-first material separate, keep private and excluded examples out of the prompt, and preserve Phase 0 boundaries: mock-only, public-safe, no real filesystem reads, no live Codex or Claude execution, no terminal, no Git actions, no Tauri, no auth, no cloud sync, no search, no PDF viewer, and no file editing.",
+  },
   nextActions: [
     {
       id: "action-explorer",
@@ -777,7 +865,7 @@ export const cockpit = {
     },
   },
   prompt:
-    "Rebuild Task 10 as the Project Desk cockpit surface. Keep it web-only, mock-only, and public-safe. Preserve Phase 0 boundaries: no real filesystem reads, Git, terminal, search, auth, cloud, Tauri, PDF, file editing, or live Codex execution.",
+    "Task 11: Rebuild the Agent Context Composer as an attached handoff tray. Keep selected context explicit, keep review-first material separate, keep private and excluded examples out of the prompt, and preserve Phase 0 boundaries: mock-only, public-safe, no real filesystem reads, no live Codex or Claude execution, no terminal, no Git actions, no Tauri, no auth, no cloud sync, no search, no PDF viewer, and no file editing.",
 };
 
 export function getSurfaceLabel(view: ViewId) {

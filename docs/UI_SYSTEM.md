@@ -202,8 +202,12 @@ Task 8B implementation status as of 2026-06-25:
   project context, source material, next tasks, recent/pinned work, context
   candidates, grouped mock quick actions, and visible empty states for no
   tasks, no extra pinned docs, and no safe context.
-- Context remains reachable as a bounded future surface, but Task 11 must
-  rebuild its full composer behavior against this cockpit foundation.
+- Task 11 rebuilds Agent Context Composer as the fourth real cockpit surface:
+  `ContextComposerSurface` provides the full controlled handoff work surface,
+  while `ComposerTray` attaches the same selected, review-first, private, and
+  excluded boundaries to Home, Explorer, Project Desk, and Context. The
+  suggested prompt is secondary to context boundary clarity, and copy
+  success/fallback remains accessible without implying live agent execution.
 
 The reset applies to the whole system:
 
@@ -566,8 +570,8 @@ Current Task 8B implementation:
   top-level cockpit composition.
 - App-local modules under `src/app/` own the concrete shell and surfaces:
   `TopBar`, `ObjectHeader`, `SurfaceTabs`, `HomeCockpit`,
-  `ExplorerSurface`, `ProjectDeskSurface`, `WorkspaceDetailsPanel`,
-  `QueuedSurface`, and `ComposerTray`.
+  `ExplorerSurface`, `ProjectDeskSurface`, `ContextComposerSurface`,
+  `WorkspaceDetailsPanel`, `QueuedSurface`, and `ComposerTray`.
 - `src/app/cockpitData.ts` owns the public-safe mock view model for the current
   cockpit and reachable future surfaces.
 - Top navigation is a compact button group with `aria-current="page"` on the
@@ -660,9 +664,10 @@ Use for markdown, HTML mockup, image/card, and code-summary previews.
 Current Task 8B implementation:
 
 - Preview and Composer treatments are expressed as app-local cockpit patterns
-  in `src/app/HomeCockpit.tsx`, `src/app/QueuedSurface.tsx`, and
-  `src/app/ComposerTray.tsx`. Do not recreate `WorkspaceTray` or
-  `src/shared/ui` until repeated Task 9-11 needs justify extraction.
+  in `src/app/HomeCockpit.tsx`, `src/app/ExplorerSurface.tsx`,
+  `src/app/ContextComposerSurface.tsx`, and `src/app/ComposerTray.tsx`. Do not
+  recreate `WorkspaceTray` or `src/shared/ui` until repeated Task 9-11 needs
+  justify extraction.
 
 Current Task 9 implementation:
 
@@ -894,11 +899,12 @@ Rules:
 
 ## Implementation Rules
 
-- Current Task 8B UI starts under `src/app`.
+- Current visual reset UI lives under `src/app`.
 - Reusable primitives remain app-local until reuse is real across the rebuilt
   Phase 0 screens.
 - Current cockpit patterns are `TopBar`, `ObjectHeader`, `SurfaceTabs`,
-  `HomeCockpit`, `WorkflowPanel`, `WorkspaceDetailsPanel`, `StatusPill`, and
+  `HomeCockpit`, `ExplorerSurface`, `ProjectDeskSurface`,
+  `ContextComposerSurface`, `WorkspaceDetailsPanel`, `StatusPill`, and
   `ComposerTray` under `src/app`.
 - Mock data stays in `src/app/cockpitData.ts` until the new model repeats
   enough to justify extraction. A real platform adapter is Phase 1+.
