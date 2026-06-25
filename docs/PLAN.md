@@ -36,13 +36,13 @@ longer feel like a generic AI-generated card dashboard.
 - [x] Task 8B is redefined as a design system foundation task that addresses the
       source problem: agents polishing disconnected screens without a shared
       reference-matched visual grammar.
-- [ ] Task 8B establishes the initial concrete design system foundation and
+- [x] Task 8B establishes the initial concrete design system foundation and
       Workspace cockpit model for the whole Phase 0 app, with Home as the first
       implemented cockpit surface.
 - [ ] Tasks 9-11 rebuild Visual Explorer + Preview, Project Desk, and Agent
       Context Composer in sequence against the Task 8B design system
       foundation.
-- [ ] Redesign uses dashboard UI kit references strongly without copying
+- [x] Redesign uses dashboard UI kit references strongly without copying
       reference assets, brand content, or exact screens 1:1.
 - [ ] Targeted visual verification checks the redesigned screens at desktop and
       narrower laptop widths.
@@ -81,7 +81,10 @@ longer feel like a generic AI-generated card dashboard.
 - The shared component library should start with the concrete Task 8B design
   system foundation and then grow from repeated needs while rebuilding the
   actual Phase 0 screens, not from a detached demo surface.
-- Future Tauri compatibility is protected through `src/shared/platform/`.
+- Future Tauri compatibility remains a Phase 1 requirement. Task 8B removed the
+  current `src/shared/platform/` placeholder with the rest of the legacy visual
+  implementation; a real platform boundary should be reintroduced only when
+  Phase 1 behavior exists.
 - Desktop/laptop are priority; mobile is not a Phase 0 priority.
 
 ### Risk Classification
@@ -130,6 +133,12 @@ longer feel like a generic AI-generated card dashboard.
 - Rejected Task 8B runtime demo surface was reverted: the app no longer has a
   `Foundation` navigation item or a standalone demo screen.
   The plan now treats the whole Phase 0 product flow as the visual gate.
+- Task 8B Design System Foundation And Home Cockpit is complete: `src/features`
+  and `src/shared` were physically removed, the 8B implementation now lives
+  app-local under `src/app`, and Home renders as a reference-matched Workspace
+  cockpit with top chrome, object header, segmented tabs, dense panels, dotted
+  work canvas, status/privacy text, bounded recent activity, and a docked mock
+  context composer.
 - Dashboard UI kit PNGs exist as references only, not product assets.
 
 ## Phase 0 Decision
@@ -149,7 +158,7 @@ longer feel like a generic AI-generated card dashboard.
 
 ```txt
 Runnable Vite/React/Tailwind shell + feedback loops
-  -> public-safe mock workspace data through the shared/platform boundary
+  -> public-safe mock workspace data in the Task 8B app-local cockpit model
   -> docs/UI_SYSTEM.md visual reference
     -> functional Home / Explorer / Project Desk / Agent Context sketch
       -> reference audit and redesign brief
@@ -164,9 +173,10 @@ Runnable Vite/React/Tailwind shell + feedback loops
 Notes:
 
 - Task 1 is the required foundation slice because no app exists yet.
-- Redesign tasks preserve feature ownership under `src/features`, shared
-  primitives only where useful, app navigation, tests, and targeted browser
-  review.
+- Task 8B intentionally removed `src/features` and `src/shared`; later redesign
+  tasks should extend the app-local cockpit foundation first and reintroduce
+  product-area folders only when the new pattern has repeated enough to earn
+  extraction.
 - `docs/UI_SYSTEM.md` now exists as the durable UI reference at Aga's request;
   update it when later views introduce or change reusable patterns.
 
@@ -268,7 +278,7 @@ Notes:
 
 ### Task 8B - Design System Foundation And Home Cockpit
 
-- Status: planned, replaces the rejected standalone demo/checkpoint direction
+- Status: complete, replaces the rejected standalone demo/checkpoint direction
   and the previous "one mega reset task" shape.
 - User-visible result: Aga can judge the first concrete, reference-matched
   design system foundation in the real app, with Home rebuilt as the first
@@ -303,30 +313,30 @@ Notes:
   visual reasons. Existing shared UI primitives may be rewritten, replaced,
   renamed, or removed if they do not fit the new design system foundation.
 - Acceptance criteria:
-  - [ ] No legacy `Foundation` route, nav item, standalone demo screen,
+  - [x] No legacy `Foundation` route, nav item, standalone demo screen,
         checklist surface, or demo-specific test remains.
-  - [ ] `docs/UI_SYSTEM.md` defines the initial concrete design system
+  - [x] `docs/UI_SYSTEM.md` defines the initial concrete design system
         foundation for shell, canvas, object header, tabs/controls, panels,
         preview/composer treatment, typography, spacing, radius, depth, and
         states.
-  - [ ] Home is rebuilt as the first-screen Workspace cockpit, not an
+  - [x] Home is rebuilt as the first-screen Workspace cockpit, not an
         explanatory card stack.
-  - [ ] Home demonstrates a near-clone visual grammar from the reference kit:
+  - [x] Home demonstrates a near-clone visual grammar from the reference kit:
         top nav, dominant rounded dark canvas, object header, dense panels,
         segmented controls/tabs where useful, compact action clusters, and
         composer/context-readiness attachment.
-  - [ ] The implementation does not merely reuse current components with new
+  - [x] The implementation does not merely reuse current components with new
         colors, radii, or spacing; existing layouts and primitives are
         disposable when they conflict with the references.
-  - [ ] Recent Activity remains bounded to three static cards.
-  - [ ] Status/privacy/agent-safety remains readable and not color-only.
-  - [ ] Phase 0 mock-only exclusions remain intact.
+  - [x] Recent Activity remains bounded to three static cards.
+  - [x] Status/privacy/agent-safety remains readable and not color-only.
+  - [x] Phase 0 mock-only exclusions remain intact.
 - Work order:
-  - [ ] First: define the cockpit grammar in code and docs: shell, canvas,
+  - [x] First: define the cockpit grammar in code and docs: shell, canvas,
         selected object header, controls/tabs, panel hierarchy, and states.
-  - [ ] Second: rebuild Home against that grammar using existing public-safe
+  - [x] Second: rebuild Home against that grammar using existing public-safe
         mock semantics.
-  - [ ] Third: run runtime screenshot review against `Company Profile.png`,
+  - [x] Third: run runtime screenshot review against `Company Profile.png`,
         `Workflow.png`, and `Company Profile - ai chat*.png` with the question:
         "Is this a strong design system foundation, or still a polished version
         of the old UI?"
@@ -341,17 +351,27 @@ Notes:
 - Dependencies:
   - Task 7.
   - Task 8.
-- Likely touched files:
+- Touched files:
   - `docs/UI_SYSTEM.md`
   - `docs/PLAN.md`
-  - `docs/SPEC.md`
+  - `docs/ARCHITECTURE.md`
+  - `docs/VERIFY_LOG.md`
+  - `CONTEXT.md`
   - `src/app/App.tsx`
+  - `src/app/ComposerTray.tsx`
+  - `src/app/HomeCockpit.tsx`
+  - `src/app/ObjectHeader.tsx`
+  - `src/app/QueuedSurface.tsx`
+  - `src/app/SurfaceTabs.tsx`
+  - `src/app/TopBar.tsx`
+  - `src/app/WorkspaceDetailsPanel.tsx`
+  - `src/app/cockpitData.ts`
+  - `src/app/cockpitPrimitives.tsx`
+  - `src/app/cockpitToneClasses.ts`
+  - `src/app/App.test.tsx`
   - `src/index.css`
-  - `src/shared/ui/`
-  - `src/features/home/`
-  - `src/features/agent-context/` only for Home composer/context affordance.
-  - `src/shared/data/` only if mock content needs tightening for the Home
-    cockpit.
+  - deleted `src/features/`
+  - deleted `src/shared/`
 - Do not touch:
   - Standalone demo/checklist surfaces.
   - Broad component library work beyond the concrete design system foundation.
@@ -368,6 +388,7 @@ Notes:
   - `frontend-ui-engineering`
 - Estimated scope: Large.
 - Cannot verify yet:
+  - Aga's design acceptance of the foundation.
   - Whether the full Phase 0 visual direction is accepted until Tasks 9-12
     apply and verify the foundation across the whole flow.
 
@@ -401,10 +422,9 @@ Notes:
 - Dependencies:
   - Task 8B.
 - Likely touched files:
-  - `src/features/explorer/`
-  - `src/shared/data/`
-  - `src/shared/ui/`
-  - `src/app/App.tsx`
+  - app-local cockpit modules under `src/app/`
+  - `src/app/cockpitData.ts`
+  - `src/index.css`
   - `docs/UI_SYSTEM.md` if Explorer introduces reusable pattern refinements.
 - Do not touch:
   - Real filesystem scanning.
@@ -452,10 +472,9 @@ Notes:
   - Task 8B.
   - Task 9 for shared artifact/preview language.
 - Likely touched files:
-  - `src/features/project-desk/`
-  - `src/shared/data/`
-  - `src/shared/ui/`
-  - `src/app/App.tsx`
+  - app-local cockpit modules under `src/app/`
+  - `src/app/cockpitData.ts`
+  - `src/index.css`
   - `docs/UI_SYSTEM.md` if Project Desk introduces reusable pattern
     refinements.
 - Do not touch:
@@ -502,11 +521,9 @@ Notes:
   - Task 8B.
   - Task 10 for Project Desk attachment.
 - Likely touched files:
-  - `src/features/agent-context/`
-  - `src/features/home/`
-  - `src/features/project-desk/`
-  - `src/shared/data/`
-  - `src/shared/ui/`
+  - app-local cockpit modules under `src/app/`
+  - `src/app/cockpitData.ts`
+  - `src/index.css`
   - `docs/UI_SYSTEM.md` if reusable composer patterns change.
 - Do not touch:
   - Real Codex, Claude, terminal, provider execution, or AI calls.
@@ -864,20 +881,20 @@ Notes:
 
 ### Checkpoint - After Task 8B
 
-- [ ] Standalone `Foundation` route, nav, feature, tests,
+- [x] Standalone `Foundation` route, nav, feature, tests,
       and review doc are removed.
-- [ ] The initial concrete design system foundation is documented in
+- [x] The initial concrete design system foundation is documented in
       `docs/UI_SYSTEM.md` and visible in the real Home cockpit.
-- [ ] Home is redesigned as the first Workspace cockpit surface using a
+- [x] Home is redesigned as the first Workspace cockpit surface using a
       near-clone visual grammar from the references.
-- [ ] Runtime review shows Home in the real app, not a detached demo/checklist
+- [x] Runtime review shows Home in the real app, not a detached demo/checklist
       surface.
 - [ ] Aga has accepted the design system foundation as strong enough for Tasks
       9-11 to apply to the remaining required surfaces.
-- [ ] Component extraction remains limited to the concrete design system
+- [x] Component extraction remains limited to the concrete design system
       foundation and repeated needs from the actual Phase 0 screens.
-- [ ] No Phase 0 exclusions were introduced.
-- [ ] Typecheck, lint, tests, and build pass.
+- [x] No Phase 0 exclusions were introduced.
+- [x] Typecheck, lint, tests, and build pass.
 
 ### Checkpoint - After Task 9
 

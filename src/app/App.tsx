@@ -1,83 +1,52 @@
 import { useState } from "react";
-import { Compass, Home as HomeIcon, PanelRightOpen } from "lucide-react";
 
-import { Explorer } from "../features/explorer/Explorer";
-import { Home } from "../features/home/Home";
-import { ProjectDesk } from "../features/project-desk/ProjectDesk";
-import {
-  getWorkspaceAgentContextModel,
-  getWorkspaceExplorerModel,
-  getWorkspaceHomeModel,
-  getWorkspaceProjectDeskModel,
-} from "../shared/platform/workspace";
-import { AppShell } from "../shared/ui/AppShell";
-
-type ActiveView = "home" | "explorer" | "projectDesk";
+import { cockpit, type ViewId } from "./cockpitData";
+import { ComposerTray, type CopyState } from "./ComposerTray";
+import { HomeCockpit } from "./HomeCockpit";
+import { ObjectHeader } from "./ObjectHeader";
+import { QueuedSurface } from "./QueuedSurface";
+import { SurfaceTabs } from "./SurfaceTabs";
+import { TopBar } from "./TopBar";
 
 export function App() {
-  const [activeView, setActiveView] = useState<ActiveView>("home");
-  const homeModel = getWorkspaceHomeModel();
-  const explorerModel = getWorkspaceExplorerModel();
-  const projectDeskModel = getWorkspaceProjectDeskModel();
-  const agentContextModel = getWorkspaceAgentContextModel();
+  const [activeView, setActiveView] = useState<ViewId>("home");
+  const [copyState, setCopyState] = useState<CopyState>("idle");
 
-  const navItems = [
-    {
-      id: "home",
-      label: "Home",
-      icon: HomeIcon,
-      isActive: activeView === "home",
-      onSelect: () => setActiveView("home"),
-    },
-    {
-      id: "explorer",
-      label: "Visual Explorer",
-      icon: Compass,
-      isActive: activeView === "explorer",
-      onSelect: () => setActiveView("explorer"),
-    },
-    {
-      id: "projectDesk",
-      label: "Project Desk",
-      icon: PanelRightOpen,
-      isActive: activeView === "projectDesk",
-      onSelect: () => setActiveView("projectDesk"),
-    },
-  ];
+  async function copyPrompt() {
+    try {
+      if (typeof navigator.clipboard?.writeText !== "function") {
+        throw new Error("Clipboard API unavailable");
+      }
 
-  if (activeView === "explorer") {
-    return (
-      <AppShell navItems={navItems}>
-        <Explorer
-          model={explorerModel}
-          onOpenHome={() => setActiveView("home")}
-          onOpenProjectDesk={() => setActiveView("projectDesk")}
-        />
-      </AppShell>
-    );
-  }
-
-  if (activeView === "projectDesk") {
-    return (
-      <AppShell navItems={navItems}>
-        <ProjectDesk
-          model={projectDeskModel}
-          agentContext={agentContextModel}
-          onOpenHome={() => setActiveView("home")}
-          onOpenExplorer={() => setActiveView("explorer")}
-        />
-      </AppShell>
-    );
+      await navigator.clipboard.writeText(cockpit.prompt);
+      setCopyState("copied");
+    } catch {
+      setCopyState("fallback");
+    }
   }
 
   return (
-    <AppShell navItems={navItems}>
-      <Home
-        model={homeModel}
-        agentContext={agentContextModel}
-        onOpenExplorer={() => setActiveView("explorer")}
-        onOpenProjectDesk={() => setActiveView("projectDesk")}
-      />
-    </AppShell>
+    <div className="min-h-screen bg-night-980 text-white">
+      <TopBar activeView={activeView} onSelectView={setActiveView} />
+
+      <main className="mx-auto max-w-[1440px] px-5 pb-6 pt-9 md:px-8 lg:px-12">
+        <ObjectHeader activeView={activeView} onSelectView={setActiveView} />
+
+        <section
+          aria-label="Workspace cockpit canvas"
+          className="mt-8 overflow-hidden rounded-stage border border-black/70 bg-night-960 shadow-stage"
+        >
+          <SurfaceTabs activeView={activeView} />
+
+          {activeView === "home" ? (
+            <HomeCockpit onSelectView={setActiveView} />
+          ) : (
+            <QueuedSurface view={activeView} onSelectView={setActiveView} />
+          )}
+
+          <ComposerTray copyState={copyState} onCopyPrompt={copyPrompt} />
+        </section>
+      </main>
+    </div>
   );
 }

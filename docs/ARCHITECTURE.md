@@ -5,7 +5,7 @@ boundaries.
 
 ## Status
 
-- Last reviewed: 2026-06-23.
+- Last reviewed: 2026-06-25.
 - Reviewed by: Aga + agent.
 - Related ADRs: `docs/decisions/ADR-0001-project-foundation.md`.
 
@@ -32,13 +32,16 @@ boundaries.
 Default principle: organize code by product/domain ownership, not by technical
 layer.
 
-- Chosen convention: `features`.
-- Exact root path: `src/features`.
-- Reason: Phase 0 has clear product areas: Home, Explorer, Project Desk, and
-  Agent Context. Feature ownership will stay readable and portable into Tauri.
+- Current Task 8B convention: app-local Workspace cockpit.
+- Exact root path: `src/app`.
+- Reason: Task 8B is a from-scratch visual system reset. Aga explicitly asked
+  to physically remove the legacy `src/features` and `src/shared`
+  implementation before rebuilding the design foundation. The current Home
+  cockpit keeps the first concrete grammar together until repeated patterns
+  from Tasks 9-11 justify extraction.
 - Existing repo convention: N/A, new repo.
 
-Planned frontend structure:
+Current frontend structure:
 
 ```txt
 workspace-ui/
@@ -47,16 +50,18 @@ workspace-ui/
   src/
     app/
       App.tsx
+      App.test.tsx
+      ComposerTray.tsx
+      HomeCockpit.tsx
+      ObjectHeader.tsx
+      QueuedSurface.tsx
+      SurfaceTabs.tsx
+      TopBar.tsx
+      WorkspaceDetailsPanel.tsx
+      cockpitData.ts
+      cockpitPrimitives.tsx
+      cockpitToneClasses.ts
       routes.ts
-    features/
-      home/
-      explorer/
-      project-desk/
-      agent-context/
-    shared/
-      ui/
-      data/
-      platform/
   public/
   docs/
   src-tauri/        # Phase 1 only, not created in Phase 0
@@ -64,10 +69,12 @@ workspace-ui/
 
 Global technical folders policy:
 
-- `src/shared/ui/` is allowed for reusable primitives and design-system pieces.
-- `src/shared/data/` is allowed for mock data and shared data shapes.
-- `src/shared/platform/` is allowed for adapters that hide mock vs future Tauri
-  behavior.
+- Do not recreate `src/features/` or `src/shared/` during the Task 8B reset just
+  to restore the old shape.
+- Reintroduce product-area folders only when the new cockpit grammar repeats
+  across Home, Explorer, Project Desk, and Context enough to earn extraction.
+- Reintroduce `src/shared/platform/` only when Phase 1 starts real platform or
+  Tauri behavior; Phase 0 currently has no real filesystem adapter.
 - Broad global dumping grounds for application logic are not allowed.
 
 ## Styling Tooling
@@ -98,9 +105,8 @@ Phase 0:
 
 ```txt
 public-safe mock data
-  -> platform/mock workspace adapter
-  -> feature view models
-  -> React views/components
+  -> src/app/cockpitData.ts
+  -> src/app/App.tsx + app-local cockpit modules
   -> user-visible prototype
 ```
 
@@ -108,14 +114,14 @@ Phase 1 candidate:
 
 ```txt
 Tauri filesystem commands
-  -> platform/tauri workspace adapter
-  -> feature view models
+  -> future platform/tauri workspace adapter
+  -> future feature or cockpit view models
   -> React views/components
 ```
 
 Notes:
 
-- Feature UI should not call Tauri APIs directly.
+- UI should not call Tauri APIs directly when Phase 1 begins.
 - Mock data should model privacy/status/context concepts without using real
   private data.
 - Raw technical details may exist as secondary UI, not as the first layer.
@@ -142,10 +148,10 @@ No persistent schema in Phase 0.
 
 | Concept | Storage | Owner module | Notes |
 |---|---|---|---|
-| Workspace area | TypeScript mock data | `shared/data` | Projects, Clients, Research, Build Logs, Templates, Assets, Archive. |
-| Artifact | TypeScript mock data | `shared/data` | File/project/card with role, status, privacy, agent-safety, preview type. |
-| Project desk | TypeScript mock data | `features/project-desk` | Focused composition for one project. |
-| Agent context composer | TypeScript mock data | `features/agent-context` | Active folder, selected/excluded/private/review-first files, suggested prompt, and browser clipboard fallback state. |
+| Workspace cockpit | TypeScript mock data | `src/app/cockpitData.ts` | Selected workspace object, tab belt, metrics, workflow nodes, details, and bounded surfaces. |
+| Artifact surface | TypeScript mock data | `src/app/cockpitData.ts` | Reachable placeholder for Task 9; no real preview execution or filesystem scanning. |
+| Project desk surface | TypeScript mock data | `src/app/cockpitData.ts` | Reachable placeholder for Task 10; no real project actions. |
+| Agent context composer | TypeScript mock data | `src/app/cockpitData.ts` + `src/app/ComposerTray.tsx` | Selected/review-first/private boundaries, suggested prompt, and browser clipboard fallback state. |
 
 ## External Systems
 
@@ -181,3 +187,4 @@ No persistent schema in Phase 0.
 |---|---|---|---|
 | 2026-06-20 | Initial architecture | Project foundation | N/A |
 | 2026-06-23 | Added Agent Context composer model and feature owner | Task 5 implemented the mock context composer slice | Task 5 |
+| 2026-06-25 | Replaced legacy `features/shared` implementation with app-local cockpit | Task 8B reset required physically removing the old visual layer and rebuilding Home as the design-system foundation | Current conversation |

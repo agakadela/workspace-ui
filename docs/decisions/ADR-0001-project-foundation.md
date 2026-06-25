@@ -31,7 +31,7 @@ Phase 0 proves useful.
 | Payments/entitlements | N/A | Out of scope. | Commercial packaging is considered. |
 | API style | N/A for Phase 0 | No backend/API. | Shared endpoint/action appears. |
 | UI foundation | Own dashboard-kit-inspired components; Radix/shadcn selectively | Preserve visual direction while allowing accessible primitives. | Revisit when reusable patterns harden after multiple views. |
-| Module convention | `src/features` + `src/shared` | Product-area ownership; portable to Tauri. | Product domains become more backend-like. |
+| Module convention | Task 8B app-local cockpit under `src/app`; earlier `src/features` + `src/shared` convention is suspended | The visual reset physically removed the old implementation so the first concrete cockpit grammar can harden before extraction. | Patterns repeat across Tasks 9-11 or Phase 1 platform behavior starts. |
 | AI boundary | N/A for Phase 0 | Agent Context Panel is mock-only. | First real AI/provider call. |
 | Future desktop | Tauri first, Electron fallback | Local-first desktop direction with smaller/security-focused runtime. | Phase 0 close decision. |
 | Monitoring | N/A for Phase 0 | Local prototype. | Launch/preview becomes real. |
@@ -104,17 +104,20 @@ Phase 0 proves useful.
 
 - Default principle: organize code by product/domain ownership, not by technical
   layer.
-- Chosen convention: `features`.
-- Exact root path: `src/features`.
-- Reason: Home, Explorer, Project Desk, and Agent Context are clear product
-  areas. This stays readable when Tauri adds `src-tauri/` later.
+- Current Task 8B convention: app-local Workspace cockpit.
+- Exact root path: `src/app`.
+- Reason: the Task 8B visual reset physically removed the legacy
+  `src/features` and `src/shared` implementation before rebuilding Home as the
+  design-system foundation. Extraction should follow repeated new cockpit
+  patterns, not the old module shape.
 - Why not `domains`: Phase 0 is a frontend prototype without stable backend
   domain boundaries.
-- Why not `modules`: less specific than feature ownership for this UI.
-- Shared code policy: `src/shared/ui`, `src/shared/data`, and
-  `src/shared/platform` only for genuinely shared primitives/adapters.
-- Dependency boundaries: feature UI should depend on shared primitives and
-  platform interfaces, not directly on future Tauri APIs.
+- Why not `features` now: the previous feature folders carried the rejected
+  visual system and were explicitly removed for Task 8B.
+- Shared code policy: do not recreate `src/shared` during Task 8B. Reintroduce
+  shared primitives or a platform adapter only when reuse or Phase 1 behavior is
+  real.
+- Dependency boundaries: UI must not call future Tauri APIs directly.
 
 ### Feedback Loops
 
@@ -157,7 +160,8 @@ Phase 0 proves useful.
 
 ### Operational Requirements Created By This ADR
 
-- Keep platform behavior behind `src/shared/platform`.
+- Keep future platform behavior behind an adapter boundary; `src/shared/platform`
+  should be reintroduced only when real Phase 1 behavior starts.
 - Do not create `src-tauri/` in Phase 0.
 - Maintain `docs/UI_SYSTEM.md`, created early at Aga's request so agents have a
   durable UI reference before later views exist.

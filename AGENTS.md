@@ -113,10 +113,14 @@ QA/testing/bug-report coverage or a larger release/regression pass.
 
 - Frontend stays at repo top level so it can later be bundled by Tauri.
 - Future Tauri code belongs in `src-tauri/`, not in Phase 0.
-- Product areas live under `src/features/`.
-- Cross-cutting primitives live under `src/shared/`.
-- Platform-specific behavior goes behind `src/shared/platform/` so Phase 0 can
-  use mock adapters and Phase 1 can use Tauri adapters.
+- Task 8B exception: the current visual foundation is app-local under `src/app`;
+  `src/features/` and `src/shared/` were physically removed during the reset.
+- Do not recreate `src/features/` or `src/shared/` just to restore the old
+  structure. Reintroduce product-area/shared folders only after the new cockpit
+  grammar repeats across actual Phase 0 screens.
+- Platform-specific behavior should go behind an adapter boundary when Phase 1
+  starts real filesystem/Tauri behavior; do not add a placeholder platform
+  layer during Phase 0 Task 8B.
 - Avoid global dumping grounds such as broad `components/`, `utils/`,
   `services/`, or `types/` folders for application logic.
 
