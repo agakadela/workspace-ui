@@ -144,6 +144,11 @@ longer feel like a generic AI-generated card dashboard.
   with a local Artifact Map rail, payload-forward artifact cards, readable
   selected Preview Pane, markdown/HTML mockup/image-card/code-summary examples,
   and calm unsupported plus empty states.
+- Task 10 Redesign Project Desk is complete: Project Desk now uses the Task 8B
+  app-local cockpit system and Task 9 payload language as a focused project
+  work surface with selected project context, source docs, next tasks,
+  recent/pinned work, context candidates, mock quick actions, and visible empty
+  states for no tasks, no extra pinned docs, and no safe context.
 - Dashboard UI kit PNGs exist as references only, not product assets.
 
 ## Phase 0 Decision
@@ -452,7 +457,7 @@ Notes:
 
 ### Task 10 - Redesign Project Desk
 
-- Status: planned.
+- Status: complete.
 - User-visible result: Project Desk feels like a focused project cockpit in the
   same system, not a long documentation/status page.
 - Description: Rebuild the project-focused screen around selected project
@@ -460,16 +465,16 @@ Notes:
   and mock quick actions using the Task 8B foundation and the artifact/preview
   language established in Task 9.
 - Acceptance criteria:
-  - [ ] Project Desk remains reachable from Home and Explorer.
-  - [ ] Project Desk uses the Task 8B design system foundation rather than
+  - [x] Project Desk remains reachable from Home and Explorer.
+  - [x] Project Desk uses the Task 8B design system foundation rather than
         inventing a separate screen language.
-  - [ ] The screen shows project status, source docs, next tasks,
+  - [x] The screen shows project status, source docs, next tasks,
         recent/pinned work, context candidates, and mock quick actions.
-  - [ ] Quick actions are visibly mock/conceptual and grouped as controls, not
+  - [x] Quick actions are visibly mock/conceptual and grouped as controls, not
         explanatory panels.
-  - [ ] Empty states remain visible for no tasks, no pinned docs, and no safe
+  - [x] Empty states remain visible for no tasks, no pinned docs, and no safe
         context.
-  - [ ] The screen does not imply real filesystem, Git, terminal, Codex/Claude,
+  - [x] The screen does not imply real filesystem, Git, terminal, Codex/Claude,
         auth, cloud, search, PDF, or file editing behavior.
 - Verification:
   - Automated: `npm run typecheck`, `npm run lint`, `npm test`,
@@ -481,12 +486,15 @@ Notes:
 - Dependencies:
   - Task 8B.
   - Task 9 for shared artifact/preview language.
-- Likely touched files:
-  - app-local cockpit modules under `src/app/`
+- Touched files:
+  - `src/app/App.tsx`
+  - `src/app/App.test.tsx`
+  - `src/app/ComposerTray.tsx`
+  - `src/app/ProjectDeskSurface.tsx`
   - `src/app/cockpitData.ts`
-  - `src/index.css`
-  - `docs/UI_SYSTEM.md` if Project Desk introduces reusable pattern
-    refinements.
+  - `docs/PLAN.md`
+  - `docs/UI_SYSTEM.md`
+  - `docs/VERIFY_LOG.md`
 - Do not touch:
   - Real open-in-VS-Code, Finder, or terminal behavior.
   - File editing, moving, deleting, or pinning persistence.
@@ -917,12 +925,12 @@ Notes:
 
 ### Checkpoint - After Task 10
 
-- [ ] Project Desk uses the Task 8B design system foundation and Task 9
+- [x] Project Desk uses the Task 8B design system foundation and Task 9
       artifact/preview language.
-- [ ] Project status, source docs, next tasks, recent/pinned work, context
+- [x] Project status, source docs, next tasks, recent/pinned work, context
       candidates, and mock quick actions remain visible.
-- [ ] Quick actions remain visibly mock/conceptual.
-- [ ] Project Desk does not read like a long documentation/status page.
+- [x] Quick actions remain visibly mock/conceptual.
+- [x] Project Desk does not read like a long documentation/status page.
 
 ### Checkpoint - After Task 11
 

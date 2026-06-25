@@ -7,7 +7,7 @@ changing Home, Explorer, Project Desk, Agent Context, or shared UI primitives.
 
 - Status: active Phase 0 reference.
 - Created: 2026-06-21.
-- Last updated: 2026-06-24.
+- Last updated: 2026-06-25.
 - Owner: Aga.
 - Reason for early creation: Aga explicitly requested a full UI reference before
   the second view so agents do not guess from isolated screenshots or one-off
@@ -184,10 +184,10 @@ Task 8B implementation status as of 2026-06-25:
   physically removed instead of being restyled.
 - The first concrete foundation now lives app-local under `src/app/`.
   `App.tsx` coordinates the active surface, while `TopBar`, `ObjectHeader`,
-  `SurfaceTabs`, `HomeCockpit`, `WorkspaceDetailsPanel`, `QueuedSurface`, and
-  `ComposerTray` express the cockpit shell, Home surface, bounded future
-  surfaces, and docked composer. `cockpitData.ts` holds the public-safe mock
-  model.
+  `SurfaceTabs`, `HomeCockpit`, `ExplorerSurface`, `ProjectDeskSurface`,
+  `WorkspaceDetailsPanel`, `QueuedSurface`, and `ComposerTray` express the
+  cockpit shell, rebuilt product surfaces, bounded future surfaces, and docked
+  composer. `cockpitData.ts` holds the public-safe mock model.
 - The Home screen is the runtime design-system specimen: top product chrome,
   selected workspace object header, segmented tab belt, dominant dark rounded
   canvas, dense metric/detail panels, dotted workflow field, bounded recent
@@ -197,9 +197,13 @@ Task 8B implementation status as of 2026-06-25:
   Artifact Map rail for workspace areas, payload-forward artifact cards,
   selected Preview Pane, and explicit markdown/HTML mockup/image-card/
   code-summary/unsupported/empty examples.
-- Project Desk and Context remain reachable as bounded future surfaces, but
-  Tasks 10-11 must rebuild their full product behavior against this cockpit
-  foundation.
+- Task 10 rebuilds Project Desk as the third real cockpit surface:
+  `ProjectDeskSurface` keeps the app-local `src/app` shape, uses selected
+  project context, source material, next tasks, recent/pinned work, context
+  candidates, grouped mock quick actions, and visible empty states for no
+  tasks, no extra pinned docs, and no safe context.
+- Context remains reachable as a bounded future surface, but Task 11 must
+  rebuild its full composer behavior against this cockpit foundation.
 
 The reset applies to the whole system:
 
@@ -562,8 +566,8 @@ Current Task 8B implementation:
   top-level cockpit composition.
 - App-local modules under `src/app/` own the concrete shell and surfaces:
   `TopBar`, `ObjectHeader`, `SurfaceTabs`, `HomeCockpit`,
-  `ExplorerSurface`, `WorkspaceDetailsPanel`, `QueuedSurface`, and
-  `ComposerTray`.
+  `ExplorerSurface`, `ProjectDeskSurface`, `WorkspaceDetailsPanel`,
+  `QueuedSurface`, and `ComposerTray`.
 - `src/app/cockpitData.ts` owns the public-safe mock view model for the current
   cockpit and reachable future surfaces.
 - Top navigation is a compact button group with `aria-current="page"` on the

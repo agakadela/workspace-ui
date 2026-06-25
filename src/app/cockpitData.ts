@@ -108,6 +108,14 @@ export type ExplorerArtifact = {
   };
 };
 
+export type MockQuickAction = {
+  id: string;
+  label: string;
+  detail: string;
+  status: StatusItem;
+  icon: LucideIcon;
+};
+
 export const navItems: CockpitNavItem[] = [
   { id: "home", label: "Home", icon: LayoutDashboard },
   { id: "explorer", label: "Explorer", icon: Compass },
@@ -479,6 +487,195 @@ export const cockpit = {
       },
     ] satisfies ExplorerArtifact[],
   },
+  projectDesk: {
+    project: {
+      eyebrow: "Selected fictional project",
+      title: "Orchard Launch Kit",
+      summary:
+        "A compact desk for the current Phase 0 redesign project: source truth, near-term tasks, recent material, and safe context candidates.",
+      status: { label: "Task 10 active", tone: "blue", icon: CircleDot } satisfies StatusItem,
+      rows: [
+        { label: "Project state", value: "Visual redesign in progress" },
+        { label: "Current slice", value: "Project Desk cockpit" },
+        { label: "Primary source", value: "docs/PLAN.md#task-10" },
+        { label: "Boundary", value: "Mock-only, no live IO" },
+      ] satisfies DetailRow[],
+    },
+    stats: [
+      {
+        id: "desk-source",
+        label: "Source Material",
+        value: "3 Docs",
+        meta: "Spec, plan, and UI system anchor the screen.",
+        icon: BookOpen,
+        tone: "blue",
+      },
+      {
+        id: "desk-tasks",
+        label: "Next Tasks",
+        value: "3 Items",
+        meta: "Task 10, Task 11, and verification stay visible.",
+        icon: ClipboardList,
+        tone: "orange",
+      },
+      {
+        id: "desk-context",
+        label: "Context Candidates",
+        value: "4 Files",
+        meta: "Safe, review-first, and excluded boundaries are explicit.",
+        icon: ShieldCheck,
+        tone: "mint",
+      },
+    ] satisfies WorkspaceMetric[],
+    sourceDocs: [
+      {
+        id: "desk-doc-plan",
+        title: "Task 10 plan",
+        path: "docs/PLAN.md#task-10",
+        reason: "Defines the focused Project Desk acceptance criteria.",
+        status: { label: "Current", tone: "blue", icon: CircleDot },
+      },
+      {
+        id: "desk-doc-ui",
+        title: "Project Desk UI target",
+        path: "docs/UI_SYSTEM.md#project-desk",
+        reason: "Keeps the screen inside the dashboard-kit cockpit grammar.",
+        status: { label: "Review first", tone: "orange", icon: TriangleAlert },
+      },
+      {
+        id: "desk-doc-spec",
+        title: "Phase 0 scope",
+        path: "docs/SPEC.md",
+        reason: "Preserves public-safe mock-only product boundaries.",
+        status: { label: "Source of truth", tone: "mint", icon: BadgeCheck },
+      },
+    ] satisfies ContextFile[],
+    nextTasks: [
+      {
+        id: "desk-task-10",
+        title: "Redesign Project Desk",
+        summary:
+          "Convert the project view from a placeholder into a dense focused cockpit.",
+        meta: "Current task",
+        status: { label: "In progress", tone: "blue", icon: CircleDot },
+      },
+      {
+        id: "desk-task-11",
+        title: "Attach Context Composer",
+        summary:
+          "Rework the handoff tray around selected, review-first, private, and excluded files.",
+        meta: "Next planned",
+        status: { label: "Planned", tone: "orange", icon: ClipboardList },
+      },
+      {
+        id: "desk-task-12",
+        title: "Whole-flow visual verification",
+        summary:
+          "Check Home, Explorer, Project Desk, and Composer across desktop and laptop widths.",
+        meta: "Verification pack",
+        status: { label: "Queued", tone: "neutral", icon: ShieldCheck },
+      },
+    ] satisfies ActivityItem[],
+    recentPinnedWork: [
+      {
+        id: "desk-work-explorer",
+        title: "Explorer inspection surface",
+        path: "src/app/ExplorerSurface.tsx",
+        reason: "Artifact card and preview language to reuse for project material.",
+        status: { label: "Done", tone: "mint", icon: BadgeCheck },
+      },
+      {
+        id: "desk-work-home",
+        title: "Home cockpit foundation",
+        path: "src/app/HomeCockpit.tsx",
+        reason: "Object header, work canvas, and dense panel rhythm.",
+        status: { label: "Foundation", tone: "blue", icon: LayoutDashboard },
+      },
+      {
+        id: "desk-work-data",
+        title: "Public-safe mock model",
+        path: "src/app/cockpitData.ts",
+        reason: "Fictional project state only; no private workspace data.",
+        status: { label: "Mock data", tone: "neutral", icon: LockKeyhole },
+      },
+    ] satisfies ContextFile[],
+    contextCandidates: [
+      {
+        id: "desk-context-plan",
+        title: "Task plan excerpt",
+        path: "docs/PLAN.md#task-10",
+        reason: "Selected because it names the active contract.",
+        status: { label: "Safe for agent", tone: "mint", icon: ShieldCheck },
+      },
+      {
+        id: "desk-context-ui",
+        title: "UI system guidance",
+        path: "docs/UI_SYSTEM.md",
+        reason: "Review first because it references external visual material.",
+        status: { label: "Review first", tone: "orange", icon: TriangleAlert },
+      },
+      {
+        id: "desk-context-app",
+        title: "Cockpit app modules",
+        path: "src/app/",
+        reason: "Selected as implementation context, not a raw folder dump.",
+        status: { label: "Developer-readable", tone: "neutral", icon: FileText },
+      },
+      {
+        id: "desk-context-private",
+        title: "Private archive placeholder",
+        path: "private-client-material/",
+        reason: "Fictional private example; visible only as an exclusion boundary.",
+        status: { label: "Private: excluded", tone: "danger", icon: LockKeyhole },
+      },
+    ] satisfies ContextFile[],
+    quickActions: [
+      {
+        id: "desk-action-source",
+        label: "Open source stack",
+        detail: "Review docs in the mock desk",
+        status: { label: "Mock control", tone: "neutral", icon: CircleDot },
+        icon: BookOpen,
+      },
+      {
+        id: "desk-action-context",
+        label: "Stage context draft",
+        detail: "Prepare handoff boundaries",
+        status: { label: "Mock control", tone: "neutral", icon: CircleDot },
+        icon: ClipboardList,
+      },
+      {
+        id: "desk-action-review",
+        label: "Mark desk reviewed",
+        detail: "Conceptual progress state",
+        status: { label: "Mock control", tone: "neutral", icon: CircleDot },
+        icon: ShieldCheck,
+      },
+    ] satisfies MockQuickAction[],
+    emptyStates: [
+      {
+        id: "desk-empty-tasks",
+        title: "No backlog tasks",
+        summary: "The later-task lane is empty for this fictional project.",
+        meta: "Empty task state",
+        status: { label: "No tasks", tone: "neutral", icon: CircleDot },
+      },
+      {
+        id: "desk-empty-pins",
+        title: "No extra pinned docs",
+        summary: "Only the three source documents are pinned in Phase 0.",
+        meta: "Empty pinned-doc state",
+        status: { label: "No pinned docs", tone: "neutral", icon: BookOpen },
+      },
+      {
+        id: "desk-empty-context",
+        title: "No safe context here",
+        summary: "Private archive examples stay excluded from the handoff.",
+        meta: "Empty safe-context state",
+        status: { label: "Excluded", tone: "danger", icon: LockKeyhole },
+      },
+    ] satisfies ActivityItem[],
+  },
   contextGroups: [
     {
       id: "selected",
@@ -566,7 +763,7 @@ export const cockpit = {
       eyebrow: "Focused work surface",
       title: "Project Desk",
       summary:
-        "A reachable project cockpit for the next pass: source docs, next work, recent decisions, and mock controls stay bounded.",
+        "A focused project cockpit with source docs, next work, recent pinned material, context candidates, and bounded mock controls.",
       icon: FolderKanban,
       stats: ["1 fictional project", "3 source docs", "0 live actions"],
     },
@@ -580,7 +777,7 @@ export const cockpit = {
     },
   },
   prompt:
-    "Rebuild Task 9 as the Visual Explorer and Preview cockpit surface. Keep it web-only, mock-only, and public-safe. Preserve Phase 0 boundaries: no real filesystem reads, Git, terminal, search, auth, cloud, Tauri, PDF, file editing, or live Codex execution.",
+    "Rebuild Task 10 as the Project Desk cockpit surface. Keep it web-only, mock-only, and public-safe. Preserve Phase 0 boundaries: no real filesystem reads, Git, terminal, search, auth, cloud, Tauri, PDF, file editing, or live Codex execution.",
 };
 
 export function getSurfaceLabel(view: ViewId) {

@@ -5,6 +5,7 @@ import { ComposerTray, type CopyState } from "./ComposerTray";
 import { ExplorerSurface } from "./ExplorerSurface";
 import { HomeCockpit } from "./HomeCockpit";
 import { ObjectHeader } from "./ObjectHeader";
+import { ProjectDeskSurface } from "./ProjectDeskSurface";
 import { QueuedSurface } from "./QueuedSurface";
 import { SurfaceTabs } from "./SurfaceTabs";
 import { TopBar } from "./TopBar";
@@ -43,6 +44,8 @@ export function App() {
             <HomeCockpit onSelectView={setActiveView} />
           ) : activeView === "explorer" ? (
             <ExplorerSurface onSelectView={setActiveView} />
+          ) : activeView === "projectDesk" ? (
+            <ProjectDeskSurface onSelectView={setActiveView} />
           ) : (
             <QueuedSurface view={activeView} onSelectView={setActiveView} />
           )}
