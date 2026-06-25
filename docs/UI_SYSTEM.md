@@ -92,20 +92,19 @@ layouts.
 - visual payloads that are only decorative thumbnails rather than useful
   previews or object signals.
 
-## Whole Phase 0 Visual Reset Foundation
+## Whole Phase 0 Visual Reset Contract
 
-This foundation now applies to the actual Phase 0 product flow, not to a
-detached proof screen. Aga rejected the standalone Task 8B proof direction
+This contract applies to the actual Phase 0 product flow, not to a detached
+demo or checkpoint screen. Aga rejected the standalone Task 8B demo direction
 because it produced another surface to judge instead of addressing the source
-problem: Home, Explorer, Project Desk, and Agent Context still need one
-coherent visual system.
+problem: the existing app UI needs to be rebuilt as one coherent visual system.
 
 The implementation should closely match the layout grammar, density, hierarchy,
 proportions, shell, dark canvas, object headers, tab/control rows, panel rhythm,
 and composer/tray treatment of the selected references while using
 `workspace-ui` content and public-safe mock data in the real screens.
 
-### Foundation Reference Model
+### Reference Model
 
 Use a hybrid model:
 
@@ -155,7 +154,7 @@ miss if it does not read as a close adaptation of `Company Profile.png`,
 
 ### From-Scratch Visual System Reset
 
-Task 8B resets the visual system from scratch. The current UI proves product
+Task 8B resets the visual system from scratch. The current UI shows product
 surfaces and mock-only boundaries, but it is not the design foundation.
 
 The reset applies to the whole system:
@@ -197,7 +196,7 @@ boundaries; rebuild the design system where the references demand it.
 
 ### Component Library Stance
 
-Do not build a broad component library before repeated product screens prove
+Do not build a broad component library before repeated product screens establish
 the pattern. The library should grow from Home, Explorer, Project Desk, and
 Agent Context needs during the whole Phase 0 reset.
 
@@ -240,8 +239,8 @@ The redesigned flow must show:
 - accessible focus states and readable contrast.
 
 Rejected approach: rendering a meta-checklist, reference names, or a standalone
-proof surface in product UI. Reference comparison belongs in docs/review or PR
-notes, not in the app.
+demo/checkpoint surface in product UI. Reference comparison belongs in
+docs/review or PR notes, not in the app.
 
 Task 8B should remain one end-to-end visual reset task with internal gates. Do
 not split it back into separate top-level Home, Explorer, Project Desk, and
@@ -284,7 +283,7 @@ Primary feeling:
 ## Phase 0 Redesign Direction
 
 The current implementation is a functional sketch, not the accepted visual
-direction. It proves the product surfaces, but it reads too much like a generic
+direction. It shows the product surfaces, but it reads too much like a generic
 AI-generated card dashboard: large explanatory sections, repeated card shapes,
 left rail scaffolding, and long documentation-like panels.
 
@@ -326,7 +325,7 @@ moss/clay; preserve that product personality while borrowing the references'
 dark dashboard structure.
 
 During the redesign, do not preserve the existing left rail plus white page-card
-composition unless a later design pass explicitly proves it is stronger than
+composition unless a later design pass explicitly demonstrates it is stronger than
 the reference-backed top-nav/canvas direction.
 
 Use:
@@ -826,7 +825,7 @@ For any meaningful UI slice:
 - run `npm run lint`,
 - run relevant tests or `npm test` when behavior changed,
 - run `npm run build` before merge/phase close,
-- use targeted gstack `/browse` runtime proof for visual/state checks,
+- use targeted gstack `/browse` runtime review for visual/state checks,
 - check desktop and narrower laptop widths proportionally,
 - record cannot-verify items.
 
