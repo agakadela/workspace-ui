@@ -182,9 +182,12 @@ Task 8B implementation status as of 2026-06-25:
 
 - The legacy `src/features/` and `src/shared/` implementation folders were
   physically removed instead of being restyled.
-- The first concrete foundation now lives app-local under `src/app/`:
-  `App.tsx` expresses the cockpit shell and Home surface, while
-  `cockpitData.ts` holds the public-safe mock model.
+- The first concrete foundation now lives app-local under `src/app/`.
+  `App.tsx` coordinates the active surface, while `TopBar`, `ObjectHeader`,
+  `SurfaceTabs`, `HomeCockpit`, `WorkspaceDetailsPanel`, `QueuedSurface`, and
+  `ComposerTray` express the cockpit shell, Home surface, bounded future
+  surfaces, and docked composer. `cockpitData.ts` holds the public-safe mock
+  model.
 - The Home screen is the runtime design-system specimen: top product chrome,
   selected workspace object header, segmented tab belt, dominant dark rounded
   canvas, dense metric/detail panels, dotted workflow field, bounded recent
@@ -550,9 +553,11 @@ Do not add account/auth concepts beyond public-safe mock UI.
 
 Current Task 8B implementation:
 
-- `src/app/App.tsx` owns global top navigation, product chrome, mock-only
-  status controls, object header, segmented tabs, the dark cockpit canvas,
-  Home panels, and the docked composer tray.
+- `src/app/App.tsx` owns active-view state, clipboard fallback state, and the
+  top-level cockpit composition.
+- App-local modules under `src/app/` own the concrete shell and surfaces:
+  `TopBar`, `ObjectHeader`, `SurfaceTabs`, `HomeCockpit`,
+  `WorkspaceDetailsPanel`, `QueuedSurface`, and `ComposerTray`.
 - `src/app/cockpitData.ts` owns the public-safe mock view model for the current
   cockpit and reachable future surfaces.
 - Top navigation is a compact button group with `aria-current="page"` on the
@@ -637,8 +642,9 @@ Use for markdown, HTML mockup, image/card, and code-summary previews.
 Current Task 8B implementation:
 
 - Preview and Composer treatments are expressed as app-local cockpit patterns
-  in `src/app/App.tsx`. Do not recreate `WorkspaceTray` or `src/shared/ui`
-  until repeated Task 9-11 needs justify extraction.
+  in `src/app/HomeCockpit.tsx`, `src/app/QueuedSurface.tsx`, and
+  `src/app/ComposerTray.tsx`. Do not recreate `WorkspaceTray` or
+  `src/shared/ui` until repeated Task 9-11 needs justify extraction.
 
 Rules:
 
@@ -864,8 +870,8 @@ Rules:
 - Reusable primitives remain app-local until reuse is real across the rebuilt
   Phase 0 screens.
 - Current cockpit patterns are `TopBar`, `ObjectHeader`, `SurfaceTabs`,
-  `WorkflowPanel`, `WorkspaceDetailsPanel`, `StatusPill`, and `ComposerTray`
-  inside `src/app/App.tsx`.
+  `HomeCockpit`, `WorkflowPanel`, `WorkspaceDetailsPanel`, `StatusPill`, and
+  `ComposerTray` under `src/app`.
 - Mock data stays in `src/app/cockpitData.ts` until the new model repeats
   enough to justify extraction. A real platform adapter is Phase 1+.
 - Do not add Radix/shadcn or other UI dependencies without asking Aga first.

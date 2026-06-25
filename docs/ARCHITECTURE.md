@@ -51,7 +51,16 @@ workspace-ui/
     app/
       App.tsx
       App.test.tsx
+      ComposerTray.tsx
+      HomeCockpit.tsx
+      ObjectHeader.tsx
+      QueuedSurface.tsx
+      SurfaceTabs.tsx
+      TopBar.tsx
+      WorkspaceDetailsPanel.tsx
       cockpitData.ts
+      cockpitPrimitives.tsx
+      cockpitToneClasses.ts
       routes.ts
   public/
   docs/
@@ -97,7 +106,7 @@ Phase 0:
 ```txt
 public-safe mock data
   -> src/app/cockpitData.ts
-  -> src/app/App.tsx cockpit views
+  -> src/app/App.tsx + app-local cockpit modules
   -> user-visible prototype
 ```
 
@@ -142,7 +151,7 @@ No persistent schema in Phase 0.
 | Workspace cockpit | TypeScript mock data | `src/app/cockpitData.ts` | Selected workspace object, tab belt, metrics, workflow nodes, details, and bounded surfaces. |
 | Artifact surface | TypeScript mock data | `src/app/cockpitData.ts` | Reachable placeholder for Task 9; no real preview execution or filesystem scanning. |
 | Project desk surface | TypeScript mock data | `src/app/cockpitData.ts` | Reachable placeholder for Task 10; no real project actions. |
-| Agent context composer | TypeScript mock data | `src/app/cockpitData.ts` + `src/app/App.tsx` | Selected/review-first/private boundaries, suggested prompt, and browser clipboard fallback state. |
+| Agent context composer | TypeScript mock data | `src/app/cockpitData.ts` + `src/app/ComposerTray.tsx` | Selected/review-first/private boundaries, suggested prompt, and browser clipboard fallback state. |
 
 ## External Systems
 

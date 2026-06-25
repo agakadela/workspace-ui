@@ -358,7 +358,16 @@ Notes:
   - `docs/VERIFY_LOG.md`
   - `CONTEXT.md`
   - `src/app/App.tsx`
+  - `src/app/ComposerTray.tsx`
+  - `src/app/HomeCockpit.tsx`
+  - `src/app/ObjectHeader.tsx`
+  - `src/app/QueuedSurface.tsx`
+  - `src/app/SurfaceTabs.tsx`
+  - `src/app/TopBar.tsx`
+  - `src/app/WorkspaceDetailsPanel.tsx`
   - `src/app/cockpitData.ts`
+  - `src/app/cockpitPrimitives.tsx`
+  - `src/app/cockpitToneClasses.ts`
   - `src/app/App.test.tsx`
   - `src/index.css`
   - deleted `src/features/`
@@ -413,7 +422,7 @@ Notes:
 - Dependencies:
   - Task 8B.
 - Likely touched files:
-  - `src/app/App.tsx`
+  - app-local cockpit modules under `src/app/`
   - `src/app/cockpitData.ts`
   - `src/index.css`
   - `docs/UI_SYSTEM.md` if Explorer introduces reusable pattern refinements.
@@ -463,7 +472,7 @@ Notes:
   - Task 8B.
   - Task 9 for shared artifact/preview language.
 - Likely touched files:
-  - `src/app/App.tsx`
+  - app-local cockpit modules under `src/app/`
   - `src/app/cockpitData.ts`
   - `src/index.css`
   - `docs/UI_SYSTEM.md` if Project Desk introduces reusable pattern
@@ -512,7 +521,7 @@ Notes:
   - Task 8B.
   - Task 10 for Project Desk attachment.
 - Likely touched files:
-  - `src/app/App.tsx`
+  - app-local cockpit modules under `src/app/`
   - `src/app/cockpitData.ts`
   - `src/index.css`
   - `docs/UI_SYSTEM.md` if reusable composer patterns change.
