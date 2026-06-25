@@ -63,7 +63,7 @@ It will include:
 
 ## Phase 0 Visual Redesign Addendum
 
-The current Phase 0 implementation proves the product surfaces and mock-only
+The current Phase 0 implementation shows the product surfaces and mock-only
 boundaries, but it is not visually accepted as the direction for the product.
 The UI currently reads too much like a generic AI-generated dashboard: a set of
 descriptive cards inside a scaffold, rather than a premium, dense,
@@ -117,12 +117,13 @@ Create a stronger dashboard-kit-inspired product surface for the existing Phase
   layout, proportion, density, chrome, and interaction surface hierarchy.
 - Rebuild the visual system from the references rather than preserving the
   current typography, effects, panel treatments, or component rhythm by default.
-- Add a reference-matched layout foundation before deeper screen redesign work:
-  `Company Profile.png` is the primary shell/object reference, `Workflow.png`
-  is the work-canvas reference, and `Company Profile - ai chat*.png` is the
-  composer/tray reference.
-- Require a small runtime proof of the layout foundation before rebuilding the
-  full screen set.
+- Rebuild the actual Phase 0 app UI end to end against the reference grammar;
+  no standalone sample, demo surface, or partial layout checkpoint is
+  sufficient.
+- Use `Company Profile.png` as the primary shell/object reference,
+  `Workflow.png` as the work-canvas reference, and
+  `Company Profile - ai chat*.png` as the composer/tray reference for the full
+  application, not a detached foundation sample.
 - Do not add Tauri, real filesystem access, Git integration, search, terminal,
   file editing, auth, cloud sync, AI calls, or provider behavior.
 
@@ -160,7 +161,7 @@ Create a stronger dashboard-kit-inspired product surface for the existing Phase
 - Successful outcome: user knows where work left off and what next action makes
   sense before opening VS Code.
 - Failure/empty states: no recent activity, no pinned docs, no next tasks.
-- Runtime proof required: Home renders with public-safe mock data and remains
+- Runtime review required: Home renders with public-safe mock data and remains
   readable on desktop and narrower laptop widths.
 
 ### Flow 2: Browse Artifacts With Meaning
@@ -174,7 +175,7 @@ Create a stronger dashboard-kit-inspired product surface for the existing Phase
   3. Preview pane renders a readable preview or summary.
 - Successful outcome: user sees what a file/folder means, not only where it is.
 - Failure/empty states: no artifacts in area, unsupported preview type.
-- Runtime proof required: markdown, HTML mockup, image/card, and code-summary
+- Runtime review required: markdown, HTML mockup, image/card, and code-summary
   preview examples are visible.
 
 ### Flow 3: Work From Project Desk
@@ -189,7 +190,7 @@ Create a stronger dashboard-kit-inspired product surface for the existing Phase
   listing.
 - Failure/empty states: project has no tasks, no pinned docs, or no safe agent
   context.
-- Runtime proof required: one fictional project shows docs, previews, tasks,
+- Runtime review required: one fictional project shows docs, previews, tasks,
   context candidates, and quick actions.
 
 ### Flow 4: Compose Mock Agent Context
@@ -202,7 +203,7 @@ Create a stronger dashboard-kit-inspired product surface for the existing Phase
   3. User reviews suggested prompt and copies it.
 - Successful outcome: agent context feels explicit and controlled.
 - Failure/empty states: no selected files, private file warning.
-- Runtime proof required: panel is visibly a composer, not a chat or live Codex
+- Runtime review required: panel is visibly a composer, not a chat or live Codex
   session.
 
 ## Success Criteria
@@ -220,7 +221,7 @@ Create a stronger dashboard-kit-inspired product surface for the existing Phase
 | Agent workflow is documented | Docs review | At least two rounds recorded before Phase 0 decision | Aga + agent |
 | Phase 0 decision can be made | Phase close review | Move to Tauri, improve concept, or stop | Aga |
 | Redesign direction is documented | Docs review | Reference audit and task pack exist before implementation PRs | Aga + agent |
-| Reference-matched layout foundation is accepted | Docs + runtime proof | `docs/UI_SYSTEM.md` defines the hybrid reference grammar and the app shows a small proof before full screen redesign | Aga |
+| Design system foundation contract is accepted | Docs + runtime review | `docs/UI_SYSTEM.md` defines the full-app reference grammar, Task 8B foundation, and sequenced screen rebuild; standalone demo surfaces, partial layout checkpoints, and component polish are rejected as sufficient | Aga |
 | Current UI is treated as a functional sketch | Plan review | Redesign tasks may replace shell/layouts while preserving Phase 0 flows | Aga + agent |
 | Dashboard-kit inspiration is stronger | Visual review | Top nav, dark workspace canvas, dense panels, object-focused surfaces, and refined control rhythm are visible | Aga |
 | Generic AI-dashboard feel is removed | Visual review | Screens no longer read as explanatory card grids or template scaffold UI | Aga |
@@ -260,15 +261,21 @@ Create a stronger dashboard-kit-inspired product surface for the existing Phase
   Aga's request so agents have a durable UI reference before later views exist.
 - Existing module convention remains `src/features`; the redesign does not
   change the architecture convention, and the shared component library should
-  grow organically from repeated Phase 0 screen patterns after the foundation
-  proof, not from a broad up-front abstraction pass.
-- Accepted for the redesign: Task 8B stays one end-to-end visual reset task
-  because splitting the screens into separate implementation tasks caused
-  disconnected polish. The task may have internal checkpoints, but acceptance is
-  judged against the whole Phase 0 flow and near-clone reference grammar.
-- Future: reference-matched layout foundation and component grammar, if the
-  accepted proof establishes reusable app-shell/workspace-canvas primitives that
-  should be treated as architecture rather than ordinary UI implementation.
+  grow organically from the Task 8B design system foundation and repeated Phase
+  0 screen patterns during the sequenced rebuild, not from a broad up-front
+  abstraction pass.
+- Accepted for the redesign: Task 8B establishes the initial concrete design
+  system foundation and Workspace cockpit model for the whole Phase 0 app,
+  using Home as the first implemented cockpit surface. Tasks 9-11 then rebuild
+  the remaining required product surfaces in sequence against that shared
+  system: Explorer + Preview, Project Desk, and Agent Context Composer.
+- Accepted for the redesign: screen tasks may be split only after the shared
+  design system foundation exists. Splitting before the foundation caused
+  disconnected polish; splitting after the foundation is now required so each
+  required surface can be judged against the same reference-matched grammar.
+- Future: reference-matched component grammar, if the sequenced redesign
+  establishes reusable app-shell/workspace-canvas primitives that should be
+  treated as architecture rather than ordinary UI implementation.
 - Future: HTML preview sandbox policy before Phase 1 real local HTML preview.
 - Future: Tauri filesystem permissions and ignore rules before real workspace
   scanning.
@@ -280,9 +287,10 @@ Create a stronger dashboard-kit-inspired product surface for the existing Phase
 
 - N/A for the Phase 0 visual redesign task pack. Aga confirmed the scope stays
   Phase 0 web-only/mock-only, the current UI structure is disposable, the
-  redesign should be deeper than polish, and the reference-matched layout
-  foundation should be documented and proven in runtime before full screen
-  redesign.
+  redesign should be a UI implementation reset with zero legacy visual
+  carryover, Task 8B should establish the initial concrete design system for the
+  whole project, and Tasks 9-11 should rebuild each remaining required product
+  surface against that shared cockpit model.
 
 ### Non-blocking
 
@@ -292,7 +300,7 @@ Create a stronger dashboard-kit-inspired product surface for the existing Phase
 - Whether to introduce Radix/shadcn for specific accessible primitives.
 - Where to host/share the prototype, if anywhere, during Phase 0.
 - Exact format for documenting the two agent-work rounds.
-- Exact shared primitive API names after the reference-matched foundation proof.
+- Exact shared primitive API names after the sequenced visual rebuild.
 
 ## Review Notes
 
