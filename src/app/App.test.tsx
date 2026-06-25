@@ -48,6 +48,24 @@ describe("Task 8B cockpit foundation", () => {
     ).toBeInTheDocument();
   });
 
+  it("attaches the redesigned context composer to Home with explicit boundaries", () => {
+    render(<App />);
+
+    const composer = screen.getByRole("region", {
+      name: /agent context composer/i,
+    });
+
+    expect(within(composer).getByText(/home handoff/i)).toBeInTheDocument();
+    expect(within(composer).getByText(/orchard notes workspace/i)).toBeInTheDocument();
+    expect(within(composer).getByText(/active folder/i)).toBeInTheDocument();
+    expect(within(composer).getByText(/^selected context$/i)).toBeInTheDocument();
+    expect(within(composer).getByText(/^review first$/i)).toBeInTheDocument();
+    expect(within(composer).getByText(/^private$/i)).toBeInTheDocument();
+    expect(within(composer).getByText(/^excluded$/i)).toBeInTheDocument();
+    expect(within(composer).getByText(/suggested prompt/i)).toBeInTheDocument();
+    expect(within(composer).getByText(/no live agent execution/i)).toBeInTheDocument();
+  });
+
   it("shows bounded activity, status, privacy, and mock-only signals", () => {
     render(<App />);
 
@@ -173,7 +191,7 @@ describe("Task 8B cockpit foundation", () => {
     expect(screen.getAllByText(/controlled handoff/i).length).toBeGreaterThan(0);
   });
 
-  it("keeps Context reachable as a bounded future pass", async () => {
+  it("opens Context as the full composer surface without live-agent behavior", async () => {
     const user = userEvent.setup();
 
     render(<App />);
@@ -192,7 +210,10 @@ describe("Task 8B cockpit foundation", () => {
         name: /agent context composer/i,
       }),
     ).toBeInTheDocument();
-    expect(screen.getAllByText(/controlled handoff/i).length).toBeGreaterThan(0);
+    expect(screen.getByText(/selected handoff boundary/i)).toBeInTheDocument();
+    expect(screen.getByText(/private boundary/i)).toBeInTheDocument();
+    expect(screen.getByText(/excluded boundary/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/no live agent execution/i).length).toBeGreaterThan(0);
   });
 
   it("copies the mock prompt with an accessible fallback state", async () => {
@@ -214,7 +235,9 @@ describe("Task 8B cockpit foundation", () => {
       within(composer).getByRole("button", { name: /copy suggested prompt/i }),
     );
 
-    expect(writeText).toHaveBeenCalledWith(expect.stringContaining("Task 10"));
+    expect(writeText).toHaveBeenCalledWith(expect.stringContaining("Task 11"));
+    expect(writeText).toHaveBeenCalledWith(expect.stringContaining("selected"));
+    expect(writeText).toHaveBeenCalledWith(expect.stringContaining("private"));
     expect(
       await screen.findByText(/clipboard permission is unavailable/i),
     ).toBeInTheDocument();

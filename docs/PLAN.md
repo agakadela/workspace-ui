@@ -39,7 +39,7 @@ longer feel like a generic AI-generated card dashboard.
 - [x] Task 8B establishes the initial concrete design system foundation and
       Workspace cockpit model for the whole Phase 0 app, with Home as the first
       implemented cockpit surface.
-- [ ] Tasks 9-11 rebuild Visual Explorer + Preview, Project Desk, and Agent
+- [x] Tasks 9-11 rebuild Visual Explorer + Preview, Project Desk, and Agent
       Context Composer in sequence against the Task 8B design system
       foundation.
 - [x] Redesign uses dashboard UI kit references strongly without copying
@@ -149,6 +149,11 @@ longer feel like a generic AI-generated card dashboard.
   work surface with selected project context, source docs, next tasks,
   recent/pinned work, context candidates, mock quick actions, and visible empty
   states for no tasks, no extra pinned docs, and no safe context.
+- Task 11 Redesign Agent Context Composer is complete: the Composer now uses
+  the app-local cockpit system as an attached handoff tray on Home and Project
+  Desk, plus a full Context surface with selected, review-first, private, and
+  excluded boundaries, secondary suggested prompt, and accessible copy
+  success/fallback states.
 - Dashboard UI kit PNGs exist as references only, not product assets.
 
 ## Phase 0 Decision
@@ -510,7 +515,7 @@ Notes:
 
 ### Task 11 - Redesign Agent Context Composer
 
-- Status: planned.
+- Status: complete.
 - User-visible result: Agent Context Composer feels like an attached handoff
   tray/layer in the same cockpit system, not a chat, terminal, or text dump.
 - Description: Rebuild the mock Composer around active folder, selected,
@@ -518,15 +523,15 @@ Notes:
   It should borrow the reference AI-chat tray/share-panel density while
   translating access semantics into explicit context boundaries.
 - Acceptance criteria:
-  - [ ] Composer uses the Task 8B design system foundation rather than inventing
+  - [x] Composer uses the Task 8B design system foundation rather than inventing
         a separate screen language.
-  - [ ] Composer is attached to the current workspace/project context on Home
+  - [x] Composer is attached to the current workspace/project context on Home
         and Project Desk, not placed as a long standalone documentation panel.
-  - [ ] Selected, excluded, private, and review-first boundaries are visible at
+  - [x] Selected, excluded, private, and review-first boundaries are visible at
         a glance.
-  - [ ] Suggested prompt remains secondary to context boundary clarity.
-  - [ ] Copy prompt success/fallback remains accessible.
-  - [ ] The Composer does not imply live Codex/Claude, terminal, provider
+  - [x] Suggested prompt remains secondary to context boundary clarity.
+  - [x] Copy prompt success/fallback remains accessible.
+  - [x] The Composer does not imply live Codex/Claude, terminal, provider
         execution, automatic private-data selection, or real file reads.
 - Verification:
   - Automated: `npm run typecheck`, `npm run lint`, `npm test`,
@@ -538,11 +543,14 @@ Notes:
 - Dependencies:
   - Task 8B.
   - Task 10 for Project Desk attachment.
-- Likely touched files:
-  - app-local cockpit modules under `src/app/`
+- Touched files:
+  - `src/app/App.tsx`
+  - `src/app/App.test.tsx`
+  - `src/app/ComposerTray.tsx`
+  - `src/app/ContextComposerSurface.tsx`
   - `src/app/cockpitData.ts`
-  - `src/index.css`
-  - `docs/UI_SYSTEM.md` if reusable composer patterns change.
+  - `docs/PLAN.md`
+  - `docs/UI_SYSTEM.md`
 - Do not touch:
   - Real Codex, Claude, terminal, provider execution, or AI calls.
   - Real file reads or automatic context selection from disk.
@@ -552,7 +560,7 @@ Notes:
   - `$aga-build`
   - `frontend-ui-engineering`
 - Estimated scope: Medium.
-- Cannot verify yet:
+- Cannot verify:
   - Real agent handoff quality; Phase 0 is mock-only.
 
 ### Task 12 - Redesign Verification Pack
@@ -934,12 +942,12 @@ Notes:
 
 ### Checkpoint - After Task 11
 
-- [ ] Agent Context Composer uses the Task 8B design system foundation.
-- [ ] Composer is attached to Home and Project Desk context instead of becoming
+- [x] Agent Context Composer uses the Task 8B design system foundation.
+- [x] Composer is attached to Home and Project Desk context instead of becoming
       a standalone chat/text panel.
-- [ ] Selected, excluded, private, and review-first boundaries are visible at a
+- [x] Selected, excluded, private, and review-first boundaries are visible at a
       glance.
-- [ ] Composer still does not imply live agent execution, terminal, provider
+- [x] Composer still does not imply live agent execution, terminal, provider
       behavior, or real file reads.
 
 ### Checkpoint - After Task 12

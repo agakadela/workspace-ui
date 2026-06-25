@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { cockpit, type ViewId } from "./cockpitData";
 import { ComposerTray, type CopyState } from "./ComposerTray";
+import { ContextComposerSurface } from "./ContextComposerSurface";
 import { ExplorerSurface } from "./ExplorerSurface";
 import { HomeCockpit } from "./HomeCockpit";
 import { ObjectHeader } from "./ObjectHeader";
@@ -46,11 +47,21 @@ export function App() {
             <ExplorerSurface onSelectView={setActiveView} />
           ) : activeView === "projectDesk" ? (
             <ProjectDeskSurface onSelectView={setActiveView} />
+          ) : activeView === "context" ? (
+            <ContextComposerSurface
+              copyState={copyState}
+              onCopyPrompt={copyPrompt}
+              onSelectView={setActiveView}
+            />
           ) : (
             <QueuedSurface view={activeView} onSelectView={setActiveView} />
           )}
 
-          <ComposerTray copyState={copyState} onCopyPrompt={copyPrompt} />
+          <ComposerTray
+            activeView={activeView}
+            copyState={copyState}
+            onCopyPrompt={copyPrompt}
+          />
         </section>
       </main>
     </div>
