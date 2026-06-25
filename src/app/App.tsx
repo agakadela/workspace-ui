@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { cockpit, type ViewId } from "./cockpitData";
 import { ComposerTray, type CopyState } from "./ComposerTray";
+import { ExplorerSurface } from "./ExplorerSurface";
 import { HomeCockpit } from "./HomeCockpit";
 import { ObjectHeader } from "./ObjectHeader";
 import { QueuedSurface } from "./QueuedSurface";
@@ -40,6 +41,8 @@ export function App() {
 
           {activeView === "home" ? (
             <HomeCockpit onSelectView={setActiveView} />
+          ) : activeView === "explorer" ? (
+            <ExplorerSurface onSelectView={setActiveView} />
           ) : (
             <QueuedSurface view={activeView} onSelectView={setActiveView} />
           )}

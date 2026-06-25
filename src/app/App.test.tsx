@@ -60,7 +60,7 @@ describe("Task 8B cockpit foundation", () => {
     expect(screen.getAllByText(/private: excluded/i).length).toBeGreaterThan(0);
   });
 
-  it("opens future surfaces without restoring the old feature screens", async () => {
+  it("opens Explorer as a dense artifact inspection surface", async () => {
     const user = userEvent.setup();
 
     render(<App />);
@@ -70,8 +70,64 @@ describe("Task 8B cockpit foundation", () => {
     expect(
       screen.getByRole("heading", { level: 1, name: /visual explorer/i }),
     ).toBeInTheDocument();
-    expect(screen.getAllByText(/artifact inspection/i).length).toBeGreaterThan(0);
-    expect(screen.getByText(/5 artifacts/i)).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 2, name: /artifact map/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 2, name: /source docs/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/workspace layer promise/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/docs\/SPEC\.md/i).length).toBeGreaterThan(0);
+
+    await user.click(screen.getByRole("button", { name: /html mockups/i }));
+    await user.click(screen.getByRole("button", { name: /home handoff mockup/i }));
+
+    expect(
+      screen.getByRole("img", { name: /static html mockup preview/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/no iframe, no script execution/i)).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /visual cards/i }));
+    await user.click(screen.getByRole("button", { name: /reference mood card/i }));
+
+    expect(
+      screen.getByRole("img", { name: /image card preview/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", {
+        level: 2,
+        name: /dark cockpit material study/i,
+      }),
+    ).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /code summary/i }));
+    await user.click(screen.getByRole("button", { name: /cockpit app modules/i }));
+
+    expect(screen.getByText(/code summary, not a source dump/i)).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /source docs/i }));
+    await user.click(
+      screen.getByRole("button", { name: /archived pdf placeholder/i }),
+    );
+
+    expect(
+      screen.getByRole("heading", {
+        level: 3,
+        name: /unsupported preview state/i,
+      }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/no pdf viewer added/i)).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /empty archive/i }));
+
+    expect(screen.getByText(/no safe artifacts in empty archive/i)).toBeInTheDocument();
+    expect(screen.getByText(/no selected artifact/i)).toBeInTheDocument();
+  });
+
+  it("keeps later surfaces reachable as bounded future passes", async () => {
+    const user = userEvent.setup();
+
+    render(<App />);
 
     await user.click(screen.getByRole("button", { name: /^project desk$/i }));
 
@@ -110,7 +166,7 @@ describe("Task 8B cockpit foundation", () => {
       within(composer).getByRole("button", { name: /copy suggested prompt/i }),
     );
 
-    expect(writeText).toHaveBeenCalledWith(expect.stringContaining("Task 8B"));
+    expect(writeText).toHaveBeenCalledWith(expect.stringContaining("Task 9"));
     expect(
       await screen.findByText(/clipboard permission is unavailable/i),
     ).toBeInTheDocument();

@@ -27,7 +27,7 @@ export function ComposerTray({
           Agent Context Composer
         </h2>
         <p className="px-2 py-2 text-sm font-medium text-ash-300">
-          Context ready for Task 8B reset?
+          Context ready for Task 9 Explorer?
         </p>
         <div className="flex items-center gap-2">
           <button
@@ -42,7 +42,7 @@ export function ComposerTray({
             className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-control bg-night-860 px-4 text-sm font-semibold text-white transition hover:bg-night-800"
           >
             <Sparkles aria-hidden="true" className="text-flame-500" size={16} />
-            Task 8B reset
+            Task 9 Explorer
             <ChevronDown aria-hidden="true" size={15} />
           </button>
           <button
