@@ -74,6 +74,20 @@ This redesign may change the composition, shell, layout primitives, information
 density, copy density, and panel hierarchy of the current screens. It must
 preserve the product flows and Phase 0 boundaries.
 
+The redesign target is a near-clone visual grammar of the reference kit, not
+generic inspiration. Agents should closely match the references' macro
+composition, proportions, density, panel rhythm, dark workspace canvas, top
+navigation, object header, tab/control language, and composer/tray hierarchy
+while replacing the reference domain, brand, content, data, icons/logos, and
+assets with original `workspace-ui` mock content.
+
+This is a from-scratch visual system reset. The current UI is only a functional
+prototype and should not constrain the redesign. The reset covers the whole
+system design: layout grammar, typography hierarchy, spacing scale, radius,
+color balance, depth, shadows, overlays, hover/focus/pressed states, panel
+effects, preview/composer treatments, and icon/control rhythm. Changing only
+colors, corner radius, or isolated cards is not enough.
+
 ### Redesign Objective
 
 Create a stronger dashboard-kit-inspired product surface for the existing Phase
@@ -99,6 +113,10 @@ Create a stronger dashboard-kit-inspired product surface for the existing Phase
   references.
 - Use the dashboard UI kit PNGs as strong visual inspiration, not assets to copy
   1:1.
+- Treat the dashboard UI kit PNGs as the visual grammar to closely follow for
+  layout, proportion, density, chrome, and interaction surface hierarchy.
+- Rebuild the visual system from the references rather than preserving the
+  current typography, effects, panel treatments, or component rhythm by default.
 - Add a reference-matched layout foundation before deeper screen redesign work:
   `Company Profile.png` is the primary shell/object reference, `Workflow.png`
   is the work-canvas reference, and `Company Profile - ai chat*.png` is the
@@ -206,6 +224,8 @@ Create a stronger dashboard-kit-inspired product surface for the existing Phase
 | Current UI is treated as a functional sketch | Plan review | Redesign tasks may replace shell/layouts while preserving Phase 0 flows | Aga + agent |
 | Dashboard-kit inspiration is stronger | Visual review | Top nav, dark workspace canvas, dense panels, object-focused surfaces, and refined control rhythm are visible | Aga |
 | Generic AI-dashboard feel is removed | Visual review | Screens no longer read as explanatory card grids or template scaffold UI | Aga |
+| Near-clone reference grammar is visible | Visual review | The app feels like it belongs to the same dashboard-kit family in shell, canvas, object headers, tabs, dense panels, and composer/tray behavior while using original workspace-ui content | Aga |
+| Full visual system reset is visible | Visual review | Typography, spacing, radius, depth/effects, states, panels, overlays, and controls are redesigned together instead of polished one component at a time | Aga |
 
 ## Product Constraints
 
@@ -242,6 +262,10 @@ Create a stronger dashboard-kit-inspired product surface for the existing Phase
   change the architecture convention, and the shared component library should
   grow organically from repeated Phase 0 screen patterns after the foundation
   proof, not from a broad up-front abstraction pass.
+- Accepted for the redesign: Task 8B stays one end-to-end visual reset task
+  because splitting the screens into separate implementation tasks caused
+  disconnected polish. The task may have internal checkpoints, but acceptance is
+  judged against the whole Phase 0 flow and near-clone reference grammar.
 - Future: reference-matched layout foundation and component grammar, if the
   accepted proof establishes reusable app-shell/workspace-canvas primitives that
   should be treated as architecture rather than ordinary UI implementation.

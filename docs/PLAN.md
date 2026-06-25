@@ -31,18 +31,13 @@ longer feel like a generic AI-generated card dashboard.
 - [x] The app shell moves toward top navigation, product chrome, and a dominant
       dark workspace canvas instead of the current left rail plus white page
       card composition.
-- [ ] Reference-matched layout foundation is documented and accepted as a hard
-      gate before deeper screen redesign continues.
-- [ ] A small runtime proof demonstrates the hybrid foundation: `Company
-      Profile.png` as primary shell/object reference, `Workflow.png` as work
-      canvas reference, and `Company Profile - ai chat*.png` as composer/tray
-      reference.
-- [ ] Home is redesigned as a first-screen workspace cockpit, not an
-      explanatory stack of equal-weight cards.
-- [ ] Visual Explorer + Preview is redesigned as a dense inspection surface
-      with stronger preview/object hierarchy.
-- [ ] Project Desk and Agent Context Composer are redesigned as working tools,
-      not long documentation panels.
+- [x] The rejected Task 8B standalone proof surface is removed from the product
+      UI and from the redesign plan.
+- [x] Task 8B is redefined as a whole-Phase-0 visual reset that addresses the
+      source problem: disconnected screen-by-screen polish and proof surfaces
+      instead of one coherent workspace product.
+- [ ] Home, Visual Explorer + Preview, Project Desk, and Agent Context Composer
+      are redesigned together as one object-focused workspace system.
 - [ ] Redesign uses dashboard UI kit references strongly without copying
       reference assets, brand content, or exact screens 1:1.
 - [ ] Targeted visual verification proves the redesigned screens at desktop and
@@ -75,12 +70,12 @@ longer feel like a generic AI-generated card dashboard.
 - The redesign should follow the references more strongly: top nav, dark
   workspace canvas, dense panels, object-focused surfaces, refined tabs, and
   tighter control rhythm.
-- The redesign must pass a reference-matched layout foundation gate before
-  screen-level Task 9-11 work continues. The foundation should strongly mirror
-  the selected references' composition and hierarchy, not only borrow colors or
-  rounded surfaces.
-- The shared component library should grow from repeated screen needs after the
-  foundation proof, not from a broad up-front abstraction pass.
+- The redesign should not use a standalone proof/checkpoint surface as the
+  visual gate. Aga rejected that direction. The gate is now the full Phase 0
+  product flow itself.
+- The shared component library should grow from repeated needs while rebuilding
+  the actual Phase 0 screens, not from a broad up-front abstraction pass or a
+  detached proof surface.
 - Future Tauri compatibility is protected through `src/shared/platform/`.
 - Desktop/laptop are priority; mobile is not a Phase 0 priority.
 
@@ -127,6 +122,9 @@ longer feel like a generic AI-generated card dashboard.
   instead of sitting behind large bright page cards, named Tailwind
   shell/radius/depth tokens, and reusable shell/tray/tab primitives for the
   remaining redesign tasks.
+- Rejected Task 8B runtime proof surface was reverted: the app no longer has a
+  `Foundation`/`Foundation Proof` navigation item or a standalone proof screen.
+  The plan now treats the whole Phase 0 product flow as the visual gate.
 - Dashboard UI kit PNGs exist as references only, not product assets.
 
 ## Phase 0 Decision
@@ -151,11 +149,9 @@ Runnable Vite/React/Tailwind shell + feedback loops
     -> functional Home / Explorer / Project Desk / Agent Context sketch
       -> reference audit and redesign brief
         -> redesigned shell, tokens, and layout primitives
-          -> reference-matched layout foundation docs and runtime proof
-            -> redesigned Home
-              -> redesigned Explorer + Preview
-                -> redesigned Project Desk + Agent Context Composer
-                  -> visual verification pack
+          -> whole-Phase-0 visual reset across Home, Explorer + Preview,
+             Project Desk, and Agent Context Composer
+            -> visual verification pack
 ```
 
 Notes:
@@ -263,51 +259,92 @@ Notes:
 - Cannot verify yet:
   - Whether each screen fully reaches the new visual bar until Tasks 9-11.
 
-### Task 8B - Reference-Matched Layout Foundation Proof
+### Task 8B - Whole Phase 0 UI Reset
 
-- Status: planned.
-- User-visible result: Aga can judge a small live foundation proof before the
-  redesign is applied across Home, Explorer, Project Desk, and Agent Context.
+- Status: planned, replaces the rejected standalone foundation proof.
+- User-visible result: Aga can judge the actual Phase 0 product flow as one
+  near-clone reference-grammar product surface instead of a detached
+  proof/checklist surface or another round of generic dashboard polish.
 - Five-line feature spec:
-  - Problem: the current shell primitives exist, but the plan still allows
-    loose, generic dashboard interpretation during screen redesign.
-  - Flow: document the hybrid reference grammar, implement a minimal live
-    shell/canvas proof, and compare it visually before deeper screen work.
-  - Visible result: a top-nav, dark-canvas, object-header, dense-panel proof
-    that feels materially close to the selected dashboard UI kit references.
-  - Out of scope: full Home/Explorer/Project Desk rebuild, broad component
-    library, copied reference assets, or new Phase 0 product behavior.
-  - Success: Aga accepts the proof as the foundation for subsequent screen and
-    component work.
-- Description: Establish a hard design-system foundation before Task 9. Use
-  `Company Profile.png` as the primary shell/object reference, `Workflow.png`
-  for the dominant work canvas, and `Company Profile - ai chat.png` /
-  `Company Profile - ai chat (1).png` for composer/tray language. Produce a
-  small runtime proof that demonstrates the foundation without rebuilding every
-  screen.
+  - Problem: the rejected 8B proof treated the symptom, not the source problem;
+    Phase 0 still reads as disconnected dashboard/card screens, and "inspired
+    by the references" has left too much room for generic AI-dashboard output.
+  - Flow: remove the standalone proof surface, then redesign Home, Explorer +
+    Preview, Project Desk, and Agent Context Composer together as one coherent
+    workspace product surface that closely follows the reference kit's macro
+    composition, density, shell, canvas, object headers, tabs, panels, and
+    composer/tray hierarchy.
+  - Visible result: Home remains first, but the full Phase 0 flow shares one
+    object-first cockpit language: selected workspace/project/artifact,
+    meaningful previews, dense controls, and an attached context composer.
+  - Out of scope: copied reference assets, new UI dependencies, Tauri, real
+    filesystem/Git/Codex/search/terminal/auth/cloud/PDF/file editing behavior.
+  - Success: Aga reviews runtime screenshots/flow and accepts that the app
+    feels like it belongs to the same dashboard-kit family as the references
+    while using original `workspace-ui` content and mock data.
+- Description: Replace the rejected Task 8B runtime proof with a true source
+  fix: rebuild the actual Phase 0 screens together. Use the dashboard UI kit
+  references as a near-clone visual grammar for the real product flow, not as
+  names or checklist copy in the UI. The work should preserve every existing
+  Phase 0 concept while changing the composition, hierarchy, density, copy
+  rhythm, and preview/composer placement where needed.
+- Task shape: keep this as one end-to-end task. Splitting Home, Explorer,
+  Project Desk, and Composer back into separate top-level tasks risks the same
+  disconnected screen-by-screen polish that caused the current mismatch. Use
+  internal checkpoints, but judge acceptance only against the whole Phase 0
+  flow.
+- Visual-system scope: treat the current UI as a functional prototype to
+  replace, not a design base to preserve. The reset covers typography,
+  spacing, radius, color balance, shadows, depth, overlays, hover/focus/pressed
+  states, panel effects, icon/control rhythm, preview panes, and
+  composer/tray treatment across the whole app.
 - Acceptance criteria:
-  - [ ] `docs/UI_SYSTEM.md` contains the reference-matched layout foundation,
-        including selected references, similarity targets, layout grammar,
-        component-library stance, runtime proof contract, and review checklist.
-  - [ ] The proof uses top navigation/product chrome as the default global
-        frame.
-  - [ ] The proof makes a dark rounded workspace canvas the dominant first
-        viewport surface.
-  - [ ] The proof shows a selected-object header, compact action cluster,
-        reference-like tab/control rhythm, dense supporting panels, and a
-        preview or composer placeholder attached to the canvas.
-  - [ ] The proof is visually closer to the hybrid reference model than to a
-        generic dashboard shell.
-  - [ ] Shared primitives are introduced only where they serve the proof or are
-        immediately reusable by planned Phase 0 redesign tasks.
+  - [ ] No `Foundation` / `Foundation Proof` product route, nav item, runtime
+        proof screen, or proof-specific test remains.
+  - [ ] The redesigned screens use a near-clone visual grammar from the
+        reference kit: top nav, dominant rounded dark canvas, object header,
+        dense panels, segmented tabs/controls, compact action clusters, and
+        docked/floating composer rhythm.
+  - [ ] The visual system is rebuilt from scratch where needed: typography,
+        spacing, radius, shadows/depth/effects, panel treatment, interaction
+        states, icon/control rhythm, preview panes, and composer tray all feel
+        reference-matched.
+  - [ ] Home is redesigned as the first-screen workspace cockpit, not an
+        explanatory card stack.
+  - [ ] Visual Explorer + Preview is redesigned as a dense inspection surface
+        with stronger selected-artifact and readable-preview hierarchy.
+  - [ ] Project Desk is redesigned as a working project surface, not a long
+        status/documentation page.
+  - [ ] Agent Context Composer is redesigned as an attached handoff tool with
+        selected/excluded/private/review-first boundaries visible at a glance.
+  - [ ] The screens share one visual system: top product chrome, selected
+        object header, compact controls/tabs, dense purposeful panels, and
+        preview/composer attachment.
+  - [ ] The implementation does not merely reuse current components with new
+        colors, radii, or spacing; existing layouts are disposable when they
+        conflict with the references.
+  - [ ] Recent Activity remains bounded to three static cards.
+  - [ ] Required preview kinds remain available: markdown, HTML mockup,
+        image/card, code summary, unsupported, and empty state.
   - [ ] Phase 0 mock-only exclusions remain intact.
+- Internal gates:
+  - [ ] Gate 1: establish the reference-matched shell/object/canvas grammar
+        across all screens, including typography, spacing, radius, depth,
+        effects, and interaction states, before polishing any individual panel.
+  - [ ] Gate 2: rebuild Home, Explorer + Preview, Project Desk, and Composer
+        as one coherent flow with shared hierarchy and attached previews/trays.
+  - [ ] Gate 3: run runtime screenshots/flow review and compare against
+        `Company Profile.png`, `Workflow.png`, and
+        `Company Profile - ai chat*.png` for visual-family closeness.
 - Verification:
   - Automated: `npm run typecheck`, `npm run lint`, `npm test`,
     `npm run build`.
-  - Runtime/manual: targeted gstack `/browse` check at desktop and narrower
-    laptop widths.
-  - Visual proof: compare screenshots against `Company Profile.png`,
-    `Workflow.png`, and `Company Profile - ai chat*.png`.
+  - Runtime/manual: targeted gstack `/browse` flow over Home, Explorer +
+    Preview, Project Desk, and Agent Context Composer at desktop and `1024px`.
+  - Visual proof: screenshots of the actual screens compared against the
+    selected dashboard-kit patterns, with the explicit question: "Does this
+    feel like the same reference-kit family, or merely a generic dashboard with
+    borrowed colors?"
 - Dependencies:
   - Task 7.
   - Task 8.
@@ -318,11 +355,14 @@ Notes:
   - `src/app/App.tsx`
   - `src/index.css`
   - `src/shared/ui/`
-  - One minimal feature surface if needed for the proof.
+  - `src/features/home/`
+  - `src/features/explorer/`
+  - `src/features/project-desk/`
+  - `src/features/agent-context/`
+  - `src/shared/data/` only if mock content needs tightening for the redesign.
 - Do not touch:
-  - Full Home, Explorer, Project Desk, or Agent Context rebuild beyond what is
-    needed to mount the proof.
-  - Broad component library work before reuse exists.
+  - Standalone proof/checklist surfaces.
+  - Broad component library work before repeated screen needs exist.
   - Dashboard UI kit PNGs as product assets.
   - New UI dependencies without asking first.
   - `src-tauri/`
@@ -332,14 +372,15 @@ Notes:
 - Skill routing:
   - `$aga-build`
   - `frontend-ui-engineering`
-- Estimated scope: Medium.
+- Estimated scope: Large.
 - Cannot verify yet:
-  - Whether the foundation is accepted as visually close enough until Aga
-    reviews the runtime proof.
+  - Whether the full Phase 0 visual direction is accepted until Aga reviews the
+    rebuilt runtime flow.
 
 ### Task 9 - Redesign Home As Workspace Cockpit
 
-- Status: planned.
+- Status: folded into Task 8B unless Aga explicitly asks to split the reset
+  back into separate screen tasks.
 - User-visible result: Home feels like the primary cockpit for returning to a
   local workspace, not a landing page or a card-based status report.
 - Description: Rebuild Home around a strong first-screen workspace object:
@@ -386,7 +427,8 @@ Notes:
 
 ### Task 10 - Redesign Visual Explorer And Preview
 
-- Status: planned.
+- Status: folded into Task 8B unless Aga explicitly asks to split the reset
+  back into separate screen tasks.
 - User-visible result: Explorer feels like a dense artifact inspection surface
   with a meaningful preview hierarchy, not a list of similarly weighted cards.
 - Description: Rework Explorer around workspace areas, selected artifact state,
@@ -434,7 +476,8 @@ Notes:
 
 ### Task 11 - Redesign Project Desk And Agent Context Composer
 
-- Status: planned.
+- Status: folded into Task 8B unless Aga explicitly asks to split the reset
+  back into separate screen tasks.
 - User-visible result: Project Desk and Agent Context Composer feel like working
   surfaces with controls and state, not long documentation panels.
 - Description: Rebuild the project-focused screen and composer around selected
@@ -485,7 +528,8 @@ Notes:
 
 ### Task 12 - Redesign Verification Pack
 
-- Status: planned.
+- Status: folded into Task 8B verification unless Aga explicitly asks to split
+  the reset back into separate tasks.
 - User-visible result: Aga has visual evidence to decide whether the redesigned
   Phase 0 concept is good enough to consider Tauri next.
 - Description: Run the automated checks and a targeted visual browser pass over
@@ -827,12 +871,18 @@ Notes:
 
 ### Checkpoint - After Task 8B
 
-- [ ] Hybrid reference model is documented in `docs/UI_SYSTEM.md`.
-- [ ] Runtime proof shows top nav, dark canvas, object header, tabs/controls,
-      dense panels, and preview/composer attachment.
-- [ ] Aga has accepted the proof as close enough to guide screen redesign.
-- [ ] Component extraction remains limited to the foundation proof and
-      immediately reused Phase 0 patterns.
+- [ ] Standalone `Foundation` / `Foundation Proof` route, nav, feature, tests,
+      and review doc are removed.
+- [ ] Home, Explorer + Preview, Project Desk, and Agent Context Composer are
+      redesigned together as one coherent Phase 0 workspace product using a
+      near-clone visual grammar from the references.
+- [ ] Runtime proof shows the real screens, not a detached proof surface.
+- [ ] Aga has accepted the whole Phase 0 visual direction.
+- [ ] Aga has accepted that one end-to-end Task 8B was sufficient; any remaining
+      visual gaps become follow-up tasks only after the whole flow has been
+      judged.
+- [ ] Component extraction remains limited to repeated needs from the actual
+      Phase 0 screens.
 - [ ] No Phase 0 exclusions were introduced.
 - [ ] Typecheck, lint, tests, and build pass.
 
