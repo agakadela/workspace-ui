@@ -17,13 +17,16 @@ changing Home, Explorer, Project Desk, Agent Context, or shared UI primitives.
 
 ## Reference Images Checked
 
-The UI should be heavily inspired by the dashboard UI kit PNGs in
-`docs/design/references/dashboard-ui-kit/`.
+The UI should closely follow the dashboard UI kit PNGs in
+`docs/design/references/dashboard-ui-kit/` as a near-clone visual grammar.
 
 Use these references for density, panel rhythm, rounded dark surfaces,
 tab/control styling, typography feel, quiet status treatment, and polished
-dashboard craft. Do not copy logos, brand names, insurance/company domain
-content, illustrations, exact layouts, exact visual assets, or screens 1:1.
+dashboard craft. The app should feel like it belongs to the same kit family in
+macro composition, proportions, chrome, canvas hierarchy, object headers,
+tabs/controls, dense panels, and composer/tray treatment. Do not copy logos,
+brand names, insurance/company domain content, illustrations, exact visual
+assets, or screens 1:1.
 
 For the Phase 0 visual redesign, start from these reference roles:
 
@@ -89,13 +92,18 @@ layouts.
 - visual payloads that are only decorative thumbnails rather than useful
   previews or object signals.
 
-## Reference-Matched Layout Foundation
+## Whole Phase 0 Visual Reset Foundation
 
-This foundation is a required gate before deeper Home, Explorer, Project Desk,
-and Agent Context redesign work. It is stronger than "inspired by the
-references": implementation should closely match the layout grammar, density,
-hierarchy, and control rhythm of the selected references while using
-workspace-ui content and public-safe mock data.
+This foundation now applies to the actual Phase 0 product flow, not to a
+detached proof screen. Aga rejected the standalone Task 8B proof direction
+because it produced another surface to judge instead of addressing the source
+problem: Home, Explorer, Project Desk, and Agent Context still need one
+coherent visual system.
+
+The implementation should closely match the layout grammar, density, hierarchy,
+proportions, shell, dark canvas, object headers, tab/control rows, panel rhythm,
+and composer/tray treatment of the selected references while using
+`workspace-ui` content and public-safe mock data in the real screens.
 
 ### Foundation Reference Model
 
@@ -140,6 +148,33 @@ An implementation is not acceptable if it keeps the current scaffold feeling and
 only borrows colors, rounded corners, or isolated components from the
 references.
 
+The acceptance bar is visual-family closeness. A neat custom dashboard, a
+recolored current UI, or a generic "premium SaaS" interpretation is still a
+miss if it does not read as a close adaptation of `Company Profile.png`,
+`Workflow.png`, and the AI-chat composer references.
+
+### From-Scratch Visual System Reset
+
+Task 8B resets the visual system from scratch. The current UI proves product
+surfaces and mock-only boundaries, but it is not the design foundation.
+
+The reset applies to the whole system:
+
+- typography scale, hierarchy, density, and label/body/metadata rhythm,
+- spacing scale, grid proportions, and first-viewport composition,
+- radius system for controls, panels, trays, and major canvases,
+- color balance across dark canvas, paper surfaces, selected states, and
+  status accents,
+- depth, shadows, overlays, borders, and other panel effects,
+- hover, focus, pressed, selected, empty, unsupported, private, and review-first
+  states,
+- icon/control rhythm, tab strips, chips, action clusters, and tool controls,
+- preview pane, composer tray, and attached/floating surface treatments.
+
+Do not preserve existing typography, panel treatments, effects, or component
+rhythm simply because they already exist. Preserve product concepts and Phase 0
+boundaries; rebuild the design system where the references demand it.
+
 ### Non-Negotiable Layout Grammar
 
 - Shell: global frame uses top navigation/product chrome as the default. A left
@@ -156,18 +191,18 @@ references.
   the current object or canvas, not placed as long explanatory documents.
 - Copy density: visible text should behave like product UI. Keep raw technical
   explanation secondary and compact.
-- Public-safe mock data: all proof content stays fictional and must not imply
+- Public-safe mock data: all product content stays fictional and must not imply
   real filesystem, Git, Codex, Tauri, auth, cloud, search, terminal, PDF, or
   file editing behavior.
 
 ### Component Library Stance
 
-Do not build a broad component library before the foundation is proven. The
-library should grow from repeated product areas after the layout grammar is
-accepted.
+Do not build a broad component library before repeated product screens prove
+the pattern. The library should grow from Home, Explorer, Project Desk, and
+Agent Context needs during the whole Phase 0 reset.
 
-Allowed early primitives, only when used by the foundation proof or immediately
-reused by planned screens:
+Allowed early primitives, only when used by the actual Phase 0 screens or
+immediately reused by planned screens:
 
 - `AppShell`
 - `WorkspaceCanvas`
@@ -182,34 +217,47 @@ reused by planned screens:
 Feature-specific UI should remain inside `src/features/<feature>/` until a
 pattern is reused or clearly needed across the active Phase 0 redesign tasks.
 
-### Foundation Runtime Proof
+### Whole Phase 0 Runtime Gate
 
-Before Home, Explorer, Project Desk, or Agent Context are deeply rebuilt, Task
-8B must produce a small runtime proof that demonstrates the foundation. This
-proof can be a neutral shell/canvas state or a minimal existing app surface, but
-it must show:
+Task 8B no longer creates a separate `Foundation` / `Foundation Proof` product
+surface. The runtime gate is the real Phase 0 flow:
+
+- Home as the first-screen workspace cockpit,
+- Visual Explorer + Preview as the artifact inspection surface,
+- Project Desk as the focused project work surface,
+- Agent Context Composer as the controlled handoff tray/tool.
+
+The redesigned flow must show:
 
 - top navigation/product chrome,
-- dominant dark workspace canvas,
-- selected-object header,
-- tab or segmented control rhythm,
-- compact action cluster,
-- dense supporting panel group,
-- preview or composer placeholder attached to the canvas,
+- one selected workspace/project/artifact object per screen,
+- dominant dark workspace surfaces in the first viewport,
+- tab or segmented control rhythm where it belongs to the current object,
+- compact action clusters near the surface they affect,
+- dense supporting panels with distinct jobs,
+- readable previews and composer trays attached to the current object or
+  canvas,
 - accessible focus states and readable contrast.
 
-The proof is acceptable only if Aga can visually compare it with the hybrid
-reference model and decide whether it is close enough before further screen
-redesign work continues.
+Rejected approach: rendering a meta-checklist, reference names, or a standalone
+proof surface in product UI. Reference comparison belongs in docs/review or PR
+notes, not in the app.
+
+Task 8B should remain one end-to-end visual reset task with internal gates. Do
+not split it back into separate top-level Home, Explorer, Project Desk, and
+Composer polish tasks unless Aga explicitly asks for that after reviewing the
+whole redesigned runtime flow.
 
 ### Similarity Review Checklist
 
-Use this checklist before accepting the foundation proof:
+Use this checklist before accepting the whole Phase 0 visual reset:
 
 - Does the first viewport immediately feel close to `Company Profile.png` and
-  `Workflow.png`, not merely like a recolored app shell?
+  `Workflow.png`, not merely like a recolored app shell or card dashboard?
+- Would a viewer believe this app belongs to the same dashboard-kit family as
+  the references before reading any explanatory copy?
 - Is the dark canvas the dominant surface, not a background decoration?
-- Is there one clear selected object or work surface?
+- Is there one clear selected object or work surface on each screen?
 - Are panels dense and purposeful instead of an even grid?
 - Are tabs, chips, icon controls, and action clusters placed like product
   controls, not explanatory cards?
