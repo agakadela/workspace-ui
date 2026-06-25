@@ -221,7 +221,7 @@ Create a stronger dashboard-kit-inspired product surface for the existing Phase
 | Agent workflow is documented | Docs review | At least two rounds recorded before Phase 0 decision | Aga + agent |
 | Phase 0 decision can be made | Phase close review | Move to Tauri, improve concept, or stop | Aga |
 | Redesign direction is documented | Docs review | Reference audit and task pack exist before implementation PRs | Aga + agent |
-| Total app visual rebuild contract is accepted | Docs + runtime review | `docs/UI_SYSTEM.md` defines the full-app reference grammar and rejects standalone demo surfaces, partial layout checkpoints, and component polish as sufficient | Aga |
+| Design system foundation contract is accepted | Docs + runtime review | `docs/UI_SYSTEM.md` defines the full-app reference grammar, Task 8B foundation, and sequenced screen rebuild; standalone demo surfaces, partial layout checkpoints, and component polish are rejected as sufficient | Aga |
 | Current UI is treated as a functional sketch | Plan review | Redesign tasks may replace shell/layouts while preserving Phase 0 flows | Aga + agent |
 | Dashboard-kit inspiration is stronger | Visual review | Top nav, dark workspace canvas, dense panels, object-focused surfaces, and refined control rhythm are visible | Aga |
 | Generic AI-dashboard feel is removed | Visual review | Screens no longer read as explanatory card grids or template scaffold UI | Aga |
@@ -261,15 +261,21 @@ Create a stronger dashboard-kit-inspired product surface for the existing Phase
   Aga's request so agents have a durable UI reference before later views exist.
 - Existing module convention remains `src/features`; the redesign does not
   change the architecture convention, and the shared component library should
-  grow organically from repeated Phase 0 screen patterns during the total app
-  visual rebuild, not from a broad up-front abstraction pass.
-- Accepted for the redesign: Task 8B stays one end-to-end visual reset task
-  because splitting the screens into separate implementation tasks caused
-  disconnected polish. The task may have internal checkpoints, but acceptance is
-  judged against the whole Phase 0 flow and near-clone reference grammar.
-- Future: reference-matched component grammar, if the total redesign establishes
-  reusable app-shell/workspace-canvas primitives that should be treated as
-  architecture rather than ordinary UI implementation.
+  grow organically from the Task 8B design system foundation and repeated Phase
+  0 screen patterns during the sequenced rebuild, not from a broad up-front
+  abstraction pass.
+- Accepted for the redesign: Task 8B establishes the initial concrete design
+  system foundation and Workspace cockpit model for the whole Phase 0 app,
+  using Home as the first implemented cockpit surface. Tasks 9-11 then rebuild
+  the remaining required product surfaces in sequence against that shared
+  system: Explorer + Preview, Project Desk, and Agent Context Composer.
+- Accepted for the redesign: screen tasks may be split only after the shared
+  design system foundation exists. Splitting before the foundation caused
+  disconnected polish; splitting after the foundation is now required so each
+  required surface can be judged against the same reference-matched grammar.
+- Future: reference-matched component grammar, if the sequenced redesign
+  establishes reusable app-shell/workspace-canvas primitives that should be
+  treated as architecture rather than ordinary UI implementation.
 - Future: HTML preview sandbox policy before Phase 1 real local HTML preview.
 - Future: Tauri filesystem permissions and ignore rules before real workspace
   scanning.
@@ -281,9 +287,10 @@ Create a stronger dashboard-kit-inspired product surface for the existing Phase
 
 - N/A for the Phase 0 visual redesign task pack. Aga confirmed the scope stays
   Phase 0 web-only/mock-only, the current UI structure is disposable, the
-  redesign should be a total app visual rebuild deeper than polish, and the
-  accepted direction must be judged against the complete runtime flow rather
-  than a standalone demo surface.
+  redesign should be a UI implementation reset with zero legacy visual
+  carryover, Task 8B should establish the initial concrete design system for the
+  whole project, and Tasks 9-11 should rebuild each remaining required product
+  surface against that shared cockpit model.
 
 ### Non-blocking
 
@@ -293,7 +300,7 @@ Create a stronger dashboard-kit-inspired product surface for the existing Phase
 - Whether to introduce Radix/shadcn for specific accessible primitives.
 - Where to host/share the prototype, if anywhere, during Phase 0.
 - Exact format for documenting the two agent-work rounds.
-- Exact shared primitive API names after the total visual rebuild.
+- Exact shared primitive API names after the sequenced visual rebuild.
 
 ## Review Notes
 

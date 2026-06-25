@@ -99,6 +99,13 @@ demo or checkpoint screen. Aga rejected the standalone Task 8B demo direction
 because it produced another surface to judge instead of addressing the source
 problem: the existing app UI needs to be rebuilt as one coherent visual system.
 
+The rebuild now proceeds in sequence. Task 8B establishes the initial concrete
+design system foundation for the whole project and implements Home as the first
+Workspace cockpit surface. Tasks 9-11 then rebuild Visual Explorer + Preview,
+Project Desk, and Agent Context Composer against that same system. This keeps
+one shared visual grammar without forcing every required screen into one
+implementation task.
+
 The implementation should closely match the layout grammar, density, hierarchy,
 proportions, shell, dark canvas, object headers, tab/control rows, panel rhythm,
 and composer/tray treatment of the selected references while using
@@ -152,10 +159,24 @@ recolored current UI, or a generic "premium SaaS" interpretation is still a
 miss if it does not read as a close adaptation of `Company Profile.png`,
 `Workflow.png`, and the AI-chat composer references.
 
+Task 8B has zero legacy visual carryover. Preserve functional continuity, not
+visual continuity: product concepts, mock data meanings, navigation flow,
+required preview kinds, accessibility basics, and Phase 0 exclusions remain;
+current layout composition, component rhythm, panel treatments, typography
+hierarchy, spacing, depth, and composer placement do not.
+
+Task 8B's deliverable is the design system foundation, not every final screen.
+It must make the whole project's future visual grammar concrete: shell,
+workspace canvas, object header, tabs/controls, dense panels, preview/composer
+treatments, statuses, typography, spacing, radius, depth, and interaction
+states.
+
 ### From-Scratch Visual System Reset
 
-Task 8B resets the visual system from scratch. The current UI shows product
-surfaces and mock-only boundaries, but it is not the design foundation.
+Task 8B starts the visual system reset from scratch. The current UI shows
+product surfaces and mock-only boundaries, but it is not the design foundation.
+Later redesign tasks extend and correct the foundation while rebuilding their
+required surfaces; they should not invent separate visual systems.
 
 The reset applies to the whole system:
 
@@ -197,8 +218,17 @@ boundaries; rebuild the design system where the references demand it.
 ### Component Library Stance
 
 Do not build a broad component library before repeated product screens establish
-the pattern. The library should grow from Home, Explorer, Project Desk, and
-Agent Context needs during the whole Phase 0 reset.
+the pattern. Task 8B may create concrete shared primitives needed to express the
+design system foundation, but the library should still grow from Home,
+Explorer, Project Desk, and Agent Context needs during the sequenced Phase 0
+reset.
+
+Existing shared primitives are not protected for visual continuity. `AppShell`,
+`WorkspaceTray`, `SurfaceTabStrip`, `StatusChip`, or any other current shared
+UI primitive may be rewritten, replaced, renamed, or removed during Task 8B if
+that better expresses the reference-matched design system foundation while
+preserving functional continuity, accessibility basics, tests where useful, and
+Phase 0 boundaries.
 
 Allowed early primitives, only when used by the actual Phase 0 screens or
 immediately reused by planned screens:
@@ -219,12 +249,14 @@ pattern is reused or clearly needed across the active Phase 0 redesign tasks.
 ### Whole Phase 0 Runtime Gate
 
 Task 8B no longer creates a separate `Foundation` / `Foundation Proof` product
-surface. The runtime gate is the real Phase 0 flow:
+surface. The runtime gate for the full redesign is the real Phase 0 flow,
+reached through Tasks 8B-12:
 
-- Home as the first-screen workspace cockpit,
-- Visual Explorer + Preview as the artifact inspection surface,
-- Project Desk as the focused project work surface,
-- Agent Context Composer as the controlled handoff tray/tool.
+- Task 8B: design system foundation and Home as the first-screen Workspace cockpit,
+- Task 9: Visual Explorer + Preview as the artifact inspection surface,
+- Task 10: Project Desk as the focused project work surface,
+- Task 11: Agent Context Composer as the controlled handoff tray/tool,
+- Task 12: whole-flow verification and visual comparison.
 
 The redesigned flow must show:
 
@@ -242,10 +274,9 @@ Rejected approach: rendering a meta-checklist, reference names, or a standalone
 demo/checkpoint surface in product UI. Reference comparison belongs in
 docs/review or PR notes, not in the app.
 
-Task 8B should remain one end-to-end visual reset task with internal gates. Do
-not split it back into separate top-level Home, Explorer, Project Desk, and
-Composer polish tasks unless Aga explicitly asks for that after reviewing the
-whole redesigned runtime flow.
+Tasks 9-11 must stay visually subordinate to the Task 8B design system
+foundation. They are not independent polish passes; each task prepares the next
+required screen or surface in the same Workspace cockpit model.
 
 ### Similarity Review Checklist
 
