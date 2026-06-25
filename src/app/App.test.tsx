@@ -124,7 +124,56 @@ describe("Task 8B cockpit foundation", () => {
     expect(screen.getByText(/no selected artifact/i)).toBeInTheDocument();
   });
 
-  it("keeps later surfaces reachable as bounded future passes", async () => {
+  it("opens Project Desk as a focused project cockpit", async () => {
+    const user = userEvent.setup();
+
+    render(<App />);
+
+    await user.click(screen.getByRole("button", { name: /^explorer$/i }));
+    await user.click(screen.getByRole("button", { name: /open project desk/i }));
+
+    expect(
+      screen.getByRole("heading", { level: 1, name: /project desk/i }),
+    ).toBeInTheDocument();
+
+    expect(
+      screen.getByRole("heading", {
+        level: 2,
+        name: /orchard launch kit/i,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 2, name: /source material/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 2, name: /next tasks/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 2, name: /recent and pinned work/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 2, name: /context candidates/i }),
+    ).toBeInTheDocument();
+    expect(screen.getAllByText(/mock control/i).length).toBeGreaterThan(0);
+    expect(screen.getByText(/no backlog tasks/i)).toBeInTheDocument();
+    expect(screen.getByText(/no extra pinned docs/i)).toBeInTheDocument();
+    expect(screen.getByText(/no safe context here/i)).toBeInTheDocument();
+    expect(screen.queryByText(/real git/i)).not.toBeInTheDocument();
+
+    await user.click(
+      screen.getAllByRole("button", { name: /review context tray/i })[0],
+    );
+
+    expect(
+      screen.getByRole("heading", {
+        level: 1,
+        name: /agent context composer/i,
+      }),
+    ).toBeInTheDocument();
+    expect(screen.getAllByText(/controlled handoff/i).length).toBeGreaterThan(0);
+  });
+
+  it("keeps Context reachable as a bounded future pass", async () => {
     const user = userEvent.setup();
 
     render(<App />);
@@ -134,7 +183,6 @@ describe("Task 8B cockpit foundation", () => {
     expect(
       screen.getByRole("heading", { level: 1, name: /project desk/i }),
     ).toBeInTheDocument();
-    expect(screen.getAllByText(/focused work surface/i).length).toBeGreaterThan(0);
 
     await user.click(screen.getByRole("button", { name: /^context$/i }));
 
@@ -166,7 +214,7 @@ describe("Task 8B cockpit foundation", () => {
       within(composer).getByRole("button", { name: /copy suggested prompt/i }),
     );
 
-    expect(writeText).toHaveBeenCalledWith(expect.stringContaining("Task 9"));
+    expect(writeText).toHaveBeenCalledWith(expect.stringContaining("Task 10"));
     expect(
       await screen.findByText(/clipboard permission is unavailable/i),
     ).toBeInTheDocument();

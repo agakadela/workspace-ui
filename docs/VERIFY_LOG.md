@@ -12,6 +12,47 @@ Rules:
 
 ## Entries
 
+### 2026-06-25 — `standard` — `Task 10 Redesign Project Desk` — `N/A recorded before commit`
+
+- Environment: `local`
+- Checked:
+  - Project Desk remains reachable from Home/top navigation and from Explorer's
+    `Open Project Desk` control.
+  - Project Desk uses the Task 8B app-local cockpit system under `src/app` and
+    the Task 9 payload-forward material language.
+  - Project status, source docs, next tasks, recent/pinned work, context
+    candidates, and grouped mock quick actions are visible.
+  - Empty states are visible for no tasks, no extra pinned docs, and no safe
+    context.
+  - Phase 0 exclusions remain intact: no real filesystem, Git, terminal,
+    Codex/Claude, auth, cloud, search, PDF, file editing, or Tauri behavior.
+- Commands run:
+  - `npm run typecheck`
+  - `npm test`
+  - `npm run lint`
+  - `npm run build`
+- Runtime proof:
+  - gstack `/browse` opened `http://127.0.0.1:5173/` with HTTP 200.
+  - Browser flow opened Project Desk from top navigation and verified runtime
+    text including `Orchard Launch Kit`, `Source Material`, `Next Tasks`,
+    `Context Candidates`, `Mock Quick Actions`, `No backlog tasks`, `No extra
+    pinned docs`, and `No safe context here`.
+  - Screenshots checked Project Desk at `1440x1100` and `1024x1100`; no
+    incoherent overlap was observed.
+  - `gstack /browse console --errors` reported no console errors.
+  - Database proof: `N/A` because Phase 0 has no database.
+  - Provider/dashboard proof: `N/A` because Phase 0 has no external provider.
+- Cannot verify:
+  - Aga's visual acceptance of the Task 10 Project Desk redesign.
+  - Real workspace usefulness against Aga's private folder, because Phase 0 is
+    mock-only and uses fictional public-safe data.
+  - GitHub Actions result before CI runs on a branch/PR.
+- Docs updated:
+  - `docs/PLAN.md`
+  - `docs/UI_SYSTEM.md`
+  - `docs/VERIFY_LOG.md`
+- Verdict: `READY FOR AGA DESIGN REVIEW`
+
 ### 2026-06-25 — `standard` — `Task 9 Redesign Visual Explorer And Preview` — `N/A recorded before commit`
 
 - Environment: `local`
