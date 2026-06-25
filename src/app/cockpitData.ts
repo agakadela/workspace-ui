@@ -77,6 +77,37 @@ export type ContextGroup = {
   status: StatusItem;
 };
 
+export type PreviewKind = "markdown" | "html" | "image" | "code" | "unsupported";
+
+export type ExplorerArea = {
+  id: string;
+  label: string;
+  summary: string;
+  status: StatusItem;
+  artifactIds: string[];
+};
+
+export type ExplorerArtifact = {
+  id: string;
+  areaId: string;
+  title: string;
+  path: string;
+  type: string;
+  role: string;
+  updated: string;
+  summary: string;
+  status: StatusItem;
+  safety: StatusItem;
+  preview: {
+    kind: PreviewKind;
+    eyebrow: string;
+    title: string;
+    summary: string;
+    rows: DetailRow[];
+    body: string[];
+  };
+};
+
 export const navItems: CockpitNavItem[] = [
   { id: "home", label: "Home", icon: LayoutDashboard },
   { id: "explorer", label: "Explorer", icon: Compass },
@@ -231,6 +262,223 @@ export const cockpit = {
       status: { label: "Bounded", tone: "neutral", icon: ShieldCheck },
     },
   ] satisfies ActivityItem[],
+  explorer: {
+    activeAreaId: "source",
+    activeArtifactId: "artifact-spec",
+    areas: [
+      {
+        id: "source",
+        label: "Source Docs",
+        summary: "Accepted truth before raw folders.",
+        status: { label: "3 artifacts", tone: "blue", icon: FileText },
+        artifactIds: ["artifact-spec", "artifact-brief", "artifact-unsupported"],
+      },
+      {
+        id: "mockups",
+        label: "HTML Mockups",
+        summary: "Static visual payloads only.",
+        status: { label: "1 mockup", tone: "neutral", icon: LayoutDashboard },
+        artifactIds: ["artifact-html"],
+      },
+      {
+        id: "visuals",
+        label: "Visual Cards",
+        summary: "Image-like cards, not copied kit assets.",
+        status: { label: "1 card", tone: "mint", icon: Boxes },
+        artifactIds: ["artifact-image"],
+      },
+      {
+        id: "code",
+        label: "Code Summary",
+        summary: "Human summary before implementation detail.",
+        status: { label: "1 summary", tone: "neutral", icon: ClipboardList },
+        artifactIds: ["artifact-code"],
+      },
+      {
+        id: "archive",
+        label: "Empty Archive",
+        summary: "Calm empty state for areas with no safe artifacts.",
+        status: { label: "0 artifacts", tone: "orange", icon: TriangleAlert },
+        artifactIds: [],
+      },
+    ] satisfies ExplorerArea[],
+    artifacts: [
+      {
+        id: "artifact-spec",
+        areaId: "source",
+        title: "Phase 0 Workspace Spec",
+        path: "docs/SPEC.md",
+        type: "Markdown",
+        role: "Product truth",
+        updated: "Accepted Jun 24",
+        summary: "Defines the mock-only workspace layer, target user, and success criteria.",
+        status: { label: "Source of truth", tone: "mint", icon: BadgeCheck },
+        safety: { label: "Safe for agent", tone: "mint", icon: ShieldCheck },
+        preview: {
+          kind: "markdown",
+          eyebrow: "Markdown preview",
+          title: "Workspace layer promise",
+          summary:
+            "The preview keeps human meaning first: problem, user, scope, and boundaries before raw path detail.",
+          rows: [
+            { label: "Primary question", value: "What matters now?" },
+            { label: "Phase", value: "0 web-only visual prototype" },
+            { label: "Boundary", value: "No real local folder access" },
+          ],
+          body: [
+            "A local work folder can become the real center of work: docs, tasks, mockups, assets, and agent instructions.",
+            "The product should answer where to continue, what changed, what is private, and what context is safe to hand off.",
+            "Phase 0 proves the surface with fictional public-safe data before any desktop or filesystem behavior exists.",
+          ],
+        },
+      },
+      {
+        id: "artifact-brief",
+        areaId: "source",
+        title: "Redesign Task Pack",
+        path: "docs/PLAN.md#task-9",
+        type: "Markdown",
+        role: "Implementation route",
+        updated: "Planned next",
+        summary: "Names Explorer as an inspection surface, not a raw folder tree.",
+        status: { label: "Current", tone: "blue", icon: CircleDot },
+        safety: { label: "Review first", tone: "orange", icon: TriangleAlert },
+        preview: {
+          kind: "markdown",
+          eyebrow: "Markdown preview",
+          title: "Task 9 contract",
+          summary:
+            "Explorer must preserve required preview examples while adopting the Task 8B cockpit system.",
+          rows: [
+            { label: "Screen", value: "Explorer + Preview" },
+            { label: "Primary model", value: "Areas -> artifacts -> selected preview" },
+            { label: "Visual target", value: "Dense inspection surface" },
+          ],
+          body: [
+            "Areas, artifacts, and Preview Pane need stronger hierarchy than a three-column card list.",
+            "Preview content must be readable and object-specific, with raw paths secondary.",
+            "Unsupported and empty states remain calm and explicit.",
+          ],
+        },
+      },
+      {
+        id: "artifact-html",
+        areaId: "mockups",
+        title: "Home Handoff Mockup",
+        path: "mockups/home-handoff.html",
+        type: "HTML mockup",
+        role: "Static screen concept",
+        updated: "Drafted 2 days ago",
+        summary: "A safe static representation of a mock HTML surface; no execution or iframe.",
+        status: { label: "Preview available", tone: "blue", icon: LayoutDashboard },
+        safety: { label: "No HTML execution", tone: "orange", icon: LockKeyhole },
+        preview: {
+          kind: "html",
+          eyebrow: "HTML mockup preview",
+          title: "Static handoff panel",
+          summary:
+            "The app displays this as a drawn product card, not as live local HTML.",
+          rows: [
+            { label: "Render mode", value: "Static mock card" },
+            { label: "Interactive behavior", value: "N/A in Phase 0" },
+            { label: "Security note", value: "No iframe, no script execution" },
+          ],
+          body: [
+            "Header: Continue from Orchard Notes",
+            "Primary tray: Selected docs, review-first references, private examples excluded",
+            "Footer action: Copy prompt boundary as mock text only",
+          ],
+        },
+      },
+      {
+        id: "artifact-image",
+        areaId: "visuals",
+        title: "Reference Mood Card",
+        path: "visuals/reference-mood-card.png",
+        type: "Image card",
+        role: "Visual direction",
+        updated: "Pinned yesterday",
+        summary: "An original card-style visual signal inspired by the dashboard kit grammar.",
+        status: { label: "Image/card", tone: "mint", icon: Boxes },
+        safety: { label: "Reference only", tone: "orange", icon: TriangleAlert },
+        preview: {
+          kind: "image",
+          eyebrow: "Image/card preview",
+          title: "Dark cockpit material study",
+          summary:
+            "A payload-forward visual card: shell, canvas, panels, and context tray cues without copied kit assets.",
+          rows: [
+            { label: "Dominant surface", value: "Dark rounded canvas" },
+            { label: "Payload", value: "Panel rhythm and tray placement" },
+            { label: "Use", value: "Visual reference, not product asset" },
+          ],
+          body: [
+            "Canvas field with dense object panels.",
+            "Warm paper selected states.",
+            "Small clay review-first warning treatment.",
+          ],
+        },
+      },
+      {
+        id: "artifact-code",
+        areaId: "code",
+        title: "Cockpit App Modules",
+        path: "src/app/",
+        type: "Code summary",
+        role: "Implementation map",
+        updated: "Touched today",
+        summary: "Summarizes app-local modules without exposing a raw source dump as the first layer.",
+        status: { label: "Summary only", tone: "neutral", icon: ClipboardList },
+        safety: { label: "Developer-readable", tone: "neutral", icon: FileText },
+        preview: {
+          kind: "code",
+          eyebrow: "Code summary preview",
+          title: "App-local cockpit foundation",
+          summary:
+            "The preview explains ownership and boundaries before individual filenames.",
+          rows: [
+            { label: "Shell", value: "App, TopBar, ObjectHeader, SurfaceTabs" },
+            { label: "Surfaces", value: "HomeCockpit, ExplorerSurface, QueuedSurface" },
+            { label: "Data", value: "cockpitData public-safe mock model" },
+          ],
+          body: [
+            "Keep product-area extraction deferred until patterns repeat across Tasks 9-11.",
+            "Preserve cockpit primitives locally inside src/app.",
+            "Do not add filesystem, search, terminal, Git, Tauri, or live agent behavior.",
+          ],
+        },
+      },
+      {
+        id: "artifact-unsupported",
+        areaId: "source",
+        title: "Archived PDF Placeholder",
+        path: "archive/client-brief-placeholder.pdf",
+        type: "Unsupported",
+        role: "Boundary example",
+        updated: "Not opened",
+        summary: "Shows a calm unsupported preview state without adding a PDF viewer.",
+        status: { label: "Unsupported preview", tone: "orange", icon: TriangleAlert },
+        safety: { label: "Review first", tone: "orange", icon: TriangleAlert },
+        preview: {
+          kind: "unsupported",
+          eyebrow: "Unsupported preview",
+          title: "Preview intentionally unavailable",
+          summary:
+            "PDF viewing is out of Phase 0 scope, so the artifact stays visible as metadata only.",
+          rows: [
+            { label: "Preview", value: "Unsupported in Phase 0" },
+            { label: "Required action", value: "Review outside prototype" },
+            { label: "Boundary", value: "No PDF viewer added" },
+          ],
+          body: [
+            "The artifact remains searchable by meaning inside the mock Explorer surface.",
+            "The app does not open, parse, or render the file.",
+            "This preserves the unsupported state without expanding Phase 0.",
+          ],
+        },
+      },
+    ] satisfies ExplorerArtifact[],
+  },
   contextGroups: [
     {
       id: "selected",
@@ -332,7 +580,7 @@ export const cockpit = {
     },
   },
   prompt:
-    "Rebuild Task 8B as the Home cockpit design-system foundation. Keep it web-only, mock-only, and public-safe. Preserve Phase 0 boundaries: no real filesystem reads, Git, terminal, search, auth, cloud, Tauri, PDF, file editing, or live Codex execution.",
+    "Rebuild Task 9 as the Visual Explorer and Preview cockpit surface. Keep it web-only, mock-only, and public-safe. Preserve Phase 0 boundaries: no real filesystem reads, Git, terminal, search, auth, cloud, Tauri, PDF, file editing, or live Codex execution.",
 };
 
 export function getSurfaceLabel(view: ViewId) {

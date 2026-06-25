@@ -12,6 +12,51 @@ Rules:
 
 ## Entries
 
+### 2026-06-25 — `standard` — `Task 9 Redesign Visual Explorer And Preview` — `N/A recorded before commit`
+
+- Environment: `local`
+- Checked:
+  - Explorer remains reachable from Home/top navigation without becoming the
+    primary first screen.
+  - Explorer uses the Task 8B app-local cockpit system under `src/app`, with a
+    local Artifact Map rail, dark workspace canvas, payload-forward artifact
+    cards, and selected Preview Pane.
+  - Markdown, static HTML mockup, image/card, code-summary, unsupported, and
+    empty preview examples are visible and readable.
+  - Raw paths stay secondary to human-readable artifact labels, roles, status,
+    and safety metadata.
+  - Phase 0 exclusions remain intact: no real filesystem scanning, local HTML
+    execution, PDF viewer, search, Git, terminal, Tauri, auth, cloud, file
+    editing, or live agent behavior.
+- Commands run:
+  - `npm run typecheck`
+  - `npm test`
+  - `npm run lint`
+  - `npm run build`
+- Runtime proof:
+  - gstack `/browse` opened `http://127.0.0.1:5173/` with HTTP 200.
+  - Browser flow opened Explorer, selected HTML Mockups, Visual Cards, Code
+    Summary, Source Docs -> Archived PDF Placeholder, and Empty Archive.
+  - Runtime text proof showed `No iframe, no script execution`, `Image/card
+    preview`, `Code summary, not a source dump`, `No PDF viewer added`, and
+    `No selected artifact`.
+  - Screenshots checked Explorer at `1440x1000` and `1024x900`; no incoherent
+    overlap was observed.
+  - `gstack /browse console --errors` reported no console errors.
+  - Database proof: `N/A` because Phase 0 has no database.
+  - Provider/dashboard proof: `N/A` because Phase 0 has no external provider.
+- Cannot verify:
+  - Aga's visual acceptance of the Task 9 Explorer redesign.
+  - Real local-file preview security, because Phase 0 has no real filesystem or
+    local preview pipeline.
+  - GitHub Actions result before CI runs on a branch/PR.
+- Docs updated:
+  - `CONTEXT.md`
+  - `docs/PLAN.md`
+  - `docs/UI_SYSTEM.md`
+  - `docs/VERIFY_LOG.md`
+- Verdict: `READY FOR AGA DESIGN REVIEW`
+
 ### 2026-06-25 — `standard` — `Task 8B Design System Foundation And Home Cockpit` — `N/A recorded before commit`
 
 - Environment: `local`

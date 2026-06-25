@@ -139,6 +139,11 @@ longer feel like a generic AI-generated card dashboard.
   cockpit with top chrome, object header, segmented tabs, dense panels, dotted
   work canvas, status/privacy text, bounded recent activity, and a docked mock
   context composer.
+- Task 9 Redesign Visual Explorer And Preview is complete: Explorer now uses
+  the Task 8B app-local cockpit system as a dense artifact inspection surface
+  with a local Artifact Map rail, payload-forward artifact cards, readable
+  selected Preview Pane, markdown/HTML mockup/image-card/code-summary examples,
+  and calm unsupported plus empty states.
 - Dashboard UI kit PNGs exist as references only, not product assets.
 
 ## Phase 0 Decision
@@ -394,7 +399,7 @@ Notes:
 
 ### Task 9 - Redesign Visual Explorer And Preview
 
-- Status: planned.
+- Status: complete.
 - User-visible result: Explorer feels like a dense artifact inspection surface
   in the same Workspace cockpit system, not a list of similarly weighted cards.
 - Description: Rebuild Explorer around workspace areas, selected artifact
@@ -402,16 +407,16 @@ Notes:
   visual signals. Preserve markdown, HTML mockup, image/card, code-summary,
   unsupported, and empty preview examples.
 - Acceptance criteria:
-  - [ ] Explorer remains reachable from Home without becoming the primary first
+  - [x] Explorer remains reachable from Home without becoming the primary first
         screen.
-  - [ ] Explorer uses the Task 8B design system foundation rather than inventing
+  - [x] Explorer uses the Task 8B design system foundation rather than inventing
         a separate screen language.
-  - [ ] Areas, artifacts, and Preview Pane use a stronger hierarchy than the
+  - [x] Areas, artifacts, and Preview Pane use a stronger hierarchy than the
         current three-column card list.
-  - [ ] Preview content is readable and object-specific, not decorative.
-  - [ ] Artifact metadata is dense and scannable; raw paths stay secondary.
-  - [ ] Unsupported and empty states remain visible and calm.
-  - [ ] No real local HTML execution or filesystem scanning is introduced.
+  - [x] Preview content is readable and object-specific, not decorative.
+  - [x] Artifact metadata is dense and scannable; raw paths stay secondary.
+  - [x] Unsupported and empty states remain visible and calm.
+  - [x] No real local HTML execution or filesystem scanning is introduced.
 - Verification:
   - Automated: `npm run typecheck`, `npm run lint`, `npm test`,
     `npm run build`.
@@ -421,11 +426,16 @@ Notes:
     `Company Profile - Materials.png`, and `Employees- profile details.png`.
 - Dependencies:
   - Task 8B.
-- Likely touched files:
-  - app-local cockpit modules under `src/app/`
+- Touched files:
+  - `src/app/App.tsx`
+  - `src/app/App.test.tsx`
+  - `src/app/ComposerTray.tsx`
+  - `src/app/ExplorerSurface.tsx`
   - `src/app/cockpitData.ts`
-  - `src/index.css`
-  - `docs/UI_SYSTEM.md` if Explorer introduces reusable pattern refinements.
+  - `CONTEXT.md`
+  - `docs/PLAN.md`
+  - `docs/UI_SYSTEM.md`
+  - `docs/VERIFY_LOG.md`
 - Do not touch:
   - Real filesystem scanning.
   - Real local HTML preview or sandbox policy implementation.

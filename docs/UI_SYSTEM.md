@@ -192,9 +192,14 @@ Task 8B implementation status as of 2026-06-25:
   selected workspace object header, segmented tab belt, dominant dark rounded
   canvas, dense metric/detail panels, dotted workflow field, bounded recent
   activity, status/privacy text, and docked mock composer tray.
-- Visual Explorer, Project Desk, and Context remain reachable as bounded
-  future surfaces, but Tasks 9-11 must rebuild their full product behavior
-  against this 8B cockpit foundation.
+- Task 9 rebuilds Visual Explorer as the second real cockpit surface:
+  `ExplorerSurface` keeps the app-local `src/app` shape, uses a local
+  Artifact Map rail for workspace areas, payload-forward artifact cards,
+  selected Preview Pane, and explicit markdown/HTML mockup/image-card/
+  code-summary/unsupported/empty examples.
+- Project Desk and Context remain reachable as bounded future surfaces, but
+  Tasks 10-11 must rebuild their full product behavior against this cockpit
+  foundation.
 
 The reset applies to the whole system:
 
@@ -557,7 +562,8 @@ Current Task 8B implementation:
   top-level cockpit composition.
 - App-local modules under `src/app/` own the concrete shell and surfaces:
   `TopBar`, `ObjectHeader`, `SurfaceTabs`, `HomeCockpit`,
-  `WorkspaceDetailsPanel`, `QueuedSurface`, and `ComposerTray`.
+  `ExplorerSurface`, `WorkspaceDetailsPanel`, `QueuedSurface`, and
+  `ComposerTray`.
 - `src/app/cockpitData.ts` owns the public-safe mock view model for the current
   cockpit and reachable future surfaces.
 - Top navigation is a compact button group with `aria-current="page"` on the
@@ -626,6 +632,14 @@ Rules:
 
 Use for mock files, docs, previews, assets, and code summaries.
 
+Current Task 9 implementation:
+
+- Explorer artifact cards live in `src/app/ExplorerSurface.tsx` and are
+  payload-forward: visual tile first, human title and role next, raw path
+  secondary, and status/safety chips with text plus icons.
+- The local Artifact Map rail filters the cards by public-safe mock area; it is
+  not a global nav, real search index, or raw folder tree.
+
 Required content:
 
 - human-readable title,
@@ -645,6 +659,16 @@ Current Task 8B implementation:
   in `src/app/HomeCockpit.tsx`, `src/app/QueuedSurface.tsx`, and
   `src/app/ComposerTray.tsx`. Do not recreate `WorkspaceTray` or
   `src/shared/ui` until repeated Task 9-11 needs justify extraction.
+
+Current Task 9 implementation:
+
+- `src/app/ExplorerSurface.tsx` owns the first rebuilt Preview Pane. It renders
+  readable selected-object previews for markdown, static HTML mockup,
+  image/card, code summary, unsupported preview, and empty area states.
+- HTML mockup preview is a drawn static product card. It must not use an
+  iframe, `dangerouslySetInnerHTML`, local file execution, or script execution.
+- Unsupported PDF-like artifacts remain metadata plus a calm unavailable state;
+  do not add a PDF viewer in Phase 0.
 
 Rules:
 
